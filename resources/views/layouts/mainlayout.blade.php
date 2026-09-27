@@ -702,6 +702,307 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 /* =====================================================
+   Coffee legacy video
+===================================================== */
+document.addEventListener('DOMContentLoaded', function () {
+    'use strict';
+
+    var vid      = document.getElementById('cofBgVideo');
+    var beans    = document.querySelector('.cof-beans');
+    if (!vid || !beans) return;
+
+    var centerBtn = document.getElementById('cofCenterBtn');
+    var controls  = document.getElementById('cofControls');
+    var ctrlPlay  = document.getElementById('cofCtrlPlay');
+    var ctrlRew   = document.getElementById('cofCtrlRew');
+    var ctrlFwd   = document.getElementById('cofCtrlFwd');
+    var timeEl    = document.getElementById('cofTime');
+    var seekWrap  = document.getElementById('cofSeekWrap');
+    var seekBuf   = document.getElementById('cofSeekBuf');
+    var seekPlayed= document.getElementById('cofSeekPlayed');
+    var seekTip   = document.getElementById('cofSeekTip');
+    var speedBtn  = document.getElementById('cofSpeedBtn');
+    var speedMenu = document.getElementById('cofSpeedMenu');
+    var muteBtn   = document.getElementById('cofCtrlMute');
+    var volSlider = document.getElementById('cofVolSlider');
+    var fsBtn     = document.getElementById('cofCtrlFs');
+
+    /* ---- Accessibility / performance ---- */
+    var prefRed  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var saveData = !!(typeof navigator.connection !== 'undefined' && navigator.connection.saveData);
+    if (prefRed)  beans.classList.add('no-pulse');
+    if (saveData) vid.preload = 'none';
+
+    /* ---- Mobile source swap (before first metadata load) ---- */
+    if (window.matchMedia('(max-width: 768px)').matches && vid.dataset.mobileSrc) {
+        vid.querySelectorAll('source').forEach(function (s) { s.remove(); });
+        var ms = document.createElement('source');
+        ms.src  = vid.dataset.mobileSrc;
+        ms.type = 'video/mp4';
+        vid.appendChild(ms);
+        vid.load();
+    }
+
+    beans.setAttribute('tabindex', '0');
+
+    /* ---- Helpers ---- */
+    var hideTimer  = null;
+    var isDragging = false;
+
+    function fmtTime(s) {
+        if (!isFinite(s) || isNaN(s)) return '0:00';
+        var m  = Math.floor(s / 60);
+        var ss = Math.floor(s % 60);
+        return m + ':' + (ss < 10 ? '0' : '') + ss;
+    }
+
+    function getSeekFrac(e) {
+        if (!seekWrap) return 0;
+        var r  = seekWrap.getBoundingClientRect();
+        var cx = (e.touches && e.touches.length) ? e.touches[0].clientX : e.clientX;
+        return Math.max(0, Math.min(1, (cx - r.left) / r.width));
+    }
+
+    /* ---- Icon helpers ---- */
+    function setPlayIcons(state) {
+        [centerBtn, ctrlPlay].forEach(function (btn) {
+            if (!btn) return;
+            ['play', 'pause', 'replay'].forEach(function (s) {
+                var el = btn.querySelector('.icon-' + s);
+                if (el) el.style.display = (s === state) ? '' : 'none';
+            });
+        });
+        if (centerBtn) centerBtn.setAttribute('aria-label',
+            state === 'replay' ? 'Replay video' : state === 'pause' ? 'Pause video' : 'Play video');
+        if (ctrlPlay) ctrlPlay.setAttribute('aria-label', state === 'pause' ? 'Pause' : 'Play');
+    }
+
+    function setMuteIcons() {
+        var m = vid.muted || vid.volume === 0;
+        if (muteBtn) {
+            var iv = muteBtn.querySelector('.icon-vol');
+            var im = muteBtn.querySelector('.icon-muted');
+            if (iv) iv.style.display = m ? 'none' : '';
+            if (im) im.style.display = m ? '' : 'none';
+            muteBtn.setAttribute('aria-label', m ? 'Unmute' : 'Mute');
+        }
+        if (volSlider) volSlider.value = (vid.muted ? 0 : vid.volume).toString();
+    }
+
+    function setFsIcons() {
+        var inFs = !!document.fullscreenElement;
+        if (fsBtn) {
+            var ifs  = fsBtn.querySelector('.icon-fs');
+            var iefs = fsBtn.querySelector('.icon-exit-fs');
+            if (ifs)  ifs.style.display  = inFs ? 'none' : '';
+            if (iefs) iefs.style.display = inFs ? '' : 'none';
+            fsBtn.setAttribute('aria-label', inFs ? 'Exit full screen' : 'Full screen');
+        }
+    }
+
+    /* ---- Controls visibility ---- */
+    function showControls() {
+        clearTimeout(hideTimer);
+        beans.classList.add('controls-visible');
+        if (!vid.paused && !vid.ended) {
+            hideTimer = setTimeout(function () {
+                beans.classList.remove('controls-visible');
+            }, 2500);
+        }
+    }
+
+    /* ---- Timeline ---- */
+    function updateTimeline() {
+        var dur = vid.duration;
+        var pct = dur ? vid.currentTime / dur * 100 : 0;
+        if (seekPlayed) seekPlayed.style.width = pct + '%';
+        if (seekBuf && vid.buffered.length) {
+            seekBuf.style.width = (vid.buffered.end(vid.buffered.length - 1) / (dur || 1) * 100) + '%';
+        }
+        if (timeEl) timeEl.textContent = fmtTime(vid.currentTime) + ' / ' + fmtTime(dur);
+    }
+
+    /* ---- Play / pause ---- */
+    function doPlay()  { vid.play().catch(function () {}); }
+    function doPause() { vid.pause(); }
+    function togglePlay() {
+        if (vid.ended) { vid.currentTime = 0; doPlay(); }
+        else if (vid.paused) doPlay();
+        else doPause();
+    }
+
+    /* ---- Video events drive UI state ---- */
+    vid.addEventListener('play', function () {
+        beans.classList.add('is-playing');
+        beans.classList.remove('is-ended');
+        setPlayIcons('pause');
+        showControls();
+    });
+    vid.addEventListener('pause', function () {
+        if (vid.ended) return;
+        beans.classList.remove('is-playing');
+        setPlayIcons('play');
+        clearTimeout(hideTimer);
+        beans.classList.add('controls-visible');
+    });
+    vid.addEventListener('ended', function () {
+        beans.classList.remove('is-playing');
+        beans.classList.add('is-ended');
+        setPlayIcons('replay');
+        clearTimeout(hideTimer);
+        beans.classList.add('controls-visible');
+    });
+    vid.addEventListener('timeupdate',     updateTimeline);
+    vid.addEventListener('seeked',         updateTimeline);
+    vid.addEventListener('progress',       updateTimeline);
+    vid.addEventListener('loadedmetadata', updateTimeline);
+    vid.addEventListener('durationchange', updateTimeline);
+
+    /* ---- Click targets ---- */
+    if (centerBtn) centerBtn.addEventListener('click', function (e) { togglePlay(); e.stopPropagation(); });
+    if (ctrlPlay)  ctrlPlay.addEventListener('click',  function (e) { togglePlay(); e.stopPropagation(); });
+    beans.addEventListener('click', function (e) {
+        if (controls  && controls.contains(e.target))  return;
+        if (centerBtn && centerBtn.contains(e.target)) return;
+        togglePlay();
+    });
+
+    /* ---- Rewind / Forward ---- */
+    if (ctrlRew) ctrlRew.addEventListener('click', function (e) {
+        vid.currentTime = Math.max(0, vid.currentTime - 10);
+        updateTimeline(); showControls(); e.stopPropagation();
+    });
+    if (ctrlFwd) ctrlFwd.addEventListener('click', function (e) {
+        vid.currentTime = Math.min(vid.duration || 0, vid.currentTime + 10);
+        updateTimeline(); showControls(); e.stopPropagation();
+    });
+
+    /* ---- Seek (mouse + touch) ---- */
+    if (seekWrap) {
+        seekWrap.addEventListener('mousedown', function (e) {
+            isDragging = true;
+            if (isFinite(vid.duration)) vid.currentTime = getSeekFrac(e) * vid.duration;
+            updateTimeline(); showControls(); e.stopPropagation();
+        });
+        seekWrap.addEventListener('mousemove', function (e) {
+            if (!seekTip) return;
+            var r    = seekWrap.getBoundingClientRect();
+            var x    = e.clientX - r.left;
+            seekTip.textContent  = fmtTime(getSeekFrac(e) * (vid.duration || 0));
+            seekTip.style.left   = Math.max(18, Math.min(r.width - 18, x)) + 'px';
+            seekTip.style.opacity = '1';
+        });
+        seekWrap.addEventListener('mouseleave', function () {
+            if (seekTip) seekTip.style.opacity = '0';
+        });
+        seekWrap.addEventListener('touchstart', function (e) {
+            isDragging = true;
+            if (isFinite(vid.duration)) vid.currentTime = getSeekFrac(e) * vid.duration;
+            updateTimeline(); showControls(); e.stopPropagation();
+        }, { passive: true });
+    }
+    document.addEventListener('mousemove', function (e) {
+        if (!isDragging) return;
+        if (isFinite(vid.duration)) vid.currentTime = getSeekFrac(e) * vid.duration;
+        updateTimeline();
+    });
+    document.addEventListener('mouseup',   function () { isDragging = false; });
+    document.addEventListener('touchmove', function (e) {
+        if (!isDragging) return;
+        if (isFinite(vid.duration)) vid.currentTime = getSeekFrac(e) * vid.duration;
+        updateTimeline();
+    }, { passive: true });
+    document.addEventListener('touchend',  function () { isDragging = false; });
+
+    /* ---- Speed ---- */
+    if (speedBtn && speedMenu) {
+        speedBtn.addEventListener('click', function (e) {
+            var open = speedMenu.classList.toggle('is-open');
+            speedBtn.setAttribute('aria-expanded', String(open));
+            showControls(); e.stopPropagation();
+        });
+        speedMenu.querySelectorAll('[data-speed]').forEach(function (item) {
+            item.addEventListener('click', function (e) {
+                var spd = parseFloat(item.dataset.speed);
+                vid.playbackRate = spd;
+                speedBtn.textContent = (spd === 1 ? '1' : spd) + '×';
+                speedMenu.querySelectorAll('[data-speed]').forEach(function (i) { i.classList.remove('active'); });
+                item.classList.add('active');
+                speedMenu.classList.remove('is-open');
+                speedBtn.setAttribute('aria-expanded', 'false');
+                showControls(); e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', function () {
+            if (speedMenu.classList.contains('is-open')) {
+                speedMenu.classList.remove('is-open');
+                speedBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    /* ---- Mute / Volume ---- */
+    if (muteBtn) muteBtn.addEventListener('click', function (e) {
+        vid.muted = !vid.muted; setMuteIcons(); showControls(); e.stopPropagation();
+    });
+    if (volSlider) volSlider.addEventListener('input', function (e) {
+        vid.volume = parseFloat(volSlider.value);
+        vid.muted  = (vid.volume === 0);
+        setMuteIcons(); showControls(); e.stopPropagation();
+    });
+
+    /* ---- Fullscreen ---- */
+    if (fsBtn) fsBtn.addEventListener('click', function (e) {
+        if (!document.fullscreenElement) beans.requestFullscreen && beans.requestFullscreen();
+        else document.exitFullscreen && document.exitFullscreen();
+        showControls(); e.stopPropagation();
+    });
+    document.addEventListener('fullscreenchange', setFsIcons);
+
+    /* ---- Controls auto-show on hover / tap ---- */
+    beans.addEventListener('mousemove',  showControls);
+    beans.addEventListener('touchstart', showControls, { passive: true });
+
+    /* ---- IntersectionObserver: pause only when scrolled out ---- */
+    if (typeof IntersectionObserver !== 'undefined') {
+        new IntersectionObserver(function (entries) {
+            if (!entries[0].isIntersecting && !vid.paused) doPause();
+        }, { threshold: 0.1 }).observe(beans);
+    }
+
+    /* ---- Tab visibility ---- */
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden && !vid.paused) doPause();
+    });
+
+    /* ---- Keyboard (Space/K play-pause, J/← rwd, L/→ fwd, M mute, F fullscreen) ---- */
+    beans.addEventListener('keydown', function (e) {
+        if (e.target.tagName === 'INPUT') return;
+        switch (e.key) {
+            case ' ': case 'k': case 'K':
+                e.preventDefault(); togglePlay(); showControls(); break;
+            case 'j': case 'J': case 'ArrowLeft':
+                e.preventDefault();
+                vid.currentTime = Math.max(0, vid.currentTime - 10);
+                updateTimeline(); showControls(); break;
+            case 'l': case 'L': case 'ArrowRight':
+                e.preventDefault();
+                vid.currentTime = Math.min(vid.duration || 0, vid.currentTime + 10);
+                updateTimeline(); showControls(); break;
+            case 'm': case 'M':
+                e.preventDefault(); vid.muted = !vid.muted; setMuteIcons(); showControls(); break;
+            case 'f': case 'F':
+                e.preventDefault();
+                if (!document.fullscreenElement) beans.requestFullscreen && beans.requestFullscreen();
+                else document.exitFullscreen && document.exitFullscreen();
+                break;
+        }
+    });
+
+});
+
+
+/* =====================================================
    GUEST REVIEWS — auto-slider
 ===================================================== */
 document.addEventListener('DOMContentLoaded', function () {

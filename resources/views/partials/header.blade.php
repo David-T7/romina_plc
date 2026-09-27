@@ -110,7 +110,7 @@
             </div>
 
             <a href="{{ route('sustainability') }}"{!! $pageCode === 'Sustainability' ? ' aria-current="page"' : '' !!}>Sustainability</a>
-            <a href="{{ $home }}#careers">Careers</a>
+            <a href="{{ route('careers.index') }}"{!! $pageCode === 'Careers' ? ' aria-current="page"' : '' !!}>Careers</a>
             <a href="{{ $home }}#accomplishments">News</a>
             <a href="{{ $home }}#contact">Contact</a>
 
@@ -156,7 +156,7 @@
             @endforeach
         </div>
         <a href="{{ route('sustainability') }}" style="--d: 100ms"{!! $pageCode === 'Sustainability' ? ' aria-current="page"' : '' !!}><span>Sustainability</span></a>
-        <a href="{{ $home }}#careers"        style="--d: 150ms"><span>Careers</span></a>
+        <a href="{{ route('careers.index') }}" style="--d: 150ms"{!! $pageCode === 'Careers' ? ' aria-current="page"' : '' !!}><span>Careers</span></a>
         <a href="{{ $home }}#accomplishments" style="--d: 200ms"><span>News</span></a>
         <a href="{{ $home }}#contact"        style="--d: 250ms"><span>Contact</span></a>
     </nav>
