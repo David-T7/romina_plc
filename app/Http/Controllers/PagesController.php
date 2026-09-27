@@ -21,6 +21,26 @@ class PagesController extends Controller
         return redirect('/#about');
     }
 
+    public function history()
+    {
+        $pageData = [
+            'pageTitle' => 'Our History — Romina Group',
+            'pageCode' => 'History',
+        ];
+
+        return view('about.history')->with($pageData);
+    }
+
+    public function leadership()
+    {
+        $pageData = [
+            'pageTitle' => 'Our Leadership — Romina Group',
+            'pageCode' => 'Leadership',
+        ];
+
+        return view('about.leadership')->with($pageData);
+    }
+
     public function team()
     {
         return redirect('/#executive-team');

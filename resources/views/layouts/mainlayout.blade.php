@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Romina Group</title>
+    <title>{{ $pageTitle ?? 'Romina Group' }}</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+
+    @yield('page-css')
 </head>
 
 <body>
@@ -31,37 +33,7 @@
 
 <main>
 
-@include('partials.hero')
-
-@include('partials.about')
-
-@include('partials.who-we-are')
-
-@include('partials.portfolio')
-
-@include('partials.values')
-
-@include('partials.reviews')
-
-@include('partials.brands-tabs')
-
-@include('partials.coffee')
-
-@include('partials.executive-team')
-
-@include('partials.businesses')
-
-@include('partials.news')
-
-@include('partials.sustainability')
-
-@include('partials.partners')
-
-@include('partials.careers')
-
-@include('partials.contact')
-
-@include('partials.find-us')
+@yield('page-content')
 
 @include('partials.footer')
 
@@ -502,6 +474,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const progressActive = document.querySelector('.progress-active');
     const progressDot    = document.querySelector('.progress-dot');
 
+    if (!slides.length || !nextButton || !prevButton) return;
+
     let current = 0;
     let autoplay;
     const total = slides.length;
@@ -813,23 +787,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const section = document.querySelector("#executive-team");
     if (!section) return;
 
+    /* Each grid reveals on its own as it scrolls into view */
+    const grids = section.querySelectorAll(".executive-team-grid");
+
     if ("IntersectionObserver" in window) {
 
         const observer = new IntersectionObserver(
             function (entries, observer) {
                 entries.forEach(function (entry) {
                     if (!entry.isIntersecting) return;
-                    section.classList.add("is-visible");
+                    entry.target.classList.add("is-visible");
                     observer.unobserve(entry.target);
                 });
             },
             { threshold: 0.12, rootMargin: "0px 0px -70px 0px" }
         );
 
-        observer.observe(section);
+        grids.forEach(function (grid) { observer.observe(grid); });
 
     } else {
-        section.classList.add("is-visible");
+        grids.forEach(function (grid) { grid.classList.add("is-visible"); });
     }
 
 });
@@ -841,6 +818,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
 
     const section  = document.querySelector("#sustainability");
+    if (!section) return;
     const counters = section.querySelectorAll(".counter");
     let hasAnimated = false;
 
@@ -1247,6 +1225,8 @@ document.addEventListener('DOMContentLoaded', function () {
     updateHeader();
 }());
 </script>
+
+@yield('page-js')
 
 </body>
 </html>

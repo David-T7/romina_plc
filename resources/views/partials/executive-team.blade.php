@@ -1,6 +1,76 @@
 <!-- =====================================================
      EXECUTIVE TEAM
+     Pass ['extendedTeam' => true] to also show the second grid.
 ===================================================== -->
+
+@php
+    // Placeholder names, positions and role descriptions — replace once the team supplies them.
+    // Leave 'photo' as null to show the "photo coming soon" placeholder.
+    $teamGrids = [
+        [
+            'label'   => 'EXECUTIVE LEADERSHIP',
+            'members' => [
+                [
+                    'name'     => 'Executive Name',
+                    'position' => 'Chief Executive Officer',
+                    'photo'    => 'images/team/executive-01.jpg',
+                    'role'     => 'Sets the Group\'s strategic direction and leads the executive team, overseeing growth across hospitality, coffee export, trading and distribution.',
+                ],
+                [
+                    'name'     => 'Executive Name',
+                    'position' => 'Chief Financial Officer',
+                    'photo'    => 'images/team/executive-02.jpg',
+                    'role'     => 'Oversees financial planning, reporting and investment across the Group, keeping every business on a sound and sustainable footing.',
+                ],
+                [
+                    'name'     => 'Executive Name',
+                    'position' => 'Chief Operating Officer',
+                    'photo'    => 'images/team/executive-03.jpg',
+                    'role'     => 'Runs day-to-day operations across the Group\'s businesses, driving quality, efficiency and consistent standards of service.',
+                ],
+                [
+                    'name'     => 'Executive Name',
+                    'position' => 'Director of Hospitality',
+                    'photo'    => 'images/team/executive-04.jpg',
+                    'role'     => 'Leads Romina Restaurants, KOBA and Meskott, shaping the guest experience and the culinary standards behind each brand.',
+                ],
+            ],
+        ],
+        [
+            'label'   => 'BUSINESS LEADERSHIP',
+            'members' => [
+                [
+                    'name'     => 'Executive Name',
+                    'position' => 'Managing Director, Romina Coffee',
+                    'photo'    => null,
+                    'role'     => 'Leads sourcing, processing and export of Ethiopian Arabica, working with farmer partners and buyers across four continents.',
+                ],
+                [
+                    'name'     => 'Executive Name',
+                    'position' => 'General Manager, KOBA',
+                    'photo'    => null,
+                    'role'     => 'Oversees KOBA\'s patisserie and bakery branches, from artisan production to the cafe experience across Addis Ababa.',
+                ],
+                [
+                    'name'     => 'Executive Name',
+                    'position' => 'General Manager, Romina Imports',
+                    'photo'    => null,
+                    'role'     => 'Manages the import and distribution of quality FMCG products supplied to the Ethiopian market.',
+                ],
+                [
+                    'name'     => 'Executive Name',
+                    'position' => 'General Manager, Jaquar World',
+                    'photo'    => null,
+                    'role'     => 'Leads Jaquar World Addis Ababa, the Group\'s partnership with Jaquar Group for complete bathroom solutions.',
+                ],
+            ],
+        ],
+    ];
+
+    if (empty($extendedTeam)) {
+        $teamGrids = array_slice($teamGrids, 0, 1);
+    }
+@endphp
 
 <section class="executive-team-section" id="executive-team">
 
@@ -35,135 +105,63 @@
 
         <!-- TEAM MEMBERS -->
 
-        <div class="executive-team-grid">
+        @foreach ($teamGrids as $grid)
 
-            <!-- EXECUTIVE 01 -->
+            <div class="executive-team-grid">
 
-            <article class="executive-member">
+                @foreach ($grid['members'] as $member)
 
-                <div class="executive-photo">
-                    <img
-                        src="{{ asset('images/team/executive-01.jpg') }}"
-                        alt="Executive team member"
-                    >
+                    <article class="executive-member" tabindex="0">
 
-                </div>
+                        <div class="executive-photo">
 
-                <div class="executive-info">
+                            @if ($member['photo'])
+                                <img
+                                    src="{{ asset($member['photo']) }}"
+                                    alt="{{ $member['name'] }}, {{ $member['position'] }}"
+                                >
+                            @else
+                                <div class="executive-photo-placeholder" aria-hidden="true">
+                                    <span>ROMINA</span>
+                                    <small>PHOTO COMING SOON</small>
+                                </div>
+                            @endif
 
-                    <span>
-                        EXECUTIVE LEADERSHIP
-                    </span>
+                            <span class="executive-hint" aria-hidden="true">
+                                <i class="fa-solid fa-plus"></i>
+                            </span>
 
-                    <h3>
-                        Executive Name
-                    </h3>
+                            <!-- Role description, revealed on hover / focus -->
+                            <div class="executive-overlay">
+                                <span class="executive-overlay-label">The role</span>
+                                <p>{{ $member['role'] }}</p>
+                            </div>
 
-                    <p>
-                        Executive Position
-                    </p>
+                        </div>
 
-                </div>
+                        <div class="executive-info">
 
-            </article>
+                            <span>
+                                {{ $grid['label'] }}
+                            </span>
 
+                            <h3>
+                                {{ $member['name'] }}
+                            </h3>
 
-            <!-- EXECUTIVE 02 -->
+                            <p>
+                                {{ $member['position'] }}
+                            </p>
 
-            <article class="executive-member">
+                        </div>
 
-                <div class="executive-photo">
-                    <img
-                        src="{{ asset('images/team/executive-02.jpg') }}"
-                        alt="Executive team member"
-                    >
-                   
+                    </article>
 
-                </div>
+                @endforeach
 
-                <div class="executive-info">
+            </div>
 
-                    <span>
-                        EXECUTIVE LEADERSHIP
-                    </span>
-
-                    <h3>
-                        Executive Name
-                    </h3>
-
-                    <p>
-                        Executive Position
-                    </p>
-
-                </div>
-
-            </article>
-
-
-            <!-- EXECUTIVE 03 -->
-
-            <article class="executive-member">
-
-                <div class="executive-photo">
-                    <img
-                        src="{{ asset('images/team/executive-03.jpg') }}"
-                        alt="Executive team member"
-                    >
-                   
-
-                </div>
-
-                <div class="executive-info">
-
-                    <span>
-                        EXECUTIVE LEADERSHIP
-                    </span>
-
-                    <h3>
-                        Executive Name
-                    </h3>
-
-                    <p>
-                        Executive Position
-                    </p>
-
-                </div>
-
-            </article>
-
-
-            <!-- EXECUTIVE 04 -->
-
-            <article class="executive-member">
-
-                <div class="executive-photo">
-                    <img
-                        src="{{ asset('images/team/executive-04.jpg') }}"
-                        alt="Executive team member"
-                    >
-                   
-
-                </div>
-
-                <div class="executive-info">
-
-                    <span>
-                        EXECUTIVE LEADERSHIP
-                    </span>
-
-                    <h3>
-                        Executive Name
-                    </h3>
-
-                    <p>
-                        Executive Position
-                    </p>
-
-                </div>
-
-            </article>
-
-        </div>
+        @endforeach
 
 
         <!-- BOTTOM STATEMENT -->

@@ -372,6 +372,39 @@ button {
 }
 
 
+/* About mega menu — anchored to the header's right edge instead of the
+   trigger, so it lines up with the Businesses menu without overflowing. */
+
+.nav-wrapper {
+    position: relative;
+}
+
+
+.nav-dropdown--about {
+    position: static;
+}
+
+
+.nav-dropdown--about .mega-menu {
+    top: calc(100% - 8px);
+    right: 0;
+
+    width: min(760px, 100%);
+
+    grid-template-columns: 1.3fr 1fr 1fr;
+}
+
+
+.nav-dropdown--about.is-current .dropdown-trigger::after {
+    width: 100%;
+}
+
+
+.mega-column a[aria-current="page"] {
+    color: var(--red);
+}
+
+
 /* =====================================================
    HERO
 ===================================================== */
@@ -3761,28 +3794,28 @@ button {
         transform .8s cubic-bezier(.22, 1, .36, 1);
 }
 
-.executive-team-section.is-visible
+.executive-team-grid.is-visible
 .executive-member {
     opacity: 1;
     transform: translateY(0);
 }
 
-.executive-team-section.is-visible
+.executive-team-grid.is-visible
 .executive-member:nth-child(1) {
     transition-delay: .05s;
 }
 
-.executive-team-section.is-visible
+.executive-team-grid.is-visible
 .executive-member:nth-child(2) {
     transition-delay: .15s;
 }
 
-.executive-team-section.is-visible
+.executive-team-grid.is-visible
 .executive-member:nth-child(3) {
     transition-delay: .25s;
 }
 
-.executive-team-section.is-visible
+.executive-team-grid.is-visible
 .executive-member:nth-child(4) {
     transition-delay: .35s;
 }
@@ -3902,6 +3935,150 @@ button {
             transparent 55%,
             rgba(7, 27, 58, .22)
         );
+}
+
+
+/* =========================================================
+   ROLE OVERLAY — revealed on hover / keyboard focus / tap
+========================================================= */
+
+.executive-member {
+    outline: none;
+}
+
+.executive-member:focus-visible .executive-photo {
+    outline: 2px solid #e3262e;
+    outline-offset: 4px;
+}
+
+.executive-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    padding: 34px 28px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(7, 27, 58, .96) 0%,
+            rgba(7, 27, 58, .82) 50%,
+            rgba(7, 27, 58, .35) 100%
+        );
+
+    opacity: 0;
+
+    transition: opacity .5s cubic-bezier(.22, 1, .36, 1);
+}
+
+.executive-overlay-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 16px;
+
+    color: #e3262e;
+
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+}
+
+.executive-overlay-label::before {
+    content: "";
+
+    width: 28px;
+    height: 2px;
+
+    background: #e3262e;
+}
+
+.executive-overlay p {
+    margin: 0;
+
+    color: rgba(255, 255, 255, .9);
+
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.executive-overlay-label,
+.executive-overlay p {
+    transform: translateY(24px);
+
+    transition: transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+
+.executive-overlay p {
+    transition-delay: .05s;
+}
+
+.executive-member:hover .executive-overlay,
+.executive-member:focus-within .executive-overlay {
+    opacity: 1;
+}
+
+.executive-member:hover .executive-overlay-label,
+.executive-member:hover .executive-overlay p,
+.executive-member:focus-within .executive-overlay-label,
+.executive-member:focus-within .executive-overlay p {
+    transform: translateY(0);
+}
+
+
+/* Corner hint — signals there is more to see */
+
+.executive-hint {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 3;
+
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    background: rgba(255, 255, 255, .92);
+
+    color: #071b3a;
+    font-size: 13px;
+
+    transition:
+        background .4s ease,
+        color .4s ease;
+}
+
+.executive-hint i {
+    transition: transform .5s cubic-bezier(.22, 1, .36, 1);
+}
+
+.executive-member:hover .executive-hint,
+.executive-member:focus-within .executive-hint {
+    background: #e3262e;
+    color: #fff;
+}
+
+.executive-member:hover .executive-hint i,
+.executive-member:focus-within .executive-hint i {
+    transform: rotate(45deg);
+}
+
+
+/* Space between stacked team grids */
+
+.executive-team-grid + .executive-team-grid {
+    margin-top: 70px;
 }
 
 
@@ -4111,6 +4288,10 @@ button {
         height: 460px;
     }
 
+    .executive-team-grid + .executive-team-grid {
+        margin-top: 50px;
+    }
+
     .executive-team-bottom {
         display: block;
 
@@ -4134,7 +4315,12 @@ button {
 @media (prefers-reduced-motion: reduce) {
 
     .executive-member,
-    .executive-photo img {
+    .executive-photo img,
+    .executive-overlay,
+    .executive-overlay-label,
+    .executive-overlay p,
+    .executive-hint,
+    .executive-hint i {
         transition: none !important;
     }
 
@@ -7199,4 +7385,306 @@ button {
     height: 9px;
     border-radius: 50%;
     background: #e3262e;
+}
+
+
+/* =====================================================
+   MOBILE NAV — About sub-links
+===================================================== */
+
+.mobile-nav-links .mobile-nav-sub {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 22px;
+
+    padding: 4px 0 10px;
+}
+
+.mobile-menu--centered .mobile-nav-links .mobile-nav-sub a {
+    width: auto;
+    min-height: 36px;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 0;
+
+    color: rgba(255,255,255,.6);
+
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .5px;
+}
+
+.mobile-menu--centered .mobile-nav-links .mobile-nav-sub a:hover,
+.mobile-menu--centered .mobile-nav-links .mobile-nav-sub a:focus-visible {
+    background: transparent;
+    color: var(--white);
+}
+
+.mobile-menu--centered .mobile-nav-links .mobile-nav-sub a[aria-current="page"] {
+    color: var(--red);
+}
+
+
+/* =====================================================
+   PAGE HERO — About sub-pages
+===================================================== */
+
+.page-hero {
+    position: relative;
+
+    height: 78vh;
+    min-height: 620px;
+    max-height: 820px;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: var(--deep-blue);
+}
+
+
+.page-hero-bg {
+    animation: page-hero-zoom 7s ease forwards;
+}
+
+
+@keyframes page-hero-zoom {
+    from { transform: scale(1.05); }
+    to   { transform: scale(1); }
+}
+
+
+.page-hero-content {
+    position: relative;
+    z-index: 2;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding-top: 100px;
+    padding-bottom: 40px;
+}
+
+
+.page-hero-crumbs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-bottom: 28px;
+
+    color: rgba(255,255,255,.6);
+
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+
+.page-hero-crumbs a {
+    transition: color var(--transition);
+}
+
+
+.page-hero-crumbs a:hover {
+    color: var(--white);
+}
+
+
+.page-hero-crumbs i {
+    color: var(--red);
+    font-size: 8px;
+}
+
+
+.page-hero-crumbs span {
+    color: var(--white);
+}
+
+
+.page-hero-content h1 {
+    max-width: 850px;
+
+    color: var(--white);
+
+    font-size: clamp(44px, 5.2vw, 82px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -2.5px;
+}
+
+
+.page-hero-content h1 span {
+    color: #b8c5d8;
+}
+
+
+.page-hero-content p {
+    max-width: 600px;
+
+    margin-top: 28px;
+
+    color: rgba(255,255,255,.78);
+
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+/* Tabs between the About pages */
+
+.page-hero-tabs {
+    position: relative;
+    z-index: 2;
+
+    border-top: 1px solid rgba(255,255,255,.18);
+
+    background: rgba(4, 20, 45, .45);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+
+
+.page-hero-tabs nav {
+    display: flex;
+}
+
+
+.page-hero-tabs a {
+    position: relative;
+
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 26px 0;
+
+    color: rgba(255,255,255,.7);
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: color var(--transition);
+}
+
+
+.page-hero-tabs a::before {
+    content: "";
+
+    position: absolute;
+    top: -1px;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background: var(--red);
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform var(--transition);
+}
+
+
+.page-hero-tabs a:hover,
+.page-hero-tabs a.active {
+    color: var(--white);
+}
+
+
+.page-hero-tabs a:hover::before,
+.page-hero-tabs a.active::before {
+    transform: scaleX(1);
+}
+
+
+.page-hero-tab-num {
+    color: var(--red);
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+
+/* Keep anchor targets clear of the fixed header */
+
+.page-hero ~ section[id],
+.page-hero ~ section [id] {
+    scroll-margin-top: 90px;
+}
+
+
+@media (max-width: 900px) {
+
+    .page-hero {
+        height: auto;
+        min-height: 560px;
+    }
+
+    .page-hero-tabs nav {
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .page-hero-tabs nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .page-hero-tabs a {
+        flex: 0 0 auto;
+        padding: 20px 28px 20px 0;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .page-hero-content h1 {
+        letter-spacing: -1.5px;
+    }
+
+    .page-hero-content p {
+        font-size: 15px;
+    }
+
+    /* Fit all tabs on a phone without scrolling */
+    .page-hero-tab-num {
+        display: none;
+    }
+
+    .page-hero-tabs a {
+        flex: 1 1 auto;
+        padding: 18px 14px 18px 0;
+        font-size: 13px;
+    }
+
+    .page-hero-tabs a:last-child {
+        padding-right: 0;
+    }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .page-hero-bg {
+        animation: none;
+        transform: none;
+    }
+
 }
