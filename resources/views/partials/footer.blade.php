@@ -25,12 +25,12 @@
                 </div>
                 <div>
                     <p class="ftr-h">Businesses</p>
-                    <a href="{{ url('/') }}#businesses">Romina Restaurants</a>
-                    <a href="{{ url('/') }}#businesses">KOBA</a>
-                    <a href="{{ url('/') }}#businesses">Meskott</a>
-                    <a href="{{ url('/') }}#businesses">Romina Coffee</a>
-                    <a href="{{ url('/') }}#businesses">Romina Imports</a>
-                    <a href="{{ url('/') }}#businesses">Jaquar World</a>
+                    <a href="{{ route('business', 'romina-restaurants') }}">Romina Restaurants</a>
+                    <a href="{{ route('business', 'koba-patisserie') }}">KOBA</a>
+                    <a href="{{ route('business', 'meskott-culinary') }}">Meskott</a>
+                    <a href="{{ route('business', 'romina-coffee') }}">Romina Coffee</a>
+                    <a href="{{ route('business', 'romina-imports') }}">Romina Imports</a>
+                    <a href="{{ route('business', 'jaquar-world') }}">Jaquar World</a>
                 </div>
                 <div>
                     <p class="ftr-h">Head office</p>

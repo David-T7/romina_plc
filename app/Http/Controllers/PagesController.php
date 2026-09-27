@@ -41,6 +41,24 @@ class PagesController extends Controller
         return view('about.leadership')->with($pageData);
     }
 
+    public function business($slug)
+    {
+        $brands = config('businesses.brands');
+
+        abort_unless(isset($brands[$slug]), 404);
+
+        $pageData = [
+            'pageTitle' => $brands[$slug]['name'] . ' — Romina Group',
+            'pageCode' => 'Business',
+            'brandSlug' => $slug,
+            'brand' => $brands[$slug],
+            'brands' => $brands,
+            'groups' => config('businesses.groups'),
+        ];
+
+        return view('businesses.show')->with($pageData);
+    }
+
     public function sustainability()
     {
         $pageData = [

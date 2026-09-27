@@ -3,6 +3,11 @@
     $home     = url('/');
     $pageCode = $pageCode ?? 'Home';
     $isAbout  = in_array($pageCode, ['History', 'Leadership']);
+
+    // Businesses menu is built from config/businesses.php
+    $bizGroups  = config('businesses.groups');
+    $bizBrands  = config('businesses.brands');
+    $currentBiz = $pageCode === 'Business' ? ($brandSlug ?? null) : null;
 @endphp
 
 <header class="site-header">
@@ -67,7 +72,7 @@
             </div>
 
             <!-- Businesses Mega Menu -->
-            <div class="nav-dropdown">
+            <div class="nav-dropdown{{ $currentBiz ? ' is-current' : '' }}">
                 <button class="dropdown-trigger">
                     Businesses
                     <span class="dropdown-arrow"><i class="fa-solid fa-chevron-down"></i></span>
@@ -84,68 +89,22 @@
                         </p>
                     </div>
 
-                    <div class="mega-column">
-                        <span class="column-title">
-                            Restaurants &amp; Culinary Brands
-                        </span>
+                    {{-- Columns come from config/businesses.php, one per group --}}
+                    @foreach ($bizGroups as $groupKey => $groupLabel)
+                        <div class="mega-column">
+                            <span class="column-title">
+                                {{ $groupLabel }}
+                            </span>
 
-                        <a href="{{ $home }}#brands">
-                            Restaurant Brands
-                            <small>Explore <span><i class="fa-solid fa-arrow-right"></i></span></small>
-                        </a>
-
-                        <a href="{{ $home }}#brands">
-                            Hospitality
-                            <small>Explore <span><i class="fa-solid fa-arrow-right"></i></span></small>
-                        </a>
-
-                        <a href="{{ $home }}#brands">
-                            Food &amp; Beverage
-                            <small>Explore <span><i class="fa-solid fa-arrow-right"></i></span></small>
-                        </a>
-                    </div>
-
-                    <div class="mega-column">
-                        <span class="column-title">
-                            Romina Coffee
-                        </span>
-
-                        <a href="{{ $home }}#brands">
-                            Our Coffee
-                            <small>Explore <span><i class="fa-solid fa-arrow-right"></i></span></small>
-                        </a>
-
-                        <a href="{{ $home }}#brands">
-                            Coffee Shops
-                            <small>Explore <span><i class="fa-solid fa-arrow-right"></i></span></small>
-                        </a>
-
-                        <a href="{{ $home }}#about">
-                            Our Story
-                            <small>Explore <span><i class="fa-solid fa-arrow-right"></i></span></small>
-                        </a>
-                    </div>
-
-                    <div class="mega-column">
-                        <span class="column-title">
-                            Other Businesses
-                        </span>
-
-                        <a href="{{ $home }}#brands">
-                            Real Estate
-                            <small>Explore <span><i class="fa-solid fa-arrow-right"></i></span></small>
-                        </a>
-
-                        <a href="{{ $home }}#brands">
-                            Investments
-                            <small>Explore <span><i class="fa-solid fa-arrow-right"></i></span></small>
-                        </a>
-
-                        <a href="{{ $home }}#brands">
-                            Consumer Brands
-                            <small>Explore <span><i class="fa-solid fa-arrow-right"></i></span></small>
-                        </a>
-                    </div>
+                            @foreach ($bizBrands as $slug => $biz)
+                                @continue($biz['group'] !== $groupKey)
+                                <a href="{{ route('business', $slug) }}"{!! $currentBiz === $slug ? ' aria-current="page"' : '' !!}>
+                                    {{ $biz['menu'] }}
+                                    <small>Explore <span><i class="fa-solid fa-arrow-right"></i></span></small>
+                                </a>
+                            @endforeach
+                        </div>
+                    @endforeach
 
                 </div>
             </div>
@@ -190,7 +149,12 @@
         <div class="mobile-nav-sub" style="--d: 25ms" aria-label="About pages">
             <a href="{{ route('about.history') }}"{!! $pageCode === 'History' ? ' aria-current="page"' : '' !!}>Our History</a>
             <a href="{{ route('about.leadership') }}"{!! $pageCode === 'Leadership' ? ' aria-current="page"' : '' !!}>Our Leadership</a>        </div>
-        <a href="{{ $home }}#businesses"     style="--d: 50ms"><span>Businesses</span></a>
+        <a href="{{ $home }}#businesses"     style="--d: 50ms"{!! $currentBiz ? ' aria-current="page"' : '' !!}><span>Businesses</span></a>
+        <div class="mobile-nav-sub" style="--d: 75ms" aria-label="Business pages">
+            @foreach ($bizBrands as $slug => $biz)
+                <a href="{{ route('business', $slug) }}"{!! $currentBiz === $slug ? ' aria-current="page"' : '' !!}>{{ $biz['menu'] }}</a>
+            @endforeach
+        </div>
         <a href="{{ route('sustainability') }}" style="--d: 100ms"{!! $pageCode === 'Sustainability' ? ' aria-current="page"' : '' !!}><span>Sustainability</span></a>
         <a href="{{ $home }}#careers"        style="--d: 150ms"><span>Careers</span></a>
         <a href="{{ $home }}#accomplishments" style="--d: 200ms"><span>News</span></a>
