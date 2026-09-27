@@ -864,63 +864,44 @@ document.addEventListener("DOMContentLoaded", function () {
 ===================================================== */
 (function () {
 
-    function initApproachAccordion() {
-        var section = document.querySelector('.sustainability-details');
-        if (!section) return;
-        var items = section.querySelectorAll('.accordion-item');
-
-        items.forEach(function (item) {
-            var trigger = item.querySelector('.accordion-trigger');
-            if (!trigger) return;
-
-            trigger.addEventListener('click', function () {
-                var isActive = item.classList.contains('active');
-
-                items.forEach(function (other) {
-                    other.classList.remove('active');
-                    var t = other.querySelector('.accordion-trigger');
-                    if (t) t.setAttribute('aria-expanded', 'false');
-                });
-
-                if (!isActive) {
-                    item.classList.add('active');
-                    trigger.setAttribute('aria-expanded', 'true');
-                }
-            });
-        });
-    }
-
+    /* Heading + photo tiles fade up as they enter; "Read More" is a plain
+       anchor link, so the jump to each detail block needs no JS. */
     function initApproachReveal() {
         var section = document.querySelector('.sustainability-details');
         if (!section) return;
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
         var header = section.querySelector('.sa-reveal');
-        var rows   = section.querySelectorAll('.accordion-reveal');
+        var tiles  = section.querySelectorAll('.appr-reveal');
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (reduced || typeof IntersectionObserver === 'undefined') {
+            if (header) header.classList.add('revealed');
+            tiles.forEach(function (tile) { tile.classList.add('revealed'); });
+            return;
+        }
 
         var observer = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (!entry.isIntersecting) return;
-                entry.target.classList.add('revealed');
-                observer.unobserve(entry.target);
+                var el = entry.target;
+                el.classList.add('revealed');
+                observer.unobserve(el);
+                /* Drop the stagger once in, so the hover dim responds instantly */
+                setTimeout(function () { el.style.transitionDelay = ''; }, 1200);
             });
         }, { threshold: 0.12 });
 
         if (header) observer.observe(header);
 
-        rows.forEach(function (row, i) {
-            row.style.transitionDelay = (i * 55) + 'ms';
-            observer.observe(row);
+        tiles.forEach(function (tile, i) {
+            tile.style.transitionDelay = ((i % 3) * 110) + 'ms';   /* cascade per row */
+            observer.observe(tile);
         });
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function () {
-            initApproachAccordion();
-            initApproachReveal();
-        });
+        document.addEventListener('DOMContentLoaded', initApproachReveal);
     } else {
-        initApproachAccordion();
         initApproachReveal();
     }
 

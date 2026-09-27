@@ -395,7 +395,8 @@ button {
 }
 
 
-.nav-dropdown--about.is-current .dropdown-trigger::after {
+.nav-dropdown--about.is-current .dropdown-trigger::after,
+.main-navigation > a[aria-current="page"]::after {
     width: 100%;
 }
 
@@ -5608,256 +5609,439 @@ button {
   /* Scroll reveal */
 
   .sa-reveal,
-  .accordion-reveal {
+  .appr-reveal {
     opacity: 0;
     transform: translateY(18px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.22, 1, .36, 1);
   }
 
   .sa-reveal.revealed,
-  .accordion-reveal.revealed {
+  .appr-reveal.revealed {
     opacity: 1;
     transform: none;
   }
 
-  /* Accordion */
+  /* ------------------------------------------
+     Approach grid — 3 x 2 photo tiles
+     ------------------------------------------ */
 
-  .sustainability-accordion {
-    border-top: 1px solid var(--border);
+  .appr-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    scroll-margin-top: 110px;
   }
 
-  .accordion-item {
+  .appr-tile {
     position: relative;
-    border-bottom: 1px solid var(--border);
-    transition: background 0.25s ease;
+    height: 440px;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--primary);
+    color: #ffffff;
   }
 
-  .accordion-item.active {
-    background: var(--warm);
+  /* Revealed tiles take over the transition for the hover dim */
+  .appr-tile.revealed {
+    transition:
+      opacity 0.45s ease,
+      transform 0.6s cubic-bezier(.22, 1, .36, 1);
   }
 
-  /* Animated left accent — grows top-to-bottom on open */
+  /* Photo — muted and tinted until hovered */
 
-  .accordion-item::before {
+  .appr-tile-media {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(.85) contrast(1.05);
+    transform: scale(1.02);
+    transition:
+      filter 0.7s ease,
+      transform 1.2s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .appr-tile::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(
+        to top,
+        rgba(7, 27, 58, .96) 0%,
+        rgba(7, 27, 58, .55) 45%,
+        rgba(7, 27, 58, .72) 100%
+      );
+    transition: opacity 0.6s ease;
+  }
+
+  /* Red bar that fills along the bottom edge */
+  .appr-tile::after {
     content: "";
     position: absolute;
     left: 0;
-    top: 0;
     bottom: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--secondary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  /* Inset frame that draws itself in on hover */
+
+  .appr-tile-frame {
+    position: absolute;
+    inset: 16px;
+    pointer-events: none;
+  }
+
+  .appr-tile-frame::before,
+  .appr-tile-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transition: transform 0.7s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .appr-tile-frame::before {
+    border-top: 1px solid rgba(255, 255, 255, .55);
+    border-bottom: 1px solid rgba(255, 255, 255, .55);
+    transform: scaleX(0);
+  }
+
+  .appr-tile-frame::after {
+    border-left: 1px solid rgba(255, 255, 255, .55);
+    border-right: 1px solid rgba(255, 255, 255, .55);
+    transform: scaleY(0);
+    transition-delay: .1s;
+  }
+
+  /* Oversized outline number */
+
+  .appr-tile-num {
+    position: absolute;
+    top: 30px;
+    left: 34px;
+    color: transparent;
+    font-size: 88px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, .45);
+    transition:
+      color 0.5s ease,
+      -webkit-text-stroke-color 0.5s ease;
+  }
+
+  /* Title block — lifts on hover to make room for the button */
+
+  .appr-tile-body {
+    position: absolute;
+    left: 34px;
+    right: 34px;
+    bottom: 34px;
+    transform: translateY(62px);
+    transition: transform 0.6s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .appr-tile-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255, 255, 255, .4);
+    border-radius: 50%;
+    color: #ffffff;
+    transition:
+      background 0.4s ease,
+      border-color 0.4s ease;
+  }
+
+  .appr-tile-body h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+
+  .appr-tile-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 22px;
+    padding: 13px 22px;
+    background: var(--secondary);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.4s ease,
+      transform 0.5s cubic-bezier(.22, 1, .36, 1),
+      background 0.3s ease;
+  }
+
+  .appr-tile-btn:hover {
+    background: #bd1820;
+    color: #ffffff;
+  }
+
+  .appr-tile-btn:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+  }
+
+  .appr-tile-btn i {
+    font-size: 11px;
+  }
+
+  .appr-tile-btn:hover i {
+    animation: appr-nudge 0.8s ease infinite;
+  }
+
+  @keyframes appr-nudge {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(3px); }
+  }
+
+  /* Hover / keyboard focus state */
+
+  .appr-tile:hover .appr-tile-media,
+  .appr-tile:focus-within .appr-tile-media {
+    filter: none;
+    transform: scale(1.08);
+  }
+
+  .appr-tile:hover::before,
+  .appr-tile:focus-within::before {
+    opacity: .85;
+  }
+
+  .appr-tile:hover::after,
+  .appr-tile:focus-within::after,
+  .appr-tile:hover .appr-tile-frame::before,
+  .appr-tile:focus-within .appr-tile-frame::before {
+    transform: scaleX(1);
+  }
+
+  .appr-tile:hover .appr-tile-frame::after,
+  .appr-tile:focus-within .appr-tile-frame::after {
+    transform: scaleY(1);
+  }
+
+  .appr-tile:hover .appr-tile-num,
+  .appr-tile:focus-within .appr-tile-num {
+    color: rgba(255, 255, 255, .1);
+    -webkit-text-stroke-color: #ffffff;
+  }
+
+  .appr-tile:hover .appr-tile-body,
+  .appr-tile:focus-within .appr-tile-body {
+    transform: translateY(0);
+  }
+
+  .appr-tile:hover .appr-tile-icon,
+  .appr-tile:focus-within .appr-tile-icon {
+    background: var(--secondary);
+    border-color: var(--secondary);
+  }
+
+  .appr-tile:hover .appr-tile-btn,
+  .appr-tile:focus-within .appr-tile-btn {
+    opacity: 1;
+    transform: none;
+    transition-delay: .12s, .12s, 0s;
+  }
+
+  /* Spotlight — the other tiles step back while one is hovered */
+
+  @media (hover: hover) {
+    .appr-grid:hover .appr-tile.revealed:not(:hover) {
+      opacity: .55;
+    }
+  }
+
+  /* Touch screens: no hover, so show everything up front */
+
+  @media (hover: none) {
+    .appr-tile-media {
+      filter: none;
+    }
+
+    .appr-tile-body {
+      transform: none;
+    }
+
+    .appr-tile-btn {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* ------------------------------------------
+     Approach details — one block per item
+     ------------------------------------------ */
+
+  .appr-details {
+    margin-top: 110px;
+    border-top: 1px solid var(--border);
+  }
+
+  .appr-detail {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 60px;
+    padding: 56px 0 56px 28px;
+    border-bottom: 1px solid var(--border);
+    scroll-margin-top: 110px;
+  }
+
+  /* Left accent bar, drawn in when arrived at via "Read More" */
+  .appr-detail::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 56px;
+    bottom: 56px;
     width: 3px;
     background: var(--secondary);
     transform: scaleY(0);
     transform-origin: top;
-    transition: transform 0.35s ease;
-    pointer-events: none;
+    transition: transform 0.6s cubic-bezier(.22, 1, .36, 1);
   }
 
-  .accordion-item.active::before {
+  .appr-detail:target::before {
     transform: scaleY(1);
   }
 
-  /* Hover: red sweep across the bottom divider */
-
-  .accordion-item::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -1px;
-    width: 0;
-    height: 1px;
-    background: var(--secondary);
-    transition: width 0.4s ease;
-    pointer-events: none;
-    z-index: 1;
+  .appr-detail:target {
+    animation: appr-arrive 1.8s ease;
   }
 
-  .accordion-item:hover::after {
-    width: 100%;
+  @keyframes appr-arrive {
+    0%, 30% { background: var(--warm); }
+    100%    { background: transparent; }
   }
 
-  .accordion-trigger {
-    position: relative;
-    width: 100%;
-    border: 0;
-    background: transparent;
-    color: var(--primary);
-    padding: 29px 8px;
-    display: flex;
+  .appr-detail-head {
+    position: sticky;
+    top: 130px;
+    align-self: start;
+    display: grid;
+    grid-template-columns: auto 1fr;
     align-items: center;
-    justify-content: space-between;
-    gap: 30px;
-    text-align: left;
-    cursor: pointer;
+    column-gap: 16px;
   }
 
-  .accordion-trigger:focus-visible {
-    outline: 2px solid var(--secondary);
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
-
-  .accordion-title {
-    display: flex;
-    align-items: center;
-    min-width: 0;
-    gap: 22px;
-  }
-
-  .accordion-number {
-    min-width: 36px;
+  .appr-detail-num {
+    grid-column: 1 / -1;
+    margin-bottom: 18px;
     color: var(--secondary);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 800;
+    letter-spacing: 0.12em;
     font-variant-numeric: tabular-nums;
-    letter-spacing: 0.06em;
-    opacity: 0.42;
-    transition: opacity 0.25s ease;
-    flex-shrink: 0;
   }
 
-  .accordion-item.active .accordion-number {
-    opacity: 1;
+  .appr-detail-head h3 {
+    margin: 0;
+    color: var(--primary);
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .appr-detail-back {
+    grid-column: 1 / -1;
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 26px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .appr-detail-back:hover {
+    color: var(--secondary);
+    border-color: var(--secondary);
   }
 
   /* Icon badge */
 
   .approach-badge {
-    width: 44px;
-    height: 44px;
-    flex: 0 0 44px;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
     border-radius: 50%;
-    border: 1px solid rgba(7, 27, 58, 0.28);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary);
-    transition:
-      background 0.25s ease,
-      color 0.25s ease,
-      border-color 0.25s ease;
-  }
-
-  .accordion-trigger:hover .approach-badge,
-  .accordion-item.active .approach-badge {
     background: var(--primary);
     color: #ffffff;
-    border-color: var(--primary);
   }
 
   .approach-badge svg {
     flex-shrink: 0;
   }
 
-  .accordion-name {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    color: var(--primary);
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -0.015em;
-    transition: transform 0.25s ease;
-  }
+  /* Body copy */
 
-  .accordion-trigger:hover .accordion-name {
-    transform: translateX(4px);
-  }
-
-  /* Chevron */
-
-  .accordion-chevron {
-    width: 40px;
-    height: 40px;
-    flex: 0 0 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    color: var(--primary);
-    transition:
-      background 0.25s ease,
-      color 0.25s ease,
-      border-color 0.25s ease;
-  }
-
-  .accordion-trigger:hover .accordion-chevron {
-    border-color: rgba(7, 27, 58, 0.32);
-  }
-
-  .approach-chevron-icon {
-    transition: transform 0.35s ease;
-  }
-
-  .accordion-item.active .accordion-chevron {
-    background: var(--primary);
-    color: #ffffff;
-    border-color: var(--primary);
-  }
-
-  .accordion-item.active .approach-chevron-icon {
-    transform: rotate(180deg);
-  }
-
-  /* Content animation */
-
-  .accordion-content {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.45s ease;
-  }
-
-  .accordion-item.active .accordion-content {
-    grid-template-rows: 1fr;
-  }
-
-  .accordion-content-inner {
-    overflow: hidden;
-    min-height: 0;
-    max-width: 850px;
-    padding: 0 100px 0 94px;
+  .appr-detail-body {
+    max-width: 680px;
     color: var(--muted);
     font-size: 16px;
     line-height: 1.8;
-    transition:
-      padding 0.45s ease,
-      opacity 0.35s ease;
-    opacity: 0;
   }
 
-  .accordion-item.active .accordion-content-inner {
-    padding-bottom: 42px;
-    opacity: 1;
-  }
-
-  .accordion-content-inner p {
+  .appr-detail-body p {
     margin: 0 0 20px;
   }
 
-  .accordion-content-inner p:last-of-type {
+  .appr-detail-body p:last-of-type {
     margin-bottom: 0;
   }
 
-  .accordion-content-inner strong {
+  .appr-detail-body strong {
     color: var(--primary);
     font-weight: 700;
   }
 
-  /* Lists */
-
-  .accordion-content-inner ul {
+  .appr-detail-body ul {
     margin: 0 0 25px;
     padding: 0;
     list-style: none;
   }
 
-  .accordion-content-inner li {
+  .appr-detail-body li {
     position: relative;
     padding-left: 25px;
     margin-bottom: 11px;
   }
 
-  .accordion-content-inner li::before {
+  .appr-detail-body li::before {
     content: "";
     position: absolute;
     left: 0;
@@ -5898,15 +6082,25 @@ button {
     font-size: 17px;
   }
 
-  /* Active left-padding push to clear the accent bar */
-
-  .accordion-item.active .accordion-trigger {
-    padding-left: 20px;
-  }
 
   /* ==========================================
      RESPONSIVE
      ========================================== */
+
+  @media (max-width: 1000px) {
+    .appr-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .appr-detail {
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+
+    .appr-detail-head {
+      position: static;
+    }
+  }
 
   @media (max-width: 700px) {
     .sustainability-details {
@@ -5925,71 +6119,62 @@ button {
       font-size: 15px;
     }
 
-    .accordion-trigger {
-      padding: 24px 4px;
-      gap: 15px;
+    .appr-details {
+      margin-top: 70px;
     }
 
-    .accordion-title {
-      gap: 14px;
+    .appr-detail {
+      padding: 40px 0 40px 18px;
     }
 
-    .accordion-number {
-      min-width: 28px;
-      font-size: 11px;
+    .appr-detail::before {
+      top: 40px;
+      bottom: 40px;
     }
 
-    .accordion-name {
-      font-size: 17px;
-      gap: 12px;
+    .appr-detail-head h3 {
+      font-size: 21px;
+    }
+
+    .appr-detail-body {
+      font-size: 15px;
     }
 
     .approach-badge {
-      width: 36px;
-      height: 36px;
-      flex-basis: 36px;
+      width: 40px;
+      height: 40px;
+      flex-basis: 40px;
     }
 
     .approach-badge svg {
       width: 16px;
       height: 16px;
     }
-
-    .accordion-chevron {
-      width: 36px;
-      height: 36px;
-      flex-basis: 36px;
-    }
-
-    .accordion-content-inner {
-      padding: 0 15px 0 47px;
-      font-size: 15px;
-    }
-
-    .accordion-item.active .accordion-content-inner {
-      padding-bottom: 30px;
-    }
-
-    .accordion-item.active .accordion-trigger {
-      padding-left: 15px;
-    }
   }
 
-  @media (max-width: 480px) {
-    .accordion-number {
-      display: none;
+  @media (max-width: 640px) {
+    .appr-grid {
+      grid-template-columns: 1fr;
     }
 
-    .accordion-content-inner {
-      padding-left: 15px;
+    .appr-tile {
+      height: 360px;
     }
 
-    .accordion-item.active .accordion-content-inner {
-      padding-left: 15px;
+    .appr-tile-num {
+      font-size: 68px;
+      top: 24px;
+      left: 26px;
     }
 
-    .accordion-name {
-      font-size: 16px;
+    .appr-tile-body {
+      left: 26px;
+      right: 26px;
+      bottom: 26px;
+    }
+
+    .appr-tile-body h3 {
+      font-size: 21px;
     }
   }
 
@@ -5997,22 +6182,28 @@ button {
 
   @media (prefers-reduced-motion: reduce) {
     .sa-reveal,
-    .accordion-reveal {
+    .appr-reveal {
       opacity: 1;
       transform: none;
       transition: none;
     }
 
-    .accordion-content,
-    .accordion-content-inner,
-    .accordion-chevron,
-    .approach-chevron-icon,
-    .approach-badge,
-    .accordion-number,
-    .accordion-name,
-    .accordion-item::before,
-    .accordion-item::after {
+    .appr-tile,
+    .appr-tile::before,
+    .appr-tile::after,
+    .appr-tile-media,
+    .appr-tile-frame::before,
+    .appr-tile-frame::after,
+    .appr-tile-num,
+    .appr-tile-body,
+    .appr-tile-icon,
+    .appr-tile-btn,
+    .appr-detail::before {
       transition: none;
+    }
+
+    .appr-tile-btn:hover i,
+    .appr-detail:target {
       animation: none;
     }
   }
@@ -7538,6 +7729,13 @@ button {
 
     font-size: 17px;
     line-height: 1.7;
+}
+
+
+/* Pages without the tab bar need the extra breathing room at the bottom */
+
+.page-hero--plain .page-hero-content {
+    padding-bottom: 80px;
 }
 
 

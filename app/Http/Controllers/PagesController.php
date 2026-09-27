@@ -41,6 +41,16 @@ class PagesController extends Controller
         return view('about.leadership')->with($pageData);
     }
 
+    public function sustainability()
+    {
+        $pageData = [
+            'pageTitle' => 'Sustainability — Romina Group',
+            'pageCode' => 'Sustainability',
+        ];
+
+        return view('sustainability.index')->with($pageData);
+    }
+
     public function team()
     {
         return redirect('/#executive-team');

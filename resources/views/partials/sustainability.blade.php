@@ -147,43 +147,49 @@
 
 <?php
 /*
- * Icons array — swap SVGs here without touching markup.
+ * Approach items — swap icons or tile images here without touching markup.
  * Each icon: 20px rendered, 24-grid, 1.5px stroke, round caps/joins, currentColor.
  */
 $approach_items = [
     [
         'num'   => '01',
         'id'    => 'appr-1',
+        'image' => 'images/coffee/drying-beds.jpg',
         'title' => 'Farmer Support & Responsible Sourcing',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V12"/><path d="M12 12C11 7 6 4 2 5c0 4 3 8 10 7"/><path d="M12 12c1-5 6-8 10-7 0 4-3 8-10 7"/></svg>',
     ],
     [
         'num'   => '02',
         'id'    => 'appr-2',
+        'image' => 'images/hero/hero-01.jpg',
         'title' => 'Community Development',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
     ],
     [
         'num'   => '03',
         'id'    => 'appr-3',
+        'image' => 'images/hero/hero-03.jpg',
         'title' => 'Environmental Commitment',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
     ],
     [
         'num'   => '04',
         'id'    => 'appr-4',
+        'image' => 'images/coffee/hand-sorting.jpg',
         'title' => 'Water Treatment',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5S5 10 5 15a7 7 0 0 0 14 0c0-5-7-12.5-7-12.5z"/></svg>',
     ],
     [
         'num'   => '05',
         'id'    => 'appr-5',
+        'image' => 'images/business/coffee.jpg',
         'title' => 'Looking Ahead',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="none"/></svg>',
     ],
     [
         'num'   => '06',
         'id'    => 'appr-6',
+        'image' => 'images/coffee/green-beans.jpg',
         'title' => 'Farmer & Staff Training',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
     ],
@@ -207,39 +213,51 @@ $approach_items = [
       </p>
     </div>
 
-    <div class="sustainability-accordion">
+    {{-- HOVER GRID — one photo tile per approach item; "Read More" jumps to its detail below --}}
+    <div class="appr-grid" id="approach-grid">
+
+      @foreach ($approach_items as $item)
+      <article class="appr-tile appr-reveal">
+
+        <div class="appr-tile-media" style="background-image: url('{{ asset($item['image']) }}');" aria-hidden="true"></div>
+
+        <span class="appr-tile-frame" aria-hidden="true"></span>
+
+        <span class="appr-tile-num" aria-hidden="true">{{ $item['num'] }}</span>
+
+        <div class="appr-tile-body">
+          <span class="appr-tile-icon" aria-hidden="true">{!! $item['icon'] !!}</span>
+          <h3>{{ $item['title'] }}</h3>
+          <a href="#{{ $item['id'] }}" class="appr-tile-btn">
+            Read More
+            <span class="visually-hidden">about {{ $item['title'] }}</span>
+            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+          </a>
+        </div>
+
+      </article>
+      @endforeach
+
+    </div>
+
+
+    {{-- DETAILS — one block per approach item, targeted by the tiles above --}}
+    <div class="appr-details">
 
       @foreach ($approach_items as $idx => $item)
-      <div
-        class="accordion-item accordion-reveal{{ $idx === 0 ? ' active' : '' }}"
-        data-idx="{{ $idx }}"
-      >
-        <button
-          class="accordion-trigger"
-          type="button"
-          id="{{ $item['id'] }}-hdr"
-          aria-expanded="{{ $idx === 0 ? 'true' : 'false' }}"
-          aria-controls="{{ $item['id'] }}-panel"
-        >
-          <span class="accordion-title">
-            <span class="accordion-number">{{ $item['num'] }}</span>
-            <span class="accordion-name">
-              <span class="approach-badge">{!! $item['icon'] !!}</span>
-              {{ $item['title'] }}
-            </span>
-          </span>
-          <span class="accordion-chevron" aria-hidden="true">
-            <svg class="approach-chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </span>
-        </button>
+      <article class="appr-detail" id="{{ $item['id'] }}">
 
-        <div
-          class="accordion-content"
-          id="{{ $item['id'] }}-panel"
-          role="region"
-          aria-labelledby="{{ $item['id'] }}-hdr"
-        >
-          <div class="accordion-content-inner">
+        <header class="appr-detail-head">
+          <span class="appr-detail-num">{{ $item['num'] }}</span>
+          <span class="approach-badge" aria-hidden="true">{!! $item['icon'] !!}</span>
+          <h3>{{ $item['title'] }}</h3>
+          <a href="#approach-grid" class="appr-detail-back">
+            <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+            Back to overview
+          </a>
+        </header>
+
+        <div class="appr-detail-body">
             @switch($idx)
 
               @case(0)
@@ -362,9 +380,9 @@ $approach_items = [
               @break
 
             @endswitch
-          </div>
         </div>
-      </div>
+
+      </article>
       @endforeach
 
     </div>

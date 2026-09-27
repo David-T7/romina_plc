@@ -21,13 +21,9 @@
 
 @include('partials.coffee')
 
-@include('partials.executive-team')
-
 @include('partials.businesses')
 
 @include('partials.news')
-
-@include('partials.sustainability')
 
 @include('partials.partners')
 

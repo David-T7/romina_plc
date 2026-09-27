@@ -150,7 +150,7 @@
                 </div>
             </div>
 
-            <a href="{{ $home }}#sustainability">Sustainability</a>
+            <a href="{{ route('sustainability') }}"{!! $pageCode === 'Sustainability' ? ' aria-current="page"' : '' !!}>Sustainability</a>
             <a href="{{ $home }}#careers">Careers</a>
             <a href="{{ $home }}#accomplishments">News</a>
             <a href="{{ $home }}#contact">Contact</a>
@@ -186,12 +186,12 @@
     </div>
 
     <nav class="container mobile-nav-links" aria-label="Mobile navigation">
-        <a href="{{ $home }}#about"          style="--d: 0ms"  aria-current="page"><span>About</span></a>
+        <a href="{{ $home }}#about"          style="--d: 0ms"{!! $pageCode === 'Home' || $isAbout ? ' aria-current="page"' : '' !!}><span>About</span></a>
         <div class="mobile-nav-sub" style="--d: 25ms" aria-label="About pages">
             <a href="{{ route('about.history') }}"{!! $pageCode === 'History' ? ' aria-current="page"' : '' !!}>Our History</a>
             <a href="{{ route('about.leadership') }}"{!! $pageCode === 'Leadership' ? ' aria-current="page"' : '' !!}>Our Leadership</a>        </div>
         <a href="{{ $home }}#businesses"     style="--d: 50ms"><span>Businesses</span></a>
-        <a href="{{ $home }}#sustainability" style="--d: 100ms"><span>Sustainability</span></a>
+        <a href="{{ route('sustainability') }}" style="--d: 100ms"{!! $pageCode === 'Sustainability' ? ' aria-current="page"' : '' !!}><span>Sustainability</span></a>
         <a href="{{ $home }}#careers"        style="--d: 150ms"><span>Careers</span></a>
         <a href="{{ $home }}#accomplishments" style="--d: 200ms"><span>News</span></a>
         <a href="{{ $home }}#contact"        style="--d: 250ms"><span>Contact</span></a>

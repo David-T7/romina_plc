@@ -18,7 +18,7 @@
                     <p class="ftr-h">Romina Group</p>
                     <a href="{{ url('/') }}#about">About</a>
                     <a href="{{ url('/') }}#businesses">Businesses</a>
-                    <a href="{{ url('/') }}#sustainability">Sustainability</a>
+                    <a href="{{ route('sustainability') }}">Sustainability</a>
                     <a href="{{ url('/') }}#careers">Careers</a>
                     <a href="{{ url('/') }}#news">News</a>
                     <a href="{{ url('/') }}#contact">Contact</a>
