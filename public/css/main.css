@@ -7886,3 +7886,644 @@ button {
     }
 
 }
+
+
+/* =====================================================
+   OUR STORY — 3D glass panels (About › Our History)
+   Cards sit like an open book; JS sets --rx/--ry (tilt)
+   and --gx/--gy (glare position) on pointer move.
+===================================================== */
+
+.story {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    padding: clamp(90px, 10vw, 150px) 0;
+
+    background: var(--deep-blue);
+    color: var(--white);
+}
+
+
+/* Translucent photo wash */
+
+.story-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -4;
+
+    background-size: cover;
+    background-position: center;
+
+    opacity: .28;
+    filter: saturate(.7);
+}
+
+.story::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(11, 40, 82, .2), rgba(7, 27, 58, .9) 70%),
+        linear-gradient(180deg, rgba(7, 27, 58, .55), rgba(7, 27, 58, .92));
+}
+
+
+/* Soft glowing light behind the glass */
+
+.story-orb {
+    position: absolute;
+    z-index: -2;
+
+    width: 520px;
+    height: 520px;
+
+    border-radius: 50%;
+    filter: blur(90px);
+
+    animation: story-float 14s ease-in-out infinite alternate;
+}
+
+.story-orb--red {
+    top: -120px;
+    left: -140px;
+    background: rgba(227, 38, 46, .32);
+}
+
+.story-orb--blue {
+    right: -160px;
+    bottom: -160px;
+    background: rgba(62, 120, 255, .28);
+    animation-delay: -7s;
+}
+
+@keyframes story-float {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(80px, 60px) scale(1.15); }
+}
+
+
+/* Extruded year in the background */
+
+.story-year {
+    position: absolute;
+    z-index: -1;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color: rgba(255, 255, 255, .035);
+
+    font-size: clamp(180px, 28vw, 440px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -.04em;
+
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+
+    text-shadow:
+        2px 2px 0 rgba(11, 40, 82, .9),
+        4px 4px 0 rgba(11, 40, 82, .8),
+        6px 6px 0 rgba(11, 40, 82, .7),
+        8px 8px 0 rgba(11, 40, 82, .6),
+        10px 10px 0 rgba(11, 40, 82, .5),
+        12px 12px 0 rgba(11, 40, 82, .4),
+        14px 14px 0 rgba(11, 40, 82, .3),
+        30px 40px 60px rgba(0, 0, 0, .4);
+}
+
+
+/* Grid + cards */
+
+.story-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 44px;
+    align-items: stretch;
+
+    perspective: 1800px;
+}
+
+.story-card {
+    --base: 0deg;
+    --rx: 0deg;
+    --ry: 0deg;
+    --gx: 50%;
+    --gy: 50%;
+
+    position: relative;
+
+    padding: 54px 50px;
+
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--base) + var(--ry))) rotateX(var(--rx));
+
+    transition:
+        transform .7s cubic-bezier(.22, 1, .36, 1),
+        opacity .9s ease,
+        translate .9s cubic-bezier(.22, 1, .36, 1);
+}
+
+/* Open-book pose: inner edges recede towards the spine */
+.story-card--welcome {
+    --base: 5deg;
+
+    /* Stretches to match the taller right panel — keep content centred */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.story-card--welcome > .story-layer {
+    align-self: stretch;
+}
+.story-card--who     { --base: -5deg; }
+
+.story-card.is-tilting {
+    transition:
+        transform .12s linear,
+        opacity .9s ease,
+        translate .9s cubic-bezier(.22, 1, .36, 1);
+}
+
+
+/* Frosted glass layer (kept separate so the card stays 3D) */
+
+.story-glass {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, .14),
+            rgba(255, 255, 255, .04)
+        );
+
+    border: 1px solid rgba(255, 255, 255, .18);
+
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
+
+    box-shadow:
+        0 40px 80px rgba(0, 0, 0, .35),
+        inset 0 1px 0 rgba(255, 255, 255, .25);
+}
+
+/* Red spine accent on the inner edge */
+.story-card--welcome .story-glass { border-right: 2px solid rgba(227, 38, 46, .75); }
+.story-card--who .story-glass     { border-left: 2px solid rgba(227, 38, 46, .75); }
+
+.story-glare {
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at var(--gx) var(--gy),
+            rgba(255, 255, 255, .16),
+            transparent 45%
+        );
+
+    opacity: 0;
+    transform: translateZ(1px);
+    pointer-events: none;
+
+    transition: opacity .4s ease;
+}
+
+.story-card.is-tilting .story-glare {
+    opacity: 1;
+}
+
+
+/* Depth layers — content floats above the glass */
+
+.story-layer {
+    position: relative;
+}
+
+.story-layer--1 { transform: translateZ(24px); }
+.story-layer--2 { transform: translateZ(44px); }
+.story-layer--3 { transform: translateZ(64px); }
+
+
+/* Type */
+
+.story-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #ff5960;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.story-kicker i {
+    font-size: 11px;
+}
+
+.story-amh {
+    margin: 12px 0 0;
+
+    color: rgba(255, 255, 255, .5);
+    font-size: 15px;
+}
+
+.story-title {
+    margin: 22px 0 24px;
+
+    color: var(--white);
+
+    font-size: clamp(40px, 4.2vw, 64px);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -2px;
+}
+
+.story-title span {
+    color: #b8c5d8;
+}
+
+.story-subtitle {
+    margin: 18px 0 18px;
+
+    color: var(--white);
+
+    font-size: clamp(24px, 2.2vw, 30px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -.5px;
+}
+
+.story-text {
+    margin: 0;
+
+    color: rgba(255, 255, 255, .78);
+
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.story-text strong {
+    color: var(--white);
+    font-weight: 600;
+}
+
+.story-note {
+    margin: 0 0 28px;
+    padding-left: 16px;
+
+    border-left: 2px solid var(--red);
+
+    color: rgba(255, 255, 255, .62);
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* Stat chips */
+
+.story-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+
+    margin: 36px 0;
+}
+
+.story-stat {
+    padding: 20px 18px;
+
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-top: 2px solid var(--red);
+
+    box-shadow: 0 18px 34px rgba(0, 0, 0, .28);
+
+    transition:
+        transform .45s cubic-bezier(.22, 1, .36, 1),
+        background .35s ease;
+}
+
+.story-stat:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, .13);
+}
+
+.story-stat strong {
+    display: block;
+
+    color: var(--white);
+
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.story-stat sup {
+    top: -.6em;
+    color: #ff5960;
+    font-size: .5em;
+}
+
+.story-stat span {
+    display: block;
+
+    margin-top: 10px;
+
+    color: rgba(255, 255, 255, .6);
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+
+/* Sector tiles */
+
+.story-sectors {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+
+    margin: 28px 0 26px;
+    padding: 0;
+
+    list-style: none;
+}
+
+.story-sector {
+    position: relative;
+
+    height: 100%;
+    min-height: 136px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    padding: 18px;
+
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .14);
+
+    color: var(--white);
+
+    transition:
+        transform .5s cubic-bezier(.22, 1, .36, 1),
+        background .35s ease,
+        border-color .35s ease,
+        box-shadow .5s ease;
+}
+
+.story-sector:hover,
+.story-sector:focus-visible {
+    color: var(--white);
+
+    transform: translateY(-6px);
+
+    background: rgba(255, 255, 255, .12);
+    border-color: rgba(227, 38, 46, .75);
+
+    box-shadow: 0 24px 40px rgba(0, 0, 0, .35);
+}
+
+.story-sector-num {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+
+    color: rgba(255, 255, 255, .4);
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.story-sector-icon {
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 50%;
+
+    font-size: 14px;
+
+    transition:
+        background .35s ease,
+        border-color .35s ease;
+}
+
+.story-sector:hover .story-sector-icon,
+.story-sector:focus-visible .story-sector-icon {
+    background: var(--red);
+    border-color: var(--red);
+}
+
+.story-sector-name {
+    padding-right: 22px;
+
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.story-sector-arrow {
+    position: absolute;
+    right: 18px;
+    bottom: 20px;
+
+    color: #ff5960;
+    font-size: 13px;
+
+    opacity: 0;
+    transform: translateX(-8px);
+
+    transition:
+        opacity .35s ease,
+        transform .45s cubic-bezier(.22, 1, .36, 1);
+}
+
+.story-sector:hover .story-sector-arrow,
+.story-sector:focus-visible .story-sector-arrow {
+    opacity: 1;
+    transform: none;
+}
+
+
+/* Buttons */
+
+.story-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.story-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 15px 26px;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+
+    transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
+}
+
+.story-btn i {
+    font-size: 12px;
+    transition: transform var(--transition);
+}
+
+.story-btn:hover {
+    transform: translateY(-2px);
+}
+
+.story-btn:hover i {
+    transform: translateX(4px);
+}
+
+.story-btn--solid {
+    background: var(--red);
+    color: var(--white);
+}
+
+.story-btn--solid:hover {
+    background: #bd1820;
+    color: var(--white);
+}
+
+.story-btn--ghost {
+    border: 1px solid rgba(255, 255, 255, .4);
+    color: var(--white);
+}
+
+.story-btn--ghost:hover {
+    background: var(--white);
+    border-color: var(--white);
+    color: var(--deep-blue);
+}
+
+.story-btn:focus-visible,
+.story-sector:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 3px;
+}
+
+
+/* Entrance — rises in, then settles into the 3D pose */
+
+.story-reveal:not(.revealed) {
+    opacity: 0;
+    translate: 0 70px;
+}
+
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+
+    .story-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .story-card--welcome,
+    .story-card--who {
+        --base: 0deg;
+    }
+
+    .story-card--welcome .story-glass,
+    .story-card--who .story-glass {
+        border-left: 1px solid rgba(255, 255, 255, .18);
+        border-right: 1px solid rgba(255, 255, 255, .18);
+        border-top: 2px solid rgba(227, 38, 46, .75);
+    }
+
+}
+
+@media (max-width: 640px) {
+
+    .story-card {
+        padding: 38px 24px;
+    }
+
+    .story-title {
+        letter-spacing: -1px;
+    }
+
+    .story-stats {
+        gap: 8px;
+    }
+
+    .story-stat {
+        padding: 16px 12px;
+    }
+
+    .story-stat strong {
+        font-size: 26px;
+    }
+
+    .story-stat span {
+        font-size: 9px;
+        letter-spacing: .5px;
+        overflow-wrap: anywhere;
+    }
+
+    .story-sectors {
+        grid-template-columns: 1fr;
+    }
+
+    .story-sector {
+        min-height: 0;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .story-orb {
+        animation: none;
+    }
+
+    .story-card,
+    .story-stat,
+    .story-sector,
+    .story-sector-arrow,
+    .story-btn {
+        transition: none;
+    }
+
+    .story-reveal:not(.revealed) {
+        opacity: 1;
+        translate: none;
+    }
+
+}

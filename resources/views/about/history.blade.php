@@ -12,7 +12,7 @@
     'image' => 'images/about/romina-history.jpg',
 ])
 
-@include('partials.about')
+@include('partials.about-story')
 
 @endsection
 
