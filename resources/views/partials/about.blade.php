@@ -21,7 +21,7 @@
                 <p class="amh" lang="am">እንኳን ደህና መጡ</p>
                 <h3 class="about-sub">Welcome to Romina Group</h3>
                 <p class="about-body">
-                    Founded in 1973 by Girma Taye as a small restaurant in Arat Kilo,
+                    Founded in 1973 by Girma Taye as a small restaurant in 4 Kilo,
                     Romina has grown over five decades into a diversified Ethiopian enterprise,
                     through strategic expansion, successful partnerships and an unwavering
                     commitment to excellence.
@@ -37,7 +37,7 @@
 
         @php
             $tlMilestones = [
-                ['year' => 1973,           'label' => '1973',  'title' => 'Where it began'],
+                ['year' => 1973,           'label' => '1973',  'title' => 'Romina Restaurant'],
                 ['year' => 2009,           'label' => '2009',  'title' => 'Romina Coffee' ],
                 ['year' => 2017,           'label' => '2017',  'title' => 'Jaquar World'  ],
                 ['year' => 2020,           'label' => '2020',  'title' => 'KOBA'          ],
