@@ -36,17 +36,10 @@ return [
             'title'      => 'The home of great service',
             'body'       => [
                 "We don't just serve food; we invite you into an experience that mirrors the inclusion and warmth of home. Home-styled dishes from across the world, prepared as the most comforting versions of what you love.",
-<<<<<<< HEAD
-                'Romina Group itself began in 1973 with a small, cherished restaurant in Arat Kilo. Hospitality has been at the heart of the Group ever since, and Romina Restaurants carries that legacy forward today.',
-            ],
-            'facts'      => [
-                ['value' => '1973', 'label' => 'Our roots in Arat Kilo'],
-=======
                 'Romina Group itself began in 1973 with a small, cherished restaurant in 4 Kilo. Hospitality has been at the heart of the Group ever since, and Romina Restaurants carries that legacy forward today.',
             ],
             'facts'      => [
                 ['value' => '1973', 'label' => 'Our roots in 4 Kilo'],
->>>>>>> development
                 ['value' => '2',    'label' => 'Locations in Addis Ababa'],
                 ['value' => '4',    'label' => 'Culinary traditions'],
             ],
@@ -57,10 +50,6 @@ return [
                     ['icon' => 'fa-utensils',   'name' => 'European dishes'],
                     ['icon' => 'fa-bowl-rice',  'name' => 'Asian dishes'],
                     ['icon' => 'fa-pepper-hot', 'name' => 'Local Ethiopian dishes'],
-<<<<<<< HEAD
-                    ['icon' => 'fa-star',       'name' => 'Signature Agelgel'],
-=======
->>>>>>> development
                 ],
             ],
             'gallery'    => [
@@ -70,11 +59,7 @@ return [
             ],
             'locations_label' => 'Visit us',
             'locations'  => [
-<<<<<<< HEAD
-                ['name' => 'Arat Kilo (4 Kilo)', 'desc' => 'Romina Restaurant, Bar & Cafe',      'tag' => null],
-=======
                 ['name' => '4 Kilo', 'desc' => 'Romina Restaurant, Bar & Cafe',      'tag' => null],
->>>>>>> development
                 ['name' => 'Balderas',           'desc' => 'Romina Restaurant / Takeaway Center', 'tag' => null],
             ],
             'phone'      => null,
@@ -117,11 +102,7 @@ return [
             ],
             'locations_label' => 'Find a KOBA near you',
             'locations'  => [
-<<<<<<< HEAD
-                ['name' => 'Arat Kilo', 'desc' => 'Pastry & bakery takeaway center',     'tag' => null],
-=======
                 ['name' => '4 Kilo', 'desc' => 'Pastry & bakery takeaway center',     'tag' => null],
->>>>>>> development
                 ['name' => 'Sandford',  'desc' => 'Pastry, bakery, meals & drinks cafe', 'tag' => null],
                 ['name' => 'Atlas',     'desc' => 'Pastry, bakery, meals & drinks cafe', 'tag' => null],
                 ['name' => 'Peacock',   'desc' => 'Elevated coffee roastery experience', 'tag' => 'Flagship'],
@@ -135,31 +116,6 @@ return [
             'name'       => 'Meskott Culinary Experience',
             'menu'       => 'Meskott Culinary',
             'group'      => 'culinary',
-<<<<<<< HEAD
-            'kicker'     => 'Fine dining, VIP tables, a street food garden and the bar',
-            'intro'      => 'The new upscale meeting place in the city.',
-            'badge'      => ['value' => 'Arat Kilo', 'label' => 'Sellassie Twin Towers'],
-            'image'      => null,
-            'image_shot' => 'Meskott bar at night, backlit shelves',
-            'title'      => 'An evening, elevated.',
-            'body'       => [
-                'International cuisine led by talented chefs, paired with a curated selection of wines, spirits and classy cocktails. The new upscale meeting place in the city.',
-                'From intimate VIP tables to a lively street food garden and a bar made for long evenings, Meskott brings four distinct experiences together under one roof in Arat Kilo.',
-            ],
-            'facts'      => [
-                ['value' => '4',   'label' => 'Experiences under one roof'],
-                ['value' => '1',   'label' => 'Destination in Arat Kilo'],
-                ['value' => 'Intl.', 'label' => 'Cuisine by talented chefs'],
-            ],
-            'highlights' => [
-                'label' => 'The experience',
-                'title' => 'Four ways to spend an evening at Meskott.',
-                'items' => [
-                    ['icon' => 'fa-utensils',              'name' => 'Fine dining'],
-                    ['icon' => 'fa-crown',                 'name' => 'VIP tables'],
-                    ['icon' => 'fa-tree',                  'name' => 'Street food garden'],
-                    ['icon' => 'fa-martini-glass-citrus',  'name' => 'The bar'],
-=======
             'kicker'     => 'Promising an unparalleled selection of International Cuisine',
             'intro'      => 'The new upscale meeting place in the city.',
             'badge'      => ['value' => '4 Kilo', 'label' => 'Selassie Twin Towers'],
@@ -182,25 +138,16 @@ return [
                     ['icon' => 'fa-utensils',              'name' => 'Fine dining'],
                     ['icon' => 'fa-globe',                  'name' => 'International Cuisine'],
                     ['icon' => 'fa-martini-glass-citrus',  'name' => 'Immersive bar'],
->>>>>>> development
                 ],
             ],
             'gallery'    => [
                 ['src' => null, 'shot' => 'Meskott bar at night, backlit shelves', 'caption' => 'The bar'],
                 ['src' => null, 'shot' => 'VIP table area, set for dinner',        'caption' => 'VIP table area'],
-<<<<<<< HEAD
-                ['src' => null, 'shot' => 'Street food garden, brunch service',    'caption' => 'Street food garden'],
-            ],
-            'locations_label' => 'Find us',
-            'locations'  => [
-                ['name' => 'Arat Kilo', 'desc' => 'King George VI Street, opposite Menelik II School, ground floor, Sellassie Twin Towers', 'tag' => null],
-=======
                 ['src' => null, 'shot' => 'Local food garden, brunch service',    'caption' => 'Street food garden'],
             ],
             'locations_label' => 'Find us',
             'locations'  => [
                 ['name' => '4 Kilo', 'desc' => 'King George VI Street, opposite Menelik II School, ground floor, Sellassie Twin Towers', 'tag' => null],
->>>>>>> development
             ],
             'phone'      => '+251 90 387 9999',
             'website'    => null,
