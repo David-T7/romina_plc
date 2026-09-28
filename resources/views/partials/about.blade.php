@@ -43,19 +43,11 @@
 
         @php
             $tlMilestones = [
-<<<<<<< HEAD
                 ['year' => 1973,           'label' => '1973',  'i18n_title' => 'tl_0_title'],
                 ['year' => 2009,           'label' => '2009',  'i18n_title' => 'tl_1_title'],
                 ['year' => 2017,           'label' => '2017',  'i18n_title' => 'tl_2_title'],
                 ['year' => 2020,           'label' => '2020',  'i18n_title' => 'tl_3_title'],
                 ['year' => (int)date('Y'), 'label' => 'Today', 'i18n_title' => 'tl_4_title'],
-=======
-                ['year' => 1973,           'label' => '1973',  'title' => 'Romina Restaurants'],
-                ['year' => 2009,           'label' => '2009',  'title' => 'Romina Coffee' ],
-                ['year' => 2017,           'label' => '2017',  'title' => 'Jaquar World'  ],
-                ['year' => 2020,           'label' => '2020',  'title' => 'KOBA'          ],
-                ['year' => (int)date('Y'), 'label' => 'Today', 'title' => 'Romina Group'  ],
->>>>>>> 77b32ae4536a0ee17e23df53ecc0d76bfd811f1e
             ];
 
             // sqrt-weighted gaps so large spans compress and tight clusters expand
