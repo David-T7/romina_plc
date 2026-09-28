@@ -15,6 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/lang/{locale}', function (string $locale) {
+    abort_unless(array_key_exists($locale, config('app.available_locales')), 404);
+    session(['locale' => $locale]);
+    return redirect()->back(302, [], '/');
+})->name('lang.switch')->where('locale', '[a-z]{2}');
+
+Route::post('/lang/{locale}', function (string $locale) {
+    abort_unless(array_key_exists($locale, config('app.available_locales')), 404);
+    session(['locale' => $locale]);
+    return response()->noContent();
+})->name('lang.switch.post')->where('locale', '[a-z]{2}');
+
 Route::get('/', [PagesController::class, 'home'])->name('home');
 Route::get('/about', [PagesController::class, 'about'])->name('about');
 Route::get('/about/history', [PagesController::class, 'history'])->name('about.history');

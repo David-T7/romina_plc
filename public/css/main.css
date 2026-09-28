@@ -1158,6 +1158,53 @@ button {
 
 
 /* =====================================================
+   LANGUAGE SWITCHER — desktop
+===================================================== */
+
+.lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+}
+
+.lang-opt {
+    color: rgba(255,255,255,.55);
+    text-decoration: none;
+    transition: color 200ms ease;
+    padding: 4px 2px;
+}
+
+.lang-opt:hover                       { color: var(--white); }
+.lang-opt--on                         { color: var(--white); font-weight: 700; }
+
+.lang-div {
+    color: rgba(255,255,255,.3);
+    font-weight: 300;
+    line-height: 1;
+}
+
+/* Scrolled (solid white) header */
+.site-header.is-scrolled .lang-opt    { color: rgba(14,34,64,.45); }
+.site-header.is-scrolled .lang-opt:hover { color: #0E2240; }
+.site-header.is-scrolled .lang-opt--on   { color: #C0272D; }
+.site-header.is-scrolled .lang-div    { color: rgba(14,34,64,.2); }
+
+.lang-opt:focus-visible {
+    outline: 2px solid rgba(255,255,255,.85);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+.site-header.is-scrolled .lang-opt:focus-visible {
+    outline-color: #0E2240;
+}
+
+
+/* =====================================================
    MEGA MENU
 ===================================================== */
 
@@ -2714,6 +2761,40 @@ button {
 
 .mobile-nav-foot a:hover {
     color: var(--white);
+}
+
+
+/* =====================================================
+   LANGUAGE SWITCHER — mobile overlay
+===================================================== */
+
+.mobile-lang-sw {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px 0 0;
+    border-top: 1px solid rgba(255,255,255,.12);
+    margin-bottom: 0;
+}
+
+.mobile-lang-opt {
+    display: block;
+    padding: 14px 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255,255,255,.5);
+    text-decoration: none;
+    transition: color 200ms ease;
+    min-height: 44px;
+}
+
+.mobile-lang-opt:hover   { color: var(--white); }
+.mobile-lang-opt--on     { color: var(--white); font-weight: 700; }
+
+.mobile-lang-opt:focus-visible {
+    outline: 2px solid rgba(255,255,255,.8);
+    outline-offset: 4px;
+    border-radius: 2px;
 }
 
 
@@ -11335,4 +11416,39 @@ button {
 }
 @media (max-width: 480px) {
     .cof-speed-btn { display: none; }
+}
+
+
+/* =====================================================
+   AMHARIC TYPOGRAPHY  (.lang-am on <html>)
+===================================================== */
+
+.lang-am body,
+.lang-am input,
+.lang-am textarea,
+.lang-am select,
+.lang-am button {
+    font-family: 'Noto Sans Ethiopic', 'Roboto', sans-serif;
+    line-height: 1.75;
+}
+
+/* Remove uppercase/tight tracking where Ethiopic script renders poorly */
+.lang-am .menu-label,
+.lang-am .about-mark,
+.lang-am .talk-button,
+.lang-am .story-btn,
+.lang-am .story-kicker,
+.lang-am .ftr-copy,
+.lang-am .column-title {
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+/* Slightly looser line-height for headings */
+.lang-am h1,
+.lang-am h2,
+.lang-am h3,
+.lang-am h4 {
+    line-height: 1.4;
+    letter-spacing: 0;
 }

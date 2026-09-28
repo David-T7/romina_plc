@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"{{ app()->getLocale() === 'am' ? ' class="lang-am"' : '' }}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $pageTitle ?? 'Romina Group' }}</title>
 
-    <!-- Google Font -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;500;700&family=Roboto:wght@300;400;500;700;900&display=swap"
         rel="stylesheet"
     >
 
@@ -23,6 +23,16 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
     @yield('page-css')
+
+    @php
+        $i18nEn   = trans('site', [], 'en');
+        $i18nAm   = trans('site', [], 'am');
+        $i18nYear = date('Y');
+        if (isset($i18nEn['ftr_copyright'])) $i18nEn['ftr_copyright'] = str_replace(':year', $i18nYear, $i18nEn['ftr_copyright']);
+        if (isset($i18nAm['ftr_copyright'])) $i18nAm['ftr_copyright'] = str_replace(':year', $i18nYear, $i18nAm['ftr_copyright']);
+    @endphp
+    <script>window.I18N={!! json_encode(['en'=>$i18nEn,'am'=>$i18nAm],JSON_UNESCAPED_UNICODE|JSON_HEX_TAG) !!};window.I18N_LOCALE='{{ app()->getLocale() }}';</script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -132,13 +142,18 @@ document.addEventListener('DOMContentLoaded', function () {
 ===================================================== */
 document.addEventListener('DOMContentLoaded', function () {
 
-    var TIMELINE = [
-        { year: '1973',  text: 'Girma Taye opens a small, cherished restaurant in Arat Kilo, in the heart of Addis Ababa.' },
-        { year: '2009',  text: 'Romina Coffee launches, taking Ethiopian Arabica to Europe, the USA, Asia and the Middle East.' },
-        { year: '2017',  text: 'A partnership between Jaquar Group and Romina Group opens Jaquar World Addis Ababa.' },
-        { year: '2020',  text: 'KOBA Patisserie & Bakery is established, built on craftsmanship and artisan baking.' },
-        { year: 'Today', text: 'A diversified Ethiopian group spanning hospitality, coffee export, international trading, importing and distribution.' },
-    ];
+    function getTlData(locale) {
+        var L = window.I18N && (window.I18N[locale] || window.I18N['en']) || {};
+        return [
+            { year: '1973',              text: L['tl_0_text'] || '' },
+            { year: '2009',              text: L['tl_1_text'] || '' },
+            { year: '2017',              text: L['tl_2_text'] || '' },
+            { year: '2020',              text: L['tl_3_text'] || '' },
+            { year: L['tl_4_year'] || 'Today', text: L['tl_4_text'] || '' },
+        ];
+    }
+    var TIMELINE    = getTlData(window.I18N_LOCALE || document.documentElement.lang || 'en');
+    var tlActiveIdx = 0;
 
     var nodes  = document.querySelectorAll('.tl-node');
     var dot    = document.getElementById('tlDot');
@@ -152,6 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var prefRed = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function activate(index) {
+        tlActiveIdx = index;
         nodes.forEach(function (n, i) {
             n.classList.toggle('on',   i === index);
             n.classList.toggle('past', i < index);
@@ -468,6 +484,19 @@ document.addEventListener('DOMContentLoaded', function () {
         if (ctrl) ctrl.onVisibility(document.hidden);
     });
 
+    document.addEventListener('localechange', function (e) {
+        TIMELINE = getTlData(e.detail.locale);
+        activate(tlActiveIdx);
+        /* Also update tl-node title spans */
+        nodes.forEach(function (n, i) {
+            var span = n.querySelector('.tl-title');
+            if (span && span.dataset.i18n) {
+                var val = window.I18N && window.I18N[e.detail.locale] && window.I18N[e.detail.locale][span.dataset.i18n];
+                if (val != null) span.textContent = val;
+            }
+        });
+    });
+
 });
 
 
@@ -618,13 +647,18 @@ document.addEventListener('DOMContentLoaded', () => {
 ===================================================== */
 document.addEventListener('DOMContentLoaded', function () {
 
-    var VALUES = [
-        { name: 'Excellence',   text: 'Striving for superior performance and quality in everything we undertake.' },
-        { name: 'Innovation',   text: 'Committed to continuous creativity and adapting to stay ahead of the curve and the competition.' },
-        { name: 'Quality',      text: 'Providing our customers with the highest standard of products and services available.' },
-        { name: 'Sustainability', text: 'Operating in an environmentally friendly way, protecting our resources for future generations.' },
-        { name: 'Integrity',    text: 'Conducting our business with unwavering honesty, transparency and ethical standards.' }
-    ];
+    function getValData(locale) {
+        var L = window.I18N && (window.I18N[locale] || window.I18N['en']) || {};
+        return [
+            { name: L['val_0_name'] || 'Excellence',   text: L['val_0_text'] || '' },
+            { name: L['val_1_name'] || 'Innovation',   text: L['val_1_text'] || '' },
+            { name: L['val_2_name'] || 'Quality',      text: L['val_2_text'] || '' },
+            { name: L['val_3_name'] || 'Sustainability', text: L['val_3_text'] || '' },
+            { name: L['val_4_name'] || 'Integrity',    text: L['val_4_text'] || '' },
+        ];
+    }
+    var VALUES      = getValData(window.I18N_LOCALE || document.documentElement.lang || 'en');
+    var valActiveIdx = 0;
 
     var items   = document.querySelectorAll('.val-list li');
     var card    = document.getElementById('valCard');
@@ -634,6 +668,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!items.length || !card) return;
 
     function activate(index) {
+        valActiveIdx = index;
         items.forEach(function (li, i) {
             li.classList.toggle('on', i === index);
             li.querySelector('button').setAttribute('aria-expanded', i === index ? 'true' : 'false');
@@ -653,6 +688,11 @@ document.addEventListener('DOMContentLoaded', function () {
         btn.addEventListener('click',      function () { activate(i); });
         btn.addEventListener('mouseenter', function () { activate(i); });
         btn.addEventListener('focus',      function () { activate(i); });
+    });
+
+    document.addEventListener('localechange', function (e) {
+        VALUES = getValData(e.detail.locale);
+        activate(valActiveIdx);
     });
 
 });
@@ -773,7 +813,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* ---- Icon helpers ---- */
+    var vidState = 'play';   /* track for localechange */
+
+    function vidStr(key) {
+        var loc = window.I18N_LOCALE || document.documentElement.lang || 'en';
+        return (window.I18N && window.I18N[loc] && window.I18N[loc][key]) || key;
+    }
+
     function setPlayIcons(state) {
+        vidState = state;
         [centerBtn, ctrlPlay].forEach(function (btn) {
             if (!btn) return;
             ['play', 'pause', 'replay'].forEach(function (s) {
@@ -782,8 +830,8 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
         if (centerBtn) centerBtn.setAttribute('aria-label',
-            state === 'replay' ? 'Replay video' : state === 'pause' ? 'Pause video' : 'Play video');
-        if (ctrlPlay) ctrlPlay.setAttribute('aria-label', state === 'pause' ? 'Pause' : 'Play');
+            state === 'replay' ? vidStr('vid_replay') : state === 'pause' ? vidStr('vid_pause') : vidStr('vid_play'));
+        if (ctrlPlay) ctrlPlay.setAttribute('aria-label', state === 'pause' ? vidStr('vid_pause_ctrl') : vidStr('vid_play_ctrl'));
     }
 
     function setMuteIcons() {
@@ -793,7 +841,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var im = muteBtn.querySelector('.icon-muted');
             if (iv) iv.style.display = m ? 'none' : '';
             if (im) im.style.display = m ? '' : 'none';
-            muteBtn.setAttribute('aria-label', m ? 'Unmute' : 'Mute');
+            muteBtn.setAttribute('aria-label', m ? vidStr('vid_unmute') : vidStr('vid_mute'));
         }
         if (volSlider) volSlider.value = (vid.muted ? 0 : vid.volume).toString();
     }
@@ -805,7 +853,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var iefs = fsBtn.querySelector('.icon-exit-fs');
             if (ifs)  ifs.style.display  = inFs ? 'none' : '';
             if (iefs) iefs.style.display = inFs ? '' : 'none';
-            fsBtn.setAttribute('aria-label', inFs ? 'Exit full screen' : 'Full screen');
+            fsBtn.setAttribute('aria-label', inFs ? vidStr('vid_exit_fullscreen') : vidStr('vid_fullscreen'));
         }
     }
 
@@ -982,6 +1030,13 @@ document.addEventListener('DOMContentLoaded', function () {
     /* ---- Tab visibility ---- */
     document.addEventListener('visibilitychange', function () {
         if (document.hidden && !vid.paused) doPause();
+    });
+
+    /* ---- Locale change: refresh aria-labels ---- */
+    document.addEventListener('localechange', function () {
+        setPlayIcons(vidState);
+        setMuteIcons();
+        setFsIcons();
     });
 
     /* ---- Keyboard (Space/K play-pause, J/← rwd, L/→ fwd, M mute, F fullscreen) ---- */
@@ -1453,6 +1508,11 @@ document.addEventListener('DOMContentLoaded', function () {
         var status = document.getElementById('ctcStatus');
         if (!form || !status) return;
 
+        function fStr(key) {
+            var loc = window.I18N_LOCALE || document.documentElement.lang || 'en';
+            return (window.I18N && window.I18N[loc] && window.I18N[loc][key]) || key;
+        }
+
         form.addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -1461,13 +1521,13 @@ document.addEventListener('DOMContentLoaded', function () {
             var message = (form.querySelector('[name="message"]').value || '').trim();
 
             if (!name || !email || !message) {
-                status.textContent   = 'Add your name, email and message, then send again.';
+                status.textContent   = fStr('form_err_required');
                 status.className     = 'f-status err';
                 status.style.display = 'block';
                 return;
             }
 
-            status.textContent   = "Form preview: this form isn't connected to an inbox yet. Email info@rominaplc.com in the meantime.";
+            status.textContent   = fStr('form_preview_msg');
             status.className     = 'f-status';
             status.style.display = 'block';
         });
@@ -1583,6 +1643,92 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateHeader() { hdr.classList.toggle('is-scrolled', window.scrollY > 60); }
     window.addEventListener('scroll', updateHeader, { passive: true });
     updateHeader();
+}());
+
+
+/* =====================================================
+   LANG SWITCHER — instant client-side swap
+===================================================== */
+(function () {
+    'use strict';
+
+    var CSRF     = (document.querySelector('meta[name="csrf-token"]') || {}).content || '';
+    var postBase = '/lang/';
+
+    function lookup(locale, key) {
+        var dict = window.I18N && window.I18N[locale];
+        return (dict && dict[key] != null) ? dict[key] : null;
+    }
+
+    function applyLocale(locale) {
+        var prev = window.I18N_LOCALE || document.documentElement.lang || 'en';
+        if (locale === prev || !window.I18N || !window.I18N[locale]) return;
+
+        /* — text nodes — */
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var val = lookup(locale, el.dataset.i18n);
+            if (val != null) el.textContent = val;
+        });
+
+        /* — trusted HTML (our own <br>/<strong> strings only) — */
+        document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+            var val = lookup(locale, el.dataset.i18nHtml);
+            if (val != null) el.innerHTML = val;
+        });
+
+        /* — attributes (format: "attr:key" or "attr:key;attr2:key2") — */
+        document.querySelectorAll('[data-i18n-attr]').forEach(function (el) {
+            el.dataset.i18nAttr.split(';').forEach(function (pair) {
+                var sep  = pair.indexOf(':');
+                if (sep < 1) return;
+                var attr = pair.slice(0, sep).trim();
+                var key  = pair.slice(sep + 1).trim();
+                var val  = lookup(locale, key);
+                if (val != null) el.setAttribute(attr, val);
+            });
+        });
+
+        /* — <html lang> + Amharic font class — */
+        document.documentElement.lang = locale;
+        document.documentElement.classList.toggle('lang-am', locale === 'am');
+
+        /* — switcher active states — */
+        document.querySelectorAll('[data-locale]').forEach(function (a) {
+            var on = a.dataset.locale === locale;
+            a.classList.toggle('lang-opt--on',        on);
+            a.classList.toggle('mobile-lang-opt--on', on);
+        });
+
+        /* — update global tracker — */
+        window.I18N_LOCALE = locale;
+
+        /* — notify dynamic components — */
+        document.dispatchEvent(new CustomEvent('localechange', {
+            detail: { locale: locale, prev: prev }
+        }));
+
+        /* — persist (fire-and-forget; GET link is the no-JS fallback) — */
+        if (typeof fetch !== 'undefined') {
+            fetch(postBase + locale, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN':    CSRF,
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            }).catch(function () {});
+        }
+    }
+
+    document.addEventListener('click', function (e) {
+        var a = e.target.closest('[data-locale]');
+        if (!a) return;
+        e.preventDefault();
+        var locale = a.dataset.locale;
+        if (!locale) return;
+        applyLocale(locale);
+        a.focus();   /* keep keyboard focus on the switcher */
+    });
+
 }());
 </script>
 

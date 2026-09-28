@@ -9,22 +9,18 @@
 
             <!-- Left: section label + big heading -->
             <div class="about-head">
-                <span class="about-mark">Who we are</span>
-                <h2 class="about-heading">
-                    Find out all about Romina's<br>
-                    corporate business.
+                <span class="about-mark" data-i18n="about_mark">{{ __('site.about_mark') }}</span>
+                <h2 class="about-heading" data-i18n-html="about_heading">
+                    {!! __('site.about_heading') !!}
                 </h2>
             </div>
 
             <!-- Right: Amharic welcome + copy -->
             <div class="about-copy">
-                <p class="amh" lang="am">እንኳን ደህና መጡ</p>
-                <h3 class="about-sub">Welcome to Romina Group</h3>
-                <p class="about-body">
-                    Founded in 1973 by Girma Taye as a small restaurant in Arat Kilo,
-                    Romina has grown over five decades into a diversified Ethiopian enterprise,
-                    through strategic expansion, successful partnerships and an unwavering
-                    commitment to excellence.
+                <p class="amh" lang="am" data-i18n="about_amh">{{ __('site.about_amh') }}</p>
+                <h3 class="about-sub" data-i18n="about_sub">{{ __('site.about_sub') }}</h3>
+                <p class="about-body" data-i18n="about_body">
+                    {{ __('site.about_body') }}
                 </p>
             </div>
 
@@ -37,11 +33,11 @@
 
         @php
             $tlMilestones = [
-                ['year' => 1973,           'label' => '1973',  'title' => 'Where it began'],
-                ['year' => 2009,           'label' => '2009',  'title' => 'Romina Coffee' ],
-                ['year' => 2017,           'label' => '2017',  'title' => 'Jaquar World'  ],
-                ['year' => 2020,           'label' => '2020',  'title' => 'KOBA'          ],
-                ['year' => (int)date('Y'), 'label' => 'Today', 'title' => 'Romina Group'  ],
+                ['year' => 1973,           'label' => '1973',  'i18n_title' => 'tl_0_title'],
+                ['year' => 2009,           'label' => '2009',  'i18n_title' => 'tl_1_title'],
+                ['year' => 2017,           'label' => '2017',  'i18n_title' => 'tl_2_title'],
+                ['year' => 2020,           'label' => '2020',  'i18n_title' => 'tl_3_title'],
+                ['year' => (int)date('Y'), 'label' => 'Today', 'i18n_title' => 'tl_4_title'],
             ];
 
             // sqrt-weighted gaps so large spans compress and tight clusters expand
@@ -73,7 +69,7 @@
                             style="left: {{ $equalPct }}%; --pos: {{ $sqrtPct }}%"
                             aria-pressed="{{ $loop->first ? 'true' : 'false' }}">
                         <span class="tl-year">{{ $m['label'] }}</span>
-                        <span class="tl-title">{{ $m['title'] }}</span>
+                        <span class="tl-title" data-i18n="{{ $m['i18n_title'] }}">{{ __('site.' . $m['i18n_title']) }}</span>
                     </button>
                 @endforeach
 
@@ -82,9 +78,8 @@
 
             <div class="tl-detail" id="tlDetail">
                 <span class="tl-big" id="tlBig" aria-hidden="true">1973</span>
-                <p id="tlText">
-                    Girma Taye opens a small, cherished restaurant in Arat Kilo,
-                    in the heart of Addis Ababa.
+                <p id="tlText" data-i18n-dynamic="tl_text">
+                    {{ __('site.tl_0_text') }}
                 </p>
             </div>
 
