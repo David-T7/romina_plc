@@ -1,4 +1,912 @@
-﻿/* =====================================================
+/* =====================================================
+   ROMINA ASSISTANT — CHATBOT
+   Floating chat widget, premium Romina brand design.
+   All positions / sizes use CSS custom properties so
+   a single tweak cascades across desktop + mobile.
+===================================================== */
+
+/* ── Custom properties (scoped to chatbot) ── */
+:root {
+    --rc-navy:      #071b3a;
+    --rc-navy-2:    #0d2348;
+    --rc-red:       #E8132C;
+    --rc-white:     #ffffff;
+    --rc-border:    rgba(14,34,64,0.10);
+    --rc-shadow:    0 8px 40px rgba(7,27,58,0.18), 0 2px 8px rgba(7,27,58,0.10);
+    --rc-radius:    16px;
+    --rc-btn-size:  54px;
+    --rc-ease:      cubic-bezier(.4,0,.2,1);
+}
+
+/* ── Floating toggle button ──
+   Circular icon-only button. No text label.
+   Tooltip shown on hover via CSS ::before pseudo-element.
+*/
+.rc-toggle {
+    position: fixed;
+    bottom: 24px;
+    right:  24px;
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:  56px;
+    height: 56px;
+    background: var(--rc-navy);
+    color: var(--rc-white);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(7,27,58,0.32), 0 0 0 3px rgba(232,19,44,0.18);
+    opacity: 0;
+    transform: translateY(12px) scale(0.90);
+    transition:
+        opacity       0.35s var(--rc-ease),
+        transform     0.35s var(--rc-ease),
+        box-shadow    0.22s var(--rc-ease);
+    will-change: opacity, transform;
+    /* Tooltip positioning anchor */
+    isolation: isolate;
+}
+
+/* Tooltip — appears on hover, keyboard focus */
+.rc-toggle::before {
+    content: 'Romina Assistant';
+    position: absolute;
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    background: var(--rc-navy);
+    color: var(--rc-white);
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    padding: 6px 11px;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(7,27,58,0.22);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s var(--rc-ease);
+}
+
+/* Tooltip arrow pointing right */
+.rc-toggle::after {
+    content: '';
+    position: absolute;
+    right: calc(100% + 7px);
+    top: 50%;
+    transform: translateY(-50%);
+    border: 5px solid transparent;
+    border-left-color: var(--rc-navy);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s var(--rc-ease);
+}
+
+.rc-toggle:hover::before,
+.rc-toggle:hover::after,
+.rc-toggle:focus-visible::before,
+.rc-toggle:focus-visible::after {
+    opacity: 1;
+}
+
+/* Hide tooltip while chat window is open (redundant info) */
+.rc-toggle--open::before,
+.rc-toggle--open::after { opacity: 0 !important; }
+
+.rc-toggle--visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.rc-toggle:hover {
+    box-shadow: 0 8px 28px rgba(7,27,58,0.40), 0 0 0 3px rgba(232,19,44,0.30);
+    transform: scale(1.05);
+    outline: none;
+}
+
+.rc-toggle--visible:hover {
+    transform: scale(1.05);
+}
+
+.rc-toggle:focus-visible {
+    outline: 2px solid var(--rc-red);
+    outline-offset: 3px;
+    box-shadow: 0 4px 20px rgba(7,27,58,0.32);
+}
+
+.rc-toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* ── Chat window ── */
+.rc-window {
+    position: fixed;
+    bottom: 90px;
+    right:  24px;
+    z-index: 9997;
+    width: 380px;
+    max-height: 560px;
+    background: var(--rc-white);
+    border: 1px solid var(--rc-border);
+    border-radius: var(--rc-radius);
+    box-shadow: var(--rc-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    transform-origin: bottom right;
+    transition:
+        opacity   0.22s var(--rc-ease),
+        transform 0.22s var(--rc-ease);
+    will-change: opacity, transform;
+}
+
+.rc-window--visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* ── Header ── */
+.rc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 16px 14px;
+    background: var(--rc-navy);
+    color: var(--rc-white);
+    flex-shrink: 0;
+    border-radius: var(--rc-radius) var(--rc-radius) 0 0;
+}
+
+.rc-header-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.rc-header-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 7px;
+    flex-shrink: 0;
+}
+
+.rc-header-avatar img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.rc-header-name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin: 0 0 2px;
+    color: var(--rc-white);
+}
+
+.rc-header-sub {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.60);
+    margin: 0;
+    font-weight: 400;
+}
+
+/* Red dot status indicator */
+.rc-header-info::after {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background: #22c55e;
+    border-radius: 50%;
+    border: 2px solid var(--rc-navy);
+    margin-left: 32px;
+    margin-top: 28px;
+}
+
+/* ── Close button ── */
+.rc-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: rgba(255,255,255,0.80);
+    transition: background 0.18s, color 0.18s;
+    flex-shrink: 0;
+}
+
+.rc-close:hover {
+    background: rgba(255,255,255,0.16);
+    color: var(--rc-white);
+}
+
+.rc-close:focus-visible {
+    outline: 2px solid var(--rc-red);
+    outline-offset: 2px;
+}
+
+/* ── Messages body ── */
+.rc-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 14px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    scroll-behavior: smooth;
+    background: #f8f9fc;
+}
+
+.rc-body::-webkit-scrollbar { width: 4px; }
+.rc-body::-webkit-scrollbar-track { background: transparent; }
+.rc-body::-webkit-scrollbar-thumb { background: rgba(7,27,58,0.12); border-radius: 2px; }
+
+/* ── Message bubbles ── */
+.rc-msg {
+    display: flex;
+    margin-bottom: 10px;
+    animation: rc-msg-in 0.22s var(--rc-ease) both;
+}
+
+@keyframes rc-msg-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0);   }
+}
+
+.rc-msg--bot  { justify-content: flex-start; }
+.rc-msg--user { justify-content: flex-end;   }
+
+.rc-bubble {
+    max-width: 84%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.55;
+}
+
+.rc-bubble p { margin: 0 0 8px; }
+.rc-bubble p:last-child { margin-bottom: 0; }
+.rc-bubble a { color: var(--rc-red); text-decoration: underline; }
+
+.rc-msg--bot  .rc-bubble {
+    background: var(--rc-white);
+    color: #1a2740;
+    border-radius: 4px 12px 12px 12px;
+    box-shadow: 0 1px 3px rgba(7,27,58,0.08);
+}
+
+.rc-msg--user .rc-bubble {
+    background: var(--rc-navy);
+    color: var(--rc-white);
+    border-radius: 12px 4px 12px 12px;
+}
+
+/* Subtle nav button inside bot message */
+.rc-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 7px 14px;
+    background: var(--rc-navy);
+    color: var(--rc-white) !important;
+    text-decoration: none !important;
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: background 0.18s;
+}
+
+.rc-link-btn:hover { background: var(--rc-navy-2); }
+
+.rc-followup {
+    color: #667085;
+    font-size: 0.8125rem !important;
+    font-style: italic;
+    margin-top: 8px !important;
+}
+
+/* ── Typing indicator ── */
+.rc-typing {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 12px 14px;
+    min-height: 44px;
+}
+
+.rc-typing span {
+    width: 7px;
+    height: 7px;
+    background: rgba(7,27,58,0.3);
+    border-radius: 50%;
+    display: inline-block;
+    animation: rc-bounce 1.2s ease-in-out infinite;
+}
+
+.rc-typing span:nth-child(2) { animation-delay: 0.15s; }
+.rc-typing span:nth-child(3) { animation-delay: 0.30s; }
+
+@keyframes rc-bounce {
+    0%, 60%, 100% { transform: translateY(0);    opacity: 0.4; }
+    30%            { transform: translateY(-5px); opacity: 1;   }
+}
+
+/* ── Quick question buttons ── */
+.rc-quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding: 4px 14px 10px;
+    background: #f8f9fc;
+    border-top: 1px solid rgba(7,27,58,0.06);
+}
+
+.rc-quick-btn {
+    padding: 6px 12px;
+    border: 1px solid rgba(7,27,58,0.14);
+    border-radius: 20px;
+    background: var(--rc-white);
+    color: var(--rc-navy);
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.78125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.16s, border-color 0.16s, color 0.16s;
+    white-space: nowrap;
+}
+
+.rc-quick-btn:hover {
+    background: var(--rc-navy);
+    border-color: var(--rc-navy);
+    color: var(--rc-white);
+}
+
+.rc-quick-btn:focus-visible {
+    outline: 2px solid var(--rc-red);
+    outline-offset: 2px;
+}
+
+/* ── Inline Follow-up Questions ── */
+.rc-followups {
+    margin: 8px 0 16px 0;
+    padding: 0 4px;
+    animation: rc-msg-in 0.22s var(--rc-ease) both;
+}
+
+.rc-followups-label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.75rem;
+    color: #667085;
+    margin: 0 0 8px 4px;
+    font-weight: 500;
+}
+
+.rc-followups-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.rc-followup-btn {
+    padding: 6px 12px;
+    border: 1px solid rgba(7,27,58,0.14);
+    border-radius: 20px;
+    background: var(--rc-white);
+    color: var(--rc-navy);
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.78125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.16s, border-color 0.16s, color 0.16s;
+    white-space: nowrap;
+}
+
+.rc-followup-btn:hover {
+    background: var(--rc-navy);
+    border-color: var(--rc-navy);
+    color: var(--rc-white);
+}
+
+.rc-followup-btn:focus-visible {
+    outline: 2px solid var(--rc-red);
+    outline-offset: 2px;
+}
+
+.rc-followup-btn--reset {
+    background: transparent;
+    border-color: transparent;
+    color: #667085;
+}
+
+.rc-followup-btn--reset:hover {
+    background: rgba(7,27,58,0.06);
+    border-color: transparent;
+    color: var(--rc-navy);
+}
+
+/* ── Footer / input ── */
+.rc-footer {
+    padding: 10px 12px 12px;
+    border-top: 1px solid var(--rc-border);
+    background: var(--rc-white);
+    flex-shrink: 0;
+}
+
+.rc-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f1f3f8;
+    border-radius: 10px;
+    border: 1px solid rgba(7,27,58,0.10);
+    padding: 4px 4px 4px 12px;
+    transition: border-color 0.18s;
+}
+
+.rc-form:focus-within {
+    border-color: var(--rc-navy);
+}
+
+.rc-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.875rem;
+    color: #1a2740;
+    outline: none;
+    padding: 6px 0;
+    min-width: 0;
+}
+
+.rc-input::placeholder { color: #9aa5b8; }
+
+.rc-send {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--rc-navy);
+    color: var(--rc-white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.16s, transform 0.12s;
+}
+
+.rc-send:hover  { background: var(--rc-navy-2); }
+.rc-send:active { transform: scale(0.94); }
+
+.rc-send:focus-visible {
+    outline: 2px solid var(--rc-red);
+    outline-offset: 2px;
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+    .rc-toggle {
+        bottom: 16px;
+        right:  16px;
+        width:  52px;
+        height: 52px;
+    }
+
+    /* Tooltip position on mobile (above, not to the left) */
+    .rc-toggle::before {
+        right: auto;
+        left: 50%;
+        bottom: calc(100% + 10px);
+        top: auto;
+        transform: translateX(-50%);
+    }
+    .rc-toggle::after {
+        right: auto;
+        left: 50%;
+        bottom: calc(100% + 5px);
+        top: auto;
+        transform: translateX(-50%) rotate(90deg);
+        border-left-color: transparent;
+        border-top-color: var(--rc-navy);
+    }
+
+    .rc-window {
+        width:  calc(100vw - 20px);
+        right:  10px;
+        bottom: 80px;
+        max-height: 72svh;
+        border-radius: 14px;
+    }
+
+    .rc-quick { padding: 4px 10px 8px; }
+    .rc-bubble { max-width: 90%; font-size: 0.84375rem; }
+    .rc-footer { padding: 8px 10px 10px; }
+}
+
+/* ── Reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+    .rc-toggle,
+    .rc-window,
+    .rc-msg,
+    .rc-typing span {
+        animation: none !important;
+        transition: opacity 0.1s !important;
+        transform: none !important;
+    }
+}
+
+/* =====================================================
+   ROMINA INTRO ANIMATION
+   All timing values follow the approved timing table.
+   Only transform, opacity, stroke-dashoffset animated
+   (GPU-composited). No width/height/top/left animation.
+===================================================== */
+
+/* ── Overlay shell ── */
+/* Background is set directly here so the overlay blocks the page
+   immediately on first paint — before any JS has run.
+   JS will set display:none if the session key is already present. */
+.ri-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    contain: layout style paint;
+    pointer-events: all;
+    background: radial-gradient(ellipse 60% 55% at 50% 45%,
+        #0d2348 0%,
+        #071b3a 55%,
+        #040f22 100%);
+}
+
+/* ── Deep navy background with subtle radial warmth ── */
+.ri-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 60% 55% at 50% 45%,
+            #0d2348 0%,
+            #071b3a 55%,
+            #040f22 100%);
+}
+
+/* ── Stage (SVG container) ── */
+.ri-stage {
+    position: relative;
+    z-index: 1;
+    width: min(78vw, 30rem);
+    aspect-ratio: 400 / 280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── SVG fills its container ── */
+.ri-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* ════════════════════════════════════════════════════
+   DEFAULT (hidden) state for all animated elements
+   Everything starts invisible / unanimated
+   ════════════════════════════════════════════════════ */
+
+/* Red dots — hidden by default */
+.ri-dot,
+.ri-dot-glow {
+    opacity: 0;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+/* Connector line — hidden */
+.ri-connector {
+    opacity: 0;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;   /* fully hidden */
+}
+
+/* Pulse ring — hidden */
+.ri-pulse-ring {
+    opacity: 0;
+    transform-origin: center;
+    transform-box: fill-box;
+    transform: scale(1);
+}
+
+/* Frame lines — all collapsed to zero length (hidden via attributes — JS animates via CSS vars) */
+.ri-frame {
+    opacity: 0;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+}
+
+/* Wordmark wrapper — opacity only.
+   The outer <g class="ri-wordmark"> has NO SVG transform attribute,
+   so CSS opacity animation is safe and will not interfere with the
+   inner <g transform="..."> that does the coordinate mapping. */
+.ri-wordmark {
+    opacity: 0;
+}
+
+/* SINCE 1973 text — already in SVG canvas coordinates, CSS transform is safe */
+.ri-since {
+    opacity: 0;
+}
+
+/* Light sweep — starts off left */
+.ri-sweep {
+    opacity: 0;
+}
+
+/* ════════════════════════════════════════════════════
+   ACTIVE ANIMATION STATE  (.ri--animate)
+   15-SECOND PREMIUM CINEMATIC TIMELINE
+   ─────────────────────────────────────────────────
+   0.00s – 1.20s  Top red dot appears
+   1.50s – 2.50s  Bottom red dot appears
+   3.00s – 5.50s  Connector line draws
+   5.50s – 6.30s  Connection moment pulse + dot brightening
+   6.50s – 7.30s  Frame H edges extend from centre
+   7.50s – 8.40s  Frame V sides reveal
+   8.50s – 9.50s  ROMINA wordmark reveals
+   10.50s–11.30s  SINCE 1973 reveals
+   12.00s–13.50s  Complete logo hold + dot pulse
+   13.60s–14.30s  Light sweep
+   14.40s–15.00s  Overlay fades out
+   ════════════════════════════════════════════════════ */
+
+/* ── 0.00s: Top dot appears (1.20s, deliberate slow reveal) ── */
+.ri--animate .ri-dot-top {
+    animation:
+        ri-dot-appear      1.20s cubic-bezier(.34,1.05,.64,1) 0.00s  forwards,
+        ri-dot-connection  0.60s ease-in-out                  5.55s  forwards,
+        ri-dot-pulse       2.50s ease-in-out                  12.00s infinite;
+    will-change: opacity, transform;
+}
+.ri--animate .ri-dot-top-glow {
+    animation:
+        ri-dot-appear      1.20s cubic-bezier(.34,1.05,.64,1) 0.00s  forwards,
+        ri-glow-connection 0.60s ease-in-out                  5.55s  forwards,
+        ri-glow-pulse      2.50s ease-in-out                  12.00s infinite;
+    will-change: opacity, transform;
+}
+
+/* ── 1.50s: Bottom dot appears (1.00s duration) ── */
+.ri--animate .ri-dot-bottom {
+    animation:
+        ri-dot-appear      1.00s cubic-bezier(.34,1.05,.64,1) 1.50s  forwards,
+        ri-dot-connection  0.60s ease-in-out                  5.55s  forwards,
+        ri-dot-pulse       2.50s ease-in-out                  12.00s infinite;
+    will-change: opacity, transform;
+}
+.ri--animate .ri-dot-bottom-glow {
+    animation:
+        ri-dot-appear      1.00s cubic-bezier(.34,1.05,.64,1) 1.50s  forwards,
+        ri-glow-connection 0.60s ease-in-out                  5.55s  forwards,
+        ri-glow-pulse      2.50s ease-in-out                  12.00s infinite;
+    will-change: opacity, transform;
+}
+
+/* ── 3.00s: Connector line draws (2.50s duration, very deliberate) ── */
+.ri--animate .ri-connector {
+    animation: ri-line-draw 2.50s cubic-bezier(.65,0,.35,1) 3.00s forwards;
+}
+
+/* ── 5.50s: Connection moment pulse ring (0.80s duration) ── */
+.ri--animate .ri-pulse-ring {
+    animation: ri-pulse-ring-pop 0.80s ease-out 5.50s forwards;
+}
+
+/* ── 6.50s: Frame H edges extend outward from centre (0.80s) ── */
+.ri--animate .ri-frame-top-l,
+.ri--animate .ri-frame-top-r,
+.ri--animate .ri-frame-bottom-l,
+.ri--animate .ri-frame-bottom-r {
+    animation: ri-frame-draw 0.80s cubic-bezier(.4,0,.2,1) 6.50s forwards;
+}
+
+/* ── 7.50s: Frame V sides reveal (0.90s) ── */
+.ri--animate .ri-frame-left {
+    animation: ri-frame-draw 0.90s cubic-bezier(.4,0,.2,1) 7.50s forwards;
+}
+.ri--animate .ri-frame-right {
+    animation: ri-frame-draw 0.90s cubic-bezier(.4,0,.2,1) 7.50s forwards;
+}
+
+/* ── 8.50s: ROMINA wordmark reveals (1.00s) — opacity only, no transform ── */
+.ri--animate .ri-wordmark {
+    animation: ri-word-appear 1.00s cubic-bezier(.16,1,.3,1) 8.50s forwards;
+}
+
+/* ── 10.50s: SINCE 1973 reveals (0.80s) ── */
+.ri--animate .ri-since {
+    animation: ri-word-appear-since 0.80s cubic-bezier(.16,1,.3,1) 10.50s forwards;
+}
+
+/* ── 13.60s: Light sweep during hold phase (0.70s) ── */
+.ri--animate .ri-sweep {
+    animation: ri-sweep-move 0.70s ease-out 13.60s forwards;
+}
+
+/* ── 14.40s: Overlay fades + scales out (0.60s) ── */
+.ri--animate {
+    animation: ri-overlay-out 0.60s cubic-bezier(.4,0,.2,1) 14.40s forwards;
+    will-change: opacity, transform;
+}
+
+/* ════════════════════════════════════════════════════
+   KEYFRAMES
+   ════════════════════════════════════════════════════ */
+
+/* Dot appears: scale from 0 → 1, opacity 0 → 1 */
+@keyframes ri-dot-appear {
+    from { opacity: 0; transform: scale(0.3); }
+    to   { opacity: 1; transform: scale(1);   }
+}
+
+/* Connection moment: dot gently brightens when line arrives */
+@keyframes ri-dot-connection {
+    0%   { opacity: 1;   transform: scale(1);    }
+    45%  { opacity: 1;   transform: scale(1.45); }
+    100% { opacity: 1;   transform: scale(1);    }
+}
+@keyframes ri-glow-connection {
+    0%   { opacity: 0.65; transform: scale(1);    }
+    45%  { opacity: 1;    transform: scale(1.9);  }
+    100% { opacity: 0.65; transform: scale(1);    }
+}
+
+/* Dot subtle pulse during hold phase (7.30s – exit) */
+@keyframes ri-dot-pulse {
+    0%, 100% { opacity: 1;    transform: scale(1);    }
+    50%       { opacity: 0.6;  transform: scale(1.18); }
+}
+
+/* Glow pulse — same rhythm, slightly larger */
+@keyframes ri-glow-pulse {
+    0%, 100% { opacity: 0.55; transform: scale(1);   }
+    50%       { opacity: 1;    transform: scale(1.5); }
+}
+
+/* Connector line draws from top to bottom (dashoffset 1 → 0) */
+@keyframes ri-line-draw {
+    from { opacity: 1; stroke-dashoffset: 1; }
+    to   { opacity: 1; stroke-dashoffset: 0; }
+}
+
+/* Pulse ring expands + fades at connector arrival */
+@keyframes ri-pulse-ring-pop {
+    0%   { opacity: 0;   transform: scale(0.8); }
+    40%  { opacity: 0.9; transform: scale(1.8); }
+    100% { opacity: 0;   transform: scale(2.8); }
+}
+
+/* Frame top line: extends outward from center (x1=200→42, x2=200→358 via dashoffset) */
+/* We animate using opacity + a CSS custom approach:
+   The line SVG element is set x1=42 x2=358 at full extent.
+   We use clip-path on a rect to reveal it symmetrically.
+   Simplest: animate stroke-dashoffset on pathLength=1 lines
+   by revealing from center outward using two separate segments.
+   Implementation: two overlapping half-lines per edge.          */
+
+/* Unified frame-draw keyframe (works for all 6 line elements) */
+@keyframes ri-frame-draw {
+    from { opacity: 1; stroke-dashoffset: 1; }
+    to   { opacity: 1; stroke-dashoffset: 0; }
+}
+
+/* Wordmark: opacity only (no transform — prevents CSS overriding inner SVG transform attr) */
+@keyframes ri-word-appear {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Since 1973: slight upward translate is safe here — <text> has no SVG transform attr */
+@keyframes ri-word-appear-since {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* Light sweep slides across the logo frame area */
+@keyframes ri-sweep-move {
+    0%   { opacity: 0; transform: translateX(-340px); }
+    15%  { opacity: 1; }
+    85%  { opacity: 1; }
+    100% { opacity: 0; transform: translateX(340px);  }
+}
+
+/* Overlay exit: fade + very subtle scale down */
+@keyframes ri-overlay-out {
+    from { opacity: 1; transform: scale(1);    }
+    to   { opacity: 0; transform: scale(1.03); }
+}
+
+/* ════════════════════════════════════════════════════
+   REDUCED-MOTION FALLBACK  (.ri--reduced)
+   Dots + wordmark fade in together (opacity only),
+   hold, then fade out. Total ≈ 1.15s.
+   ════════════════════════════════════════════════════ */
+
+/* 0.00s–0.10s: nothing (avoids jarring pop) */
+/* 0.10s–0.60s: fade in */
+.ri--reduced .ri-dot,
+.ri--reduced .ri-dot-glow {
+    animation: ri-reduced-fadein 0.50s ease 0.10s forwards;
+}
+
+.ri--reduced .ri-wordmark {
+    animation: ri-reduced-fadein 0.50s ease 0.10s forwards;
+    transform: translateY(0); /* no movement */
+}
+
+.ri--reduced .ri-since {
+    animation: ri-reduced-fadein 0.50s ease 0.10s forwards;
+    transform: translateY(0);
+}
+
+/* Connector, frame, sweep, pulse — NOT shown in reduced mode */
+.ri--reduced .ri-connector,
+.ri--reduced .ri-frame,
+.ri--reduced .ri-pulse-ring,
+.ri--reduced .ri-sweep { opacity: 0; }
+
+/* 0.60s–0.90s: hold (already fully opaque via forwards) */
+/* 0.90s–1.15s: fade out overlay */
+.ri--reduced {
+    animation: ri-reduced-fadeout 0.25s ease 0.90s forwards;
+}
+
+@keyframes ri-reduced-fadein {
+    from { opacity: 0; transform: none; }
+    to   { opacity: 1; transform: none; }
+}
+
+@keyframes ri-reduced-fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* ════════════════════════════════════════════════════
+   FRAME LINE GEOMETRY FIX
+   SVG lines need proper x1/x2 for the draw animation.
+   The JS-independent approach: we set the full endpoint
+   values on the SVG elements in the blade partial and
+   let dashoffset handle reveal. CSS cannot change SVG
+   presentation attrs, so the partial SVG already has
+   the correct full endpoints.
+   ════════════════════════════════════════════════════ */
+
+
+/* =====================================================
    GLOBAL
 ===================================================== */
 
@@ -196,27 +1104,24 @@ button {
 /* Let's Talk */
 
 .talk-button {
-    padding: 15px 26px;
-
-    background: var(--red);
-
-    color: var(--white) !important;
-
-    font-size: 12px !important;
-    font-weight: 700 !important;
-
+    padding: 12px 24px;
+    background: #9b1b1e;
+    color: #9b1b1e !important; /* No white, blends with background */
+    font-size: 14px !important;
+    font-weight: 900 !important;
     text-transform: uppercase;
-    letter-spacing: 1.4px;
-
-    transition:
-        background var(--transition),
-        transform var(--transition);
+    letter-spacing: 2px;
+    border-radius: 0;
+    /* Static TV Glitch effect with Cyan and Magenta */
+    text-shadow: -2px 0 0 #00ffff, 2px 0 0 #ff00ff;
+    border: none;
+    display: inline-block;
 }
 
-
 .talk-button:hover {
-    background: #bd1820;
-    transform: translateY(-2px);
+    background: #9b1b1e;
+    color: #9b1b1e !important;
+    text-shadow: -2px 0 0 #00ffff, 2px 0 0 #ff00ff;
 }
 
 

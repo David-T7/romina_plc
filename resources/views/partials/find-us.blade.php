@@ -161,7 +161,17 @@
 ============================================================ */
 .find-us-section {
     padding: var(--section-space) 0;
-    background: #0a0a0a;
+    /* Interactive animated background using Romina Logo colors */
+    background: linear-gradient(-45deg, #0d1b2a, #11233F, #1b365d, #11233F);
+    background-size: 400% 400%;
+    animation: rominaBG 15s ease infinite;
+    position: relative;
+}
+
+@keyframes rominaBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .find-us-container {
@@ -178,12 +188,16 @@
 
 .find-us-label {
     display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 700;
     letter-spacing: 0.2em;
-    color: #c8a97e;
+    color: #E61C24;
     margin-bottom: 12px;
     text-transform: uppercase;
+    padding: 6px 14px;
+    background: rgba(230, 28, 36, 0.15);
+    border-radius: 20px;
+    border: 1px solid rgba(230, 28, 36, 0.3);
 }
 
 .find-us-heading h2 {
@@ -201,10 +215,31 @@
 .find-us-panel {
     display: flex;
     overflow: hidden;
+    border-radius: 16px;
     box-shadow:
         0 24px 72px rgba(0, 0, 0, 0.6),
         0 0 0 1px rgba(255,255,255,0.06);
     height: 560px;
+    position: relative;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.find-us-panel:hover {
+    transform: translateY(-10px) scale(1.01);
+    box-shadow:
+        0 40px 100px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(230, 28, 36, 0.4);
+}
+
+.find-us-panel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: #E61C24; /* Romina Red accent */
+    z-index: 10;
 }
 
 /* ============================================================
@@ -360,9 +395,9 @@
 .fup-tab:hover { color: #000; }
 
 .fup-tab.active {
-    color: #1967d2;
-    border-bottom-color: #1967d2;
-    font-weight: 600;
+    color: #E61C24;
+    border-bottom-color: #E61C24;
+    font-weight: 700;
 }
 
 /* ACTION BUTTONS */
@@ -416,14 +451,15 @@
     transform: scale(1.08);
 }
 
-/* First action btn (Directions) gets a different fill color like Google */
+/* First action btn (Directions) gets a different fill color based on Romina */
 .fup-action-btn:first-child .fup-action-icon {
-    background: #1967d2;
+    background: #11233F;
     color: #fff;
 }
 
 .fup-action-btn:first-child:hover .fup-action-icon {
-    background: #1251a3;
+    background: #0d1b2a;
+    box-shadow: 0 4px 12px rgba(17, 35, 63, 0.4);
 }
 
 /* Open in Maps CTA */
@@ -434,18 +470,19 @@
     gap: 8px;
     font-size: 13px;
     font-weight: 600;
-    color: #1967d2;
+    color: #11233F;
     text-decoration: none;
     padding: 10px 0;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
-    transition: background 0.2s;
+    transition: all 0.3s ease;
     border-radius: 6px;
+    background: #f8fafc;
 }
 
 .fup-open-maps:hover {
-    background: #f0f4ff;
-    color: #1251a3;
+    background: #11233F;
+    color: #fff;
 }
 
 /* ============================================================

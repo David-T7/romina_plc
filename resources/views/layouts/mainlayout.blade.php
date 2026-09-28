@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,9 +25,15 @@
 
 <body>
 
+@include('partials.romina-intro')
+
+{{-- Romina Assistant chatbot — global, coordinates with intro overlay --}}
+@include('partials.romina-chatbot')
+
 <div class="scroll-prog" aria-hidden="true"><i></i></div>
 
 @include('partials.header')
+
 
 <main>
 
