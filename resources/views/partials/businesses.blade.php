@@ -18,7 +18,7 @@
 
             <div class="business-grid">
 
-                <a href="#" class="business-card">
+                <a href="businesses/romina-restaurants" class="business-card">
 
                     <div class="business-image"
                          style="background-image:
@@ -39,7 +39,7 @@
                 </a>
 
 
-                <a href="#" class="business-card">
+                <a href="businesses/romina-coffee" class="business-card">
 
                     <div class="business-image"
                          style="background-image:
@@ -60,7 +60,7 @@
                 </a>
 
 
-                <a href="#" class="business-card">
+                <a href="businesses/koba-patisserie" class="business-card">
 
                     <div class="business-image"
                          style="background-image:
