@@ -107,7 +107,7 @@
                         long-term growth.
                     </p>
 
-                    <a href="#sustainability" class="hero-link">
+                    <a href="{{ route('sustainability') }}" class="hero-link">
                         Our approach
                         <span><i class="fa-solid fa-arrow-right"></i></span>
                     </a>

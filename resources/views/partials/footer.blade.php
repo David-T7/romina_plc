@@ -16,21 +16,21 @@
             <div class="ftr-cols">
                 <div>
                     <p class="ftr-h">Romina Group</p>
-                    <a href="#about">About</a>
-                    <a href="#businesses">Businesses</a>
-                    <a href="#sustainability">Sustainability</a>
-                    <a href="#careers">Careers</a>
-                    <a href="#news">News</a>
-                    <a href="#contact">Contact</a>
+                    <a href="{{ url('/') }}#about">About</a>
+                    <a href="{{ url('/') }}#businesses">Businesses</a>
+                    <a href="{{ route('sustainability') }}">Sustainability</a>
+                    <a href="{{ url('/') }}#careers">Careers</a>
+                    <a href="{{ url('/') }}#news">News</a>
+                    <a href="{{ url('/') }}#contact">Contact</a>
                 </div>
                 <div>
                     <p class="ftr-h">Businesses</p>
-                    <a href="#businesses">Romina Restaurants</a>
-                    <a href="#businesses">KOBA</a>
-                    <a href="#businesses">Meskott</a>
-                    <a href="#businesses">Romina Coffee</a>
-                    <a href="#businesses">Romina Imports</a>
-                    <a href="#businesses">Jaquar World</a>
+                    <a href="{{ route('business', 'romina-restaurants') }}">Romina Restaurants</a>
+                    <a href="{{ route('business', 'koba-patisserie') }}">KOBA</a>
+                    <a href="{{ route('business', 'meskott-culinary') }}">Meskott</a>
+                    <a href="{{ route('business', 'romina-coffee') }}">Romina Coffee</a>
+                    <a href="{{ route('business', 'romina-imports') }}">Romina Imports</a>
+                    <a href="{{ route('business', 'jaquar-world') }}">Jaquar World</a>
                 </div>
                 <div>
                     <p class="ftr-h">Head office</p>

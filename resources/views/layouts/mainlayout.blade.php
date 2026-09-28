@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Romina Group</title>
+    <title>{{ $pageTitle ?? 'Romina Group' }}</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+
+    @yield('page-css')
 </head>
 
 <body>
@@ -37,37 +39,7 @@
 
 <main>
 
-@include('partials.hero')
-
-@include('partials.about')
-
-@include('partials.who-we-are')
-
-@include('partials.portfolio')
-
-@include('partials.values')
-
-@include('partials.reviews')
-
-@include('partials.brands-tabs')
-
-@include('partials.coffee')
-
-@include('partials.executive-team')
-
-@include('partials.businesses')
-
-@include('partials.news')
-
-@include('partials.sustainability')
-
-@include('partials.partners')
-
-@include('partials.careers')
-
-@include('partials.contact')
-
-@include('partials.find-us')
+@yield('page-content')
 
 @include('partials.footer')
 
@@ -508,6 +480,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const progressActive = document.querySelector('.progress-active');
     const progressDot    = document.querySelector('.progress-dot');
 
+    if (!slides.length || !nextButton || !prevButton) return;
+
     let current = 0;
     let autoplay;
     const total = slides.length;
@@ -734,6 +708,307 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 /* =====================================================
+   Coffee legacy video
+===================================================== */
+document.addEventListener('DOMContentLoaded', function () {
+    'use strict';
+
+    var vid      = document.getElementById('cofBgVideo');
+    var beans    = document.querySelector('.cof-beans');
+    if (!vid || !beans) return;
+
+    var centerBtn = document.getElementById('cofCenterBtn');
+    var controls  = document.getElementById('cofControls');
+    var ctrlPlay  = document.getElementById('cofCtrlPlay');
+    var ctrlRew   = document.getElementById('cofCtrlRew');
+    var ctrlFwd   = document.getElementById('cofCtrlFwd');
+    var timeEl    = document.getElementById('cofTime');
+    var seekWrap  = document.getElementById('cofSeekWrap');
+    var seekBuf   = document.getElementById('cofSeekBuf');
+    var seekPlayed= document.getElementById('cofSeekPlayed');
+    var seekTip   = document.getElementById('cofSeekTip');
+    var speedBtn  = document.getElementById('cofSpeedBtn');
+    var speedMenu = document.getElementById('cofSpeedMenu');
+    var muteBtn   = document.getElementById('cofCtrlMute');
+    var volSlider = document.getElementById('cofVolSlider');
+    var fsBtn     = document.getElementById('cofCtrlFs');
+
+    /* ---- Accessibility / performance ---- */
+    var prefRed  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var saveData = !!(typeof navigator.connection !== 'undefined' && navigator.connection.saveData);
+    if (prefRed)  beans.classList.add('no-pulse');
+    if (saveData) vid.preload = 'none';
+
+    /* ---- Mobile source swap (before first metadata load) ---- */
+    if (window.matchMedia('(max-width: 768px)').matches && vid.dataset.mobileSrc) {
+        vid.querySelectorAll('source').forEach(function (s) { s.remove(); });
+        var ms = document.createElement('source');
+        ms.src  = vid.dataset.mobileSrc;
+        ms.type = 'video/mp4';
+        vid.appendChild(ms);
+        vid.load();
+    }
+
+    beans.setAttribute('tabindex', '0');
+
+    /* ---- Helpers ---- */
+    var hideTimer  = null;
+    var isDragging = false;
+
+    function fmtTime(s) {
+        if (!isFinite(s) || isNaN(s)) return '0:00';
+        var m  = Math.floor(s / 60);
+        var ss = Math.floor(s % 60);
+        return m + ':' + (ss < 10 ? '0' : '') + ss;
+    }
+
+    function getSeekFrac(e) {
+        if (!seekWrap) return 0;
+        var r  = seekWrap.getBoundingClientRect();
+        var cx = (e.touches && e.touches.length) ? e.touches[0].clientX : e.clientX;
+        return Math.max(0, Math.min(1, (cx - r.left) / r.width));
+    }
+
+    /* ---- Icon helpers ---- */
+    function setPlayIcons(state) {
+        [centerBtn, ctrlPlay].forEach(function (btn) {
+            if (!btn) return;
+            ['play', 'pause', 'replay'].forEach(function (s) {
+                var el = btn.querySelector('.icon-' + s);
+                if (el) el.style.display = (s === state) ? '' : 'none';
+            });
+        });
+        if (centerBtn) centerBtn.setAttribute('aria-label',
+            state === 'replay' ? 'Replay video' : state === 'pause' ? 'Pause video' : 'Play video');
+        if (ctrlPlay) ctrlPlay.setAttribute('aria-label', state === 'pause' ? 'Pause' : 'Play');
+    }
+
+    function setMuteIcons() {
+        var m = vid.muted || vid.volume === 0;
+        if (muteBtn) {
+            var iv = muteBtn.querySelector('.icon-vol');
+            var im = muteBtn.querySelector('.icon-muted');
+            if (iv) iv.style.display = m ? 'none' : '';
+            if (im) im.style.display = m ? '' : 'none';
+            muteBtn.setAttribute('aria-label', m ? 'Unmute' : 'Mute');
+        }
+        if (volSlider) volSlider.value = (vid.muted ? 0 : vid.volume).toString();
+    }
+
+    function setFsIcons() {
+        var inFs = !!document.fullscreenElement;
+        if (fsBtn) {
+            var ifs  = fsBtn.querySelector('.icon-fs');
+            var iefs = fsBtn.querySelector('.icon-exit-fs');
+            if (ifs)  ifs.style.display  = inFs ? 'none' : '';
+            if (iefs) iefs.style.display = inFs ? '' : 'none';
+            fsBtn.setAttribute('aria-label', inFs ? 'Exit full screen' : 'Full screen');
+        }
+    }
+
+    /* ---- Controls visibility ---- */
+    function showControls() {
+        clearTimeout(hideTimer);
+        beans.classList.add('controls-visible');
+        if (!vid.paused && !vid.ended) {
+            hideTimer = setTimeout(function () {
+                beans.classList.remove('controls-visible');
+            }, 2500);
+        }
+    }
+
+    /* ---- Timeline ---- */
+    function updateTimeline() {
+        var dur = vid.duration;
+        var pct = dur ? vid.currentTime / dur * 100 : 0;
+        if (seekPlayed) seekPlayed.style.width = pct + '%';
+        if (seekBuf && vid.buffered.length) {
+            seekBuf.style.width = (vid.buffered.end(vid.buffered.length - 1) / (dur || 1) * 100) + '%';
+        }
+        if (timeEl) timeEl.textContent = fmtTime(vid.currentTime) + ' / ' + fmtTime(dur);
+    }
+
+    /* ---- Play / pause ---- */
+    function doPlay()  { vid.play().catch(function () {}); }
+    function doPause() { vid.pause(); }
+    function togglePlay() {
+        if (vid.ended) { vid.currentTime = 0; doPlay(); }
+        else if (vid.paused) doPlay();
+        else doPause();
+    }
+
+    /* ---- Video events drive UI state ---- */
+    vid.addEventListener('play', function () {
+        beans.classList.add('is-playing');
+        beans.classList.remove('is-ended');
+        setPlayIcons('pause');
+        showControls();
+    });
+    vid.addEventListener('pause', function () {
+        if (vid.ended) return;
+        beans.classList.remove('is-playing');
+        setPlayIcons('play');
+        clearTimeout(hideTimer);
+        beans.classList.add('controls-visible');
+    });
+    vid.addEventListener('ended', function () {
+        beans.classList.remove('is-playing');
+        beans.classList.add('is-ended');
+        setPlayIcons('replay');
+        clearTimeout(hideTimer);
+        beans.classList.add('controls-visible');
+    });
+    vid.addEventListener('timeupdate',     updateTimeline);
+    vid.addEventListener('seeked',         updateTimeline);
+    vid.addEventListener('progress',       updateTimeline);
+    vid.addEventListener('loadedmetadata', updateTimeline);
+    vid.addEventListener('durationchange', updateTimeline);
+
+    /* ---- Click targets ---- */
+    if (centerBtn) centerBtn.addEventListener('click', function (e) { togglePlay(); e.stopPropagation(); });
+    if (ctrlPlay)  ctrlPlay.addEventListener('click',  function (e) { togglePlay(); e.stopPropagation(); });
+    beans.addEventListener('click', function (e) {
+        if (controls  && controls.contains(e.target))  return;
+        if (centerBtn && centerBtn.contains(e.target)) return;
+        togglePlay();
+    });
+
+    /* ---- Rewind / Forward ---- */
+    if (ctrlRew) ctrlRew.addEventListener('click', function (e) {
+        vid.currentTime = Math.max(0, vid.currentTime - 10);
+        updateTimeline(); showControls(); e.stopPropagation();
+    });
+    if (ctrlFwd) ctrlFwd.addEventListener('click', function (e) {
+        vid.currentTime = Math.min(vid.duration || 0, vid.currentTime + 10);
+        updateTimeline(); showControls(); e.stopPropagation();
+    });
+
+    /* ---- Seek (mouse + touch) ---- */
+    if (seekWrap) {
+        seekWrap.addEventListener('mousedown', function (e) {
+            isDragging = true;
+            if (isFinite(vid.duration)) vid.currentTime = getSeekFrac(e) * vid.duration;
+            updateTimeline(); showControls(); e.stopPropagation();
+        });
+        seekWrap.addEventListener('mousemove', function (e) {
+            if (!seekTip) return;
+            var r    = seekWrap.getBoundingClientRect();
+            var x    = e.clientX - r.left;
+            seekTip.textContent  = fmtTime(getSeekFrac(e) * (vid.duration || 0));
+            seekTip.style.left   = Math.max(18, Math.min(r.width - 18, x)) + 'px';
+            seekTip.style.opacity = '1';
+        });
+        seekWrap.addEventListener('mouseleave', function () {
+            if (seekTip) seekTip.style.opacity = '0';
+        });
+        seekWrap.addEventListener('touchstart', function (e) {
+            isDragging = true;
+            if (isFinite(vid.duration)) vid.currentTime = getSeekFrac(e) * vid.duration;
+            updateTimeline(); showControls(); e.stopPropagation();
+        }, { passive: true });
+    }
+    document.addEventListener('mousemove', function (e) {
+        if (!isDragging) return;
+        if (isFinite(vid.duration)) vid.currentTime = getSeekFrac(e) * vid.duration;
+        updateTimeline();
+    });
+    document.addEventListener('mouseup',   function () { isDragging = false; });
+    document.addEventListener('touchmove', function (e) {
+        if (!isDragging) return;
+        if (isFinite(vid.duration)) vid.currentTime = getSeekFrac(e) * vid.duration;
+        updateTimeline();
+    }, { passive: true });
+    document.addEventListener('touchend',  function () { isDragging = false; });
+
+    /* ---- Speed ---- */
+    if (speedBtn && speedMenu) {
+        speedBtn.addEventListener('click', function (e) {
+            var open = speedMenu.classList.toggle('is-open');
+            speedBtn.setAttribute('aria-expanded', String(open));
+            showControls(); e.stopPropagation();
+        });
+        speedMenu.querySelectorAll('[data-speed]').forEach(function (item) {
+            item.addEventListener('click', function (e) {
+                var spd = parseFloat(item.dataset.speed);
+                vid.playbackRate = spd;
+                speedBtn.textContent = (spd === 1 ? '1' : spd) + '×';
+                speedMenu.querySelectorAll('[data-speed]').forEach(function (i) { i.classList.remove('active'); });
+                item.classList.add('active');
+                speedMenu.classList.remove('is-open');
+                speedBtn.setAttribute('aria-expanded', 'false');
+                showControls(); e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', function () {
+            if (speedMenu.classList.contains('is-open')) {
+                speedMenu.classList.remove('is-open');
+                speedBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    /* ---- Mute / Volume ---- */
+    if (muteBtn) muteBtn.addEventListener('click', function (e) {
+        vid.muted = !vid.muted; setMuteIcons(); showControls(); e.stopPropagation();
+    });
+    if (volSlider) volSlider.addEventListener('input', function (e) {
+        vid.volume = parseFloat(volSlider.value);
+        vid.muted  = (vid.volume === 0);
+        setMuteIcons(); showControls(); e.stopPropagation();
+    });
+
+    /* ---- Fullscreen ---- */
+    if (fsBtn) fsBtn.addEventListener('click', function (e) {
+        if (!document.fullscreenElement) beans.requestFullscreen && beans.requestFullscreen();
+        else document.exitFullscreen && document.exitFullscreen();
+        showControls(); e.stopPropagation();
+    });
+    document.addEventListener('fullscreenchange', setFsIcons);
+
+    /* ---- Controls auto-show on hover / tap ---- */
+    beans.addEventListener('mousemove',  showControls);
+    beans.addEventListener('touchstart', showControls, { passive: true });
+
+    /* ---- IntersectionObserver: pause only when scrolled out ---- */
+    if (typeof IntersectionObserver !== 'undefined') {
+        new IntersectionObserver(function (entries) {
+            if (!entries[0].isIntersecting && !vid.paused) doPause();
+        }, { threshold: 0.1 }).observe(beans);
+    }
+
+    /* ---- Tab visibility ---- */
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden && !vid.paused) doPause();
+    });
+
+    /* ---- Keyboard (Space/K play-pause, J/← rwd, L/→ fwd, M mute, F fullscreen) ---- */
+    beans.addEventListener('keydown', function (e) {
+        if (e.target.tagName === 'INPUT') return;
+        switch (e.key) {
+            case ' ': case 'k': case 'K':
+                e.preventDefault(); togglePlay(); showControls(); break;
+            case 'j': case 'J': case 'ArrowLeft':
+                e.preventDefault();
+                vid.currentTime = Math.max(0, vid.currentTime - 10);
+                updateTimeline(); showControls(); break;
+            case 'l': case 'L': case 'ArrowRight':
+                e.preventDefault();
+                vid.currentTime = Math.min(vid.duration || 0, vid.currentTime + 10);
+                updateTimeline(); showControls(); break;
+            case 'm': case 'M':
+                e.preventDefault(); vid.muted = !vid.muted; setMuteIcons(); showControls(); break;
+            case 'f': case 'F':
+                e.preventDefault();
+                if (!document.fullscreenElement) beans.requestFullscreen && beans.requestFullscreen();
+                else document.exitFullscreen && document.exitFullscreen();
+                break;
+        }
+    });
+
+});
+
+
+/* =====================================================
    GUEST REVIEWS — auto-slider
 ===================================================== */
 document.addEventListener('DOMContentLoaded', function () {
@@ -819,23 +1094,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const section = document.querySelector("#executive-team");
     if (!section) return;
 
+    /* Each grid reveals on its own as it scrolls into view */
+    const grids = section.querySelectorAll(".executive-team-grid");
+
     if ("IntersectionObserver" in window) {
 
         const observer = new IntersectionObserver(
             function (entries, observer) {
                 entries.forEach(function (entry) {
                     if (!entry.isIntersecting) return;
-                    section.classList.add("is-visible");
+                    entry.target.classList.add("is-visible");
                     observer.unobserve(entry.target);
                 });
             },
             { threshold: 0.12, rootMargin: "0px 0px -70px 0px" }
         );
 
-        observer.observe(section);
+        grids.forEach(function (grid) { observer.observe(grid); });
 
     } else {
-        section.classList.add("is-visible");
+        grids.forEach(function (grid) { grid.classList.add("is-visible"); });
     }
 
 });
@@ -847,6 +1125,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
 
     const section  = document.querySelector("#sustainability");
+    if (!section) return;
     const counters = section.querySelectorAll(".counter");
     let hasAnimated = false;
 
@@ -892,63 +1171,44 @@ document.addEventListener("DOMContentLoaded", function () {
 ===================================================== */
 (function () {
 
-    function initApproachAccordion() {
-        var section = document.querySelector('.sustainability-details');
-        if (!section) return;
-        var items = section.querySelectorAll('.accordion-item');
-
-        items.forEach(function (item) {
-            var trigger = item.querySelector('.accordion-trigger');
-            if (!trigger) return;
-
-            trigger.addEventListener('click', function () {
-                var isActive = item.classList.contains('active');
-
-                items.forEach(function (other) {
-                    other.classList.remove('active');
-                    var t = other.querySelector('.accordion-trigger');
-                    if (t) t.setAttribute('aria-expanded', 'false');
-                });
-
-                if (!isActive) {
-                    item.classList.add('active');
-                    trigger.setAttribute('aria-expanded', 'true');
-                }
-            });
-        });
-    }
-
+    /* Heading + photo tiles fade up as they enter; "Read More" is a plain
+       anchor link, so the jump to each detail block needs no JS. */
     function initApproachReveal() {
         var section = document.querySelector('.sustainability-details');
         if (!section) return;
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
         var header = section.querySelector('.sa-reveal');
-        var rows   = section.querySelectorAll('.accordion-reveal');
+        var tiles  = section.querySelectorAll('.appr-reveal');
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (reduced || typeof IntersectionObserver === 'undefined') {
+            if (header) header.classList.add('revealed');
+            tiles.forEach(function (tile) { tile.classList.add('revealed'); });
+            return;
+        }
 
         var observer = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (!entry.isIntersecting) return;
-                entry.target.classList.add('revealed');
-                observer.unobserve(entry.target);
+                var el = entry.target;
+                el.classList.add('revealed');
+                observer.unobserve(el);
+                /* Drop the stagger once in, so the hover dim responds instantly */
+                setTimeout(function () { el.style.transitionDelay = ''; }, 1200);
             });
         }, { threshold: 0.12 });
 
         if (header) observer.observe(header);
 
-        rows.forEach(function (row, i) {
-            row.style.transitionDelay = (i * 55) + 'ms';
-            observer.observe(row);
+        tiles.forEach(function (tile, i) {
+            tile.style.transitionDelay = ((i % 3) * 110) + 'ms';   /* cascade per row */
+            observer.observe(tile);
         });
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function () {
-            initApproachAccordion();
-            initApproachReveal();
-        });
+        document.addEventListener('DOMContentLoaded', initApproachReveal);
     } else {
-        initApproachAccordion();
         initApproachReveal();
     }
 
@@ -1219,6 +1479,75 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 /* =====================================================
+   OUR STORY — reveal + 3D tilt
+   Pointer position drives --rx/--ry (tilt) and --gx/--gy
+   (glare). Tilt only on fine pointers with motion allowed.
+===================================================== */
+document.addEventListener('DOMContentLoaded', function () {
+
+    var cards = document.querySelectorAll('.story [data-tilt]');
+    if (!cards.length) return;
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Entrance */
+    var reveals = document.querySelectorAll('.story-reveal');
+    if (reduced || typeof IntersectionObserver === 'undefined') {
+        reveals.forEach(function (el) { el.classList.add('revealed'); });
+    } else {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('revealed');
+                io.unobserve(entry.target);
+            });
+        }, { threshold: 0.15 });
+
+        reveals.forEach(function (el, i) {
+            el.style.transitionDelay = (i * 160) + 'ms';
+            io.observe(el);
+            /* Clear the stagger after entry so the tilt stays responsive */
+            setTimeout(function () { el.style.transitionDelay = ''; }, 2000);
+        });
+    }
+
+    /* Tilt */
+    var canTilt = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (reduced || !canTilt) return;
+
+    var MAX_Y = 10;   /* degrees, left-right */
+    var MAX_X = 7;    /* degrees, up-down */
+
+    cards.forEach(function (card) {
+        var raf = 0;
+
+        card.addEventListener('pointermove', function (e) {
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(function () {
+                var r  = card.getBoundingClientRect();
+                var px = (e.clientX - r.left) / r.width;
+                var py = (e.clientY - r.top)  / r.height;
+
+                card.classList.add('is-tilting');
+                card.style.setProperty('--ry', ((px - 0.5) * MAX_Y).toFixed(2) + 'deg');
+                card.style.setProperty('--rx', ((0.5 - py) * MAX_X).toFixed(2) + 'deg');
+                card.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
+                card.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
+            });
+        });
+
+        card.addEventListener('pointerleave', function () {
+            cancelAnimationFrame(raf);
+            card.classList.remove('is-tilting');
+            card.style.setProperty('--ry', '0deg');
+            card.style.setProperty('--rx', '0deg');
+        });
+    });
+
+});
+
+
+/* =====================================================
    SCROLL PROGRESS
 ===================================================== */
 (function () {
@@ -1253,6 +1582,8 @@ document.addEventListener('DOMContentLoaded', function () {
     updateHeader();
 }());
 </script>
+
+@yield('page-js')
 
 </body>
 </html>
