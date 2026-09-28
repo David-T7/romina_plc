@@ -1779,6 +1779,7 @@ button {
 .tl-node {
     position: absolute;
     top: 0;
+    left: var(--pos, 0%);
     transform: translateX(-50%);
 
     display: flex;
@@ -1794,6 +1795,7 @@ button {
 
     padding: 0;
 }
+
 
 .tl-node:first-of-type {
     align-items: flex-start;
@@ -2025,6 +2027,14 @@ button {
 @media (prefers-reduced-motion: reduce) {
     .tl-rail:not(.tl-entered) .tl-node { opacity: 1 !important; }
     .tl-rail.tl-entered .tl-node       { animation: none !important; }
+}
+
+
+/* =====================================================
+   Our story: sqrt-weighted dot positions — desktop ≥1024px
+===================================================== */
+@media (min-width: 1024px) {
+    .tl-node { left: var(--pos) !important; }
 }
 
 

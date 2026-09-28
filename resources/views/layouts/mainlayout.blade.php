@@ -158,7 +158,10 @@ document.addEventListener('DOMContentLoaded', function () {
             n.setAttribute('aria-pressed', i === index ? 'true' : 'false');
             n.setAttribute('aria-current', i === index ? 'step' : 'false');
         });
-        if (dot)    dot.style.left = ((index / (TIMELINE.length - 1)) * 100) + '%';
+        if (dot) {
+            var p = window.innerWidth >= 1024 ? nodes[index].style.getPropertyValue('--pos').trim() : '';
+            dot.style.left = p || ((index / (TIMELINE.length - 1)) * 100) + '%';
+        }
         if (detail) { detail.classList.remove('tl-animate'); void detail.offsetWidth; detail.classList.add('tl-animate'); }
         if (big)    big.textContent  = TIMELINE[index].year;
         if (text)   text.textContent = TIMELINE[index].text;
