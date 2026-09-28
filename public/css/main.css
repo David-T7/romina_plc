@@ -8485,6 +8485,7 @@ button {
     right: 0;
     top: 0;
     height: 3px;
+    background: transparent;
     z-index: 200;
     pointer-events: none;
 }
