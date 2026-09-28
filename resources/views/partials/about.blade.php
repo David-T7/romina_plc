@@ -37,7 +37,7 @@
 
         @php
             $tlMilestones = [
-                ['year' => 1973,           'label' => '1973',  'title' => 'Romina Restaurant'],
+                ['year' => 1973,           'label' => '1973',  'title' => 'Romina Restaurants'],
                 ['year' => 2009,           'label' => '2009',  'title' => 'Romina Coffee' ],
                 ['year' => 2017,           'label' => '2017',  'title' => 'Jaquar World'  ],
                 ['year' => 2020,           'label' => '2020',  'title' => 'KOBA'          ],
