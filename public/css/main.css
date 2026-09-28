@@ -1120,27 +1120,6 @@ button {
 
 /* Let's Talk */
 
-<<<<<<< HEAD
-.talk-button {
-    padding: 12px 24px;
-    background: #9b1b1e;
-    color: #9b1b1e !important; /* No white, blends with background */
-    font-size: 14px !important;
-    font-weight: 900 !important;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-radius: 0;
-    /* Static TV Glitch effect with Cyan and Magenta */
-    text-shadow: -2px 0 0 #00ffff, 2px 0 0 #ff00ff;
-    border: none;
-    display: inline-block;
-}
-
-.talk-button:hover {
-    background: #9b1b1e;
-    color: #9b1b1e !important;
-    text-shadow: -2px 0 0 #00ffff, 2px 0 0 #ff00ff;
-=======
 /* Transparent header: white-border ghost button */
 .main-navigation a.talk-button {
     display: inline-flex;
@@ -1166,7 +1145,6 @@ button {
     background: var(--white);
     border-color: var(--white);
     color: #0E2240 !important;
->>>>>>> 2cdc7e86e68be0dd27adf6f57455b29d3646c290
 }
 
 .main-navigation a.talk-button:focus-visible {
