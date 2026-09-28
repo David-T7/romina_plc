@@ -7,10 +7,10 @@
     $home = url('/');
 
     $storySectors = [
-        ['icon' => 'fa-utensils',          'name' => 'Restaurant Management & Hospitality', 'href' => $home . '#brands'],
-        ['icon' => 'fa-globe',             'name' => 'International Trading Services',      'href' => $home . '#portfolio'],
-        ['icon' => 'fa-mug-hot',           'name' => 'Coffee Exporting',                    'href' => $home . '#coffee'],
-        ['icon' => 'fa-truck-ramp-box',    'name' => 'Importing & Distribution',            'href' => $home . '#businesses'],
+        ['icon' => 'fa-utensils',          'name' => 'Restaurant Management & Hospitality', 'href' => route('business', 'romina-restaurants')],
+        ['icon' => 'fa-globe',             'name' => 'International Culinary Services',     'href' => route('business', 'meskott-culinary')],
+        ['icon' => 'fa-mug-hot',           'name' => 'Coffee Exporting',                    'href' => route('business', 'romina-coffee')],
+        ['icon' => 'fa-truck-ramp-box',    'name' => 'Importing & Distribution',            'href' => route('business', 'romina-imports')],
     ];
 @endphp
 
@@ -19,7 +19,7 @@
     <div class="story-bg" style="background-image: url('{{ asset('images/hero/hero-01.jpg') }}');" aria-hidden="true"></div>
     <span class="story-orb story-orb--red" aria-hidden="true"></span>
     <span class="story-orb story-orb--blue" aria-hidden="true"></span>
-    <span class="story-year" aria-hidden="true">1973</span>
+    <span class="story-year" aria-hidden="true">2026</span>
 
     <div class="container story-grid">
 

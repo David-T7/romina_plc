@@ -210,7 +210,7 @@
 
         <div class="bz-section-head">
             <span class="bz-label">{{ $brand['locations_label'] }}</span>
-            <h2>{{ $brand['locations_title'] ?? (count($brand['locations']) === 1 ? 'One address, worth the trip.' : count($brand['locations']) . ' places to find us.') }}</h2>
+            <h2>{{ $brand['locations_title'] ?? (count($brand['locations']) === 1 ? 'One address, worth the trip.' : 'Our Locations') }}</h2>
         </div>
 
         <ul class="bz-loc-grid">
@@ -240,37 +240,6 @@
     </div>
 </section>
 @endif
-
-
-{{-- ============ CALL TO ACTION ============ --}}
-<section class="bz-cta">
-    <div class="container bz-cta-inner">
-
-        <div>
-            <span class="bz-label bz-label--light">Get in touch</span>
-            <h2>Talk to {{ $brand['menu'] }}.</h2>
-        </div>
-
-        <div class="story-actions">
-            @if ($tel)
-                <a href="tel:{{ $tel }}" class="story-btn story-btn--solid">
-                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                    {{ $brand['phone'] }}
-                </a>
-            @endif
-            @if ($brand['website'])
-                <a href="{{ $brand['website'] }}" class="story-btn story-btn--ghost" target="_blank" rel="noopener">
-                    Visit website
-                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                </a>
-            @endif
-            <a href="mailto:info@rominaplc.com" class="story-btn story-btn--ghost">
-                info@rominaplc.com
-            </a>
-        </div>
-
-    </div>
-</section>
 
 
 {{-- ============ MORE BUSINESSES ============ --}}
