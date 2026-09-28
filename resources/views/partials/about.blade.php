@@ -17,20 +17,10 @@
 
             <!-- Right: Amharic welcome + copy -->
             <div class="about-copy">
-<<<<<<< HEAD
                 <p class="amh" lang="am" data-i18n="about_amh">{{ __('site.about_amh') }}</p>
                 <h3 class="about-sub" data-i18n="about_sub">{{ __('site.about_sub') }}</h3>
                 <p class="about-body" data-i18n="about_body">
                     {{ __('site.about_body') }}
-=======
-                <p class="amh" lang="am">እንኳን ደህና መጡ</p>
-                <h3 class="about-sub">Welcome to Romina Group</h3>
-                <p class="about-body">
-                    Founded in 1973 by Girma Taye as a small restaurant in 4 Kilo,
-                    Romina has grown over five decades into a diversified Ethiopian enterprise,
-                    through strategic expansion, successful partnerships and an unwavering
-                    commitment to excellence.
->>>>>>> 77b32ae4536a0ee17e23df53ecc0d76bfd811f1e
                 </p>
             </div>
 
