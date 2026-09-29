@@ -58,11 +58,6 @@
                             <span data-i18n="mega_about_lead_link">{{ __('site.mega_about_lead_link') }}</span>
                             <small><span data-i18n="nav_explore">{{ __('site.nav_explore') }}</span> <span><i class="fa-solid fa-arrow-right"></i></span></small>
                         </a>
-
-                        <a href="{{ route('about.leadership') }}#executive-team">
-                            <span data-i18n="mega_about_exec_link">{{ __('site.mega_about_exec_link') }}</span>
-                            <small><span data-i18n="nav_explore">{{ __('site.nav_explore') }}</span> <span><i class="fa-solid fa-arrow-right"></i></span></small>
-                        </a>
                     </div>
 
                 </div>
