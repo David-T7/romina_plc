@@ -21,10 +21,10 @@
             <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
             <a href="{{ route('news') }}">News</a>
             <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            <span aria-current="page">{{ $article['category'] }}</span>
+            <a href="{{ route('news', ['category' => $article['category']]) }}">{{ $categories[$article['category']]['label'] ?? $article['category'] }}</a>
         </nav>
 
-        <div class="hero-category">{{ $article['category'] }}</div>
+        <div class="hero-category">{{ strtoupper($categories[$article['category']]['full'] ?? $categories[$article['category']]['label'] ?? $article['category']) }}</div>
 
         <h1>{{ $article['title'] }}</h1>
 
@@ -77,7 +77,7 @@
                     </div>
                     <div class="news-card-body">
                         <div class="news-meta">
-                            <span class="news-cat">{{ $item['category'] }}</span>
+                            <span class="news-cat">{{ $categories[$item['category']]['label'] ?? $item['category'] }}</span>
                             <span class="news-date">{{ \Carbon\Carbon::parse($item['date'])->format('d M Y') }}</span>
                         </div>
                         <h3>{{ $item['title'] }}</h3>

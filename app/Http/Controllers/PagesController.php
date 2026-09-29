@@ -85,15 +85,40 @@ class PagesController extends Controller
         return $articles;
     }
 
-    public function news()
+    public function news(Request $request)
     {
-        $articles = $this->sortedArticles();
+        $articles   = $this->sortedArticles();
+        $categories = config('news.categories', []);
+
+        // Count per category for the filter tabs
+        $counts = array_fill_keys(array_keys($categories), 0);
+        foreach ($articles as $item) {
+            if (isset($counts[$item['category']])) {
+                $counts[$item['category']]++;
+            }
+        }
+
+        // ?category=<key> filters the list; unknown values fall back to "All"
+        $active = $request->query('category');
+        if (!isset($categories[$active])) {
+            $active = null;
+        }
+
+        if ($active) {
+            $articles = array_values(array_filter($articles, function ($item) use ($active) {
+                return $item['category'] === $active;
+            }));
+        }
 
         $pageData = [
-            'pageTitle' => 'News — Romina Group',
-            'pageCode'  => 'News',
-            'featured'  => $articles[0] ?? null,
-            'articles'  => array_slice($articles, 1),
+            'pageTitle'  => ($active ? $categories[$active]['label'] . ' — ' : '') . 'News — Romina Group',
+            'pageCode'   => 'News',
+            'categories' => $categories,
+            'counts'     => $counts,
+            'total'      => count($this->sortedArticles()),
+            'active'     => $active,
+            'featured'   => $articles[0] ?? null,
+            'articles'   => array_slice($articles, 1),
         ];
 
         return view('news.index')->with($pageData);
@@ -113,15 +138,20 @@ class PagesController extends Controller
 
         abort_unless($article, 404);
 
-        $related = array_values(array_filter($articles, function ($item) use ($slug) {
+        // Related: same category first, then the latest from other categories
+        $others = array_values(array_filter($articles, function ($item) use ($slug) {
             return $item['slug'] !== $slug;
         }));
+        usort($others, function ($a, $b) use ($article) {
+            return ($b['category'] === $article['category']) <=> ($a['category'] === $article['category']);
+        });
 
         $pageData = [
-            'pageTitle' => $article['title'] . ' — Romina Group',
-            'pageCode'  => 'News',
-            'article'   => $article,
-            'related'   => array_slice($related, 0, 3),
+            'pageTitle'  => $article['title'] . ' — Romina Group',
+            'pageCode'   => 'News',
+            'article'    => $article,
+            'categories' => config('news.categories', []),
+            'related'    => array_slice($others, 0, 3),
         ];
 
         return view('news.show')->with($pageData);

@@ -11688,6 +11688,103 @@ button {
 
 .news-related-section { border-top: 1px solid rgba(14,34,64,.08); }
 
+/* ----- Category filter (sticks under the fixed header) ----- */
+.news-filter {
+    position: sticky;
+    top: 100px;
+    z-index: 50;
+    background: rgba(255,255,255,.96);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(14,34,64,.08);
+}
+
+.news-filter-list {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    padding: 18px 0;
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.news-filter-list::-webkit-scrollbar { display: none; }
+
+.news-filter-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 16px;
+    border: 1px solid rgba(14,34,64,.14);
+    border-radius: 999px;
+    background: #fff;
+    color: #0E2240;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background .25s, color .25s, border-color .25s;
+}
+
+.news-filter-tab i {
+    font-size: 13px;
+    color: #E8132C;
+    transition: color .25s;
+}
+
+.news-filter-tab:hover {
+    border-color: #0E2240;
+    color: #0E2240;
+}
+
+.news-filter-tab.is-active {
+    background: #E8132C;
+    border-color: #E8132C;
+    color: #fff;
+}
+
+.news-filter-tab.is-active i { color: #fff; }
+
+.news-filter-tab:focus-visible {
+    outline: 2px solid #0E2240;
+    outline-offset: 2px;
+}
+
+.news-filter-count {
+    min-width: 22px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: rgba(14,34,64,.07);
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.news-filter-tab.is-active .news-filter-count {
+    background: rgba(255,255,255,.22);
+}
+
+.news-list-note {
+    margin: 36px 0 0;
+    color: #667085;
+    font-size: 15px;
+}
+
+.news-list-note a,
+.news-empty a {
+    color: #E8132C;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.news-list-note a:hover,
+.news-empty a:hover { text-decoration: underline; }
+
+/* Anchor clicks / filter jumps land below the sticky bar */
+.news-featured-section,
+.news-list-section { scroll-margin-top: 170px; }
+
 /* ----- Responsive ----- */
 @media (max-width: 820px) {
     .news-featured {
