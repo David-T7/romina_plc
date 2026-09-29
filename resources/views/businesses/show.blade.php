@@ -174,33 +174,76 @@
 @endif
 
 
-{{-- ============ GALLERY ============ --}}
+{{-- ============ GALLERY — photo mosaic + lightbox ============
+     Tiles come from $gallery (see PagesController::businessGallery):
+     drop photos into public/images/gallery/{slug}/ to add more. --}}
+@php
+    $tileCount  = count($gallery);
+    $photoCount = count(array_filter($gallery, function ($g) { return !empty($g['src']); }));
+@endphp
 <section class="bz-gallery">
     <div class="container">
 
-        <div class="bz-section-head">
-            <span class="bz-label">Gallery</span>
-            <h2>A closer look.</h2>
+        <div class="bz-gallery-head">
+            <div class="bz-section-head">
+                <span class="bz-label">Gallery</span>
+                <h2>A closer look.</h2>
+            </div>
+            @if ($photoCount)
+                <p class="bz-gallery-hint">
+                    <i class="fa-regular fa-images" aria-hidden="true"></i>
+                    {{ $photoCount }} {{ $photoCount === 1 ? 'photo' : 'photos' }} · click to enlarge
+                </p>
+            @endif
         </div>
 
-        <div class="bz-gallery-grid">
-            @foreach ($brand['gallery'] as $shot)
-                <figure class="bz-shot">
+        <ul class="bz-mosaic">
+            @foreach ($gallery as $i => $shot)
+                <li class="bz-tile{{ $shot['src'] ? '' : ' bz-tile--ph' }}">
+
                     @if ($shot['src'])
-                        <img src="{{ asset($shot['src']) }}" alt="{{ $shot['shot'] }}" loading="lazy">
+                        <button type="button" class="bz-tile-btn"
+                                data-full="{{ asset($shot['src']) }}"
+                                data-caption="{{ $shot['caption'] }}"
+                                aria-label="Enlarge photo: {{ $shot['caption'] }}">
+                            <img src="{{ asset($shot['src']) }}" alt="{{ $shot['shot'] }}" loading="lazy">
+                            <span class="bz-tile-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+                            <span class="bz-tile-overlay" aria-hidden="true">
+                                <span class="bz-tile-index">{{ sprintf('%02d', $i + 1) }} / {{ sprintf('%02d', $tileCount) }}</span>
+                                <span class="bz-tile-caption">{{ $shot['caption'] }}</span>
+                                @if ($shot['shot'] !== $shot['caption'])
+                                    <span class="bz-tile-shot">{{ $shot['shot'] }}</span>
+                                @endif
+                            </span>
+                        </button>
                     @else
                         <div class="bz-ph">
                             <span class="bz-ph-note"><i class="fa-regular fa-image" aria-hidden="true"></i> Photo coming soon</span>
                             <span class="bz-ph-shot">{{ $shot['shot'] }}</span>
+                            <span class="bz-tile-caption">{{ $shot['caption'] }}</span>
                         </div>
                     @endif
-                    <figcaption>{{ $shot['caption'] }}</figcaption>
-                </figure>
+
+                </li>
             @endforeach
-        </div>
+        </ul>
 
     </div>
 </section>
+
+{{-- Lightbox (one per page, filled by JS) --}}
+<div class="bz-lightbox" id="bzLightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <button type="button" class="bz-lb-btn bz-lb-close" aria-label="Close photo viewer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <button type="button" class="bz-lb-btn bz-lb-prev" aria-label="Previous photo"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+    <figure class="bz-lb-figure">
+        <img class="bz-lb-img" src="" alt="">
+        <figcaption class="bz-lb-caption">
+            <span class="bz-lb-count"></span>
+            <span class="bz-lb-text"></span>
+        </figcaption>
+    </figure>
+    <button type="button" class="bz-lb-btn bz-lb-next" aria-label="Next photo"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+</div>
 
 
 {{-- ============ LOCATIONS ============ --}}
@@ -266,4 +309,97 @@
     </div>
 </section>
 
+@endsection
+
+
+@section('page-js')
+<script>
+/* =====================================================
+   BRAND GALLERY — lightbox
+   Click a photo tile to open; arrows / swipe to browse,
+   Esc or backdrop click to close. Focus returns to the tile.
+===================================================== */
+(function () {
+    var tiles = Array.prototype.slice.call(document.querySelectorAll('.bz-tile-btn'));
+    var box   = document.getElementById('bzLightbox');
+    if (!tiles.length || !box) return;
+
+    var img     = box.querySelector('.bz-lb-img');
+    var countEl = box.querySelector('.bz-lb-count');
+    var textEl  = box.querySelector('.bz-lb-text');
+    var btnPrev = box.querySelector('.bz-lb-prev');
+    var btnNext = box.querySelector('.bz-lb-next');
+    var btnClose = box.querySelector('.bz-lb-close');
+    var current = 0;
+    var opener  = null;
+
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+    function show(i) {
+        current = (i + tiles.length) % tiles.length;
+        var t = tiles[current];
+        box.classList.remove('is-swapping');
+        void box.offsetWidth;                       /* restart the swap animation */
+        box.classList.add('is-swapping');
+        img.src = t.dataset.full;
+        img.alt = t.querySelector('img').alt;
+        countEl.textContent = pad(current + 1) + ' / ' + pad(tiles.length);
+        textEl.textContent  = t.dataset.caption;
+    }
+
+    function open(i) {
+        opener = tiles[i];
+        box.hidden = false;
+        box.classList.toggle('is-single', tiles.length < 2);
+        requestAnimationFrame(function () { box.classList.add('is-open'); });
+        document.body.style.overflow = 'hidden';
+        show(i);
+        btnClose.focus();
+    }
+
+    function close() {
+        box.classList.remove('is-open');
+        document.body.style.overflow = '';
+        setTimeout(function () { box.hidden = true; }, 300);
+        if (opener) opener.focus();
+    }
+
+    tiles.forEach(function (t, i) {
+        t.addEventListener('click', function () { open(i); });
+    });
+
+    btnPrev.addEventListener('click', function () { show(current - 1); });
+    btnNext.addEventListener('click', function () { show(current + 1); });
+    btnClose.addEventListener('click', close);
+
+    /* Backdrop click (not the photo or controls) closes */
+    box.addEventListener('click', function (e) {
+        if (e.target === box) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (box.hidden) return;
+        if (e.key === 'Escape')     close();
+        if (e.key === 'ArrowLeft')  show(current - 1);
+        if (e.key === 'ArrowRight') show(current + 1);
+        /* keep Tab focus inside the viewer */
+        if (e.key === 'Tab') {
+            var focusables = [btnClose, btnPrev, btnNext].filter(function (b) { return b.offsetParent !== null; });
+            var first = focusables[0], last = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+    });
+
+    /* Swipe on touch screens */
+    var x0 = null;
+    box.addEventListener('touchstart', function (e) { x0 = e.changedTouches[0].clientX; }, { passive: true });
+    box.addEventListener('touchend', function (e) {
+        if (x0 === null) return;
+        var dx = e.changedTouches[0].clientX - x0;
+        if (Math.abs(dx) > 40) show(dx < 0 ? current + 1 : current - 1);
+        x0 = null;
+    });
+}());
+</script>
 @endsection

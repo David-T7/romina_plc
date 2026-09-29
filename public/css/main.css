@@ -9819,55 +9819,477 @@ button {
     background: var(--white);
 }
 
-.bz-gallery-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr 1fr;
-    gap: 16px;
+.bz-gallery-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 56px;
 }
 
-.bz-shot {
-    position: relative;
+.bz-gallery-head .bz-section-head {
+    margin-bottom: 0;
+}
 
-    height: 420px;
+.bz-gallery-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     margin: 0;
+
+    color: var(--gray);
+
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .5px;
+}
+
+.bz-gallery-hint i {
+    color: var(--red);
+}
+
+
+/* Mosaic — a 7-tile pattern that locks together in 4 columns:
+   tile 1 is 2x2, tile 3 is tall, tile 5 is wide, the rest 1x1.
+   The pattern repeats for 14, 21… photos. */
+
+.bz-mosaic {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: 230px;
+    grid-auto-flow: dense;
+    gap: 14px;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.bz-tile {
+    position: relative;
     overflow: hidden;
 
     background: var(--deep-blue);
+
+    transition:
+        filter .5s ease,
+        transform .6s cubic-bezier(.22, 1, .36, 1),
+        box-shadow .6s ease;
 }
 
-.bz-shot img {
+.bz-tile:nth-child(7n + 1) { grid-column: span 2; grid-row: span 2; }
+.bz-tile:nth-child(7n + 3) { grid-row: span 2; }
+.bz-tile:nth-child(7n + 5) { grid-column: span 2; }
+
+/* Red bar that sweeps along the bottom on hover */
+.bz-tile::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 3;
+
+    width: 100%;
+    height: 4px;
+
+    background: var(--red);
+
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .6s cubic-bezier(.22, 1, .36, 1);
+    pointer-events: none;
+}
+
+.bz-tile-btn {
+    position: absolute;
+    inset: 0;
+
+    display: block;
+    width: 100%;
+    padding: 0;
+
+    border: 0;
+    background: none;
+
+    cursor: zoom-in;
+}
+
+.bz-tile-btn img {
     width: 100%;
     height: 100%;
     display: block;
     object-fit: cover;
 
-    transition: transform 1s cubic-bezier(.22, 1, .36, 1);
+    transition:
+        transform 1.2s cubic-bezier(.22, 1, .36, 1),
+        filter .6s ease;
 }
 
-.bz-shot:hover img {
-    transform: scale(1.06);
-}
-
-.bz-shot .bz-ph {
-    min-height: 0;
-    padding-bottom: 70px;
-}
-
-.bz-shot figcaption {
+/* Caption overlay */
+.bz-tile-overlay {
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
 
-    padding: 40px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 6px;
 
-    background: linear-gradient(to top, rgba(7, 27, 58, .85), transparent);
+    padding: 26px 26px 30px;
+
+    background: linear-gradient(to top, rgba(7, 27, 58, .92) 0%, rgba(7, 27, 58, .35) 45%, transparent 70%);
+    color: var(--white);
+    text-align: left;
+
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+
+.bz-tile-overlay > span {
+    transform: translateY(18px);
+    transition: transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+
+.bz-tile-overlay > span:nth-child(2) { transition-delay: .04s; }
+.bz-tile-overlay > span:nth-child(3) { transition-delay: .08s; }
+
+.bz-tile-index {
+    color: #ff5960;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.bz-tile-caption {
     color: var(--white);
 
-    font-size: 13px;
+    font-size: 18px;
     font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+    line-height: 1.25;
+}
+
+.bz-tile-shot {
+    color: rgba(255, 255, 255, .72);
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Expand button, top-right */
+.bz-tile-zoom {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 2;
+
+    width: 44px;
+    height: 44px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--deep-blue);
+
+    font-size: 14px;
+
+    opacity: 0;
+    transform: scale(.6) rotate(-45deg);
+    transition:
+        opacity .4s ease,
+        transform .5s cubic-bezier(.34, 1.56, .64, 1),
+        background .3s ease,
+        color .3s ease;
+}
+
+/* ---- Hover / focus ---- */
+
+.bz-tile:hover,
+.bz-tile:focus-within {
+    box-shadow: 0 24px 50px rgba(7, 27, 58, .25);
+}
+
+.bz-tile:hover::after,
+.bz-tile:focus-within::after {
+    transform: scaleX(1);
+}
+
+.bz-tile:hover .bz-tile-btn img,
+.bz-tile:focus-within .bz-tile-btn img {
+    transform: scale(1.08);
+}
+
+.bz-tile:hover .bz-tile-overlay,
+.bz-tile:focus-within .bz-tile-overlay {
+    opacity: 1;
+}
+
+.bz-tile:hover .bz-tile-overlay > span,
+.bz-tile:focus-within .bz-tile-overlay > span {
+    transform: none;
+}
+
+.bz-tile:hover .bz-tile-zoom,
+.bz-tile:focus-within .bz-tile-zoom {
+    opacity: 1;
+    transform: none;
+}
+
+.bz-tile-btn:hover .bz-tile-zoom {
+    background: var(--red);
+    color: var(--white);
+}
+
+.bz-tile-btn:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: -3px;
+}
+
+/* Spotlight — the rest of the mosaic steps back */
+@media (hover: hover) {
+    .bz-mosaic:hover .bz-tile:not(:hover) {
+        filter: grayscale(.65) brightness(.72);
+    }
+}
+
+/* Placeholder tiles */
+.bz-tile--ph .bz-ph {
+    position: absolute;
+    inset: 0;
+    min-height: 0;
+    padding: 24px;
+}
+
+.bz-tile--ph .bz-tile-caption {
+    margin-top: 4px;
+    font-size: 16px;
+}
+
+.bz-tile--ph .bz-ph-shot {
+    order: -1;
+    margin-bottom: auto;
+
+    color: rgba(255, 255, 255, .55);
+    font-size: 13px;
+}
+
+.bz-tile--ph:hover {
+    transform: translateY(-4px);
+}
+
+/* Touch screens: no hover, so captions show up front */
+@media (hover: none) {
+    .bz-tile-overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(7, 27, 58, .85) 0%, transparent 55%);
+    }
+
+    .bz-tile-overlay > span {
+        transform: none;
+    }
+
+    .bz-tile-shot {
+        display: none;
+    }
+}
+
+
+/* ---------- LIGHTBOX ---------- */
+
+.bz-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10000; /* above floating widgets (chat button, intro overlay) */
+
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr) 72px;
+    align-items: center;
+    gap: 16px;
+
+    padding: 70px 24px 40px;
+
+    background: rgba(4, 14, 30, .94);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.bz-lightbox[hidden] {
+    display: none;
+}
+
+.bz-lightbox.is-open {
+    opacity: 1;
+}
+
+.bz-lb-figure {
+    grid-column: 2;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.bz-lb-img {
+    max-width: 100%;
+    max-height: calc(100vh - 190px);
+    object-fit: contain;
+
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .5);
+
+    transform: scale(.96);
+    transition: transform .4s cubic-bezier(.22, 1, .36, 1);
+}
+
+.bz-lightbox.is-open .bz-lb-img {
+    transform: none;
+}
+
+.bz-lightbox.is-swapping .bz-lb-img {
+    animation: bz-lb-in .45s cubic-bezier(.22, 1, .36, 1);
+}
+
+@keyframes bz-lb-in {
+    from { opacity: 0; transform: translateY(12px) scale(.98); }
+    to   { opacity: 1; transform: none; }
+}
+
+.bz-lb-caption {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    color: var(--white);
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.bz-lb-count {
+    color: #ff5960;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.bz-lb-btn {
+    width: 56px;
+    height: 56px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--white);
+
+    font-size: 18px;
+    cursor: pointer;
+
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        transform .3s ease;
+}
+
+.bz-lb-btn:hover {
+    background: var(--red);
+    border-color: var(--red);
+}
+
+.bz-lb-btn:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 3px;
+}
+
+.bz-lb-prev { grid-column: 1; grid-row: 1; justify-self: end; }
+.bz-lb-next { grid-column: 3; grid-row: 1; }
+.bz-lb-figure { grid-row: 1; }
+
+.bz-lb-close {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+
+    width: 48px;
+    height: 48px;
+}
+
+.bz-lightbox.is-single .bz-lb-prev,
+.bz-lightbox.is-single .bz-lb-next {
+    visibility: hidden;
+}
+
+
+/* ---------- Gallery responsive ---------- */
+
+@media (max-width: 1000px) {
+
+    .bz-mosaic {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 200px;
+    }
+
+}
+
+@media (max-width: 640px) {
+
+    .bz-mosaic {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 260px;
+    }
+
+    .bz-tile:nth-child(n) {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .bz-lightbox {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr auto;
+        padding: 70px 16px 24px;
+    }
+
+    .bz-lb-figure {
+        grid-column: 1 / -1;
+        grid-row: 1;
+    }
+
+    .bz-lb-prev { grid-column: 1; grid-row: 2; justify-self: end; }
+    .bz-lb-next { grid-column: 2; grid-row: 2; justify-self: start; }
+
+    .bz-lb-img {
+        max-height: calc(100vh - 230px);
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .bz-tile,
+    .bz-tile::after,
+    .bz-tile-btn img,
+    .bz-tile-overlay,
+    .bz-tile-overlay > span,
+    .bz-tile-zoom,
+    .bz-lightbox,
+    .bz-lb-img {
+        transition: none;
+    }
+
+    .bz-lightbox.is-swapping .bz-lb-img {
+        animation: none;
+    }
+
 }
 
 
@@ -10146,14 +10568,6 @@ button {
         margin-top: 0;
     }
 
-    .bz-gallery-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .bz-gallery-grid .bz-shot:first-child {
-        grid-column: 1 / -1;
-    }
-
 }
 
 @media (max-width: 640px) {
@@ -10177,13 +10591,8 @@ button {
         gap: 18px;
     }
 
-    .bz-stats-grid,
-    .bz-gallery-grid {
+    .bz-stats-grid {
         grid-template-columns: 1fr;
-    }
-
-    .bz-shot {
-        height: 320px;
     }
 
     .bz-cta-inner {
@@ -10201,7 +10610,6 @@ button {
 
     .bz-card,
     .bz-card::after,
-    .bz-shot img,
     .bz-more-card,
     .bz-more-arrow {
         transition: none;

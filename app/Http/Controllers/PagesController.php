@@ -54,9 +54,59 @@ class PagesController extends Controller
             'brand' => $brands[$slug],
             'brands' => $brands,
             'groups' => config('businesses.groups'),
+            'gallery' => $this->businessGallery($slug, $brands[$slug]),
         ];
 
         return view('businesses.show')->with($pageData);
+    }
+
+    /**
+     * Photo mosaic for a brand page.
+     *
+     * 1. Every image dropped into public/images/gallery/{slug}/ (sorted by
+     *    filename; caption from the filename, e.g. "02-bar-at-night.jpg").
+     * 2. Photos listed in the brand's 'gallery' config.
+     * 3. "Photo coming soon" placeholders from config, padding to 7 tiles
+     *    so the mosaic always fills its grid.
+     */
+    private function businessGallery(string $slug, array $brand): array
+    {
+        $photos = [];
+        $dir = public_path('images/gallery/' . $slug);
+
+        if (is_dir($dir)) {
+            $files = glob($dir . '/*');
+            natcasesort($files);
+
+            foreach ($files as $file) {
+                if (!preg_match('/\.(jpe?g|png|webp)$/i', $file)) {
+                    continue;
+                }
+
+                $name    = pathinfo($file, PATHINFO_FILENAME);
+                $caption = ucfirst(trim(preg_replace('/[-_]+/', ' ', preg_replace('/^\d+[-_ ]*/', '', $name))));
+
+                $photos[] = [
+                    'src'     => 'images/gallery/' . $slug . '/' . basename($file),
+                    'shot'    => $caption,
+                    'caption' => $caption,
+                ];
+            }
+        }
+
+        $placeholders = [];
+        foreach ($brand['gallery'] ?? [] as $item) {
+            if (!empty($item['src'])) {
+                $photos[] = $item;
+            } else {
+                $placeholders[] = $item;
+            }
+        }
+
+        $minTiles = 7;
+        $padding  = array_slice($placeholders, 0, max(0, $minTiles - count($photos)));
+
+        return array_merge($photos, $padding);
     }
 
     public function sustainability()

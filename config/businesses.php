@@ -13,6 +13,12 @@
 | Location 'tag' is an optional pill such as "Flagship" or "Coming soon".
 | Optional 'locations_title' overrides the auto "N places to find us." heading.
 |
+| Gallery: drop photos into public/images/gallery/{slug}/ and they appear
+| in the brand's photo mosaic automatically (sorted by filename; the caption
+| comes from the filename, e.g. "02-bar-at-night.jpg" -> "Bar at night").
+| 'gallery' entries below are added after those; entries with 'src' => null
+| show as "photo coming soon" tiles until the mosaic has 7 tiles.
+|
 */
 
 return [
@@ -56,6 +62,10 @@ return [
                 ['src' => 'images/business/restaurant.jpg', 'shot' => 'A signature plate from the kitchen', 'caption' => 'From our kitchen'],
                 ['src' => null, 'shot' => 'Balderas dining room, evening service',     'caption' => 'Balderas'],
                 ['src' => null, 'shot' => 'Signature Agelgel, plated on the pass',     'caption' => 'Signature Agelgel'],
+                ['src' => null, 'shot' => 'Arat Kilo restaurant, bar and cafe',        'caption' => 'Arat Kilo'],
+                ['src' => null, 'shot' => 'Chef finishing a European dish',            'caption' => 'European dishes'],
+                ['src' => null, 'shot' => 'Traditional Ethiopian platter, shared',     'caption' => 'Ethiopian classics'],
+                ['src' => null, 'shot' => 'Takeaway counter at Balderas',              'caption' => 'Takeaway center'],
             ],
             'locations_label' => 'Visit us',
             'locations'  => [
@@ -99,6 +109,10 @@ return [
                 ['src' => 'images/business/baked.jpg', 'shot' => 'Handcrafted celebration cake, close detail', 'caption' => 'Handcrafted cakes'],
                 ['src' => null, 'shot' => 'KOBA pastry counter, morning light',       'caption' => 'The pastry counter'],
                 ['src' => null, 'shot' => 'Peacock roastery, espresso being pulled',  'caption' => 'Peacock roastery'],
+                ['src' => null, 'shot' => 'Fresh croissants out of the oven',         'caption' => 'Artisan pastries'],
+                ['src' => null, 'shot' => 'Signature breakfast plate, cafe table',    'caption' => 'Signature breakfasts'],
+                ['src' => null, 'shot' => 'Pastry artisan piping a cake',             'caption' => 'Our artisans'],
+                ['src' => null, 'shot' => 'Atlas cafe interior, afternoon',           'caption' => 'Atlas cafe'],
             ],
             'locations_label' => 'Find a KOBA near you',
             'locations'  => [
@@ -119,7 +133,7 @@ return [
             'kicker'     => 'Promising an unparalleled selection of International Cuisine',
             'intro'      => 'The new upscale meeting place in the city.',
             'badge'      => ['value' => '4 Kilo', 'label' => 'Selassie Twin Towers'],
-            'image'      => null,
+            'image'      => 'images/gallery/meskott-culinary/01-dining-room.jpg',
             'image_shot' => 'Meskott bar at night, backlit shelves',
             'title'      => 'Your Evening, Elevated.',
             'body'       => [
@@ -141,9 +155,13 @@ return [
                 ],
             ],
             'gallery'    => [
+                // The dining-room photo is picked up from public/images/gallery/meskott-culinary/
                 ['src' => null, 'shot' => 'Meskott bar at night, backlit shelves', 'caption' => 'The bar'],
                 ['src' => null, 'shot' => 'VIP table area, set for dinner',        'caption' => 'VIP table area'],
                 ['src' => null, 'shot' => 'Local food garden, brunch service',    'caption' => 'Street food garden'],
+                ['src' => null, 'shot' => 'Signature cocktail, garnished at the bar', 'caption' => 'Classy cocktails'],
+                ['src' => null, 'shot' => 'Chef plating an international dish',   'caption' => 'Our chefs'],
+                ['src' => null, 'shot' => 'Curated wine wall',                    'caption' => 'Wines & spirits'],
             ],
             'locations_label' => 'Find us',
             'locations'  => [
@@ -194,6 +212,10 @@ return [
                 ['src' => 'images/coffee/drying-beds.jpg',  'shot' => 'Farmer tending drying beds',        'caption' => 'Drying beds'],
                 ['src' => 'images/coffee/green-beans.jpg',  'shot' => 'Green coffee beans on a raised bed', 'caption' => 'Green coffee'],
                 ['src' => 'images/coffee/hand-sorting.jpg', 'shot' => 'Hand-sorting coffee at a station',   'caption' => 'Hand-sorting'],
+                ['src' => 'images/business/coffee.jpg',     'shot' => 'Ripe coffee cherries on the branch', 'caption' => 'Ripe cherries'],
+                ['src' => 'images/hero/hero-01.jpg',        'shot' => 'Our team at a coffee nursery',       'caption' => 'At the nursery'],
+                ['src' => 'images/hero/hero-03.jpg',        'shot' => 'Misty coffee-growing highlands',     'caption' => 'The highlands'],
+                ['src' => null, 'shot' => 'Cup testing in the quality lab',                 'caption' => 'Cup testing'],
             ],
             'locations_label' => 'Growing regions',
             'locations_title' => 'Seven regions, one legacy.',
@@ -245,6 +267,10 @@ return [
                 ['src' => null, 'shot' => 'Imported pasta range, studio still life', 'caption' => 'Pastas'],
                 ['src' => null, 'shot' => 'Warehouse aisle, edible oils and rice',   'caption' => 'Distribution'],
                 ['src' => null, 'shot' => 'Dairy and pastry ingredients, ready for dispatch', 'caption' => 'Ingredients'],
+                ['src' => null, 'shot' => 'Edible oils, palletised in the warehouse',        'caption' => 'Edible oils'],
+                ['src' => null, 'shot' => 'Rice sacks, stacked for distribution',            'caption' => 'Rice'],
+                ['src' => null, 'shot' => 'Delivery truck loading at dawn',                  'caption' => 'On the road'],
+                ['src' => null, 'shot' => 'Shelf of Romina-imported products in a store',    'caption' => 'On the shelf'],
             ],
             'locations_label' => null,
             'locations'  => [],
@@ -286,6 +312,10 @@ return [
                 ['src' => 'images/portfolio/jaguar.jpg', 'shot' => 'Basin and wall-mounted faucet', 'caption' => 'Bathroom solutions'],
                 ['src' => null, 'shot' => 'Jaquar World showroom, Kazanchis',             'caption' => 'Kazanchis showroom'],
                 ['src' => null, 'shot' => 'Artize shower system, architectural lighting', 'caption' => 'Artize'],
+                ['src' => null, 'shot' => 'Meskel Flower showroom floor',                  'caption' => 'Meskel Flower'],
+                ['src' => null, 'shot' => 'Smart toilet display, detail',                  'caption' => 'Smart toilets'],
+                ['src' => null, 'shot' => 'Jacuzzi bath in a styled bathroom',             'caption' => 'Jacuzzi baths'],
+                ['src' => null, 'shot' => 'Premium faucet range on display',               'caption' => 'Faucets'],
             ],
             'locations_label' => 'Visit a showroom',
             'locations'  => [
