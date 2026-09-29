@@ -34,6 +34,8 @@ Route::get('/about/leadership', [PagesController::class, 'leadership'])->name('a
 Route::get('/sustainability', [PagesController::class, 'sustainability'])->name('sustainability');
 Route::get('/team', [PagesController::class, 'team'])->name('team');
 Route::get('/news', [PagesController::class, 'news'])->name('news');
+Route::get('/news/{slug}', [PagesController::class, 'newsShow'])->name('news.show')
+    ->where('slug', '[a-z0-9\-]+');
 Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 
 Route::get('/careers',        [CareersController::class, 'index'])->name('careers.index');

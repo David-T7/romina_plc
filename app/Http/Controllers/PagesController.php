@@ -74,9 +74,57 @@ class PagesController extends Controller
         return redirect('/#executive-team');
     }
 
+    private function sortedArticles(): array
+    {
+        $articles = config('news.articles', []);
+
+        usort($articles, function ($a, $b) {
+            return strcmp($b['date'], $a['date']);
+        });
+
+        return $articles;
+    }
+
     public function news()
     {
-        return redirect('/#news');
+        $articles = $this->sortedArticles();
+
+        $pageData = [
+            'pageTitle' => 'News — Romina Group',
+            'pageCode'  => 'News',
+            'featured'  => $articles[0] ?? null,
+            'articles'  => array_slice($articles, 1),
+        ];
+
+        return view('news.index')->with($pageData);
+    }
+
+    public function newsShow($slug)
+    {
+        $articles = $this->sortedArticles();
+
+        $article = null;
+        foreach ($articles as $item) {
+            if ($item['slug'] === $slug) {
+                $article = $item;
+                break;
+            }
+        }
+
+        abort_unless($article, 404);
+
+        $related = array_values(array_filter($articles, function ($item) use ($slug) {
+            return $item['slug'] !== $slug;
+        }));
+
+        $pageData = [
+            'pageTitle' => $article['title'] . ' — Romina Group',
+            'pageCode'  => 'News',
+            'article'   => $article,
+            'related'   => array_slice($related, 0, 3),
+        ];
+
+        return view('news.show')->with($pageData);
     }
 
     public function contact()
