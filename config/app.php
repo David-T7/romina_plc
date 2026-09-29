@@ -99,6 +99,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Language Switcher
+    |--------------------------------------------------------------------------
+    |
+    | Toggles the EN / አማ language switcher in the UI. Feature is paused;
+    | set SHOW_LANGUAGE_SWITCHER=true to turn it back on.
+    |
+    */
+
+    'show_language_switcher' => env('SHOW_LANGUAGE_SWITCHER', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | Faker Locale
     |--------------------------------------------------------------------------
     |
