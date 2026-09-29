@@ -103,6 +103,7 @@
             <a href="{{ route('news') }}"{!! $pageCode === 'News' ? ' aria-current="page"' : '' !!}><span data-i18n="nav_news">{{ __('site.nav_news') }}</span></a>
             <a href="{{ $home }}#contact"><span data-i18n="nav_contact">{{ __('site.nav_contact') }}</span></a>
 
+            @if(config('app.show_language_switcher'))
             <nav class="lang-switcher" aria-label="{{ __('site.lang_switcher_label') }}"
                  data-i18n-attr="aria-label:lang_switcher_label">
                 <a href="{{ route('lang.switch', 'en') }}" lang="en" hreflang="en"
@@ -113,6 +114,7 @@
                    data-locale="am"
                    class="lang-opt{{ app()->getLocale() === 'am' ? ' lang-opt--on' : '' }}">አማ</a>
             </nav>
+            @endif
 
             <a href="{{ $home }}#contact" class="talk-button">
                 <span data-i18n="nav_lets_talk">{{ __('site.nav_lets_talk') }}</span>
@@ -181,6 +183,7 @@
         <span>Jaquar World</span>
     </div>
 
+    @if(config('app.show_language_switcher'))
     <nav class="container mobile-lang-sw"
          aria-label="{{ __('site.lang_switcher_label') }}"
          data-i18n-attr="aria-label:lang_switcher_label">
@@ -191,6 +194,7 @@
            data-locale="am"
            class="mobile-lang-opt{{ app()->getLocale() === 'am' ? ' mobile-lang-opt--on' : '' }}">አማ — አማርኛ</a>
     </nav>
+    @endif
 
     <div class="container mobile-nav-foot">
         <a href="mailto:info@rominaplc.com">info@rominaplc.com</a>

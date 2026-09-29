@@ -15,8 +15,6 @@
 
 @include('partials.values')
 
-@include('partials.reviews')
-
 @include('partials.brands-tabs')
 
 @include('partials.coffee')
