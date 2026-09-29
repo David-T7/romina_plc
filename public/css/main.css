@@ -11406,3 +11406,310 @@ button {
     .news-grid { grid-template-columns: 1fr; }
     .news-article-body p { font-size: 16px; }
 }
+
+
+/* =====================================================
+   Romina Imports brands
+===================================================== */
+
+.rib-brands {
+    position: relative;
+    overflow: hidden;                 /* no horizontal page overflow */
+    color: #fff;
+    padding-block: clamp(4rem, 8vw, 8rem);
+    background: var(--deep-blue);
+    isolation: isolate;
+}
+
+/* navy background + subtle gradient + faint photo texture */
+.rib-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        linear-gradient(135deg, rgba(7,27,58,.92) 0%, rgba(11,40,82,.86) 55%, rgba(7,27,58,.96) 100%),
+        url("../images/hero/hero-02.jpg") center/cover no-repeat;
+}
+
+.rib-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+}
+
+/* ---- left column ---- */
+.rib-copy { max-width: 560px; }
+
+.rib-heading {
+    font-weight: 300;
+    font-size: clamp(30px, 4vw, 56px);
+    line-height: 1.05;
+    margin-bottom: 22px;
+}
+
+.rib-intro {
+    color: rgba(255,255,255,.78);
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    max-width: 46ch;
+}
+
+.rib-filter { margin-bottom: 32px; }
+
+.rib-filter-label {
+    display: block;
+    font-size: 13px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+    margin-bottom: 14px;
+}
+
+.rib-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.rib-chip {
+    appearance: none;
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    color: #fff;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.45);
+    border-radius: 999px;
+    padding: 9px 18px;
+    transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition);
+}
+
+.rib-chip:hover { border-color: #fff; }
+
+.rib-chip[aria-pressed="true"] {
+    background: #fff;
+    color: var(--deep-blue);
+    border-color: #fff;
+}
+
+.rib-chip:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+.rib-clear {
+    appearance: none;
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    color: rgba(255,255,255,.75);
+    background: none;
+    border: 0;
+    padding: 0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.rib-clear:hover { color: #fff; }
+.rib-clear:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+.rib-viewall {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    border: 1px solid rgba(255,255,255,.5);
+    border-radius: 999px;
+    padding: 13px 26px;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.rib-viewall:hover {
+    background: #fff;
+    color: var(--deep-blue);
+    border-color: #fff;
+}
+
+.rib-viewall i { transition: transform var(--transition); }
+.rib-viewall:hover i { transform: translateX(4px); }
+.rib-viewall:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* ---- right: tight honeycomb "molecule" cluster ---- */
+.rib-cluster {
+    --sz: clamp(120px, 11vw, 170px);          /* circle diameter D */
+    position: relative;
+    align-self: end;                          /* anchor to bottom of the row */
+    min-height: calc(var(--sz) * 2.68);       /* fits the 3-row molecule */
+    margin-bottom: calc(var(--sz) * -0.30);   /* bottom row overflows the edge */
+}
+
+.rib-badge {
+    position: absolute;
+    /* packed hex position, anchored to cluster's bottom-right, + organic jitter */
+    right: calc(var(--rx) * var(--sz) + var(--jx, 0px));
+    bottom: calc(var(--by) * var(--sz) + var(--jy, 0px));
+    left: auto;
+    top: auto;
+    width: var(--sz);
+    height: var(--sz);
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    border-radius: 50%;
+    /* entrance state — translate/scale/rotate kept as separate props */
+    opacity: 0;
+    translate: 0 24px;
+    scale: 1;
+    rotate: var(--rot, 0deg);
+    transition:
+        opacity .6s ease,
+        translate .6s cubic-bezier(.2,.8,.2,1),
+        scale var(--transition),
+        filter var(--transition);
+    transition-delay: calc(var(--i) * 80ms);
+    z-index: 1;
+}
+
+.rib-in .rib-badge {
+    opacity: 1;
+    translate: 0 0;
+}
+
+/* the face: solid disc + soft ring; carries the idle float */
+.rib-badge-face {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(255,255,255,.6), 0 18px 40px rgba(0,0,0,.28);
+    overflow: hidden;
+    animation: rib-float var(--float-dur, 5.5s) ease-in-out var(--float-delay, 0s) infinite;
+}
+
+.rib-badge-face img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+.rib-badge-name {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    padding: 0 12px;
+    text-align: center;
+    color: var(--deep-blue);
+    font-weight: 700;
+    font-size: clamp(12px, 1.1vw, 15px);
+    line-height: 1.15;
+}
+
+/* hover tooltip label */
+.rib-badge-tip {
+    position: absolute;
+    left: 50%;
+    bottom: -30px;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 12px;
+    color: #fff;
+    background: rgba(7,27,58,.9);
+    border: 1px solid rgba(255,255,255,.25);
+    padding: 4px 10px;
+    border-radius: 6px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition);
+}
+
+.rib-badge:hover .rib-badge-tip,
+.rib-badge:focus-visible .rib-badge-tip { opacity: 1; }
+
+.rib-badge:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+}
+
+/* hover: focus one, dim + drift the rest */
+.rib-cluster:hover .rib-badge:not(:hover) { opacity: .45; }
+.rib-cluster:hover .rib-badge:not(:hover) .rib-badge-face { filter: saturate(.6) brightness(.9); }
+.rib-badge:hover {
+    scale: 1.08;
+    z-index: 3;
+    filter: brightness(1.06);
+}
+
+/* filter states */
+.rib-badge.rib-match { opacity: 1; z-index: 2; scale: 1.04; }
+.rib-badge.rib-dim   { opacity: .2; scale: .82; }
+
+/* idle float kept small (±3px) so packed neighbours never separate */
+@keyframes rib-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+}
+
+/* ---- responsive ---- */
+/* tablet: cluster drops below the copy, centered, still packed */
+@media (max-width: 960px) {
+    .rib-inner { grid-template-columns: 1fr; }
+    .rib-copy  { max-width: none; }
+    .rib-cluster {
+        justify-self: center;
+        width: calc(var(--sz) * 3.40);        /* molecule bounding width */
+        max-width: 100%;
+    }
+}
+
+/* mobile: cluster becomes a horizontal swipe row */
+@media (max-width: 640px) {
+    .rib-cluster {
+        --sz: 118px;
+        width: auto;
+        min-height: 0;
+        margin-bottom: 0;
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 10px 4px 40px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+    .rib-badge {
+        position: static;
+        right: auto;
+        bottom: auto;
+        rotate: 0deg;
+        flex: 0 0 auto;
+        scroll-snap-align: center;
+    }
+    .rib-badge-tip { display: none; }
+}
+
+/* reduced motion: opacity only, no movement or float */
+@media (prefers-reduced-motion: reduce) {
+    .rib-badge {
+        translate: none;
+        transition: opacity .4s ease;
+        transition-delay: calc(var(--i) * 80ms);
+    }
+    .rib-badge:hover,
+    .rib-badge.rib-match,
+    .rib-badge.rib-dim { scale: 1; }
+    .rib-badge-face { animation: none; }
+    .rib-cluster:hover .rib-badge:not(:hover) { opacity: .45; }
+    .rib-viewall:hover i { transform: none; }
+}
