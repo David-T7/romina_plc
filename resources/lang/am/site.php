@@ -28,8 +28,7 @@ return [
     'mega_about_history_col' => 'ታሪካችን',
     'mega_about_story_link'  => 'ታሪካችን',
     'mega_about_lead_col'    => 'አመራራችን',
-    'mega_about_lead_link'   => 'አመራር አጠቃላይ ዕይታ',
-    'mega_about_exec_link'   => 'የሥራ አስፈጻሚ ቡድን',
+    'mega_about_lead_link'   => 'አመራር እና የሥራ አስፈጻሚ ቡድን',
 
     // ── Businesses mega-menu ──────────────────────────────────────────────
     'mega_biz_label'         => 'ንግዶቻችን',
