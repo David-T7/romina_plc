@@ -272,6 +272,20 @@ return [
                 ['src' => null, 'shot' => 'Delivery truck loading at dawn',                  'caption' => 'On the road'],
                 ['src' => null, 'shot' => 'Shelf of Romina-imported products in a store',    'caption' => 'On the shelf'],
             ],
+            // TODO: replace with client-supplied brands and logos.
+            // 'logo' is a path under public/ (e.g. 'images/imports/acme.png') or null
+            // to render a clean name badge. 'category' drives the filter chips.
+            // 'link' is an optional external/brand URL.
+            'import_brands' => [
+                ['name' => 'Sample Pasta Co.', 'category' => 'Pasta',       'logo' => null, 'link' => null],
+                ['name' => 'Durum Mills',      'category' => 'Pasta',       'logo' => null, 'link' => null],
+                ['name' => 'Golden Grain',     'category' => 'Rice',        'logo' => null, 'link' => null],
+                ['name' => 'Valley Dairy',     'category' => 'Dairy',       'logo' => null, 'link' => null],
+                ['name' => 'Highland Cream',   'category' => 'Dairy',       'logo' => null, 'link' => null],
+                ['name' => 'Pure Press',       'category' => 'Edible Oils', 'logo' => null, 'link' => null],
+                ['name' => 'Sunfield Oil',     'category' => 'Edible Oils', 'logo' => null, 'link' => null],
+                ["name" => "Baker's Choice",   'category' => 'Bakery',      'logo' => null, 'link' => null],
+            ],
             'locations_label' => null,
             'locations'  => [],
             'phone'      => '0116 669 100',
