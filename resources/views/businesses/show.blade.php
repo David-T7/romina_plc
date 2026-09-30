@@ -525,7 +525,6 @@
 }());
 </script>
 
-<<<<<<< HEAD
 @if ($brandSlug === 'koba-patisserie')
 <script>
 /* =====================================================
@@ -650,7 +649,6 @@
 }());
 </script>
 @endif
-=======
 
 <script>
 /* =====================================================
@@ -794,8 +792,6 @@
     }
 }());
 </script>
-
->>>>>>> bc751aa091d77d9379b9ec987cded3811a90ed06
 
 @if ($brandSlug === 'romina-imports' && !empty($brand['import_brands']))
 <script>
