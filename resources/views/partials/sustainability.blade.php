@@ -47,10 +47,10 @@
         </div>
 
         <div class="impact-number">
-          <span class="counter" data-target="3714">0</span>
+          <span class="counter" data-target="6000">0</span>
         </div>
 
-        <p>Farmers Supported</p>
+        <p>Speciality Farmers Supported</p>
       </div>
 
       <!-- Farmland -->
@@ -67,7 +67,7 @@
         </div>
 
         <div class="impact-number impact-number-small">
-          <span class="prefix">~</span>
+
           <span class="counter decimal-counter" data-target="5480">0</span>
         </div>
 
@@ -88,7 +88,7 @@
         </div>
 
         <div class="impact-number">
-          <span class="counter" data-target="4">0</span>
+          <span class="counter" data-target="2">0</span>
         </div>
 
         <p>Schools Built</p>
@@ -104,13 +104,13 @@
         </div>
 
         <div class="impact-number">
-          <span class="counter" data-target="1">0</span>
+          <span class="counter" data-target="2">0</span>
         </div>
 
         <p>Potable-Water Sites</p>
 
         <span class="impact-detail">
-          Plus bridges and road infrastructure
+          Our Water Sites at Nansabo &amp; Guji
         </span>
       </div>
 
@@ -126,10 +126,10 @@
           <span class="counter" data-target="8">0</span>
         </div>
 
-        <p>Organic Certifications</p>
+        <p>Rainforest Alliance &amp; Organic Certifications</p>
 
         <span class="impact-detail">
-          + Rainforest Alliance
+          7 Certified Sites
         </span>
       </div>
 
@@ -289,12 +289,15 @@ $approach_items = [
                   thrive, including:
                 </p>
                 <ul>
-                  <li>Four schools for community children</li>
+                  <li>Two schools for community children</li>
                   <li>Bridges to improve connectivity</li>
                   <li>Roads to improve transportation and access</li>
                   <li>
-                    One potable-water site, bringing clean water within reach
+                    Two potable-water site, bringing clean water within reach
                     for the surrounding community
+                  </li>
+                  <li>
+                    Coffee Nursery Establishment and Seedling Production
                   </li>
                 </ul>
                 <p>
@@ -316,9 +319,16 @@ $approach_items = [
                   responsibility seriously. Our environmental programme includes
                   shade-tree planting and disease-resistant varieties on the farm,
                   alongside a growing push toward reduced carbon emissions, less
-                  operational waste, and renewable energy at our processing
-                  facilities – together with expanding partnerships in
+                  operational waste, and renewable energy through our eco-friendly machines
+                  at our processing facilities – together with expanding partnerships in
                   reforestation and biodiversity conservation.
+                <br>
+
+                We are working to build a circular economy by turning coffee pulp,
+                a byproduct of coffee processing, into natural fertilizer.
+                Instead of treating coffee pulp as waste, we transform it into a valuable resource that can support healthier soil,
+                reduce waste, and benefit coffee-growing communities.
+
                 </p>
               @break
 
@@ -358,25 +368,14 @@ $approach_items = [
                 <p>
                   Training sits at the heart of how we build a more sustainable
                   coffee industry. For our partner farmers, that means hands-on
-                  capacity-building in sustainable farming practices, farm
+                  capacity-building and agronomic based practices
+                  in sustainable farming, farm
                   management, plant health and disease prevention, proper use of
                   improved varieties, shade-tree management, harvesting and quality
                   practices, environmental responsibility, and processing quality –
                   delivered continuously, in step with the agricultural calendar.
                 </p>
-                <p>
-                  We're extending that same commitment to our own people, building
-                  staff training and professional-development opportunities across
-                  the Group.
-                </p>
-                <p>
-                  Training happens where the work happens – in our coffee-growing
-                  communities, sourcing areas, and processing facilities – through
-                  farm demonstrations, field sessions, technical workshops,
-                  processing-site training, agricultural extension support,
-                  internal staff programmes, and knowledge-sharing with technical
-                  partners.
-                </p>
+
               @break
 
             @endswitch
