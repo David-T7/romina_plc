@@ -9811,6 +9811,87 @@ button {
     font-weight: 600;
 }
 
+/* ---- Journey — a marker circle travels the rail from farm to
+        global market: it glides step to step, growing a progress
+        line behind it and lighting each dot + label as it arrives.
+        Driven by JS (.is-in on the rail, .is-active per step). ---- */
+
+.bz-journey-num,
+.bz-journey-name {
+    opacity: .4;
+    transition: opacity .45s ease;
+}
+
+.bz-journey-dot {
+    transition:
+        background-color .4s ease,
+        border-color .4s ease,
+        transform .4s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+/* Progress fill — accent line that grows behind the marker */
+.bz-journey-fill {
+    position: absolute;
+    top: 7px;
+    left: 0;
+    z-index: 1;
+
+    width: 0;
+    height: 2px;
+    background: var(--red);
+
+    transition: width .6s cubic-bezier(.22, 1, .36, 1);
+}
+
+/* The travelling marker */
+.bz-journey-marker {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    z-index: 3;
+
+    width: 18px;
+    height: 18px;
+    margin: -9px 0 0 -9px;          /* centre on the rail point */
+
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--red) 20%, transparent);
+
+    opacity: 0;
+    transform: translateX(0);
+    transition:
+        transform .6s cubic-bezier(.22, 1, .36, 1),
+        opacity .3s ease;
+}
+
+.bz-journey.is-in .bz-journey-marker {
+    opacity: 1;
+}
+
+/* Steps the marker has reached */
+.bz-journey li.is-active .bz-journey-dot {
+    background: var(--red);
+    border-color: var(--red);
+    transform: scale(1.12);
+}
+
+.bz-journey li.is-active .bz-journey-num,
+.bz-journey li.is-active .bz-journey-name {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bz-journey-marker,
+    .bz-journey-fill {
+        transition: none;
+    }
+    .bz-journey-num,
+    .bz-journey-name {
+        opacity: 1;
+    }
+}
+
 
 /* ---------- GALLERY ---------- */
 
@@ -10516,6 +10597,274 @@ button {
 .bz-locations,
 .bz-overview {
     scroll-margin-top: 90px;
+}
+
+
+/* =====================================================
+   ROMINA COFFEE — warm re-tint of the brand template
+   Scoped to .bz-theme--coffee (set from config 'theme').
+   Retokenises the shared .bz-* styles from corporate
+   navy/red into roasted espresso + crema gold, so the
+   page reads distinctly "Romina Coffee" while Koba and
+   every other brand keep the default palette. Layout,
+   type and structure are untouched.
+===================================================== */
+
+.bz-theme--coffee {
+    --deep-blue:   #2a1810;   /* roasted espresso — dark surfaces */
+    --deep-blue-2: #3a251a;   /* lighter roast — frames */
+    --red:         #c1873f;   /* crema gold — the accent */
+
+    --cof-crema:   #e0a75c;   /* warm highlight (was #ff5960) */
+    --cof-taupe:   #d9c6ac;   /* warm body text on dark (was #b8c5d8) */
+    --romina-red:  #e3262e;   /* the brand red — kept for the logo-line accents */
+    --cof-cream:   #f7f1e8;   /* warm section background (vs Koba's cool grey) */
+    --cof-card:    #fffdf9;   /* warm card surface */
+    --cof-border:  #ece1d0;   /* warm hairline */
+    --cof-espresso-txt: #6f4a24; /* label text on light sections */
+}
+
+/* HERO — swap the cool blue/red glow for a warm crema wash */
+.bz-theme--coffee .bz-hero {
+    background:
+        radial-gradient(ellipse at 85% 20%, rgba(224, 167, 92, .20), transparent 55%),
+        radial-gradient(ellipse at 0% 100%, rgba(150, 74, 28, .28), transparent 52%),
+        var(--deep-blue);
+}
+
+.bz-theme--coffee .bz-hero-kicker {
+    color: var(--cof-taupe);
+}
+
+/* STATS — espresso panel with a crema corner glow */
+.bz-theme--coffee .bz-stats {
+    background:
+        radial-gradient(ellipse at 100% 0%, rgba(193, 135, 63, .22), transparent 52%),
+        var(--deep-blue);
+}
+
+/* Warm every light-red accent used across the page */
+.bz-theme--coffee .bz-label--light,
+.bz-theme--coffee .bz-ph-note,
+.bz-theme--coffee .bz-journey-num {
+    color: var(--cof-crema);
+}
+
+/* Journey rail: crema-gold gradient instead of red→white */
+.bz-theme--coffee .bz-journey::before {
+    background: linear-gradient(90deg, var(--red), rgba(224, 167, 92, .28));
+}
+
+
+/* =====================================================
+   ROMINA COFFEE — bespoke section treatments
+   Sets Overview, Highlights and Locations apart from the
+   shared Koba/other-brand template. No lines or dots —
+   the personality comes from warm surfaces and motion:
+   lift, an icon that spins + fills, a light sheen sweep,
+   a bouncing pin and a warm wash on hover.
+===================================================== */
+
+/* ---- Section labels: warm espresso text (rule stays the
+        default short bar; no dot). ---- */
+.bz-theme--coffee .bz-overview .bz-label,
+.bz-theme--coffee .bz-highlights .bz-label,
+.bz-theme--coffee .bz-locations .bz-label {
+    color: var(--cof-espresso-txt);
+}
+
+
+/* ---- OVERVIEW: warm paper; each fact lifts and its number
+        warms to gold on hover (no top line) ---- */
+.bz-theme--coffee .bz-overview {
+    background: #fdfaf6;
+}
+
+.bz-theme--coffee .bz-facts {
+    gap: 20px;
+}
+
+.bz-theme--coffee .bz-fact {
+    border-top: none;
+    padding: 22px 20px;
+    border-radius: 6px;
+
+    transition:
+        transform .45s cubic-bezier(.22, 1, .36, 1),
+        background .45s ease,
+        box-shadow .45s ease;
+}
+
+.bz-theme--coffee .bz-fact:hover {
+    transform: translateY(-6px);
+    background: #ffffff;
+    box-shadow: 0 22px 44px rgba(74, 42, 20, .12);
+}
+
+.bz-theme--coffee .bz-fact dt {
+    transition:
+        transform .4s cubic-bezier(.34, 1.56, .64, 1),
+        color .4s ease;
+    transform-origin: left center;
+}
+
+.bz-theme--coffee .bz-fact:hover dt {
+    color: var(--red);               /* crema gold */
+    transform: scale(1.06);
+}
+
+
+/* ---- HIGHLIGHTS: warm cream cards. On hover the card lifts,
+        a light sheen sweeps across, and the icon spins, fills
+        with a warm gradient and glows ---- */
+.bz-theme--coffee .bz-highlights {
+    background: var(--cof-cream);
+}
+
+/* Roomier grid + larger cards than the shared template */
+.bz-theme--coffee .bz-cards {
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.bz-theme--coffee .bz-card {
+    position: relative;
+    overflow: hidden;
+
+    min-height: 244px;
+    gap: 30px;
+    padding: 34px 30px;
+
+    background: var(--cof-card);
+    border: 1px solid var(--cof-border);
+}
+
+/* drop the shared underline entirely */
+.bz-theme--coffee .bz-card::after {
+    display: none;
+}
+
+/* light sheen that sweeps across on hover (a fill, not a line) */
+.bz-theme--coffee .bz-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;                       /* rides over the content as a shine */
+
+    width: 55%;
+    height: 100%;
+
+    background: linear-gradient(100deg, transparent, rgba(224, 167, 92, .22), transparent);
+
+    transform: skewX(-12deg) translateX(-160%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .75s ease, opacity .5s ease;
+}
+
+.bz-theme--coffee .bz-card:hover::before {
+    opacity: 1;
+    transform: skewX(-12deg) translateX(340%);
+}
+
+.bz-theme--coffee .bz-card-name {
+    font-size: 21px;
+    transition: color .4s ease;
+}
+
+.bz-theme--coffee .bz-card:hover .bz-card-name {
+    color: var(--deep-blue);
+}
+
+.bz-theme--coffee .bz-card-icon {
+    width: 62px;
+    height: 62px;
+    font-size: 22px;
+
+    background: var(--deep-blue);
+    box-shadow: 0 0 0 4px rgba(193, 135, 63, .16);
+
+    transition:
+        transform .5s cubic-bezier(.34, 1.56, .64, 1),
+        background .45s ease,
+        box-shadow .45s ease;
+}
+
+.bz-theme--coffee .bz-card:hover .bz-card-icon {
+    transform: rotate(-8deg) scale(1.1);
+    background: radial-gradient(circle at 32% 30%, #c88a3f, #6f4320);
+    box-shadow: 0 12px 26px rgba(122, 74, 30, .34), 0 0 0 5px rgba(193, 135, 63, .22);
+}
+
+.bz-theme--coffee .bz-card-num {
+    color: #c39a58;
+    transition: transform .45s ease, color .4s ease;
+}
+
+.bz-theme--coffee .bz-card:hover .bz-card-num {
+    transform: translateX(-4px);
+    color: #7a4a1e;
+}
+
+
+/* ---- LOCATIONS: warm cream cards. On hover the card lifts,
+        a warm wash slides in from the left and the pin
+        bounces (no red edge, no dot) ---- */
+.bz-theme--coffee .bz-locations {
+    background: var(--cof-cream);
+}
+
+.bz-theme--coffee .bz-loc {
+    position: relative;
+    overflow: hidden;
+
+    background: var(--cof-card);
+    border: 1px solid var(--cof-border);
+    border-radius: 6px;
+
+    transition:
+        transform .4s cubic-bezier(.22, 1, .36, 1),
+        box-shadow .4s ease,
+        border-color .4s ease;
+}
+
+/* warm wash that slides in from the left */
+.bz-theme--coffee .bz-loc::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    background: linear-gradient(90deg, rgba(200, 138, 63, .16), transparent 55%);
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+}
+
+.bz-theme--coffee .bz-loc:hover::before {
+    opacity: 1;
+}
+
+.bz-theme--coffee .bz-loc-pin,
+.bz-theme--coffee .bz-loc > div {
+    position: relative;
+    z-index: 1;
+}
+
+.bz-theme--coffee .bz-loc:hover {
+    transform: translateY(-5px);
+    border-color: #e3cfae;
+    box-shadow: 0 22px 44px rgba(74, 42, 20, .14);
+}
+
+.bz-theme--coffee .bz-loc-pin {
+    transition: color .4s ease;
+}
+
+.bz-theme--coffee .bz-loc:hover .bz-loc-pin {
+    color: #7a4a1e;                  /* deepen from gold to espresso */
 }
 
 
