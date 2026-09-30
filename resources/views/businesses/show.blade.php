@@ -12,16 +12,21 @@
     $tel       = $brand['phone'] ? preg_replace('/\s+/', '', $brand['phone']) : null;
     $showMaps  = $brand['directions'] ?? true;
     $initial   = mb_substr($brand['name'], 0, 1);
+    $bzTheme   = $brand['theme'] ?? null;   // e.g. 'coffee' — re-tints the whole page
 @endphp
 
 @section('page-content')
 
+<<<<<<< HEAD
 @if ($brandSlug === 'koba-patisserie')
 
 {{-- KOBA has its own hero / about / showcase (Kubo-inspired, with scroll effects) --}}
 @include('businesses.partials.koba')
 
 @else
+=======
+<div class="bz-page{{ $bzTheme ? ' bz-theme--' . $bzTheme : '' }}">
+>>>>>>> bc751aa091d77d9379b9ec987cded3811a90ed06
 
 {{-- ============ HERO — split: story left, framed photo right ============ --}}
 <section class="bz-hero">
@@ -429,10 +434,16 @@
     </div>
 </section>
 
+</div>{{-- /.bz-page --}}
+
 @endsection
 
+<<<<<<< HEAD
 {{-- One page-js section: Blade only renders the first @section of a given
      name, so every brand-page script lives here. --}}
+=======
+
+>>>>>>> bc751aa091d77d9379b9ec987cded3811a90ed06
 @section('page-js')
 <script>
 /* =====================================================
@@ -524,6 +535,7 @@
 }());
 </script>
 
+<<<<<<< HEAD
 @if ($brandSlug === 'koba-patisserie')
 <script>
 /* =====================================================
@@ -648,6 +660,152 @@
 }());
 </script>
 @endif
+=======
+
+<script>
+/* =====================================================
+   BRAND STATS — count-up + journey reveal
+   Stat numbers count from 0 (keeping their prefix/suffix
+   and thousands grouping, e.g. "30,000+"); the journey
+   rail draws and its steps rise in sequence. Both fire
+   once, when scrolled into view. Reduced motion → static.
+===================================================== */
+(function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---- stat count-up ---- */
+    var statsSec = document.querySelector('.bz-stats');
+    if (statsSec) {
+        var parsed = Array.prototype.slice
+            .call(statsSec.querySelectorAll('.bz-stat strong'))
+            .map(function (el) {
+                var raw = el.textContent.trim();
+                var m   = raw.match(/[\d.,]*\d/);           /* first number run */
+                if (!m) return null;
+                var numStr = m[0];
+                var target = parseFloat(numStr.replace(/,/g, ''));
+                if (!isFinite(target)) return null;
+                return {
+                    el:      el,
+                    target:  target,
+                    prefix:  raw.slice(0, m.index),
+                    suffix:  raw.slice(m.index + numStr.length),
+                    grouped: numStr.indexOf(',') !== -1 || target >= 1000
+                };
+            })
+            .filter(Boolean);
+
+        var fmt = function (p, v) {
+            var n = p.grouped ? Math.floor(v).toLocaleString('en-US') : String(Math.floor(v));
+            return p.prefix + n + p.suffix;
+        };
+
+        var runCount = function () {
+            parsed.forEach(function (p) {
+                if (reduce) { p.el.textContent = fmt(p, p.target); return; }
+                var dur = p.target > 1000 ? 1900 : 1300;
+                var t0  = performance.now();
+                (function tick(now) {
+                    var prog  = Math.min((now - t0) / dur, 1);
+                    var eased = 1 - Math.pow(1 - prog, 3);
+                    p.el.textContent = fmt(p, eased * p.target);
+                    if (prog < 1) requestAnimationFrame(tick);
+                    else p.el.textContent = fmt(p, p.target);
+                })(performance.now());
+            });
+        };
+
+        if (!reduce) parsed.forEach(function (p) { p.el.textContent = fmt(p, 0); });
+
+        if ('IntersectionObserver' in window && !reduce) {
+            var io1 = new IntersectionObserver(function (entries) {
+                if (!entries[0].isIntersecting) return;
+                runCount();
+                io1.disconnect();
+            }, { threshold: 0.3 });
+            io1.observe(statsSec);
+        } else {
+            runCount();
+        }
+    }
+
+    /* ---- journey — a marker circle travels farm → global market ---- */
+    var journey = document.querySelector('.bz-journey');
+    if (journey) {
+        var steps  = Array.prototype.slice.call(journey.querySelectorAll('li'));
+        var marker = document.createElement('span');
+        var fill   = document.createElement('span');
+        marker.className = 'bz-journey-marker';
+        fill.className   = 'bz-journey-fill';
+        marker.setAttribute('aria-hidden', 'true');
+        fill.setAttribute('aria-hidden', 'true');
+        journey.appendChild(fill);
+        journey.appendChild(marker);
+
+        var centerX = function (li) {
+            var dot = li.querySelector('.bz-journey-dot');
+            var jr  = journey.getBoundingClientRect();
+            var dr  = dot.getBoundingClientRect();
+            return (dr.left - jr.left) + dr.width / 2;
+        };
+
+        var placeAt = function (x) {
+            marker.style.transform = 'translateX(' + x + 'px)';
+            fill.style.width = x + 'px';
+        };
+
+        var idx = 0;
+        var advance = function () {
+            if (idx >= steps.length) return;
+            placeAt(centerX(steps[idx]));
+            steps[idx].classList.add('is-active');
+            idx++;
+            if (idx < steps.length) setTimeout(advance, 620);
+        };
+
+        var start = function () {
+            journey.classList.add('is-in');
+
+            if (reduce || steps.length === 0) {
+                steps.forEach(function (s) { s.classList.add('is-active'); });
+                if (steps.length) placeAt(centerX(steps[steps.length - 1]));
+                return;
+            }
+
+            /* seat the marker on step 1 without a glide, then travel */
+            marker.style.transition = 'none';
+            placeAt(centerX(steps[0]));
+            steps[0].classList.add('is-active');
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    marker.style.transition = '';
+                    idx = 1;
+                    advance();
+                });
+            });
+        };
+
+        if ('IntersectionObserver' in window && !reduce) {
+            var io2 = new IntersectionObserver(function (entries) {
+                if (!entries[0].isIntersecting) return;
+                start();
+                io2.disconnect();
+            }, { threshold: 0.35 });
+            io2.observe(journey);
+        } else {
+            start();
+        }
+
+        /* keep the marker seated on the last reached step on resize */
+        window.addEventListener('resize', function () {
+            var active = journey.querySelectorAll('li.is-active');
+            if (active.length) placeAt(centerX(active[active.length - 1]));
+        });
+    }
+}());
+</script>
+
+>>>>>>> bc751aa091d77d9379b9ec987cded3811a90ed06
 
 @if ($brandSlug === 'romina-imports' && !empty($brand['import_brands']))
 <script>
