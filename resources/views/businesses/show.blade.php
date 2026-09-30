@@ -17,16 +17,12 @@
 
 @section('page-content')
 
-<<<<<<< HEAD
 @if ($brandSlug === 'koba-patisserie')
 
 {{-- KOBA has its own hero / about / showcase (Kubo-inspired, with scroll effects) --}}
 @include('businesses.partials.koba')
 
 @else
-=======
-<div class="bz-page{{ $bzTheme ? ' bz-theme--' . $bzTheme : '' }}">
->>>>>>> bc751aa091d77d9379b9ec987cded3811a90ed06
 
 {{-- ============ HERO — split: story left, framed photo right ============ --}}
 <section class="bz-hero">
@@ -438,12 +434,6 @@
 
 @endsection
 
-<<<<<<< HEAD
-{{-- One page-js section: Blade only renders the first @section of a given
-     name, so every brand-page script lives here. --}}
-=======
-
->>>>>>> bc751aa091d77d9379b9ec987cded3811a90ed06
 @section('page-js')
 <script>
 /* =====================================================
