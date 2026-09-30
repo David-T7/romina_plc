@@ -1328,7 +1328,11 @@ button {
 
 
 .column-title {
-    margin-bottom: 20px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+
+    /* underline separating the headline from the menu links below */
+    border-bottom: 1px solid #cbd2db;
 
     color: var(--deep-blue);
     letter-spacing: .5px;
@@ -1344,8 +1348,6 @@ button {
 
 .mega-column a {
     padding: 11px 0;
-
-    border-bottom: 1px solid #edf0f4;
 
     font-size: 14px;
     font-weight: 500;
@@ -7536,24 +7538,25 @@ button {
 .partner-tile {
     flex: none;
     width: 220px;
-    height: 110px;
+    height: 120px;
     display: grid;
     place-items: center;
-    border: 1px dashed rgba(14, 34, 64, .3);
+    border: 1px solid rgba(14, 34, 64, .12);
     background: #fff;
     overflow: hidden;
-    padding: 16px;
-    filter: grayscale(1);
-    transition: filter .3s;
+    padding: 20px 24px;
+    transition: transform .3s, box-shadow .3s, border-color .3s;
 }
 
 .partner-tile:hover {
-    filter: grayscale(0);
+    transform: translateY(-4px);
+    border-color: rgba(14, 34, 64, .22);
+    box-shadow: 0 14px 30px rgba(14, 34, 64, .10);
 }
 
 .partner-tile img {
     max-width: 100%;
-    max-height: 70px;
+    max-height: 80px;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -7593,12 +7596,44 @@ button {
 .brands    { transition: background-color .7s cubic-bezier(.16,1,.3,1), color .7s cubic-bezier(.16,1,.3,1); }
 .brands.tone-light { background: #fff; }
 .brands.tone-paper { background: #F2F4F7; }
-.brands.tone-night { background: #07111F; color: #fff; }
+
+/* Per-brand tab backgrounds. Dark ones also carry .is-dark (added by
+   the tabs JS), which supplies the light-text treatment below. */
+.brands.is-dark { color: #fff; }
+.brands.tone-restaurants { background: #8a1520; }   /* red */
+.brands.tone-koba        { background: #ebd9b0; }   /* KOBA wheat/tan */
+.brands.tone-meskott     { background: #07111F; }   /* night */
+.brands.tone-coffee      { background: #241712; }   /* espresso */
+.brands.tone-imports     { background: #14396e; }   /* dark blue (distinct from Meskott night) */
+.brands.tone-jaguar      { background: #eaf1fa; }   /* light chrome-blue */
+
+/* red bg needs its red accents lifted to stay legible */
+.brands.tone-restaurants .bp-kicker  { color: #ffd7da; }
+.brands.tone-restaurants .bp-cta-btn { background: #fff; color: #8a1520; }
+.brands.tone-restaurants .bp-cta-btn:hover { background: #ffe3e5; color: #8a1520; }
+
+/* KOBA — wheat/tan background with deep-green accents (from the logo) */
+.brands.tone-koba .bp-kicker { color: #0f4d2d; }
+.brands.tone-koba .bp-title  { color: #0f4d2d; }
+.brands.tone-koba .bp-label  { color: #0f4d2d; }
+.brands.tone-koba .bp-cta-btn { background: #0f4d2d; color: #fff; }
+.brands.tone-koba .bp-cta-btn:hover { background: #0a3a22; color: #fff; }
+.brands.tone-koba .bp-phone { color: #0f4d2d; }
+.brands.tone-koba .bp-locs li svg { color: #0f4d2d; }
+.brands.tone-koba .soon { background: #0f4d2d; }
+.brands.tone-koba .ph-tag i { background: #0f4d2d; }
+.brands.tone-koba .prog-fill,
+.brands.tone-koba .prog-fill::after { background: #0f4d2d; }
+.brands.tone-koba .arrows.small button:hover { background: #0f4d2d; border-color: #0f4d2d; color: #fff; }
+.brands.tone-koba .brand-tab:hover,
+.brands.tone-koba .brand-tab[data-state="active"] { color: #0f4d2d; }
+.brands.tone-koba .brand-tab[data-state="active"]::after,
+.brands.tone-koba .brand-tab[data-state="active"]::before { background: #0f4d2d; }
 
 /* night-tone mark override */
-.brands.tone-night #brandsMark       { color: #fff; }
-.brands.tone-night #brandsMark .mark-rule { background: currentColor; }
-.brands.tone-night #brandsMark i     { background: #fff; }
+.brands.is-dark #brandsMark       { color: #fff; }
+.brands.is-dark #brandsMark .mark-rule { background: currentColor; }
+.brands.is-dark #brandsMark i     { background: #fff; }
 
 /* tab strip */
 .brand-list {
@@ -7611,7 +7646,7 @@ button {
     width: 100%;
     list-style: none;
 }
-.brands.tone-night .brand-list { border-color: rgba(255,255,255,.16); }
+.brands.is-dark .brand-list { border-color: rgba(255,255,255,.16); }
 
 /* tab button */
 .brand-tab {
@@ -7655,10 +7690,10 @@ button {
 }
 .brand-tab[data-state="active"]::after,
 .brand-tab[data-state="active"]::before { transform: scale(1); }
-.brands.tone-night .brand-tab                               { color: rgba(255,255,255,.45); }
-.brands.tone-night .brand-tab[data-state="active"],
-.brands.tone-night .brand-tab:hover                         { color: #fff; }
-.brands.tone-night .brand-tab::after                        { background: #fff; }
+.brands.is-dark .brand-tab                               { color: rgba(255,255,255,.45); }
+.brands.is-dark .brand-tab[data-state="active"],
+.brands.is-dark .brand-tab:hover                         { color: #fff; }
+.brands.is-dark .brand-tab::after                        { background: #fff; }
 
 /* tab panel */
 .brand-pane                            { margin-top: 48px; }
@@ -7683,7 +7718,7 @@ button {
     min-width: 150px;
     animation: brands-fadeup .6s cubic-bezier(.16,1,.3,1) both;
 }
-.brands.tone-night .gallery-cap { color: rgba(255,255,255,.66); }
+.brands.is-dark .gallery-cap { color: rgba(255,255,255,.66); }
 
 /* slide stack */
 .brands .stack        { position: relative; overflow: hidden; isolation: isolate; width: 100%; height: 100%; }
@@ -7742,8 +7777,8 @@ button {
     border-radius: 50%;
     background: #E8132C;
 }
-.brands.tone-night .prog.tone-auto { background: rgba(255,255,255,.16); }
-.brands.tone-night .prog-fill      { background: #fff; }
+.brands.is-dark .prog.tone-auto { background: rgba(255,255,255,.16); }
+.brands.is-dark .prog-fill      { background: #fff; }
 
 /* prev / next arrows */
 .brands .arrows        { display: flex; gap: 8px; }
@@ -7758,31 +7793,31 @@ button {
     font-family: inherit;
 }
 .brands .arrows.small button:hover           { background: #0E2240; color: #fff; border-color: #0E2240; }
-.brands.tone-night .arrows.small button      { border-color: rgba(255,255,255,.16); color: #fff; }
-.brands.tone-night .arrows.small button:hover { background: #fff; color: #0E2240; }
+.brands.is-dark .arrows.small button      { border-color: rgba(255,255,255,.16); color: #fff; }
+.brands.is-dark .arrows.small button:hover { background: #fff; color: #0E2240; }
 
 /* copy column */
 .bp-copy     { display: flex; flex-direction: column; gap: 18px; padding-top: 8px; }
 .bp-kicker   { font-size: 15px; color: #E8132C; font-weight: 500; }
 .bp-title    { font-weight: 300; font-size: clamp(32px,3.6vw,52px); line-height: 1.05; letter-spacing: -.02em; color: #0E2240; }
-.brands.tone-night .bp-title   { color: #fff; }
+.brands.is-dark .bp-title   { color: #fff; }
 .bp-body     { color: #565656; line-height: 1.72; max-width: 48ch; }
-.brands.tone-night .bp-body    { color: rgba(255,255,255,.7); }
+.brands.is-dark .bp-body    { color: rgba(255,255,255,.7); }
 .bp-label    { font-size: 13px; font-weight: 700; color: #0E2240; margin-bottom: 8px; }
-.brands.tone-night .bp-label   { color: #fff; }
+.brands.is-dark .bp-label   { color: #fff; }
 
 /* tag chips */
 .bp-list ul  { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; }
 .bp-list li  { font-size: 14px; padding: 6px 12px; border: 1px solid rgba(14,34,64,.14); }
-.brands.tone-night .bp-list li { border-color: rgba(255,255,255,.16); color: #fff; }
+.brands.is-dark .bp-list li { border-color: rgba(255,255,255,.16); color: #fff; }
 
 /* locations list */
 .bp-locs ul              { list-style: none; padding: 0; margin: 0; }
 .bp-locs li              { display: flex; gap: 10px; padding: 10px 0; border-top: 1px solid rgba(14,34,64,.14); font-size: 14px; color: #565656; line-height: 1.5; }
 .bp-locs li svg          { flex: none; margin-top: 3px; color: #E8132C; }
 .bp-locs strong          { color: #1F1F1F; font-weight: 500; }
-.brands.tone-night .bp-locs li     { border-color: rgba(255,255,255,.16); color: rgba(255,255,255,.66); }
-.brands.tone-night .bp-locs strong { color: #fff; }
+.brands.is-dark .bp-locs li     { border-color: rgba(255,255,255,.16); color: rgba(255,255,255,.66); }
+.brands.is-dark .bp-locs strong { color: #fff; }
 .soon        { font-style: normal; font-size: 12px; margin-left: 8px; padding: 2px 8px; background: #E8132C; color: #fff; }
 
 /* CTA button + phone link */
@@ -7799,9 +7834,9 @@ button {
 }
 .bp-cta-btn:hover          { background: #c0101f; color: #fff; }
 .bp-phone    { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; color: #0E2240; text-decoration: none; }
-.brands.tone-night .bp-phone { color: #fff; }
+.brands.is-dark .bp-phone { color: #fff; }
 .bp-note     { font-size: 12.5px; color: #565656; opacity: .8; }
-.brands.tone-night .bp-note  { color: rgba(255,255,255,.5); }
+.brands.is-dark .bp-note  { color: rgba(255,255,255,.5); }
 
 /* keyframes */
 @keyframes brands-fadeup {
@@ -13438,8 +13473,9 @@ button {
     display: grid;
     place-items: center;
     border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 0 0 3px rgba(255,255,255,.6), 0 18px 40px rgba(0,0,0,.28);
+    background: #14396e;                 /* blue circle */
+    border: 3px solid #e3262e;           /* red border */
+    box-shadow: 0 18px 40px rgba(0,0,0,.28);
     overflow: hidden;
     animation: rib-float var(--float-dur, 5.5s) ease-in-out var(--float-delay, 0s) infinite;
 }
@@ -13459,7 +13495,7 @@ button {
     overflow: hidden;
     padding: 0 12px;
     text-align: center;
-    color: var(--deep-blue);
+    color: #fff;
     font-weight: 700;
     font-size: clamp(12px, 1.1vw, 15px);
     line-height: 1.15;
@@ -14248,12 +14284,24 @@ body:has(.kb-hero) .site-header:not(.is-scrolled) .main-navigation a.talk-button
     transition: transform .6s cubic-bezier(.34, 1.56, .64, 1);
 }
 
+/* photo medallion (replaces the icon when an image is set) */
+.kb-card-img {
+    position: relative;
+    width: 66%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, .22);
+    transition: transform .6s cubic-bezier(.34, 1.56, .64, 1);
+}
+
 .kb-card:hover .kb-card-blob {
     transform: rotate(24deg) scale(1.06);
 }
 
-.kb-card:hover .kb-card-art i {
-    transform: translateY(-8px) scale(1.08);
+.kb-card:hover .kb-card-art i,
+.kb-card:hover .kb-card-img {
+    transform: translateY(-8px) scale(1.06);
 }
 
 .kb-card h3 {

@@ -1315,18 +1315,27 @@ document.addEventListener('DOMContentLoaded', function () {
         activeKey = key;
 
         var tone = 'light';
+        var isDark = false;
         tabs.forEach(function (tab) {
             var isActive = tab.dataset.brand === key;
             tab.setAttribute('data-state',    isActive ? 'active'   : 'inactive');
             tab.setAttribute('aria-selected', isActive ? 'true'     : 'false');
-            if (isActive) tone = tab.dataset.tone || 'light';
+            if (isActive) {
+                tone   = tab.dataset.tone || 'light';
+                isDark = tab.dataset.dark === '1';
+            }
         });
 
-        /* swap section tone class */
-        section.className = section.className.replace(/\btone-\S+/g, '').trim() + ' tone-' + tone;
+        /* swap section tone class (background) + dark flag (light text) */
+        var base = section.className
+            .replace(/\btone-\S+/g, '')
+            .replace(/\bis-dark\b/g, '')
+            .replace(/\s+/g, ' ')
+            .trim();
+        section.className = base + ' tone-' + tone + (isDark ? ' is-dark' : '');
 
-        /* swap mark colour for night tone */
-        if (markEl) markEl.classList.toggle('tone-white', tone === 'night');
+        /* mark colour follows the dark background */
+        if (markEl) markEl.classList.toggle('tone-white', isDark);
 
         var newPanel = document.getElementById('brand-panel-' + key);
         if (newPanel) newPanel.setAttribute('data-state', 'active');

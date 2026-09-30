@@ -2,25 +2,35 @@
          HERO
     =========================================== -->
 
+    @php
+        // One representative image per brand, appended to the hero slider.
+        $brandSlides = [
+            ['img' => 'images/gallery/romina-restaurants/06-romina-restaurant.webp', 'cat' => 'Restaurants & Culinary', 'title' => 'Romina Restaurants', 'sub' => 'the home of great service.',        'text' => 'An iconic eatery in the heart of Addis Ababa, serving home-styled dishes from across the world.', 'slug' => 'romina-restaurants'],
+            ['img' => 'images/gallery/koba-patisserie/06-koba.webp',                 'cat' => 'Restaurants & Culinary', 'title' => 'KOBA Patisserie',    'sub' => 'crafted with passion.',            'text' => 'Pastries, cakes, breakfasts and specialty coffee, baked fresh across Addis Ababa.',              'slug' => 'koba-patisserie'],
+            ['img' => 'images/gallery/meskott-culinary/meskott_1.webp',              'cat' => 'Restaurants & Culinary', 'title' => 'Meskott Culinary',   'sub' => 'an upscale meeting place.',         'text' => 'Fine dining, VIP tables, a street food garden and the bar.',                                     'slug' => 'meskott-culinary'],
+            ['img' => 'images/coffee/green-beans.jpg',                               'cat' => 'Romina Coffee',          'title' => 'Romina Coffee',      'sub' => 'the legacy of Ethiopian coffee.',   'text' => 'Sourced from seven regions and exported across four continents since 2009.',                     'slug' => 'romina-coffee'],
+            ['img' => 'images/hero/hero-02.jpg',                                     'cat' => 'Other Businesses',       'title' => 'Romina Imports',     'sub' => 'from our kitchens to the market.',  'text' => 'Quality FMCG imported and distributed across the Ethiopian market.',                             'slug' => 'romina-imports'],
+            ['img' => 'images/gallery/jaquar-world/01-jaquar.webp',                  'cat' => 'Other Businesses',       'title' => 'Jaquar World',       'sub' => 'complete bathroom solutions.',      'text' => 'Faucets, showers, sanitaryware and more, from Artize luxury to Jaquar Premium.',                 'slug' => 'jaquar-world'],
+        ];
+        $heroTotal = 1 + count($brandSlides);
+    @endphp
+
     <section class="hero">
 
         <!-- Slides -->
         <div class="hero-slides">
 
-            <!-- Slide 01 -->
+            {{-- Slide 01 — Romina Group (no image for now) --}}
             <div class="hero-slide active">
 
-                <div class="hero-background"
-                     style="background-image:
-                     url('{{ asset('images/hero/hero-01.jpg') }}');">
-                </div>
+                <div class="hero-background" style="background: var(--deep-blue);"></div>
 
                 <div class="hero-overlay"></div>
 
                 <div class="container hero-content">
 
                     <div class="hero-category">
-                        BUSINESS GROUP
+                        ROMINA GROUP
                     </div>
 
                     <h1>
@@ -43,78 +53,37 @@
             </div>
 
 
-            <!-- Slide 02 -->
-            <div class="hero-slide">
+            {{-- Brand slides — one image per brand --}}
+            @foreach ($brandSlides as $s)
+                <div class="hero-slide">
 
-                <div class="hero-background"
-                     style="background-image:
-                     url('{{ asset('images/hero/hero-02.jpg') }}');">
-                </div>
-
-                <div class="hero-overlay"></div>
-
-                <div class="container hero-content">
-
-                    <div class="hero-category">
-                        OUR BUSINESSES
+                    <div class="hero-background"
+                         style="background-image:
+                         url('{{ asset($s['img']) }}');">
                     </div>
 
-                    <h1>
-                        Creating brands<br>
-                        <span>people love.</span>
-                    </h1>
+                    <div class="hero-overlay"></div>
 
-                    <p>
-                        From hospitality and food to emerging ventures,
-                        our businesses are built around quality, experience
-                        and meaningful connections.
-                    </p>
+                    <div class="container hero-content">
 
-                    <a href="#businesses" class="hero-link">
-                        Explore our businesses
-                        <span><i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
+                        <div class="hero-category">{{ strtoupper($s['cat']) }}</div>
 
-                </div>
+                        <h1>
+                            {{ $s['title'] }}<br>
+                            <span>{{ $s['sub'] }}</span>
+                        </h1>
 
-            </div>
+                        <p>{{ $s['text'] }}</p>
 
+                        <a href="{{ route('business', $s['slug']) }}" class="hero-link">
+                            Explore
+                            <span><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
 
-            <!-- Slide 03 -->
-            <div class="hero-slide">
-
-                <div class="hero-background"
-                     style="background-image:
-                     url('{{ asset('images/hero/hero-03.jpg') }}');">
-                </div>
-
-                <div class="hero-overlay"></div>
-
-                <div class="container hero-content">
-
-                    <div class="hero-category">
-                        OUR VISION
                     </div>
 
-                    <h1>
-                        Growth with<br>
-                        <span>purpose.</span>
-                    </h1>
-
-                    <p>
-                        We believe successful businesses should create
-                        positive impact while delivering sustainable,
-                        long-term growth.
-                    </p>
-
-                    <a href="{{ route('sustainability') }}" class="hero-link">
-                        Our approach
-                        <span><i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-
                 </div>
-
-            </div>
+            @endforeach
 
         </div>
 
@@ -129,7 +98,7 @@
             <div class="slide-counter">
                 <span class="current-slide">01</span>
                 <span class="counter-divider">/</span>
-                <span>03</span>
+                <span>{{ sprintf('%02d', $heroTotal) }}</span>
             </div>
 
 
