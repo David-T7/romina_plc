@@ -16,6 +16,13 @@
 
 @section('page-content')
 
+@if ($brandSlug === 'koba-patisserie')
+
+{{-- KOBA has its own hero / about / showcase (Kubo-inspired, with scroll effects) --}}
+@include('businesses.partials.koba')
+
+@else
+
 {{-- ============ HERO — split: story left, framed photo right ============ --}}
 <section class="bz-hero">
 
@@ -136,6 +143,8 @@
 
     </div>
 </section>
+
+@endif
 
 
 {{-- ============ STATS + JOURNEY (Romina Coffee) ============ --}}
@@ -422,8 +431,8 @@
 
 @endsection
 
-<<<<<<< HEAD
-
+{{-- One page-js section: Blade only renders the first @section of a given
+     name, so every brand-page script lives here. --}}
 @section('page-js')
 <script>
 /* =====================================================
@@ -514,10 +523,133 @@
     });
 }());
 </script>
-@endsection
-=======
+
+@if ($brandSlug === 'koba-patisserie')
+<script>
+/* =====================================================
+   KOBA — scroll effects (one rAF-throttled scroll loop)
+   · parallax on [data-kb-speed]
+   · marquee that speeds up / reverses with the scroll
+   · statement words light up as it is read
+   · pinned showcase whose cards slide sideways
+   Off for reduced motion; pin + parallax off below 900px.
+===================================================== */
+(function () {
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var wide    = window.matchMedia('(min-width: 901px)');
+
+    if (reduced) {
+        /* stop the SVG blob morph and show the statement fully lit */
+        document.querySelectorAll('.kb-hero svg').forEach(function (s) { if (s.pauseAnimations) s.pauseAnimations(); });
+        document.querySelectorAll('.kb-word').forEach(function (w) { w.classList.add('on'); });
+        return;
+    }
+
+    var parallax  = Array.prototype.slice.call(document.querySelectorAll('[data-kb-speed]'));
+    var words     = Array.prototype.slice.call(document.querySelectorAll('.kb-word'));
+    var reveal    = document.querySelector('.kb-reveal');
+    var track     = document.querySelector('.kb-marquee-track');
+    var showcase  = document.querySelector('.kb-showcase');
+    var cardTrack = showcase && showcase.querySelector('.kb-track');
+    var viewport  = showcase && showcase.querySelector('.kb-showcase-viewport');
+    var bar       = showcase && showcase.querySelector('.kb-progress i');
+    var nowEl     = showcase && showcase.querySelector('.kb-showcase-now');
+    var cards     = cardTrack ? cardTrack.children.length : 0;
+
+    var lastY = window.scrollY, velocity = 0, ticking = false;
+
+    /* ---- Pinned showcase: section tall enough to scroll the track sideways ---- */
+    var pinDist = 0;
+    var head    = showcase && showcase.querySelector('.kb-showcase-head h2');
+    function sizeShowcase() {
+        if (!showcase) return;
+
+        /* Line the first card up with the heading (the container width varies) */
+        var left = Math.round(head.getBoundingClientRect().left);
+        viewport.style.paddingLeft       = left + 'px';
+        viewport.style.scrollPaddingLeft = left + 'px';
+
+        if (wide.matches) {
+            /* snap-scrolling (mobile mode) may have nudged the strip — reset it */
+            viewport.scrollLeft = 0;
+            pinDist = Math.max(0, cardTrack.scrollWidth - viewport.clientWidth);
+            showcase.style.height = (window.innerHeight + pinDist) + 'px';
+            showcase.classList.add('is-pinned');
+        } else {
+            pinDist = 0;
+            showcase.style.height = '';
+            showcase.classList.remove('is-pinned');
+            cardTrack.style.transform = '';
+        }
+    }
+
+    function update() {
+        ticking = false;
+        var y  = window.scrollY;
+        var vh = window.innerHeight;
+
+        /* parallax (desktop only) */
+        parallax.forEach(function (el) {
+            if (!wide.matches) { el.style.translate = ''; return; }
+            var r = el.getBoundingClientRect();
+            var offset = (r.top + r.height / 2 - vh / 2) * parseFloat(el.dataset.kbSpeed);
+            el.style.translate = '0 ' + offset.toFixed(1) + 'px';
+        });
+
+        /* statement: light words up progressively */
+        if (reveal) {
+            var r2 = reveal.getBoundingClientRect();
+            var p  = (vh * 0.85 - r2.top) / (r2.height + vh * 0.35);
+            var lit = Math.round(Math.max(0, Math.min(1, p)) * words.length);
+            words.forEach(function (w, i) { w.classList.toggle('on', i < lit); });
+        }
+
+        /* pinned showcase */
+        if (showcase && pinDist) {
+            var r3 = showcase.getBoundingClientRect();
+            var x  = Math.max(0, Math.min(pinDist, -r3.top));
+            cardTrack.style.transform = 'translate3d(' + (-x).toFixed(1) + 'px,0,0)';
+            var prog = pinDist ? x / pinDist : 0;
+            if (bar) bar.style.transform = 'scaleX(' + prog.toFixed(3) + ')';
+            if (nowEl) nowEl.textContent = String(Math.min(cards, Math.floor(prog * (cards - 0.001)) + 1)).padStart(2, '0');
+        }
+    }
+
+    function onScroll() {
+        var y = window.scrollY;
+        velocity = y - lastY;
+        lastY = y;
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }
+
+    /* ---- Marquee: continuous drift; scroll velocity adds speed and sets direction ---- */
+    if (track) {
+        var mx = 0, dir = 1, half = 0;
+        function measure() { half = track.scrollWidth / 2; }
+        measure();
+        (function loop() {
+            if (Math.abs(velocity) > 0.5) dir = velocity > 0 ? 1 : -1;
+            var speed = 0.6 + Math.min(Math.abs(velocity) * 0.15, 8);
+            velocity *= 0.9;                               /* ease back to the base drift */
+            mx -= speed * dir;
+            if (mx <= -half) mx += half;
+            if (mx > 0)      mx -= half;
+            track.style.transform = 'translate3d(' + mx.toFixed(1) + 'px,0,0)';
+            requestAnimationFrame(loop);
+        })();
+        window.addEventListener('resize', measure);
+    }
+
+    sizeShowcase();
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function () { sizeShowcase(); update(); });
+    window.addEventListener('load', function () { sizeShowcase(); update(); });
+}());
+</script>
+@endif
+
 @if ($brandSlug === 'romina-imports' && !empty($brand['import_brands']))
-@section('page-js')
 <script>
 /* Romina Imports brands */
 (function () {
@@ -578,6 +710,5 @@
     }
 })();
 </script>
-@endsection
 @endif
->>>>>>> 1ac4de82b39c3f2be7499ca19e8efff5e39a4bd4
+@endsection

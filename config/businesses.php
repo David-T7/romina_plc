@@ -86,7 +86,7 @@ return [
             'image'      => 'images/business/baked.jpg',
             'title'      => 'Crafted with passion. Made fresh.',
             'body'       => [
-                'Artisan pastries, handcrafted cakes, signature breakfasts, specialty coffee and savory dishes, baked fresh by skilled pastry artisans across Addis Ababa.',
+                'Pastries, Cakes, Signature Breakfasts, Specialty Coffee and Savory Dishes, baked fresh across Addis Ababa.',
                 "Established in 2020, KOBA is built on craftsmanship and artisan baking, and has grown into a family of cafes and takeaway counters, including an elevated coffee roastery experience at Peacock.",
             ],
             'facts'      => [
@@ -98,11 +98,12 @@ return [
                 'label' => 'What we make',
                 'title' => 'From the first croissant to the last slice of cake.',
                 'items' => [
-                    ['icon' => 'fa-bread-slice',  'name' => 'Artisan pastries'],
-                    ['icon' => 'fa-cake-candles', 'name' => 'Handcrafted cakes'],
-                    ['icon' => 'fa-egg',          'name' => 'Signature breakfasts'],
-                    ['icon' => 'fa-mug-hot',      'name' => 'Specialty coffee'],
-                    ['icon' => 'fa-plate-wheat',  'name' => 'Savory dishes'],
+                    // 'desc' is shown on the KOBA page's sliding showcase cards
+                    ['icon' => 'fa-bread-slice',  'name' => 'Artisan pastries',     'desc' => 'Flaky, buttery and shaped by hand by our pastry artisans.'],
+                    ['icon' => 'fa-cake-candles', 'name' => 'Handcrafted cakes',    'desc' => 'Celebration cakes and slices, finished with care for every occasion.'],
+                    ['icon' => 'fa-egg',          'name' => 'Signature breakfasts', 'desc' => 'A slow, generous start to the day at our cafe tables.'],
+                    ['icon' => 'fa-mug-hot',      'name' => 'Specialty coffee',     'desc' => 'From the espresso bar to the elevated roastery at Peacock.'],
+                    ['icon' => 'fa-plate-wheat',  'name' => 'Savory dishes',        'desc' => 'Fresh-baked savory plates for lunch, or for the road.'],
                 ],
             ],
             'gallery'    => [
