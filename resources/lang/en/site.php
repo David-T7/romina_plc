@@ -26,8 +26,7 @@ return [
     'mega_about_history_col' => 'Our History',
     'mega_about_story_link'  => 'Our Story',
     'mega_about_lead_col'    => 'Our Leadership',
-    'mega_about_lead_link'   => 'Leadership Overview',
-    'mega_about_exec_link'   => 'Executive Team',
+    'mega_about_lead_link'   => 'Leadership & Executive Team',
 
     // ── Businesses mega-menu ──────────────────────────────────────────────
     'mega_biz_label'         => 'OUR BUSINESSES',

@@ -58,11 +58,6 @@
                             <span data-i18n="mega_about_lead_link">{{ __('site.mega_about_lead_link') }}</span>
                             <small><span data-i18n="nav_explore">{{ __('site.nav_explore') }}</span> <span><i class="fa-solid fa-arrow-right"></i></span></small>
                         </a>
-
-                        <a href="{{ route('about.leadership') }}#executive-team">
-                            <span data-i18n="mega_about_exec_link">{{ __('site.mega_about_exec_link') }}</span>
-                            <small><span data-i18n="nav_explore">{{ __('site.nav_explore') }}</span> <span><i class="fa-solid fa-arrow-right"></i></span></small>
-                        </a>
                     </div>
 
                 </div>
@@ -105,9 +100,10 @@
 
             <a href="{{ route('sustainability') }}"{!! $pageCode === 'Sustainability' ? ' aria-current="page"' : '' !!}><span data-i18n="nav_sustainability">{{ __('site.nav_sustainability') }}</span></a>
             <a href="{{ route('careers.index') }}"{!! $pageCode === 'Careers' ? ' aria-current="page"' : '' !!}><span data-i18n="nav_careers">{{ __('site.nav_careers') }}</span></a>
-            <a href="{{ $home }}#accomplishments"><span data-i18n="nav_news">{{ __('site.nav_news') }}</span></a>
+            <a href="{{ route('news') }}"{!! $pageCode === 'News' ? ' aria-current="page"' : '' !!}><span data-i18n="nav_news">{{ __('site.nav_news') }}</span></a>
             <a href="{{ $home }}#contact"><span data-i18n="nav_contact">{{ __('site.nav_contact') }}</span></a>
 
+            @if(config('app.show_language_switcher'))
             <nav class="lang-switcher" aria-label="{{ __('site.lang_switcher_label') }}"
                  data-i18n-attr="aria-label:lang_switcher_label">
                 <a href="{{ route('lang.switch', 'en') }}" lang="en" hreflang="en"
@@ -118,6 +114,7 @@
                    data-locale="am"
                    class="lang-opt{{ app()->getLocale() === 'am' ? ' lang-opt--on' : '' }}">አማ</a>
             </nav>
+            @endif
 
             <a href="{{ $home }}#contact" class="talk-button">
                 <span data-i18n="nav_lets_talk">{{ __('site.nav_lets_talk') }}</span>
@@ -173,7 +170,7 @@
         </div>
         <a href="{{ route('sustainability') }}" style="--d: 100ms"{!! $pageCode === 'Sustainability' ? ' aria-current="page"' : '' !!}><span data-i18n="nav_sustainability">{{ __('site.nav_sustainability') }}</span></a>
         <a href="{{ route('careers.index') }}" style="--d: 150ms"{!! $pageCode === 'Careers' ? ' aria-current="page"' : '' !!}><span data-i18n="nav_careers">{{ __('site.nav_careers') }}</span></a>
-        <a href="{{ $home }}#accomplishments" style="--d: 200ms"><span data-i18n="nav_news">{{ __('site.nav_news') }}</span></a>
+        <a href="{{ route('news') }}" style="--d: 200ms"{!! $pageCode === 'News' ? ' aria-current="page"' : '' !!}><span data-i18n="nav_news">{{ __('site.nav_news') }}</span></a>
         <a href="{{ $home }}#contact"        style="--d: 250ms"><span data-i18n="nav_contact">{{ __('site.nav_contact') }}</span></a>
     </nav>
 
@@ -186,6 +183,7 @@
         <span>Jaquar World</span>
     </div>
 
+    @if(config('app.show_language_switcher'))
     <nav class="container mobile-lang-sw"
          aria-label="{{ __('site.lang_switcher_label') }}"
          data-i18n-attr="aria-label:lang_switcher_label">
@@ -196,6 +194,7 @@
            data-locale="am"
            class="mobile-lang-opt{{ app()->getLocale() === 'am' ? ' mobile-lang-opt--on' : '' }}">አማ — አማርኛ</a>
     </nav>
+    @endif
 
     <div class="container mobile-nav-foot">
         <a href="mailto:info@rominaplc.com">info@rominaplc.com</a>
