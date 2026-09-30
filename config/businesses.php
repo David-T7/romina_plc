@@ -134,7 +134,7 @@ return [
             'kicker'     => 'Promising an unparalleled selection of International Cuisine',
             'intro'      => 'The new upscale meeting place in the city.',
             'badge'      => ['value' => '4 Kilo', 'label' => 'Selassie Twin Towers'],
-            'image'      => 'images/gallery/meskott-culinary/01-dining-room.jpg',
+            'image'      => 'images/gallery/meskott-culinary/meskott_1.webp',
             'image_shot' => 'Meskott bar at night, backlit shelves',
             'title'      => 'Your Evening, Elevated.',
             'body'       => [
@@ -157,12 +157,12 @@ return [
             ],
             'gallery'    => [
                 // The dining-room photo is picked up from public/images/gallery/meskott-culinary/
-                ['src' => null, 'shot' => 'Meskott bar at night, backlit shelves', 'caption' => 'The bar'],
-                ['src' => null, 'shot' => 'VIP table area, set for dinner',        'caption' => 'VIP table area'],
-                ['src' => null, 'shot' => 'Local food garden, brunch service',    'caption' => 'Street food garden'],
-                ['src' => null, 'shot' => 'Signature cocktail, garnished at the bar', 'caption' => 'Classy cocktails'],
-                ['src' => null, 'shot' => 'Chef plating an international dish',   'caption' => 'Our chefs'],
-                ['src' => null, 'shot' => 'Curated wine wall',                    'caption' => 'Wines & spirits'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_2.webp', 'shot' => 'Meskott bar at night, backlit shelves', 'caption' => 'The bar'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_3.webp', 'shot' => 'VIP table area, set for dinner',        'caption' => 'VIP table area'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_4.webp', 'shot' => 'Local food garden, brunch service',    'caption' => 'Street food garden'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_5.webp', 'shot' => 'Signature cocktail, garnished at the bar', 'caption' => 'Classy cocktails'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_6.webp', 'shot' => 'Chef plating an international dish',   'caption' => 'Our chefs'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_7.webp', 'shot' => 'Curated wine wall',                    'caption' => 'Wines & spirits'],
             ],
             'locations_label' => 'Find us',
             'locations'  => [
