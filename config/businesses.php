@@ -187,7 +187,7 @@ return [
             'facts'      => [
                 ['value' => '2009', 'label' => 'Exporting since'],
                 ['value' => '4',    'label' => 'Continents served'],
-                ['value' => '7+',   'label' => 'Growing regions'],
+                ['value' => '6',   'label' => 'Growing regions'],
             ],
             'highlights' => [
                 'label' => 'Where our coffee goes',
