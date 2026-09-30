@@ -8,9 +8,13 @@
     $bizGroups  = config('businesses.groups');
     $bizBrands  = config('businesses.brands');
     $currentBiz = $pageCode === 'Business' ? ($brandSlug ?? null) : null;
+
+    // Pages with a light/white hero need the dark nav treatment at the top.
+    $lightThemes = ['jaguar'];
+    $headerLight = in_array($brand['theme'] ?? null, $lightThemes, true);
 @endphp
 
-<header class="site-header">
+<header class="site-header{{ $headerLight ? ' site-header--light' : '' }}">
     <div class="container nav-wrapper">
 
         <!-- Logo -->
