@@ -6,22 +6,21 @@
 
     <?php
     $partners = [
-        ['name' => 'Romina Restaurants', 'image' => null, 'alt' => 'Romina Restaurants'],
-        ['name' => 'KOBA',               'image' => null, 'alt' => 'KOBA Patisserie & Bakery'],
-        ['name' => 'Meskott',            'image' => null, 'alt' => 'Meskott Culinary Experience'],
-        ['name' => 'Romina Coffee',      'image' => null, 'alt' => 'Romina Coffee'],
-        ['name' => 'Romina Imports',     'image' => null, 'alt' => 'Romina Imports'],
-        ['name' => 'Jaquar World',       'image' => null, 'alt' => 'Jaquar World Addis Ababa'],
+        ['name' => 'Romina Restaurants', 'image' => asset('images/brands/restaurant.jpg'),   'alt' => 'Romina Restaurants'],
+        ['name' => 'KOBA',               'image' => asset('images/brands/koba.jpg'),          'alt' => 'KOBA Patisserie & Bakery'],
+        ['name' => 'Meskott',            'image' => asset('images/brands/meskott-final.png'), 'alt' => 'Meskott Culinary Experience'],
+        ['name' => 'Bacio',              'image' => asset('images/brands/bacio.png'),         'alt' => 'Bacio'],
+        ['name' => 'Jaquar World',       'image' => asset('images/brands/jaquar.png'),        'alt' => 'Jaquar World Addis Ababa'],
     ];
     ?>
 
-    <section class="partners-strip" aria-label="Partners">
+    <section class="partners-strip" aria-label="Our brands">
 
         <div class="container">
             <p class="mark">
                 <span class="mark-rule"></span>
                 <i></i>
-                Partners
+                Our brands
             </p>
         </div>
 

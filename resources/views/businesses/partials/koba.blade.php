@@ -194,7 +194,11 @@
                             <svg class="kb-card-blob" viewBox="0 0 200 200">
                                 <path transform="translate(100 100) rotate({{ $loop->index * 67 }})" d="{{ $loop->odd ? $blobA : $blobB }}"/>
                             </svg>
-                            <i class="fa-solid {{ $item['icon'] }}"></i>
+                            @if (!empty($item['image']))
+                                <img class="kb-card-img" src="{{ asset($item['image']) }}" alt="" loading="lazy">
+                            @else
+                                <i class="fa-solid {{ $item['icon'] }}"></i>
+                            @endif
                         </div>
                         <h3>{{ $item['name'] }}</h3>
                         @if (!empty($item['desc']))

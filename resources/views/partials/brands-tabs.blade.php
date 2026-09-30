@@ -23,9 +23,9 @@
             'cta'    => 'Visit Romina Restaurants',
             'href'   => null,
             'slides' => [
-                ['src' => null, 'shot' => 'Balderas dining room, evening service',    'caption' => 'Balderas',                'pos' => '50% 50%'],
-                ['src' => null, 'shot' => 'Signature Agelgel, plated on the pass',    'caption' => 'Signature Agelgel',       'pos' => '50% 50%'],
-                ['src' => null, 'shot' => 'Catering quarter, centralized preparation','caption' => 'Centralized preparation', 'pos' => '50% 50%'],
+                ['src' => 'images/gallery/romina-restaurants/08-romina-restaurant.webp', 'shot' => 'Balderas dining room, evening service',    'caption' => 'Balderas',                'pos' => '50% 50%'],
+                ['src' => 'images/gallery/romina-restaurants/05-romina-restaurant.webp', 'shot' => 'Signature Agelgel, plated on the pass',    'caption' => 'Signature Agelgel',       'pos' => '50% 50%'],
+                ['src' => 'images/gallery/romina-restaurants/07-romina-restaurant.webp', 'shot' => 'Catering quarter, centralized preparation','caption' => 'Centralized preparation', 'pos' => '50% 50%'],
             ],
         ],
 
@@ -47,9 +47,9 @@
             'cta'    => 'Visit KOBA',
             'href'   => "https://kobapatisserie.com/",
             'slides' => [
-                ['src' => null, 'shot' => 'KOBA pastry counter, morning light',         'caption' => 'The pastry counter', 'pos' => '50% 50%'],
-                ['src' => null, 'shot' => 'Handcrafted celebration cake, close detail', 'caption' => 'Handcrafted cakes',  'pos' => '50% 50%'],
-                ['src' => null, 'shot' => 'Peacock roastery, espresso being pulled',    'caption' => 'Peacock roastery',   'pos' => '50% 50%'],
+                ['src' => 'images/gallery/koba-patisserie/06-koba.webp', 'shot' => 'KOBA pastry counter, morning light',         'caption' => 'The pastry counter', 'pos' => '50% 50%'],
+                ['src' => 'images/gallery/koba-patisserie/01-koba.webp', 'shot' => 'Handcrafted celebration cake, close detail', 'caption' => 'Handcrafted cakes',  'pos' => '50% 50%'],
+                ['src' => 'images/gallery/koba-patisserie/03-koba.webp', 'shot' => 'Peacock roastery, espresso being pulled',    'caption' => 'Peacock roastery',   'pos' => '50% 50%'],
             ],
         ],
 
@@ -67,9 +67,9 @@
             'cta'    => 'Visit Meskott',
             'href'   => null,
             'slides' => [
-                ['src' => null, 'shot' => 'Meskott bar at night, backlit shelves', 'caption' => 'The bar',            'pos' => '50% 50%'],
-                ['src' => null, 'shot' => 'VIP table area, set for dinner',         'caption' => 'VIP table area',    'pos' => '50% 50%'],
-                ['src' => null, 'shot' => 'Street food garden, brunch service',     'caption' => 'Street food garden', 'pos' => '50% 50%'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_6.webp', 'shot' => 'Meskott bar at night, backlit shelves', 'caption' => 'The bar',            'pos' => '50% 50%'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_1.webp', 'shot' => 'VIP table area, set for dinner',         'caption' => 'VIP table area',    'pos' => '50% 50%'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_5.webp', 'shot' => 'Street food garden, brunch service',     'caption' => 'Street food garden', 'pos' => '50% 50%'],
             ],
         ],
 
@@ -123,15 +123,17 @@
             'cta'    => 'Visit Jaquar World',
             'href'   => null,
             'slides' => [
-                ['src' => null, 'shot' => 'Jaquar World showroom, Kazanchis',             'caption' => 'Kazanchis showroom', 'pos' => '50% 50%'],
-                ['src' => null, 'shot' => 'Artize shower system, architectural lighting', 'caption' => 'Artize',             'pos' => '50% 50%'],
+                ['src' => 'images/portfolio/jaquar-basin.jpg', 'shot' => 'Basin and wall-mounted faucet', 'caption' => 'Bathroom solutions', 'pos' => '50% 45%'],
+                ['src' => 'images/gallery/jaquar-world/01-jaquar.webp', 'shot' => 'Jaquar bathroom fixtures', 'caption' => 'Jaquar showroom', 'pos' => '50% 50%'],
+                ['src' => 'images/gallery/jaquar-world/02-jaquar.webp', 'shot' => 'Jaquar bathroom fixtures', 'caption' => 'Artize',         'pos' => '50% 50%'],
+                ['src' => 'images/gallery/jaquar-world/03-jaquar.webp', 'shot' => 'Jaquar bathroom fixtures', 'caption' => 'Premium range',  'pos' => '50% 50%'],
             ],
         ],
 
     ];
     ?>
 
-    <section class="sec brands tone-light" id="brands">
+    <section class="sec brands tone-restaurants is-dark" id="brands">
         <div class="container">
 
             {{-- Section label --}}
@@ -153,7 +155,8 @@
                         aria-selected="{{ $k === 'restaurants' ? 'true' : 'false' }}"
                         aria-controls="brand-panel-{{ $k }}"
                         data-brand="{{ $k }}"
-                        data-tone="{{ $brands[$k]['tone'] }}"
+                        data-tone="{{ $k }}"
+                        data-dark="{{ in_array($k, ['restaurants', 'meskott', 'coffee', 'imports'], true) ? '1' : '' }}"
                         data-state="{{ $k === 'restaurants' ? 'active' : 'inactive' }}"
                     >{{ $brands[$k]['name'] }}</button>
                 @endforeach

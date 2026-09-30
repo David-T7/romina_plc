@@ -358,11 +358,6 @@
                 <button type="button" class="rib-clear" hidden>Clear all filters</button>
             </div>
 
-            <a href="{{ $home }}#contact" class="rib-viewall">
-                View all brands
-                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-            </a>
-
         </div>
 
         {{-- RIGHT: overlapping circular badges --}}

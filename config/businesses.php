@@ -99,12 +99,13 @@ return [
                 'label' => 'What we make',
                 'title' => 'From the first croissant to the last slice of cake.',
                 'items' => [
-                    // 'desc' is shown on the KOBA page's sliding showcase cards
-                    ['icon' => 'fa-bread-slice',  'name' => 'Artisan pastries',     'desc' => 'Flaky, buttery and shaped by hand by our pastry artisans.'],
-                    ['icon' => 'fa-cake-candles', 'name' => 'Handcrafted cakes',    'desc' => 'Celebration cakes and slices, finished with care for every occasion.'],
-                    ['icon' => 'fa-egg',          'name' => 'Signature breakfasts', 'desc' => 'A slow, generous start to the day at our cafe tables.'],
-                    ['icon' => 'fa-mug-hot',      'name' => 'Specialty coffee',     'desc' => 'From the espresso bar to the elevated roastery at Peacock.'],
-                    ['icon' => 'fa-plate-wheat',  'name' => 'Savory dishes',        'desc' => 'Fresh-baked savory plates for lunch, or for the road.'],
+                    // 'desc' is shown on the KOBA page's sliding showcase cards.
+                    // 'image' (optional) replaces the icon on the showcase card.
+                    ['icon' => 'fa-bread-slice',  'name' => 'Artisan pastries',     'image' => 'images/koba/koba-pastries.webp',  'desc' => 'Flaky, buttery and shaped by hand by our pastry artisans.'],
+                    ['icon' => 'fa-cake-candles', 'name' => 'Handcrafted cakes',    'image' => 'images/koba/koba-cakes.webp',     'desc' => 'Celebration cakes and slices, finished with care for every occasion.'],
+                    ['icon' => 'fa-egg',          'name' => 'Signature breakfasts', 'image' => 'images/koba/koba-breakfast.webp', 'desc' => 'A slow, generous start to the day at our cafe tables.'],
+                    ['icon' => 'fa-mug-hot',      'name' => 'Specialty coffee',     'image' => 'images/koba/koba-coffee.webp',    'desc' => 'From the espresso bar to the elevated roastery at Peacock.'],
+                    ['icon' => 'fa-plate-wheat',  'name' => 'Savory dishes',        'image' => 'images/koba/koba-savory.webp',    'desc' => 'Fresh-baked savory plates for lunch, or for the road.'],
                 ],
             ],
             'gallery'    => [
@@ -281,18 +282,16 @@ return [
             // 'logo' is a path under public/ (e.g. 'images/imports/acme.png') or null
             // to render a clean name badge. 'category' drives the filter chips.
             // 'link' is an optional external/brand URL.
-            // 'logo' images are TEMPORARY placeholders (existing site photos,
-            // shown cropped to fill each circle). Swap each path for the real
-            // brand logo/image when supplied.
+            // 'logo' is a path under public/ or null to render a clean name badge.
             'import_brands' => [
-                ['name' => 'Sample Pasta Co.', 'category' => 'Pasta',       'logo' => 'images/business/baked.jpg',     'link' => null],
-                ['name' => 'Durum Mills',      'category' => 'Pasta',       'logo' => 'images/coffee/green-beans.jpg', 'link' => null],
-                ['name' => 'Golden Grain',     'category' => 'Rice',        'logo' => 'images/coffee/hand-sorting.jpg','link' => null],
-                ['name' => 'Valley Dairy',     'category' => 'Dairy',       'logo' => 'images/hero/hero-01.jpg',       'link' => null],
-                ['name' => 'Highland Cream',   'category' => 'Dairy',       'logo' => 'images/hero/hero-03.jpg',       'link' => null],
-                ['name' => 'Pure Press',       'category' => 'Edible Oils', 'logo' => 'images/coffee/drying-beds.jpg', 'link' => null],
-                ['name' => 'Sunfield Oil',     'category' => 'Edible Oils', 'logo' => 'images/portfolio/coffee.jpg',   'link' => null],
-                ["name" => "Baker's Choice",   'category' => 'Bakery',      'logo' => 'images/portfolio/baked.jpg',    'link' => null],
+                ['name' => 'Sample Pasta Co.', 'category' => 'Pasta',       'logo' => null, 'link' => null],
+                ['name' => 'Durum Mills',      'category' => 'Pasta',       'logo' => null, 'link' => null],
+                ['name' => 'Golden Grain',     'category' => 'Rice',        'logo' => null, 'link' => null],
+                ['name' => 'Valley Dairy',     'category' => 'Dairy',       'logo' => null, 'link' => null],
+                ['name' => 'Highland Cream',   'category' => 'Dairy',       'logo' => null, 'link' => null],
+                ['name' => 'Pure Press',       'category' => 'Edible Oils', 'logo' => null, 'link' => null],
+                ['name' => 'Sunfield Oil',     'category' => 'Edible Oils', 'logo' => null, 'link' => null],
+                ["name" => "Baker's Choice",   'category' => 'Bakery',      'logo' => null, 'link' => null],
             ],
             'locations_label' => null,
             'locations'  => [],
