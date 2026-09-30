@@ -35,6 +35,7 @@ return [
             'name'       => 'Romina Restaurants',
             'menu'       => 'Romina Restaurants',
             'group'      => 'culinary',
+            'theme'      => 'restaurant',   // warm dining re-tint (see .bz-theme--restaurant)
             'kicker'     => 'An iconic eatery in the heart of Addis Ababa',
             'intro'      => 'Home-styled dishes from across the world, served with the warmth of home.',
             'badge'      => ['value' => '1973', 'label' => 'Where it all began'],
@@ -238,6 +239,9 @@ return [
             'name'       => 'Romina Imports & Distribution',
             'menu'       => 'Romina Imports & Distribution',
             'group'      => 'other',
+            'theme'          => 'imports',   // fresh market-green re-tint (see .bz-theme--imports)
+            'show_highlights' => false,      // hidden: the brand cluster carries this page
+            'show_gallery'    => false,
             'kicker'     => 'Quality FMCG imported for local consumption',
             'intro'      => 'Essential products, sourced with care and distributed across the Ethiopian market.',
             'badge'      => ['value' => '5', 'label' => 'Product categories'],
@@ -277,15 +281,18 @@ return [
             // 'logo' is a path under public/ (e.g. 'images/imports/acme.png') or null
             // to render a clean name badge. 'category' drives the filter chips.
             // 'link' is an optional external/brand URL.
+            // 'logo' images are TEMPORARY placeholders (existing site photos,
+            // shown cropped to fill each circle). Swap each path for the real
+            // brand logo/image when supplied.
             'import_brands' => [
-                ['name' => 'Sample Pasta Co.', 'category' => 'Pasta',       'logo' => null, 'link' => null],
-                ['name' => 'Durum Mills',      'category' => 'Pasta',       'logo' => null, 'link' => null],
-                ['name' => 'Golden Grain',     'category' => 'Rice',        'logo' => null, 'link' => null],
-                ['name' => 'Valley Dairy',     'category' => 'Dairy',       'logo' => null, 'link' => null],
-                ['name' => 'Highland Cream',   'category' => 'Dairy',       'logo' => null, 'link' => null],
-                ['name' => 'Pure Press',       'category' => 'Edible Oils', 'logo' => null, 'link' => null],
-                ['name' => 'Sunfield Oil',     'category' => 'Edible Oils', 'logo' => null, 'link' => null],
-                ["name" => "Baker's Choice",   'category' => 'Bakery',      'logo' => null, 'link' => null],
+                ['name' => 'Sample Pasta Co.', 'category' => 'Pasta',       'logo' => 'images/business/baked.jpg',     'link' => null],
+                ['name' => 'Durum Mills',      'category' => 'Pasta',       'logo' => 'images/coffee/green-beans.jpg', 'link' => null],
+                ['name' => 'Golden Grain',     'category' => 'Rice',        'logo' => 'images/coffee/hand-sorting.jpg','link' => null],
+                ['name' => 'Valley Dairy',     'category' => 'Dairy',       'logo' => 'images/hero/hero-01.jpg',       'link' => null],
+                ['name' => 'Highland Cream',   'category' => 'Dairy',       'logo' => 'images/hero/hero-03.jpg',       'link' => null],
+                ['name' => 'Pure Press',       'category' => 'Edible Oils', 'logo' => 'images/coffee/drying-beds.jpg', 'link' => null],
+                ['name' => 'Sunfield Oil',     'category' => 'Edible Oils', 'logo' => 'images/portfolio/coffee.jpg',   'link' => null],
+                ["name" => "Baker's Choice",   'category' => 'Bakery',      'logo' => 'images/portfolio/baked.jpg',    'link' => null],
             ],
             'locations_label' => null,
             'locations'  => [],
@@ -297,10 +304,11 @@ return [
             'name'       => 'Jaquar World Addis Ababa',
             'menu'       => 'Jaquar World – Addis Ababa',
             'group'      => 'other',
+            'theme'      => 'jaguar',   // white-dominant, small blue (see .bz-theme--jaguar)
             'kicker'     => 'Launched 2017 with Jaquar Group',
             'intro'      => 'The complete bathroom solutions destination in Addis Ababa.',
             'badge'      => ['value' => '2017', 'label' => 'Launched with Jaquar Group'],
-            'image'      => 'images/portfolio/jaguar.jpg',
+            'image'      => 'images/gallery/jaquar-world/jaguar_1.webp',
             'title'      => 'The complete bathroom solutions destination',
             'body'       => [
                 'Faucets, shower systems, sanitaryware, smart toilets, jacuzzi baths and architectural lighting, from Artize luxury to Jaquar Premium.',
@@ -324,13 +332,13 @@ return [
                 ],
             ],
             'gallery'    => [
-                ['src' => 'images/portfolio/jaguar.jpg', 'shot' => 'Basin and wall-mounted faucet', 'caption' => 'Bathroom solutions'],
-                ['src' => null, 'shot' => 'Jaquar World showroom, Kazanchis',             'caption' => 'Kazanchis showroom'],
-                ['src' => null, 'shot' => 'Artize shower system, architectural lighting', 'caption' => 'Artize'],
-                ['src' => null, 'shot' => 'Meskel Flower showroom floor',                  'caption' => 'Meskel Flower'],
-                ['src' => null, 'shot' => 'Smart toilet display, detail',                  'caption' => 'Smart toilets'],
-                ['src' => null, 'shot' => 'Jacuzzi bath in a styled bathroom',             'caption' => 'Jacuzzi baths'],
-                ['src' => null, 'shot' => 'Premium faucet range on display',               'caption' => 'Faucets'],
+                ['src' => 'images/gallery/jaquar-world/jaguar_1.webp', 'shot' => 'Basin and wall-mounted faucet',                'caption' => 'Bathroom solutions'],
+                ['src' => 'images/gallery/jaquar-world/jaguar_2.webp', 'shot' => 'Jaquar World showroom, Kazanchis',             'caption' => 'Kazanchis showroom'],
+                ['src' => 'images/gallery/jaquar-world/jaguar_3.webp', 'shot' => 'Artize shower system, architectural lighting', 'caption' => 'Artize'],
+                ['src' => 'images/gallery/jaquar-world/jaguar_4.webp', 'shot' => 'Meskel Flower showroom floor',                  'caption' => 'Meskel Flower'],
+                ['src' => 'images/gallery/jaquar-world/jaguar_5.webp', 'shot' => 'Smart toilet display, detail',                  'caption' => 'Smart toilets'],
+                ['src' => 'images/gallery/jaquar-world/jaguar_6.webp', 'shot' => 'Jacuzzi bath in a styled bathroom',             'caption' => 'Jacuzzi baths'],
+                ['src' => 'images/gallery/jaquar-world/jaguar_7.webp', 'shot' => 'Premium faucet range on display',               'caption' => 'Faucets'],
             ],
             'locations_label' => 'Visit a showroom',
             'locations'  => [

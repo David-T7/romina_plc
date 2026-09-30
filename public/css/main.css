@@ -1052,6 +1052,34 @@ button {
 }
 
 
+/* Light-hero pages (e.g. Jaquar World): dark nav at the top over
+   the white hero, keeping the header transparent. The scrolled
+   state (.is-scrolled) still takes over on scroll. */
+.site-header--light:not(.is-scrolled) .logo-white { display: none; }
+.site-header--light:not(.is-scrolled) .logo-navy  { display: block; }
+
+.site-header--light:not(.is-scrolled) .main-navigation > a,
+.site-header--light:not(.is-scrolled) .dropdown-trigger { color: #0E2240; }
+
+.site-header--light:not(.is-scrolled) .mobile-menu-button { color: #0E2240; }
+
+.site-header--light:not(.is-scrolled) .main-navigation a.talk-button {
+    border-color: rgba(14, 34, 64, .35);
+    color: #0E2240 !important;
+}
+
+.site-header--light:not(.is-scrolled) .main-navigation a.talk-button:hover {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff !important;
+}
+
+.site-header--light:not(.is-scrolled) .lang-opt    { color: rgba(14, 34, 64, .5); }
+.site-header--light:not(.is-scrolled) .lang-opt:hover { color: #0E2240; }
+.site-header--light:not(.is-scrolled) .lang-opt--on   { color: var(--red); }
+.site-header--light:not(.is-scrolled) .lang-div    { color: rgba(14, 34, 64, .2); }
+
+
 /* Navigation */
 
 .main-navigation {
@@ -4319,6 +4347,21 @@ button {
     object-fit: cover;
     object-position: center 40%;
     display: block;
+
+    /* Reverse fade-reveal, synced to the timeline line draw:
+       same 2.6s easing + .2s delay, so it finishes in lockstep.
+       Hidden at rest, wipes in from the right (reverse of the
+       left→right line) as .go fires. */
+    opacity: 0;
+    clip-path: inset(0 0 0 100%);
+    transition:
+        opacity   2.6s cubic-bezier(.16, 1, .3, 1) .2s,
+        clip-path 2.6s cubic-bezier(.16, 1, .3, 1) .2s;
+}
+
+.cof-journey.go .cof-j-sort img {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
 }
 
 /* ---- three columns ---- */
@@ -11237,6 +11280,583 @@ button {
 }
 
 
+/* =====================================================
+   ROMINA RESTAURANTS — red-dominant dining theme.
+   Largely red surfaces with small white moments (white
+   cards + white type). Its own motion, distinct from the
+   coffee page: candlelight blooms, a full plate-spin on
+   the dish icons, numbers that rise, cards that lean in
+   and a spotlight that blooms from the pin.
+   Scoped to .bz-theme--restaurant (set from config).
+===================================================== */
+
+.bz-theme--restaurant {
+    --deep-blue:   #a5171f;   /* deep red — dark surfaces + text on white cards */
+    --deep-blue-2: #c21f28;
+    --red:         #d12530;   /* red accent used on the white cards */
+
+    --rst-red:     #c81f28;   /* dominant section red */
+    --rst-red-dk:  #a5171f;   /* deeper red so white cards pop */
+    --rst-glow-w:  rgba(255, 255, 255, .22);  /* white bloom on red fields */
+    --rst-glow-r:  rgba(200, 31, 40, .16);    /* red bloom on white cards */
+}
+
+/* HERO — rich red with a soft white top-glow */
+.bz-theme--restaurant .bz-hero {
+    background:
+        radial-gradient(ellipse at 82% 18%, rgba(255, 255, 255, .10), transparent 55%),
+        radial-gradient(ellipse at 0% 100%, rgba(0, 0, 0, .24), transparent 55%),
+        linear-gradient(160deg, #c81f28, #8d131a);
+}
+
+.bz-theme--restaurant .bz-hero-kicker {
+    color: rgba(255, 255, 255, .82);
+}
+
+.bz-theme--restaurant .bz-hero-media::before {
+    border-color: rgba(255, 255, 255, .55);
+}
+
+.bz-theme--restaurant .bz-ph-note {
+    color: #ffffff;
+}
+
+
+/* ---- OVERVIEW: red field, white type; a white bloom lights
+        up behind each number, which rises on hover ---- */
+.bz-theme--restaurant .bz-overview {
+    background: var(--rst-red);
+}
+
+.bz-theme--restaurant .bz-overview .bz-label { color: #ffffff; }
+.bz-theme--restaurant .bz-overview-head h2 { color: #ffffff; }
+.bz-theme--restaurant .bz-overview-body p { color: rgba(255, 255, 255, .82); }
+.bz-theme--restaurant .bz-overview-body p:first-child { color: #ffffff; }
+
+.bz-theme--restaurant .bz-facts {
+    gap: 20px;
+}
+
+.bz-theme--restaurant .bz-fact {
+    position: relative;
+    border-top: none;
+    padding: 22px 20px;
+}
+
+.bz-theme--restaurant .bz-fact::before {   /* white bloom behind the number */
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    z-index: 0;
+
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--rst-glow-w), transparent 70%);
+
+    opacity: 0;
+    transform: scale(.4);
+    pointer-events: none;
+    transition: opacity .5s ease, transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+
+.bz-theme--restaurant .bz-fact:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.bz-theme--restaurant .bz-fact dt,
+.bz-theme--restaurant .bz-fact dd {
+    position: relative;
+    z-index: 1;
+}
+
+.bz-theme--restaurant .bz-fact dt {
+    color: #ffffff;
+    transition: transform .45s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.bz-theme--restaurant .bz-fact dd {
+    color: rgba(255, 255, 255, .75);
+}
+
+.bz-theme--restaurant .bz-fact:hover dt {
+    transform: translateY(-4px);
+}
+
+
+/* ---- HIGHLIGHTS: deeper red field, white cards that lean in;
+        a red bloom rises behind the icon and the plate icon
+        spins a full turn as it fills ---- */
+.bz-theme--restaurant .bz-highlights {
+    background: var(--rst-red-dk);
+}
+
+.bz-theme--restaurant .bz-highlights .bz-label { color: #ffffff; }
+.bz-theme--restaurant .bz-highlights .bz-section-head h2 { color: #ffffff; }
+
+.bz-theme--restaurant .bz-cards {
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.bz-theme--restaurant .bz-card {
+    position: relative;
+    overflow: hidden;
+
+    min-height: 244px;
+    gap: 30px;
+    padding: 34px 30px;
+
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, .06);
+}
+
+.bz-theme--restaurant .bz-card::after {
+    display: none;
+}
+
+.bz-theme--restaurant .bz-card::before {   /* red bloom from the icon */
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    z-index: 0;
+
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--rst-glow-r), transparent 68%);
+
+    opacity: 0;
+    transform: scale(.25);
+    pointer-events: none;
+    transition: opacity .55s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+}
+
+.bz-theme--restaurant .bz-card:hover::before {
+    opacity: 1;
+    transform: scale(1.5);
+}
+
+/* lean-in instead of lift */
+.bz-theme--restaurant .bz-card:hover {
+    transform: scale(1.03);
+    border-color: rgba(0, 0, 0, .05);
+    box-shadow: 0 24px 48px rgba(120, 16, 22, .22);
+}
+
+/* keep content above the bloom (the number stays absolutely placed) */
+.bz-theme--restaurant .bz-card-icon,
+.bz-theme--restaurant .bz-card-name {
+    position: relative;
+    z-index: 1;
+}
+
+.bz-theme--restaurant .bz-card-num {
+    z-index: 1;
+    color: #cf8a8d;
+}
+
+.bz-theme--restaurant .bz-card-name {
+    font-size: 21px;
+    transition: color .4s ease;
+}
+
+.bz-theme--restaurant .bz-card:hover .bz-card-name {
+    color: var(--deep-blue);
+}
+
+.bz-theme--restaurant .bz-card-icon {
+    width: 62px;
+    height: 62px;
+    font-size: 22px;
+
+    background: var(--deep-blue);
+    box-shadow: 0 0 0 4px rgba(209, 37, 48, .14);
+
+    transition:
+        transform .7s cubic-bezier(.34, 1.4, .5, 1),
+        background .45s ease,
+        box-shadow .45s ease;
+}
+
+.bz-theme--restaurant .bz-card:hover .bz-card-icon {
+    transform: rotate(360deg) scale(1.08);   /* a full "plating" turn */
+    background: radial-gradient(circle at 32% 30%, #e23a44, #8d131a);
+    box-shadow: 0 12px 26px rgba(141, 19, 26, .34), 0 0 0 5px rgba(209, 37, 48, .22);
+}
+
+
+/* ---- LOCATIONS: red field, white cards; a red spotlight
+        blooms from the pin, the card leans in and the pin
+        settles with a soft drop ---- */
+.bz-theme--restaurant .bz-locations {
+    background: var(--rst-red);
+}
+
+.bz-theme--restaurant .bz-locations .bz-label { color: #ffffff; }
+.bz-theme--restaurant .bz-locations .bz-section-head h2 { color: #ffffff; }
+
+.bz-theme--restaurant .bz-loc {
+    position: relative;
+    overflow: hidden;
+
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, .06);
+    border-radius: 6px;
+
+    transition:
+        transform .4s cubic-bezier(.22, 1, .36, 1),
+        box-shadow .4s ease,
+        border-color .4s ease;
+}
+
+.bz-theme--restaurant .bz-loc::before {   /* red spotlight from the pin corner */
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    background: radial-gradient(circle 220px at 46px 44px, var(--rst-glow-r), transparent 62%);
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .45s ease;
+}
+
+.bz-theme--restaurant .bz-loc:hover::before {
+    opacity: 1;
+}
+
+.bz-theme--restaurant .bz-loc-pin,
+.bz-theme--restaurant .bz-loc > div {
+    position: relative;
+    z-index: 1;
+}
+
+.bz-theme--restaurant .bz-loc:hover {
+    transform: scale(1.02);
+    border-color: rgba(0, 0, 0, .05);
+    box-shadow: 0 22px 44px rgba(120, 16, 22, .2);
+}
+
+.bz-theme--restaurant .bz-loc-pin {
+    transition: transform .5s cubic-bezier(.34, 1.56, .64, 1), color .4s ease;
+}
+
+.bz-theme--restaurant .bz-loc:hover .bz-loc-pin {
+    transform: translateY(3px) scale(1.12);   /* the pin settles / drops */
+    color: var(--red);
+}
+
+
+/* =====================================================
+   JAQUAR WORLD — clean white theme, small blue accent.
+   Its own motion, distinct from coffee & restaurant:
+   a water-ripple that rings out from the icons and the
+   showroom pin, with a chrome-blue sheen on the icons.
+   Scoped to .bz-theme--jaguar (set from config).
+===================================================== */
+
+.bz-theme--jaguar {
+    --deep-blue:   #123a63;   /* deep steel navy — dark text / icons on white */
+    --deep-blue-2: #17518c;
+    --red:         #1a72c2;   /* the small blue accent */
+
+    --jag-blue:    #1a72c2;
+    --jag-line:    #e2e8f0;   /* light hairline */
+    --jag-mist:    #f3f7fb;   /* barely-there blue-white */
+}
+
+/* The ripple ring — shared by the icons and the pin */
+@keyframes jag-ripple {
+    0%   { transform: translate(-50%, -50%) scale(.4); opacity: .5; }
+    100% { transform: translate(-50%, -50%) scale(3);  opacity: 0; }
+}
+
+/* ---- HERO: flipped to light — white field, navy type,
+        blue accents and a blue badge ---- */
+.bz-theme--jaguar .bz-hero {
+    background:
+        radial-gradient(ellipse at 80% 12%, rgba(26, 114, 194, .12), transparent 55%),
+        linear-gradient(180deg, #ffffff, #eef4fa);
+    color: var(--deep-blue);
+}
+
+.bz-theme--jaguar .bz-hero::before {
+    background-image:
+        linear-gradient(rgba(18, 58, 99, .05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 58, 99, .05) 1px, transparent 1px);
+}
+
+.bz-theme--jaguar .bz-hero-copy h1 { color: var(--deep-blue); }
+.bz-theme--jaguar .bz-hero-kicker  { color: #4a6076; }
+.bz-theme--jaguar .bz-hero-intro   { color: rgba(18, 58, 99, .72); }
+.bz-theme--jaguar .bz-hero-index   { color: rgba(18, 58, 99, .35); }
+
+.bz-theme--jaguar .page-hero-crumbs span    { color: var(--deep-blue); }
+.bz-theme--jaguar .page-hero-crumbs a:hover { color: var(--jag-blue); }
+
+.bz-theme--jaguar .bz-hero-media::before { border-color: var(--jag-blue); }
+
+.bz-theme--jaguar .story-btn--ghost {
+    border-color: rgba(18, 58, 99, .3);
+    color: var(--deep-blue);
+}
+
+.bz-theme--jaguar .bz-hero-badge {
+    background: var(--deep-blue);
+    color: #ffffff;
+}
+.bz-theme--jaguar .bz-hero-badge span { color: rgba(255, 255, 255, .72); }
+
+
+/* ---- OVERVIEW: white; facts lift and turn blue with a soft
+        mist behind them ---- */
+.bz-theme--jaguar .bz-facts { gap: 20px; }
+
+.bz-theme--jaguar .bz-fact {
+    border-top: none;
+    padding: 22px 20px;
+    border-radius: 8px;
+
+    transition:
+        transform .4s cubic-bezier(.22, 1, .36, 1),
+        background .4s ease,
+        box-shadow .4s ease;
+}
+
+.bz-theme--jaguar .bz-fact:hover {
+    transform: translateY(-4px);
+    background: var(--jag-mist);
+    box-shadow: 0 16px 34px rgba(14, 58, 102, .10);
+}
+
+.bz-theme--jaguar .bz-fact dt { transition: color .4s ease; }
+.bz-theme--jaguar .bz-fact:hover dt { color: var(--jag-blue); }
+
+
+/* ---- HIGHLIGHTS: faint mist field, white cards; on hover a
+        blue ripple rings out from the icon, which lifts and
+        picks up a chrome-blue sheen ---- */
+.bz-theme--jaguar .bz-highlights {
+    background: var(--jag-mist);
+}
+
+.bz-theme--jaguar .bz-cards {
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.bz-theme--jaguar .bz-card {
+    position: relative;
+    overflow: hidden;
+
+    min-height: 244px;
+    gap: 30px;
+    padding: 34px 30px;
+
+    background: #ffffff;
+    border: 1px solid var(--jag-line);
+}
+
+.bz-theme--jaguar .bz-card::after { display: none; }
+
+.bz-theme--jaguar .bz-card::before {   /* ripple ring, centred on the icon */
+    content: "";
+    position: absolute;
+    top: 65px;
+    left: 61px;
+    z-index: 0;
+
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid var(--jag-blue);
+
+    transform: translate(-50%, -50%) scale(.4);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.bz-theme--jaguar .bz-card:hover::before {
+    animation: jag-ripple .9s ease-out;
+}
+
+.bz-theme--jaguar .bz-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(26, 114, 194, .35);
+    box-shadow: 0 22px 44px rgba(14, 58, 102, .14);
+}
+
+/* keep content above the ripple (number stays absolutely placed) */
+.bz-theme--jaguar .bz-card-icon,
+.bz-theme--jaguar .bz-card-name { position: relative; z-index: 1; }
+.bz-theme--jaguar .bz-card-num  { z-index: 1; color: #9fb3c8; }
+
+.bz-theme--jaguar .bz-card-name { font-size: 21px; }
+
+.bz-theme--jaguar .bz-card-icon {
+    width: 62px;
+    height: 62px;
+    font-size: 22px;
+
+    background: var(--deep-blue);
+    box-shadow: 0 0 0 4px rgba(26, 114, 194, .12);
+
+    transition:
+        transform .5s cubic-bezier(.22, 1, .36, 1),
+        background .45s ease,
+        box-shadow .45s ease;
+}
+
+.bz-theme--jaguar .bz-card:hover .bz-card-icon {
+    transform: translateY(-4px);              /* a water-drop lift, no spin/tilt */
+    background: radial-gradient(circle at 32% 28%, #2b8fe0, #0e3a66);
+    box-shadow: 0 10px 24px rgba(26, 114, 194, .34), 0 0 0 5px rgba(26, 114, 194, .16);
+}
+
+
+/* ---- LOCATIONS: white cards; a blue ripple rings out from
+        the showroom pin, the card lifts and the pin turns blue ---- */
+.bz-theme--jaguar .bz-locations {
+    background: #ffffff;
+}
+
+.bz-theme--jaguar .bz-loc {
+    position: relative;
+    overflow: hidden;
+
+    background: #ffffff;
+    border: 1px solid var(--jag-line);
+    border-radius: 8px;
+
+    transition:
+        transform .4s cubic-bezier(.22, 1, .36, 1),
+        box-shadow .4s ease,
+        border-color .4s ease;
+}
+
+.bz-theme--jaguar .bz-loc::before {   /* ripple ring from the pin */
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 42px;
+    z-index: 0;
+
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 2px solid var(--jag-blue);
+
+    transform: translate(-50%, -50%) scale(.4);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.bz-theme--jaguar .bz-loc:hover::before {
+    animation: jag-ripple .9s ease-out;
+}
+
+.bz-theme--jaguar .bz-loc-pin,
+.bz-theme--jaguar .bz-loc > div {
+    position: relative;
+    z-index: 1;
+}
+
+.bz-theme--jaguar .bz-loc:hover {
+    transform: translateY(-4px);
+    border-color: rgba(26, 114, 194, .3);
+    box-shadow: 0 20px 40px rgba(14, 58, 102, .12);
+}
+
+.bz-theme--jaguar .bz-loc-pin {
+    transition: transform .45s cubic-bezier(.34, 1.56, .64, 1), color .4s ease;
+}
+
+.bz-theme--jaguar .bz-loc:hover .bz-loc-pin {
+    transform: translateY(-3px);
+    color: var(--jag-blue);
+}
+
+
+/* =====================================================
+   ROMINA IMPORTS & DISTRIBUTION — blue-black + red.
+   Its own motion: facts slide sideways like a dispatch
+   moving out. The brand cluster is the page's centrepiece,
+   so Highlights + Gallery are hidden (see config flags).
+   Scoped to .bz-theme--imports (set from config).
+===================================================== */
+
+.bz-theme--imports {
+    --deep-blue:   #0b1522;   /* blue-black — dark surfaces + text on light */
+    --deep-blue-2: #142944;
+    --red:         #e3262e;   /* Romina red accent */
+
+    --imp-steel:   #9fb0c4;   /* muted steel-blue for text on dark */
+    --imp-mist:    #eef2f8;   /* barely-there blue-white */
+}
+
+/* HERO — red + blue glow over the blue-black base */
+.bz-theme--imports .bz-hero {
+    background:
+        radial-gradient(ellipse at 85% 20%, rgba(62, 120, 255, .18), transparent 55%),
+        radial-gradient(ellipse at 0% 100%, rgba(227, 38, 46, .24), transparent 52%),
+        var(--deep-blue);
+}
+
+.bz-theme--imports .bz-hero-kicker { color: var(--imp-steel); }
+
+/* hero photo placeholder → blue-black */
+.bz-theme--imports .bz-ph {
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, .08), transparent 55%),
+        linear-gradient(150deg, #142944, #070d16);
+}
+.bz-theme--imports .bz-ph-note { color: #ff5960; }
+
+
+/* ---- OVERVIEW: faint blue paper; each fact slides sideways
+        on hover (a dispatch moving out) and turns red ---- */
+.bz-theme--imports .bz-overview {
+    background: #f7f9fc;
+}
+
+.bz-theme--imports .bz-facts {
+    gap: 20px;
+}
+
+.bz-theme--imports .bz-fact {
+    border-top: none;
+    padding: 22px 20px;
+    border-radius: 8px;
+
+    transition:
+        transform .4s cubic-bezier(.22, 1, .36, 1),
+        background .4s ease,
+        box-shadow .4s ease;
+}
+
+.bz-theme--imports .bz-fact:hover {
+    transform: translateX(8px);              /* slides out to the side */
+    background: var(--imp-mist);
+    box-shadow: -8px 16px 34px rgba(11, 21, 34, .12);
+}
+
+.bz-theme--imports .bz-fact dt { transition: color .4s ease; }
+.bz-theme--imports .bz-fact:hover dt { color: var(--red); }
+
+
+/* ---- OUR BRANDS cluster: blue-black field with a red edge ---- */
+.bz-theme--imports .rib-bg {
+    background:
+        linear-gradient(135deg, rgba(11, 21, 34, .94) 0%, rgba(20, 41, 68, .88) 55%, rgba(7, 13, 22, .97) 100%),
+        url("../images/hero/hero-02.jpg") center/cover no-repeat;
+}
+
+
 /* ---------- RESPONSIVE ---------- */
 
 @media (max-width: 1000px) {
@@ -12664,6 +13284,10 @@ button {
 /* ---- left column ---- */
 .rib-copy { max-width: 560px; }
 
+/* Hide images/text inside circles — keep circles as empty clean shapes */
+.rib-badge-face img,
+.rib-badge-face .rib-badge-name { display: none; }
+
 .rib-heading {
     font-weight: 300;
     font-size: clamp(30px, 4vw, 56px);
@@ -12820,10 +13444,12 @@ button {
     animation: rib-float var(--float-dur, 5.5s) ease-in-out var(--float-delay, 0s) infinite;
 }
 
+/* Placeholder photos fill the circle; real logos later can be
+   switched back to a contained fit if they need padding. */
 .rib-badge-face img {
-    width: 70%;
-    height: 70%;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .rib-badge-name {
@@ -12885,6 +13511,33 @@ button {
 }
 
 /* ---- responsive ---- */
+
+/* large screens: sit the whole cluster low-right, pulled in
+   from the edges and sized so it stays fully visible (no clip);
+   the copy stays top-left. */
+@media (min-width: 1200px) {
+    .rib-brands {
+        min-height: clamp(560px, 50vw, 780px);
+        padding-bottom: clamp(2.5rem, 5vw, 5rem);
+    }
+
+    .rib-inner {
+        grid-template-columns: minmax(0, 560px);   /* copy only; cluster is absolute */
+        align-items: start;                        /* copy hugs the top */
+    }
+
+    .rib-cluster {
+        --sz: clamp(104px, 9vw, 148px);            /* smaller circles */
+        position: absolute;
+        right: clamp(28px, 4vw, 110px);            /* pulled in from the right */
+        bottom: clamp(16px, 2vw, 40px);            /* fully inside — not clipped */
+        margin: 0;
+        min-height: 0;
+        width: calc(var(--sz) * 3.40);
+        height: calc(var(--sz) * 2.75);
+    }
+}
+
 /* tablet: cluster drops below the copy, centered, still packed */
 @media (max-width: 960px) {
     .rib-inner { grid-template-columns: 1fr; }

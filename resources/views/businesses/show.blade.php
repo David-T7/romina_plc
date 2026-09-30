@@ -17,6 +17,8 @@
 
 @section('page-content')
 
+<div class="bz-page{{ $bzTheme ? ' bz-theme--' . $bzTheme : '' }}">
+
 @if ($brandSlug === 'koba-patisserie')
 
 {{-- KOBA has its own hero / about / showcase (Kubo-inspired, with scroll effects) --}}
@@ -124,6 +126,7 @@
 
 
 {{-- ============ HIGHLIGHTS ============ --}}
+@if (($brand['show_highlights'] ?? true) && !empty($brand['highlights']['items']))
 <section class="bz-highlights bz-highlights--{{ $brandSlug }}">
     <div class="container">
 
@@ -144,6 +147,7 @@
 
     </div>
 </section>
+@endif
 
 @endif
 
@@ -187,6 +191,7 @@
 {{-- ============ GALLERY — photo mosaic + lightbox ============
      Tiles come from $gallery (see PagesController::businessGallery):
      drop photos into public/images/gallery/{slug}/ to add more. --}}
+@if ($brand['show_gallery'] ?? true)
 @php
     $tileCount  = count($gallery);
     $photoCount = count(array_filter($gallery, function ($g) { return !empty($g['src']); }));
@@ -254,6 +259,7 @@
     </figure>
     <button type="button" class="bz-lb-btn bz-lb-next" aria-label="Next photo"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
 </div>
+@endif
 
 
 {{-- ============ LOCATIONS ============ --}}
