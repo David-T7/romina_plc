@@ -7593,7 +7593,7 @@ button {
 
 /* section backgrounds */
 .sec       { padding-block: var(--section-space); }
-.brands    { transition: background-color .7s cubic-bezier(.16,1,.3,1), color .7s cubic-bezier(.16,1,.3,1); }
+.brands    { transition: background-color .4s cubic-bezier(.16,1,.3,1), color .4s cubic-bezier(.16,1,.3,1); }
 .brands.tone-light { background: #fff; }
 .brands.tone-paper { background: #F2F4F7; }
 
@@ -7601,7 +7601,7 @@ button {
    the tabs JS), which supplies the light-text treatment below. */
 .brands.is-dark { color: #fff; }
 .brands.tone-restaurants { background: #8a1520; }   /* red */
-.brands.tone-koba        { background: #ebd9b0; }   /* KOBA wheat/tan */
+.brands.tone-koba        { background: #0f4d2d; }   /* KOBA green (matches KOBA page --accent) */
 .brands.tone-meskott     { background: #07111F; }   /* night */
 .brands.tone-coffee      { background: #241712; }   /* espresso */
 .brands.tone-imports     { background: #14396e; }   /* dark blue (distinct from Meskott night) */
@@ -7612,23 +7612,9 @@ button {
 .brands.tone-restaurants .bp-cta-btn { background: #fff; color: #8a1520; }
 .brands.tone-restaurants .bp-cta-btn:hover { background: #ffe3e5; color: #8a1520; }
 
-/* KOBA — wheat/tan background with deep-green accents (from the logo) */
-.brands.tone-koba .bp-kicker { color: #0f4d2d; }
-.brands.tone-koba .bp-title  { color: #0f4d2d; }
-.brands.tone-koba .bp-label  { color: #0f4d2d; }
-.brands.tone-koba .bp-cta-btn { background: #0f4d2d; color: #fff; }
-.brands.tone-koba .bp-cta-btn:hover { background: #0a3a22; color: #fff; }
-.brands.tone-koba .bp-phone { color: #0f4d2d; }
-.brands.tone-koba .bp-locs li svg { color: #0f4d2d; }
-.brands.tone-koba .soon { background: #0f4d2d; }
-.brands.tone-koba .ph-tag i { background: #0f4d2d; }
-.brands.tone-koba .prog-fill,
-.brands.tone-koba .prog-fill::after { background: #0f4d2d; }
-.brands.tone-koba .arrows.small button:hover { background: #0f4d2d; border-color: #0f4d2d; color: #fff; }
-.brands.tone-koba .brand-tab:hover,
-.brands.tone-koba .brand-tab[data-state="active"] { color: #0f4d2d; }
-.brands.tone-koba .brand-tab[data-state="active"]::after,
-.brands.tone-koba .brand-tab[data-state="active"]::before { background: #0f4d2d; }
+/* KOBA green theme — tuned accents on the green background. The base
+   white-text treatment comes from .is-dark; these rules follow the
+   generic bp/is-dark rules below (see "KOBA green accents" block). */
 
 /* night-tone mark override */
 .brands.is-dark #brandsMark       { color: #fff; }
@@ -7837,6 +7823,19 @@ button {
 .brands.is-dark .bp-phone { color: #fff; }
 .bp-note     { font-size: 12.5px; color: #565656; opacity: .8; }
 .brands.is-dark .bp-note  { color: rgba(255,255,255,.5); }
+
+/* ── KOBA green accents ───────────────────────────────────────────────
+   Section goes deep green (#0f4d2d, matches the KOBA page --accent);
+   inner tint #0b3a22 / light-green tint #A7D7B8. Placed after the generic
+   bp + is-dark rules so these win on equal specificity. The CTA button
+   and the progress-line dot stay red, as on the KOBA page. */
+.brands.tone-koba .bp-body                                { color: rgba(255,255,255,.8); }          /* body ~80% white */
+.brands.tone-koba .bp-kicker                              { color: #A7D7B8; }                        /* eyebrow — light green */
+.brands.tone-koba .bp-label                               { color: #A7D7B8; }                        /* "Locations" — light green */
+.brands.tone-koba .bp-locs li svg                         { color: #fff; }                           /* location pins — white */
+.brands.tone-koba .brand-tab                              { color: rgba(255,255,255,.55); }          /* inactive tabs ~55% white */
+.brands.tone-koba .brand-tab[data-state="active"]::before { background: #A7D7B8; }                   /* active tab dot — light green */
+.brands.tone-koba .arrows.small button:hover             { background: #fff; color: #0f4d2d; border-color: #fff; }
 
 /* keyframes */
 @keyframes brands-fadeup {

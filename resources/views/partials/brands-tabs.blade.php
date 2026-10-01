@@ -156,7 +156,7 @@
                         aria-controls="brand-panel-{{ $k }}"
                         data-brand="{{ $k }}"
                         data-tone="{{ $k }}"
-                        data-dark="{{ in_array($k, ['restaurants', 'meskott', 'coffee', 'imports'], true) ? '1' : '' }}"
+                        data-dark="{{ in_array($k, ['restaurants', 'koba', 'meskott', 'coffee', 'imports'], true) ? '1' : '' }}"
                         data-state="{{ $k === 'restaurants' ? 'active' : 'inactive' }}"
                     >{{ $brands[$k]['name'] }}</button>
                 @endforeach
