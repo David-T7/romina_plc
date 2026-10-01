@@ -98,10 +98,10 @@
                 <span class="kb-badge-core">K</span>
             </div>
 
-            <div class="kb-sticker" data-kb-speed="0.1">
+            {{-- <div class="kb-sticker" data-kb-speed="0.1">
                 <strong>{{ $brand['badge']['value'] }}</strong>
                 <span>{{ $brand['badge']['label'] }}</span>
-            </div>
+            </div> --}}
 
         </div>
 

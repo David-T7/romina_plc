@@ -101,15 +101,15 @@ return [
                 'items' => [
                     // 'desc' is shown on the KOBA page's sliding showcase cards.
                     // 'image' (optional) replaces the icon on the showcase card.
-                    ['icon' => 'fa-bread-slice',  'name' => 'Pastries',     'image' => 'images/koba/koba-pastries.webp',  'desc' => 'Flaky, buttery and shaped by hand by our pastry artisans.'],
-                    ['icon' => 'fa-cake-candles', 'name' => 'Handcrafted cakes',    'image' => 'images/koba/koba-cakes.webp',     'desc' => 'Celebration cakes and slices, finished with care for every occasion.'],
-                    ['icon' => 'fa-egg',          'name' => 'Signature breakfasts', 'image' => 'images/koba/koba-breakfast.webp', 'desc' => 'A slow, generous start to the day at our cafe tables.'],
-                    ['icon' => 'fa-mug-hot',      'name' => 'Coffee',     'image' => 'images/koba/koba-coffee.webp',    'desc' => 'From the espresso bar to the elevated roastery at Peacock.'],
-                    ['icon' => 'fa-plate-wheat',  'name' => 'Savory dishes',        'image' => 'images/koba/koba-savory.webp',    'desc' => 'Fresh-baked savory plates for lunch, or for the road.'],
+                    ['icon' => 'fa-bread-slice',  'name' => 'Pastries',     'image' => 'images/koba/koba-pastries.webp',  'desc' => 'Flaky, buttery and shaped to perfection'],
+                    ['icon' => 'fa-cake-candles', 'name' => 'Handcrafted cakes',    'image' => 'images/koba/koba-cakes.jpg',     'desc' => 'Celebration cakes and slices, finished with care'],
+                    ['icon' => 'fa-egg',          'name' => 'Signature breakfasts', 'image' => 'images/koba/koba-breakfast.webp', 'desc' => 'A slow, generous start to the day '],
+                    ['icon' => 'fa-mug-hot',      'name' => 'Coffee',     'image' => 'images/koba/koba-coffee.webp',    'desc' => 'From the espresso bar to the elevated roastery'],
+                    ['icon' => 'fa-plate-wheat',  'name' => 'Savory dishes',        'image' => 'images/koba/koba-savory.webp',    'desc' => 'Fresh-baked savory plates'],
                 ],
             ],
             'gallery'    => [
-                ['src' => 'images/business/baked.jpg', 'shot' => 'Handcrafted celebration cake, close detail', 'caption' => 'Handcrafted cakes'],
+                ['src' => 'images/business/baked.jpg', 'shot' => 'Koba', 'caption' => 'Koba'],
                 ['src' => null, 'shot' => 'KOBA pastry counter, morning light',       'caption' => 'The pastry counter'],
                 ['src' => null, 'shot' => 'Peacock roastery, espresso being pulled',  'caption' => 'Peacock roastery'],
                 ['src' => null, 'shot' => 'Fresh croissants out of the oven',         'caption' => 'Pastries'],
@@ -144,9 +144,9 @@ return [
                 'From intimate VIP tables to a lively selection and a bar made for long evenings, Meskott brings four distinct experiences together under one roof in 4 Kilo.',
             ],
             'facts'      => [
-                ['value' => '4',   'label' => 'Experiences under one roof'],
-                ['value' => '1',   'label' => 'Destination in 4 Kilo'],
-                ['value' => 'Intl.', 'label' => 'Cuisine by Talented Chefs'],
+                ['value' => 'Luxurious',   'label' => 'Experiences under one roof'],
+                ['value' => 'Elegant',   'label' => 'Contemporary fine dining'],
+                ['value' => 'Creative.', 'label' => 'Cuisine by Talented Chefs'],
             ],
             'highlights' => [
                 'label' => 'The experience',

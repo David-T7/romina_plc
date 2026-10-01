@@ -86,10 +86,10 @@
                 @endif
             </div>
 
-            <div class="bz-hero-badge">
+            {{-- <div class="bz-hero-badge">
                 <strong>{{ $brand['badge']['value'] }}</strong>
                 <span>{{ $brand['badge']['label'] }}</span>
-            </div>
+            </div> --}}
         </div>
 
     </div>
