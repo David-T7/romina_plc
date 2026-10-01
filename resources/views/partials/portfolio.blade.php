@@ -32,7 +32,7 @@
                     <div class="portfolio-image">
 
                         <img
-                            src="{{ asset('images/portfolio/restaurant.jpg') }}"
+                            src="{{ asset('images/portfolio/restaurant.webp') }}"
                             alt="Romina Restaurant interior, evening service"
                         >
 

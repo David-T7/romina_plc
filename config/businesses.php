@@ -39,7 +39,7 @@ return [
             'kicker'     => 'An iconic eatery in the heart of Addis Ababa',
             'intro'      => 'Home-styled dishes from across the world, served with the warmth of home.',
             'badge'      => ['value' => '1973', 'label' => 'Where it all began'],
-            'image'      => 'images/business/restaurant.jpg',
+            'image'      => 'images/business/restaurant.webp',
             'title'      => 'The home of great service',
             'body'       => [
                 "We don't just serve food; we invite you into an experience that mirrors the inclusion and warmth of home. Home-styled dishes from across the world, prepared as the most comforting versions of what you love.",
@@ -60,7 +60,7 @@ return [
                 ],
             ],
             'gallery'    => [
-                ['src' => 'images/business/restaurant.jpg', 'shot' => 'A signature plate from the kitchen', 'caption' => 'From our kitchen'],
+                ['src' => 'images/business/restaurant.webp', 'shot' => 'A signature plate from the kitchen', 'caption' => 'From our kitchen'],
                 ['src' => null, 'shot' => 'Balderas dining room, evening service',     'caption' => 'Balderas'],
                 ['src' => null, 'shot' => 'Signature Agelgel, plated on the pass',     'caption' => 'Signature Agelgel'],
                 ['src' => null, 'shot' => 'Arat Kilo restaurant, bar and cafe',        'caption' => 'Arat Kilo'],
@@ -71,7 +71,7 @@ return [
             'locations_label' => 'Visit us',
             'locations'  => [
                 ['name' => '4 Kilo', 'desc' => 'Romina Restaurant, Bar & Cafe',      'tag' => null],
-                ['name' => 'Balderas',           'desc' => 'Romina Restaurant / Takeaway Center', 'tag' => null],
+                ['name' => 'Balderas', 'desc' => 'Romina Restaurant / Takeaway Center', 'tag' => null],
             ],
             'phone'      => null,
             'website'    => null,
@@ -87,7 +87,7 @@ return [
             'image'      => 'images/business/baked.jpg',
             'title'      => 'Crafted with passion. Made fresh.',
             'body'       => [
-                'Pastries, Cakes, Signature Breakfasts, Specialty Coffee and Savory Dishes, baked fresh across Addis Ababa.',
+                'Pastries, Cakes, Signature Breakfasts, Coffee and Savory Dishes, baked fresh across Addis Ababa.',
                 "Established in 2020, KOBA is built on craftsmanship and artisan baking, and has grown into a family of cafes and takeaway counters, including an elevated coffee roastery experience at Peacock.",
             ],
             'facts'      => [
@@ -101,10 +101,10 @@ return [
                 'items' => [
                     // 'desc' is shown on the KOBA page's sliding showcase cards.
                     // 'image' (optional) replaces the icon on the showcase card.
-                    ['icon' => 'fa-bread-slice',  'name' => 'Artisan pastries',     'image' => 'images/koba/koba-pastries.webp',  'desc' => 'Flaky, buttery and shaped by hand by our pastry artisans.'],
+                    ['icon' => 'fa-bread-slice',  'name' => 'Pastries',     'image' => 'images/koba/koba-pastries.webp',  'desc' => 'Flaky, buttery and shaped by hand by our pastry artisans.'],
                     ['icon' => 'fa-cake-candles', 'name' => 'Handcrafted cakes',    'image' => 'images/koba/koba-cakes.webp',     'desc' => 'Celebration cakes and slices, finished with care for every occasion.'],
                     ['icon' => 'fa-egg',          'name' => 'Signature breakfasts', 'image' => 'images/koba/koba-breakfast.webp', 'desc' => 'A slow, generous start to the day at our cafe tables.'],
-                    ['icon' => 'fa-mug-hot',      'name' => 'Specialty coffee',     'image' => 'images/koba/koba-coffee.webp',    'desc' => 'From the espresso bar to the elevated roastery at Peacock.'],
+                    ['icon' => 'fa-mug-hot',      'name' => 'Coffee',     'image' => 'images/koba/koba-coffee.webp',    'desc' => 'From the espresso bar to the elevated roastery at Peacock.'],
                     ['icon' => 'fa-plate-wheat',  'name' => 'Savory dishes',        'image' => 'images/koba/koba-savory.webp',    'desc' => 'Fresh-baked savory plates for lunch, or for the road.'],
                 ],
             ],
@@ -112,9 +112,9 @@ return [
                 ['src' => 'images/business/baked.jpg', 'shot' => 'Handcrafted celebration cake, close detail', 'caption' => 'Handcrafted cakes'],
                 ['src' => null, 'shot' => 'KOBA pastry counter, morning light',       'caption' => 'The pastry counter'],
                 ['src' => null, 'shot' => 'Peacock roastery, espresso being pulled',  'caption' => 'Peacock roastery'],
-                ['src' => null, 'shot' => 'Fresh croissants out of the oven',         'caption' => 'Artisan pastries'],
+                ['src' => null, 'shot' => 'Fresh croissants out of the oven',         'caption' => 'Pastries'],
                 ['src' => null, 'shot' => 'Signature breakfast plate, cafe table',    'caption' => 'Signature breakfasts'],
-                ['src' => null, 'shot' => 'Pastry artisan piping a cake',             'caption' => 'Our artisans'],
+                ['src' => null, 'shot' => 'Pastrycake',             'caption' => 'Our selected list'],
                 ['src' => null, 'shot' => 'Atlas cafe interior, afternoon',           'caption' => 'Atlas cafe'],
             ],
             'locations_label' => 'Find a KOBA near you',

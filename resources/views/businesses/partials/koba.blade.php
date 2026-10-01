@@ -161,7 +161,7 @@
                 </li>
                 <li class="kb-pillar">
                     <span class="kb-pillar-icon" aria-hidden="true"><i class="fa-solid fa-mug-hot"></i></span>
-                    <strong>Specialty coffee</strong>
+                    <strong>Coffee</strong>
                     <span>An elevated roastery experience at Peacock</span>
                 </li>
             </ul>

@@ -27,7 +27,9 @@
 
 @include('partials.partners')
 
+{{-- Hidden for now — kept for future use.
 @include('partials.careers')
+--}}
 
 @include('partials.contact')
 

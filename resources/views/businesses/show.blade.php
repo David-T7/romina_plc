@@ -269,7 +269,7 @@
 
         <div class="bz-section-head">
             <span class="bz-label">{{ $brand['locations_label'] }}</span>
-            <h2>{{ $brand['locations_title'] ?? (count($brand['locations']) === 1 ? 'One address, worth the trip.' : 'Our Locations') }}</h2>
+            <h2>{{ $brand['locations_title'] ?? (count($brand['locations']) === 1 ? 'Worth the trip.' : 'Our Locations') }}</h2>
         </div>
 
         <ul class="bz-loc-grid">
