@@ -11,6 +11,7 @@
         ['name' => 'Meskott',            'image' => asset('images/brands/meskott-final.png'), 'alt' => 'Meskott Culinary Experience'],
         ['name' => 'Bacio',              'image' => asset('images/brands/bacio.png'),         'alt' => 'Bacio'],
         ['name' => 'Jaquar World',       'image' => asset('images/brands/jaquar.png'),        'alt' => 'Jaquar World Addis Ababa'],
+        ['name' => 'Michael Girma CO',   'image' => asset('images/brands/michael-girma.webp'),        'alt' => 'Michael Girma CO'],
     ];
     ?>
 
@@ -20,7 +21,7 @@
             <p class="mark">
                 <span class="mark-rule"></span>
                 <i></i>
-                Our brands
+                Our Brands
             </p>
         </div>
 

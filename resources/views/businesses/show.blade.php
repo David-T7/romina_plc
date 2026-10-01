@@ -53,7 +53,7 @@
 
             <div class="story-actions">
                 @if ($tel)
-                    <a href="tel:{{ $tel }}" class="story-btn story-btn--solid">
+                    <a href="tel:{{ $tel }}" class="story-btn story-btn ">
                         <i class="fa-solid fa-phone" aria-hidden="true"></i>
                         {{ $brand['phone'] }}
                     </a>
