@@ -8,7 +8,7 @@
        [data-kb-speed]   parallax (px per px scrolled)
        .kb-marquee       ticker whose speed/direction follow the scroll
        .kb-reveal        words light up as the statement is read
-       .kb-showcase      pinned section, cards slide sideways
+       .kb-spot          "What we make" spotlight carousel (its own JS)
 ===================================================== --}}
 
 @php
@@ -171,47 +171,67 @@
 </section>
 
 
-{{-- ============ SHOWCASE — pinned; cards slide sideways ============ --}}
-<section class="kb-showcase" aria-labelledby="kbShowcaseTitle">
-    <div class="kb-showcase-sticky">
+{{-- ============ SHOWCASE — spotlight carousel ============ --}}
+<section class="kb-spot" aria-labelledby="kbShowcaseTitle">
+    <div class="container">
 
-        <div class="container kb-showcase-head">
+        <div class="kb-spot-head">
             <div>
                 <span class="bz-label">{{ $brand['highlights']['label'] }}</span>
                 <h2 id="kbShowcaseTitle">{{ $brand['highlights']['title'] }}</h2>
             </div>
-            <span class="kb-showcase-count" aria-hidden="true">
-                <b class="kb-showcase-now">01</b> / {{ sprintf('%02d', count($items)) }}
-            </span>
+            <div class="kb-spot-nav">
+                <span class="kb-spot-count" aria-hidden="true">
+                    <b class="kb-spot-now">01</b> / {{ sprintf('%02d', count($items)) }}
+                </span>
+            </div>
         </div>
 
-        <div class="kb-showcase-viewport">
-            <ul class="kb-track">
+        <div class="kb-spot-stage" role="group" aria-roledescription="carousel"
+             aria-label="{{ $brand['highlights']['title'] }}" tabindex="0">
+            <ul class="kb-spot-track">
                 @foreach ($items as $item)
-                    <li class="kb-card">
-                        <span class="kb-card-num">{{ sprintf('%02d', $loop->iteration) }}</span>
-                        <div class="kb-card-art" aria-hidden="true">
-                            <svg class="kb-card-blob" viewBox="0 0 200 200">
-                                <path transform="translate(100 100) rotate({{ $loop->index * 67 }})" d="{{ $loop->odd ? $blobA : $blobB }}"/>
-                            </svg>
+                    <li class="kb-spot-card" role="group" aria-roledescription="slide"
+                        aria-label="{{ $loop->iteration }} of {{ count($items) }}">
+                        <div class="kb-spot-art">
                             @if (!empty($item['image']))
-                                <img class="kb-card-img" src="{{ asset($item['image']) }}" alt="" loading="lazy">
+                                <img class="kb-spot-img" src="{{ asset($item['image']) }}" alt="{{ $item['name'] }}" loading="lazy">
                             @else
-                                <i class="fa-solid {{ $item['icon'] }}"></i>
+                                <i class="fa-solid {{ $item['icon'] }}" aria-hidden="true"></i>
                             @endif
                         </div>
-                        <h3>{{ $item['name'] }}</h3>
-                        @if (!empty($item['desc']))
-                            <p>{{ $item['desc'] }}</p>
-                        @endif
+                        <span class="kb-spot-shade" aria-hidden="true"></span>
+                        <div class="kb-spot-body">
+                            <h3>{{ $item['name'] }}</h3>
+                            @if (!empty($item['desc']))
+                                <p>{{ $item['desc'] }}</p>
+                            @endif
+                        </div>
                     </li>
                 @endforeach
             </ul>
+
+            {{-- arrows flank the stage, vertically centred just outside the side cards --}}
+            <button type="button" class="kb-spot-arrow kb-spot-prev" aria-label="Previous">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="kb-spot-arrow kb-spot-next" aria-label="Next">
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
         </div>
 
-        <div class="container">
-            <div class="kb-progress" aria-hidden="true"><i></i></div>
+        <div class="kb-spot-progress" role="tablist" aria-label="Choose item">
+            <span class="kb-spot-line" aria-hidden="true"></span>
+            <span class="kb-spot-fill" aria-hidden="true"></span>
+            <span class="kb-spot-dot" aria-hidden="true"></span>
+            @foreach ($items as $item)
+                <button type="button" class="kb-spot-pip" role="tab"
+                        aria-label="Show {{ $item['name'] }}"
+                        aria-selected="{{ $loop->first ? 'true' : 'false' }}"></button>
+            @endforeach
         </div>
+
+        <p class="kb-spot-live" aria-live="polite"></p>
 
     </div>
 </section>

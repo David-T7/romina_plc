@@ -81,6 +81,7 @@ return [
             'name'       => 'KOBA Patisserie & Bakery',
             'menu'       => 'KOBA Patisserie',
             'group'      => 'culinary',
+            'theme'      => 'koba',   // KOBA green re-tint of the shared lower sections (see .bz-theme--koba)
             'kicker'     => 'Patisserie & bakery, established 2020',
             'intro'      => 'Crafted with passion. Made fresh, every day, across Addis Ababa.',
             'badge'      => ['value' => '2020', 'label' => 'Established'],

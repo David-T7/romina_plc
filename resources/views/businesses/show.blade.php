@@ -533,8 +533,7 @@
    · parallax on [data-kb-speed]
    · marquee that speeds up / reverses with the scroll
    · statement words light up as it is read
-   · pinned showcase whose cards slide sideways
-   Off for reduced motion; pin + parallax off below 900px.
+   Off for reduced motion; parallax off below 900px.
 ===================================================== */
 (function () {
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -551,43 +550,11 @@
     var words     = Array.prototype.slice.call(document.querySelectorAll('.kb-word'));
     var reveal    = document.querySelector('.kb-reveal');
     var track     = document.querySelector('.kb-marquee-track');
-    var showcase  = document.querySelector('.kb-showcase');
-    var cardTrack = showcase && showcase.querySelector('.kb-track');
-    var viewport  = showcase && showcase.querySelector('.kb-showcase-viewport');
-    var bar       = showcase && showcase.querySelector('.kb-progress i');
-    var nowEl     = showcase && showcase.querySelector('.kb-showcase-now');
-    var cards     = cardTrack ? cardTrack.children.length : 0;
 
     var lastY = window.scrollY, velocity = 0, ticking = false;
 
-    /* ---- Pinned showcase: section tall enough to scroll the track sideways ---- */
-    var pinDist = 0;
-    var head    = showcase && showcase.querySelector('.kb-showcase-head h2');
-    function sizeShowcase() {
-        if (!showcase) return;
-
-        /* Line the first card up with the heading (the container width varies) */
-        var left = Math.round(head.getBoundingClientRect().left);
-        viewport.style.paddingLeft       = left + 'px';
-        viewport.style.scrollPaddingLeft = left + 'px';
-
-        if (wide.matches) {
-            /* snap-scrolling (mobile mode) may have nudged the strip — reset it */
-            viewport.scrollLeft = 0;
-            pinDist = Math.max(0, cardTrack.scrollWidth - viewport.clientWidth);
-            showcase.style.height = (window.innerHeight + pinDist) + 'px';
-            showcase.classList.add('is-pinned');
-        } else {
-            pinDist = 0;
-            showcase.style.height = '';
-            showcase.classList.remove('is-pinned');
-            cardTrack.style.transform = '';
-        }
-    }
-
     function update() {
         ticking = false;
-        var y  = window.scrollY;
         var vh = window.innerHeight;
 
         /* parallax (desktop only) */
@@ -604,16 +571,6 @@
             var p  = (vh * 0.85 - r2.top) / (r2.height + vh * 0.35);
             var lit = Math.round(Math.max(0, Math.min(1, p)) * words.length);
             words.forEach(function (w, i) { w.classList.toggle('on', i < lit); });
-        }
-
-        /* pinned showcase */
-        if (showcase && pinDist) {
-            var r3 = showcase.getBoundingClientRect();
-            var x  = Math.max(0, Math.min(pinDist, -r3.top));
-            cardTrack.style.transform = 'translate3d(' + (-x).toFixed(1) + 'px,0,0)';
-            var prog = pinDist ? x / pinDist : 0;
-            if (bar) bar.style.transform = 'scaleX(' + prog.toFixed(3) + ')';
-            if (nowEl) nowEl.textContent = String(Math.min(cards, Math.floor(prog * (cards - 0.001)) + 1)).padStart(2, '0');
         }
     }
 
@@ -642,11 +599,170 @@
         window.addEventListener('resize', measure);
     }
 
-    sizeShowcase();
     update();
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', function () { sizeShowcase(); update(); });
-    window.addEventListener('load', function () { sizeShowcase(); update(); });
+    window.addEventListener('resize', update);
+    window.addEventListener('load', update);
+}());
+
+/* =====================================================
+   KOBA — "What we make" spotlight carousel
+   Active card centred + large; neighbours scaled, dimmed
+   and blurred; the row loops. Autoplay every ~4s (pauses
+   on hover / focus / touch / off-screen / hidden tab and
+   resumes after ~6s idle). Swipe / drag (pointer), arrow
+   keys when focused, click a side card or a progress pip
+   to jump. A live region announces user-driven changes.
+   Reduced motion → no autoplay / zoom, instant switches.
+===================================================== */
+(function () {
+    var root = document.querySelector('.kb-spot');
+    if (!root) return;
+
+    var stage   = root.querySelector('.kb-spot-stage');
+    var cards   = Array.prototype.slice.call(root.querySelectorAll('.kb-spot-card'));
+    var prevBtn = root.querySelector('.kb-spot-prev');
+    var nextBtn = root.querySelector('.kb-spot-next');
+    var nowEl   = root.querySelector('.kb-spot-now');
+    var dot     = root.querySelector('.kb-spot-dot');
+    var pips    = Array.prototype.slice.call(root.querySelectorAll('.kb-spot-pip'));
+    var fill    = root.querySelector('.kb-spot-fill');
+    var live    = root.querySelector('.kb-spot-live');
+    var n       = cards.length;
+    if (!n) return;
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var active  = 0;
+    var AUTO    = 4000;   /* autoplay interval */
+    var RESUME  = 6000;   /* idle delay before autoplay resumes */
+    var autoTimer = null, idleTimer = null;
+    var paused = false, visible = true;
+
+    /* shortest signed distance on the ring */
+    function offsetOf(i) {
+        var d = i - active;
+        if (d >  n / 2) d -= n;
+        if (d < -n / 2) d += n;
+        return d;
+    }
+
+    function place() {
+        var SCALE = 0.78;                         /* neighbour scale */
+        var w     = cards[0].offsetWidth;         /* active card width */
+        var gap   = window.matchMedia('(max-width: 1000px)').matches ? 20 : 32;
+        /* centre-to-centre step = active half + gap + scaled neighbour half
+           → a clear gap between the active edge and each neighbour, no overlap */
+        var step  = w / 2 + gap + (w * SCALE) / 2;
+        /* never push a neighbour past the stage edge: keep it fully visible */
+        var maxStep = stage.offsetWidth / 2 - (w * SCALE) / 2 - 2;
+        if (step > maxStep) step = maxStep;
+
+        cards.forEach(function (card, i) {
+            var off = offsetOf(i);
+            var abs = Math.abs(off);
+            var shown = abs <= 1;
+            card.style.transform = 'translate(-50%, -50%) translateX(' + (off * step).toFixed(1) + 'px) scale(' + (off === 0 ? 1 : SCALE) + ')';
+            card.style.opacity = shown ? (off === 0 ? 1 : 0.45) : 0;
+            card.style.filter  = abs === 1 ? 'blur(1px)' : '';
+            card.style.zIndex  = off === 0 ? 3 : (abs === 1 ? 2 : 1);
+            card.style.pointerEvents = shown ? 'auto' : 'none';
+            card.classList.toggle('is-active', off === 0);
+            card.setAttribute('aria-hidden', off === 0 ? 'false' : 'true');
+        });
+
+        if (nowEl) nowEl.textContent = String(active + 1).padStart(2, '0');
+        pips.forEach(function (p, i) { p.setAttribute('aria-selected', i === active ? 'true' : 'false'); });
+        if (dot && pips[active]) {
+            var p = pips[active];
+            dot.style.transform = 'translateX(' + (p.offsetLeft + p.offsetWidth / 2) + 'px)';
+        }
+    }
+
+    function go(i, announce) {
+        active = (i % n + n) % n;
+        place();
+        if (announce && live) {
+            var h = cards[active].querySelector('h3');
+            live.textContent = (h ? h.textContent : ('Item ' + (active + 1))) + ', ' + (active + 1) + ' of ' + n;
+        }
+    }
+
+    /* ---- autoplay ---- */
+    function paintCountdown() {              /* (re)start the progress-line fill in sync */
+        if (!fill || reduced) return;
+        root.classList.remove('is-counting');
+        void fill.offsetWidth;              /* reflow so the animation restarts from 0 */
+        root.classList.add('is-counting');
+        fill.style.animationPlayState = 'running';
+    }
+    function startAuto() {
+        if (reduced || paused || !visible) return;
+        stopAuto();
+        paintCountdown();
+        autoTimer = setInterval(function () { go(active + 1, false); paintCountdown(); }, AUTO);
+    }
+    function stopAuto() {
+        if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+        if (fill) fill.style.animationPlayState = 'paused';   /* freeze the countdown */
+    }
+    function pause()  { paused = true;  stopAuto(); }
+    function resume() { paused = false; startAuto(); }
+    function nudge()  {                 /* user acted: hold, then resume when idle */
+        pause();
+        if (idleTimer) clearTimeout(idleTimer);
+        idleTimer = setTimeout(resume, RESUME);
+    }
+
+    /* ---- controls ---- */
+    function userGo(i) { go(i, true); nudge(); }
+    if (prevBtn) prevBtn.addEventListener('click', function () { userGo(active - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { userGo(active + 1); });
+    pips.forEach(function (p, i) { p.addEventListener('click', function () { userGo(i); }); });
+    cards.forEach(function (card, i) {
+        card.addEventListener('click', function () { if (i !== active) userGo(i); });
+    });
+
+    /* arrow keys when the carousel holds focus */
+    root.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); userGo(active - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); userGo(active + 1); }
+    });
+
+    /* pause on hover / focus */
+    root.addEventListener('mouseenter', pause);
+    root.addEventListener('mouseleave', resume);
+    root.addEventListener('focusin', pause);
+    root.addEventListener('focusout', resume);
+
+    /* ---- pointer swipe / drag (touch + mouse) ---- */
+    var x0 = null, dragging = false;
+    stage.addEventListener('pointerdown', function (e) { x0 = e.clientX; dragging = true; pause(); });
+    window.addEventListener('pointerup', function (e) {
+        if (!dragging) return;
+        dragging = false;
+        var dx = e.clientX - x0;
+        if (Math.abs(dx) > 40) userGo(active + (dx < 0 ? 1 : -1));
+        else nudge();
+        x0 = null;
+    });
+
+    /* ---- pause when off-screen or the tab is hidden ---- */
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+            visible = entries[0].isIntersecting;
+            if (visible) startAuto(); else stopAuto();
+        }, { threshold: 0.25 });
+        io.observe(root);
+    }
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) stopAuto(); else startAuto();
+    });
+
+    window.addEventListener('resize', place);
+    window.addEventListener('load', place);
+
+    go(0, false);
+    startAuto();
 }());
 </script>
 @endif
