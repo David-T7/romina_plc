@@ -178,7 +178,7 @@ return [
             'name'       => 'Romina Coffee',
             'menu'       => 'Romina Coffee',
             'group'      => 'coffee',
-            'theme'      => 'coffee',   // warm espresso/crema re-tint (see .bz-theme--coffee)
+            'theme'      => 'coffee',   // black & white re-tint with the site red (see .bz-theme--coffee)
             'kicker'     => 'Ethiopian Arabica, exported since 2009',
             'intro'      => 'Upholding the legacy of Ethiopian coffee, from farm to cup, across four continents.',
             'badge'      => ['value' => '2009', 'label' => 'Exporting since'],
