@@ -38,13 +38,13 @@
             </div>
 
             <h2 class="story-title story-layer story-layer--2">
-                Five decades of<br>
-                <span>building together.</span>
+                Five Decades of<br>
+                <span>Building Together.</span>
             </h2>
 
             <p class="story-text story-layer story-layer--1">
                 Established in 1973 and based in Addis Ababa, Ethiopia, Romina Group is a
-                formidable Ethiopian holding company that has evolved from a humble beginning
+                formidable Ethiopian Holding company that has evolved from a humble beginning
                 into a robust and diversified enterprise. Our five decades of growth have been
                 marked by strategic expansion, successful partnerships, and an unwavering
                 commitment to excellence across all our endeavours.

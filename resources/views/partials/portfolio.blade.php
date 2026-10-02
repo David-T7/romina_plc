@@ -12,10 +12,10 @@
             <p class="mark tone-white">
                 <span class="mark-rule"></span>
                 <i aria-hidden="true"></i>
-                Business portfolio
+                Our Businesses
             </p>
 
-            <h2 class="t-h2 light">Four sectors, built from one restaurant.</h2>
+            <h2 class="t-h2 light">Our Diversified Portfolio</h2>
 
         </div>
 
@@ -36,9 +36,9 @@
                             alt="Romina Restaurant interior, evening service"
                         >
 
-                        <div class="portfolio-image-caption">
-                            Romina Restaurant interior, evening service
-                        </div>
+                        {{-- <div class="portfolio-image-caption">
+                            Romina Restaurant, evening service
+                        </div> --}}
 
                     </div>
 
@@ -50,28 +50,28 @@
                         </span>
 
                         <h3>
-                            Restaurant management
-                            &amp; hospitality
+                            Restaurant Management
+                            &amp; Hospitality
                         </h3>
 
                         <p>
-                            Home-styled dishes, warm service and
-                            three distinct culinary brands across
+                            Home-styled Dishes, Warm Service and
+                            Distinct Culinary Brands across
                             Addis Ababa.
                         </p>
 
 
-                        <div class="portfolio-pills">
+                        {{-- <div class="portfolio-pills">
 
                             <span>Romina Restaurants</span>
                             <span>KOBA</span>
                             <span>Meskott</span>
 
-                        </div>
+                        </div> --}}
 
 
-                        <a href="#brands" class="portfolio-link">
-                            Explore our restaurants
+                        <a href="businesses/romina-restaurants" class="portfolio-link">
+                            Explore our Restaurant
                             <span><i class="fa-solid fa-arrow-right"></i></span>
                         </a>
 
@@ -90,9 +90,9 @@
                             alt="Romina Coffee"
                         >
 
-                        <div class="portfolio-image-caption">
+                        {{-- <div class="portfolio-image-caption">
                             Romina Coffee, crafted for everyday moments
-                        </div>
+                        </div> --}}
 
                     </div>
 
@@ -104,27 +104,25 @@
                         </span>
 
                         <h3>
-                            Coffee &amp; beverage
-                            experiences
+                            Coffee Experiences
                         </h3>
 
                         <p>
-                            Thoughtfully sourced coffee, distinctive
+                            Thoughtfully Sourced Coffee, Distinctive
                             spaces and a growing culture built around
                             every cup.
                         </p>
 
 
-                        <div class="portfolio-pills">
+                        {{-- <div class="portfolio-pills">
 
                             <span>Romina Coffee</span>
-                            <span>Specialty Coffee</span>
                             <span>Retail</span>
 
-                        </div>
+                        </div> --}}
 
 
-                        <a href="#brands" class="portfolio-link">
+                        <a href="/businesses/romina-coffee" class="portfolio-link">
                             Explore Romina Coffee
                             <span><i class="fa-solid fa-arrow-right"></i></span>
                         </a>
@@ -144,9 +142,9 @@
                             alt="Business investment and ventures"
                         >
 
-                        <div class="portfolio-image-caption">
+                        {{-- <div class="portfolio-image-caption">
                             Building the next generation of businesses
-                        </div>
+                        </div> --}}
 
                     </div>
 
@@ -162,21 +160,21 @@
                         </h3>
 
                         <p>
-                            Spaces designed for people and business
+                            Spaces Designed for People and Business
                         </p>
 
 
-                        <div class="portfolio-pills">
+                        {{-- <div class="portfolio-pills">
 
                             <span>Investments</span>
                             <span>New Ventures</span>
                             <span>Partnerships</span>
 
-                        </div>
+                        </div> --}}
 
 
-                        <a href="#brands" class="portfolio-link">
-                            Explore our ventures
+                        <a href="/businesses/jaquar-world" class="portfolio-link">
+                            Explore our Appliances
                             <span><i class="fa-solid fa-arrow-right"></i></span>
                         </a>
 
@@ -195,11 +193,11 @@
                             alt="Business property and real estate"
                         >
 
-                        <div class="portfolio-image-caption">
+                        {{-- <div class="portfolio-image-caption">
                             Identifying opportunities, supporting
                             entrepreneurs and building businesses
                             with long-term potential.
-                        </div>
+                        </div> --}}
 
                     </div>
 
@@ -211,7 +209,7 @@
                         </span>
 
                         <h3>
-                            Patisseries
+                            Cakes &amp; Pastry
                         </h3>
 
                         <p>
@@ -220,17 +218,17 @@
                         </p>
 
 
-                        <div class="portfolio-pills">
+                        {{-- <div class="portfolio-pills">
 
                             <span>Patisseries</span>
                             <span>Passion</span>
                             <span>Cake</span>
 
-                        </div>
+                        </div> --}}
 
 
-                        <a href="#brands" class="portfolio-link">
-                            Explore our properties
+                        <a href="/businesses/koba-patisserie" class="portfolio-link">
+                            Explore our Pastries
                             <span><i class="fa-solid fa-arrow-right"></i></span>
                         </a>
 
