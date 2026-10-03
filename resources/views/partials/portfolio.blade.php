@@ -9,19 +9,30 @@
         <!-- Portfolio Header -->
         <div class="portfolio-header">
 
-            <p class="mark tone-white">
-                <span class="mark-rule"></span>
-                <i aria-hidden="true"></i>
-                Our Businesses
-            </p>
+            <div>
+                <p class="mark tone-white">
+                    <span class="mark-rule"></span>
+                    <i aria-hidden="true"></i>
+                    Our Businesses
+                </p>
 
-            <h2 class="t-h2 light">Our Diversified Portfolio</h2>
+                <h2 class="t-h2 light">Our Diversified Portfolio</h2>
+            </div>
+
+            <div class="ac-arrows ac-arrows--on-dark portfolio-arrows" role="group" aria-label="Browse businesses">
+                <button class="portfolio-prev" aria-label="Previous business" disabled>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button class="portfolio-next" aria-label="Next business">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
 
         </div>
 
 
         <!-- Portfolio Slider -->
-        <div class="portfolio-slider-wrapper">
+        <div class="portfolio-slider-wrapper" tabindex="0" aria-label="Our businesses">
 
             <div class="portfolio-track">
 

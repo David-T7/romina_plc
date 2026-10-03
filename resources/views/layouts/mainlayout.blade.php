@@ -566,78 +566,68 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* =====================================================
    PORTFOLIO SLIDER
+   Cards scroll sideways via the prev/next arrows (or a
+   swipe / trackpad); counter + progress follow the track.
 ===================================================== */
 document.addEventListener('DOMContentLoaded', () => {
 
-    const section =
-        document.querySelector('.portfolio-section');
+    const section = document.querySelector('.portfolio-section');
+    if (!section) return;
 
-    const container =
-        section?.querySelector('.container');
+    const viewport      = section.querySelector('.portfolio-slider-wrapper');
+    const cards         = section.querySelectorAll('.portfolio-card');
+    const prevBtn       = section.querySelector('.portfolio-prev');
+    const nextBtn       = section.querySelector('.portfolio-next');
+    const progressBar   = section.querySelector('.portfolio-progress-active');
+    const progressDot   = section.querySelector('.portfolio-progress-dot');
+    const currentNumber = section.querySelector('.portfolio-current');
 
-    const track =
-        document.querySelector('.portfolio-track');
+    if (!viewport || !cards.length) return;
 
-    const cards =
-        document.querySelectorAll('.portfolio-card');
-
-    const progressBar =
-        document.querySelector('.portfolio-progress-active');
-
-    const progressDot =
-        document.querySelector('.portfolio-progress-dot');
-
-    const currentNumber =
-        document.querySelector('.portfolio-current');
-
-    if (!section || !container || !track || !cards.length || !progressBar || !progressDot) {
-        return;
+    function cardStep() {
+        const gap = parseFloat(getComputedStyle(cards[0].parentElement).columnGap) || 25;
+        return cards[0].offsetWidth + gap;
     }
 
-    function getHorizontalDistance() {
-        return Math.max(0, track.scrollWidth - container.clientWidth);
+    function update() {
+        const max      = viewport.scrollWidth - viewport.clientWidth;
+        const progress = max > 0 ? viewport.scrollLeft / max : 0;
+        const pct      = progress * 100;
+
+        if (progressBar) progressBar.style.width = pct + '%';
+        if (progressDot) progressDot.style.left  = `calc(${pct}% - 5px)`;
+
+        let index = Math.round(viewport.scrollLeft / cardStep());
+        if (progress > 0.99) index = cards.length - 1;
+        index = Math.max(0, Math.min(cards.length - 1, index));
+        if (currentNumber) currentNumber.textContent = String(index + 1).padStart(2, '0');
+
+        if (prevBtn) prevBtn.disabled = viewport.scrollLeft <= 2;
+        if (nextBtn) nextBtn.disabled = viewport.scrollLeft >= max - 2;
     }
 
-    function getScrollProgress() {
-        const sectionTop    = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const viewportHeight = window.innerHeight;
-        const scrollTop     = window.pageYOffset || document.documentElement.scrollTop;
-        const distanceFromStart = scrollTop - sectionTop;
-        const scrollDistance    = sectionHeight - viewportHeight;
-        return Math.max(0, Math.min(1, distanceFromStart / scrollDistance));
+    function go(dir) {
+        viewport.scrollBy({ left: dir * cardStep(), behavior: 'smooth' });
     }
 
-    function updatePortfolio() {
-        const progress           = getScrollProgress();
-        const horizontalDistance = getHorizontalDistance();
-        const x                  = horizontalDistance * progress;
+    if (prevBtn) prevBtn.addEventListener('click', () => go(-1));
+    if (nextBtn) nextBtn.addEventListener('click', () => go(1));
 
-        track.style.transform = `translate3d(-${x}px, 0, 0)`;
-
-        const percentage = progress * 100;
-        progressBar.style.width = percentage + '%';
-        progressDot.style.left  = `calc(${percentage}% - 5px)`;
-
-        const cardWidth  = cards[0].offsetWidth;
-        const gap        = parseFloat(window.getComputedStyle(track).gap) || 25;
-        const cardStep   = cardWidth + gap;
-        let currentIndex = Math.round(x / cardStep);
-        currentIndex     = Math.max(0, Math.min(cards.length - 1, currentIndex));
-        currentNumber.textContent = String(currentIndex + 1).padStart(2, '0');
-    }
+    viewport.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); go(-1); }
+    });
 
     let ticking = false;
-    window.addEventListener('scroll', () => {
+    viewport.addEventListener('scroll', () => {
         if (!ticking) {
-            window.requestAnimationFrame(() => { updatePortfolio(); ticking = false; });
+            requestAnimationFrame(() => { update(); ticking = false; });
             ticking = true;
         }
     }, { passive: true });
 
-    window.addEventListener('resize', () => { updatePortfolio(); });
-
-    updatePortfolio();
+    window.addEventListener('resize', update);
+    update();
 
 });
 
@@ -1344,8 +1334,31 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     tabs.forEach(function (tab) {
-        tab.addEventListener('click', function () { switchTab(tab.dataset.brand); });
+        tab.addEventListener('click', function () { switchTab(tab.dataset.brand); revealTab(); });
     });
+
+    /* ---- mobile arrows: step through brands ------------------------ */
+    var tabList = section.querySelector('.brand-list');
+
+    /* scroll the strip (not the page) so the active tab sits in view */
+    function revealTab() {
+        var tab = section.querySelector('.brand-tab[data-state="active"]');
+        if (!tabList || !tab || tabList.scrollWidth <= tabList.clientWidth) return;
+        var left = tab.offsetLeft - tabList.offsetLeft - (tabList.clientWidth - tab.offsetWidth) / 2;
+        tabList.scrollTo({ left: Math.max(0, left), behavior: reduced ? 'auto' : 'smooth' });
+    }
+
+    function stepBrand(dir) {
+        var i = tabs.findIndex(function (t) { return t.dataset.brand === activeKey; });
+        var next = tabs[(i + dir + tabs.length) % tabs.length];
+        switchTab(next.dataset.brand);
+        revealTab();
+    }
+
+    var bPrev = section.querySelector('.brands-prev');
+    var bNext = section.querySelector('.brands-next');
+    if (bPrev) bPrev.addEventListener('click', function () { stepBrand(-1); });
+    if (bNext) bNext.addEventListener('click', function () { stepBrand(1); });
 
 });
 

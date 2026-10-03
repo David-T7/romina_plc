@@ -143,6 +143,16 @@
                     <i></i>
                     Featured brands
                 </p>
+
+                {{-- mobile only: step through the brands when the tab strip overflows --}}
+                <div class="ac-arrows brands-arrows" role="group" aria-label="Browse brands">
+                    <button class="brands-prev" aria-label="Previous brand">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <button class="brands-next" aria-label="Next brand">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
             </div>
 
             {{-- Tab strip --}}

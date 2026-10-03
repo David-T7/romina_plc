@@ -14829,3 +14829,87 @@ button {
     }
 
 }
+
+
+/* =====================================================
+   SLIDER ARROWS — shared variants of the .ac-arrows look
+   (Portfolio + Featured brands)
+===================================================== */
+
+.ac-arrows button:disabled { opacity: .35; cursor: default; pointer-events: none; }
+
+/* on dark backgrounds */
+.ac-arrows--on-dark button               { color: #fff; border-color: rgba(255,255,255,.28); }
+.ac-arrows--on-dark button:hover         { background: #fff; color: var(--deep-blue); border-color: #fff; }
+.ac-arrows--on-dark button:focus-visible { outline-color: #fff; }
+
+
+/* ---------- Portfolio: arrow-driven slider (no scroll-jacking) ---------- */
+
+.portfolio-section {
+    height: auto;
+    padding: clamp(60px, 8vw, 120px) 0;
+}
+
+.portfolio-section > .container {
+    position: relative;
+    height: auto;
+    padding-top: 0;
+    overflow: visible;
+}
+
+.portfolio-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin: 0 0 clamp(28px, 4vw, 48px);
+}
+
+.portfolio-arrows { display: flex; }
+
+.portfolio-slider-wrapper {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+.portfolio-slider-wrapper::-webkit-scrollbar { display: none; }
+.portfolio-slider-wrapper:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+
+.portfolio-track { transform: none; will-change: auto; }
+.portfolio-card  { scroll-snap-align: start; }
+
+.portfolio-progress-active,
+.portfolio-progress-dot { transition-duration: .2s; }
+
+@media (max-width: 900px) {
+    .portfolio-section { height: auto; }
+    .portfolio-header  { margin: 0 0 24px; }
+    .portfolio-card    { flex-basis: calc(100vw - 40px); max-width: 100%; }
+}
+
+@media (max-width: 480px) {
+    .portfolio-arrows button { width: 36px; height: 36px; }
+}
+
+
+/* ---------- Featured brands: arrows on mobile only ---------- */
+
+.brands-arrows { display: none; }
+
+@media (max-width: 768px) {
+    .brands-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+    }
+    .brands-head       { margin-bottom: 28px; }
+    .brands-head .mark { margin-bottom: 0; }
+    .brands-arrows     { display: flex; }
+
+    .brands .brands-arrows button               { width: 36px; height: 36px; }
+    .brands.is-dark .brands-arrows button       { color: #fff; border-color: rgba(255,255,255,.28); }
+    .brands.is-dark .brands-arrows button:hover { background: #fff; color: #0E2240; border-color: #fff; }
+}
