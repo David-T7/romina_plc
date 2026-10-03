@@ -716,6 +716,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { threshold: 0.25 }).observe(journey);
     }
 
+    /* quote masonry tiles rise in */
+    var quote = document.getElementById('cofQuote');
+    if (quote) {
+        new IntersectionObserver(function (entries, obs) {
+            if (entries[0].isIntersecting) {
+                quote.classList.add('go');
+                obs.unobserve(quote);
+            }
+        }, { threshold: 0.2 }).observe(quote);
+    }
+
     /* stats count-up */
     var statsEl = document.getElementById('cofStats');
     if (statsEl) {

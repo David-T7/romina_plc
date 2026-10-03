@@ -29,7 +29,7 @@
 
                 <!-- Photo -->
                 <div class="fup-photo">
-                    <img
+                    <img loading="lazy" decoding="async"
                         src="{{ asset('images/business/baked.jpg') }}"
                         alt="KOBA Patisserie &amp; Bakery – Atlas Branch"
                     >

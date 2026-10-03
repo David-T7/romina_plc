@@ -32,7 +32,7 @@
                 @foreach ($partners as $partner)
                     <div class="partner-tile">
                         @if ($partner['image'])
-                            <img src="{{ $partner['image'] }}" alt="{{ $partner['alt'] }}">
+                            <img loading="lazy" decoding="async" src="{{ $partner['image'] }}" alt="{{ $partner['alt'] }}">
                         @else
                             <span class="partner-tile-name">{{ $partner['name'] }}</span>
                         @endif
@@ -43,7 +43,7 @@
                 @foreach ($partners as $partner)
                     <div class="partner-tile" aria-hidden="true">
                         @if ($partner['image'])
-                            <img src="{{ $partner['image'] }}" alt="">
+                            <img loading="lazy" decoding="async" src="{{ $partner['image'] }}" alt="">
                         @else
                             <span class="partner-tile-name">{{ $partner['name'] }}</span>
                         @endif

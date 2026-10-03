@@ -196,7 +196,7 @@
                                         <div class="brands-media">
                                             <div class="brands-media-inner">
                                                 @if ($slide['src'])
-                                                    <img
+                                                    <img loading="lazy" decoding="async"
                                                         src="{{ asset($slide['src']) }}"
                                                         alt="{{ $slide['shot'] }}"
                                                         style="object-position: {{ $slide['pos'] ?? '50% 50%' }}"

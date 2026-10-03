@@ -119,7 +119,7 @@
                         <div class="executive-photo">
 
                             @if ($member['photo'])
-                                <img
+                                <img loading="lazy" decoding="async"
                                     src="{{ asset($member['photo']) }}"
                                     alt="{{ $member['name'] }}, {{ $member['position'] }}"
                                 >

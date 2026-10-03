@@ -37,7 +37,7 @@
                     <source src="{{ route('media.video', 'coffee-legacy.mp4') }}?v={{ filemtime($mp4Path) }}" type="video/mp4">
                 </video>
             @else
-                <img
+                <img loading="lazy" decoding="async"
                     src="{{ $poster }}"
                     alt="Green Ethiopian coffee beans drying on raised beds"
                 >
@@ -188,7 +188,7 @@
 
         <div class="cof-photo">
             <div class="cof-photo-in">
-                <img
+                <img loading="lazy" decoding="async"
                     src="{{ asset('images/coffee/drying-beds.jpg') }}"
                     alt="A farmer tending coffee on a drying bed"
                 >
@@ -252,14 +252,40 @@
 
 
     {{-- 3. QUOTE + MARKETS --}}
-    <div class="cof-wrap cof-quote">
-        <p class="cof-quote-text">"Spreading the magic beans across continents."</p>
-        <ul class="cof-markets">
-            <li>Europe</li>
-            <li>USA</li>
-            <li>Asia</li>
-            <li>Middle East</li>
-        </ul>
+    {{--   Left: quote + export markets. Right: masonry of coffee photos
+           (tile spans are set in CSS: .cof-mason-a … d). --}}
+    <div class="cof-wrap cof-quote" id="cofQuote">
+
+        <div class="cof-quote-copy">
+            <p class="cof-quote-text">"Spreading the Magic Across Continents."</p>
+            <p class="cof-markets-label">Exporting to</p>
+            <ul class="cof-markets">
+                <li>Europe</li>
+                <li>USA</li>
+                <li>Asia</li>
+                <li>Middle East</li>
+            </ul>
+        </div>
+
+        <div class="cof-mason">
+            <figure class="cof-mason-a">
+                <img src="{{ asset('images/business/coffee.jpg') }}" alt="Ripe red coffee cherries on the branch" loading="lazy">
+                <figcaption>Ripe cherries</figcaption>
+            </figure>
+            <figure class="cof-mason-b">
+                <img src="{{ asset('images/hero/hero-03.jpg') }}" alt="Misty coffee-growing highlands" loading="lazy">
+                <figcaption>The highlands</figcaption>
+            </figure>
+            <figure class="cof-mason-c">
+                <img src="{{ asset('images/coffee/green-beans.jpg') }}" alt="Green coffee beans on a raised drying bed" loading="lazy">
+                <figcaption>Green coffee</figcaption>
+            </figure>
+            <figure class="cof-mason-d">
+                <img src="{{ asset('images/hero/hero-01.jpg') }}" alt="Our team at a coffee nursery" loading="lazy">
+                <figcaption>At the nursery</figcaption>
+            </figure>
+        </div>
+
     </div>
 
 
@@ -280,7 +306,7 @@
         </ol>
 
         <div class="cof-j-sort">
-            <img
+            <img loading="lazy" decoding="async"
                 src="{{ asset('images/coffee/hand-sorting.jpg') }}"
                 alt="Hand-sorting green coffee at a processing station"
             >

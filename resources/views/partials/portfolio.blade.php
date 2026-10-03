@@ -42,7 +42,7 @@
 
                     <div class="portfolio-image">
 
-                        <img
+                        <img loading="lazy" decoding="async"
                             src="{{ asset('images/portfolio/restaurant.webp') }}"
                             alt="Romina Restaurant interior, evening service"
                         >
@@ -96,7 +96,7 @@
 
                     <div class="portfolio-image">
 
-                        <img
+                        <img loading="lazy" decoding="async"
                             src="{{ asset('images/portfolio/coffee.jpg') }}"
                             alt="Romina Coffee"
                         >
@@ -148,7 +148,7 @@
 
                     <div class="portfolio-image">
 
-                        <img
+                        <img loading="lazy" decoding="async"
                             src="{{ asset('images/portfolio/jaguar.jpg') }}"
                             alt="Business investment and ventures"
                         >
@@ -199,7 +199,7 @@
 
                     <div class="portfolio-image">
 
-                        <img
+                        <img loading="lazy" decoding="async"
                             src="{{ asset('images/portfolio/baked.jpg') }}"
                             alt="Business property and real estate"
                         >

@@ -14913,3 +14913,110 @@ button {
     .brands.is-dark .brands-arrows button       { color: #fff; border-color: rgba(255,255,255,.28); }
     .brands.is-dark .brands-arrows button:hover { background: #fff; color: #0E2240; border-color: #fff; }
 }
+
+
+/* =====================================================
+   COFFEE — QUOTE + MARKETS with masonry gallery
+   (overrides the stacked .cof-quote block above)
+===================================================== */
+
+.cof-quote {
+    margin-top: clamp(72px, 8vw, 120px);
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: clamp(36px, 5vw, 88px);
+}
+
+.cof-quote-copy {
+    display: flex;
+    flex-direction: column;
+}
+
+.cof-quote .cof-quote-text {
+    font-size: clamp(32px, 3.9vw, 60px);
+    max-width: 14ch;
+}
+
+.cof-markets-label {
+    margin: clamp(28px, 3vw, 44px) 0 16px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.55);
+}
+
+.cof-quote .cof-markets li { font-size: clamp(16px, 1.5vw, 21px); }
+
+/* masonry: 2 columns, offset spans on a 6-row grid */
+.cof-mason {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 12px;
+    height: clamp(420px, 40vw, 560px);
+}
+
+.cof-mason figure {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 3px;
+    background: rgba(255,255,255,.06);
+}
+
+.cof-mason-a { grid-column: 1; grid-row: 1 / 5; }
+.cof-mason-c { grid-column: 1; grid-row: 5 / 7; }
+.cof-mason-b { grid-column: 2; grid-row: 1 / 3; }
+.cof-mason-d { grid-column: 2; grid-row: 3 / 7; }
+
+.cof-mason img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 1.1s cubic-bezier(.16,1,.3,1);
+}
+
+.cof-mason figcaption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 28px 16px 12px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #fff;
+    background: linear-gradient(transparent, rgba(0,0,0,.55));
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .35s, transform .35s;
+}
+
+.cof-mason figure:hover img        { transform: scale(1.06); }
+.cof-mason figure:hover figcaption { opacity: 1; transform: none; }
+
+/* tiles rise in when the block scrolls into view (JS adds .go) */
+.cof-mason figure {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+}
+.cof-quote.go .cof-mason figure { opacity: 1; transform: none; }
+.cof-quote.go .cof-mason-b { transition-delay: .1s; }
+.cof-quote.go .cof-mason-c { transition-delay: .2s; }
+.cof-quote.go .cof-mason-d { transition-delay: .3s; }
+
+@media (max-width: 991px) {
+    .cof-quote { grid-template-columns: 1fr; }
+    .cof-mason { height: clamp(360px, 70vw, 520px); }
+}
+
+@media (max-width: 767px) {
+    .cof-mason { gap: 8px; height: 110vw; max-height: 480px; }
+    .cof-mason figcaption { opacity: 1; transform: none; padding: 20px 10px 8px; font-size: 11.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cof-mason figure { opacity: 1; transform: none; transition: none; }
+    .cof-mason img    { transition: none; }
+}
