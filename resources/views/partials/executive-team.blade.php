@@ -66,6 +66,12 @@
                     'photo'    => 'images/team/executive-08.jpg',
                     'role'     => 'Follows up on strategic initiatives, coordinates senior leaders, prepares important meetings and reports, and helps ensure decisions are implemented effectively.',
                 ],
+                [
+                    'name'     => 'Sameer Ahmed',
+                    'position' => 'Food & Beverage Director',
+                    'photo'    => 'images/team/executive-09.jpg',
+                    'role'     => 'Leads food and beverage operations across the Group\'s restaurants and patisseries, overseeing menus, service standards, kitchen quality and the guest experience.',
+                ],
             ],
         ],
     ];
