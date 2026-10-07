@@ -43,7 +43,7 @@
 
                     <div class="business-image"
                          style="background-image:
-                         url('{{ asset('images/business/coffee.jpg') }}');">
+                         url('{{ asset('images/coffee/warehouse-stacks.webp') }}');">
                     </div>
 
                     <div class="business-card-content">

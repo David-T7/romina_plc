@@ -12,7 +12,7 @@
         $hasMp4     = file_exists($mp4Path);
         $hasWebm    = file_exists($webmPath);
         $hasMobile  = file_exists($mobilePath);
-        $poster     = asset('images/coffee/green-beans.jpg');
+        $poster     = asset('images/coffee/green-beans-burlap.webp');
     @endphp
 
     <div class="cof-beans{{ $hasMp4 ? ' has-player' : '' }}" id="cofBeans">
@@ -189,11 +189,11 @@
         <div class="cof-photo">
             <div class="cof-photo-in">
                 <img loading="lazy" decoding="async"
-                    src="{{ asset('images/coffee/drying-beds.jpg') }}"
-                    alt="A farmer tending coffee on a drying bed"
+                    src="{{ asset('images/coffee/quality-control.webp') }}"
+                    alt="Quality control in the Romina Coffee warehouse"
                 >
             </div>
-            <p class="cof-caption">Drying beds. Photography from the Romina brand library.</p>
+            <p class="cof-caption">Quality control at our export warehouse.</p>
         </div>
 
         <ol class="cof-stats" id="cofStats">
@@ -269,20 +269,20 @@
 
         <div class="cof-mason">
             <figure class="cof-mason-a">
-                <img src="{{ asset('images/business/coffee.jpg') }}" alt="Ripe red coffee cherries on the branch" loading="lazy">
-                <figcaption>Ripe cherries</figcaption>
+                <img src="{{ asset('images/coffee/warehouse-gate.webp') }}" alt="Sacks of export coffee stacked in the warehouse" loading="lazy">
+                <figcaption>Ready for export</figcaption>
             </figure>
             <figure class="cof-mason-b">
-                <img src="{{ asset('images/hero/hero-03.jpg') }}" alt="Misty coffee-growing highlands" loading="lazy">
-                <figcaption>The highlands</figcaption>
+                <img src="{{ asset('images/coffee/romina-sack.webp') }}" alt="A Romina sack stamped Produce of Ethiopia, washed Arabica" loading="lazy">
+                <figcaption>Produce of Ethiopia</figcaption>
             </figure>
             <figure class="cof-mason-c">
-                <img src="{{ asset('images/coffee/green-beans.jpg') }}" alt="Green coffee beans on a raised drying bed" loading="lazy">
+                <img src="{{ asset('images/coffee/green-beans-burlap.webp') }}" alt="Green coffee beans in a burlap sack" loading="lazy">
                 <figcaption>Green coffee</figcaption>
             </figure>
             <figure class="cof-mason-d">
-                <img src="{{ asset('images/hero/hero-01.jpg') }}" alt="Our team at a coffee nursery" loading="lazy">
-                <figcaption>At the nursery</figcaption>
+                <img src="{{ asset('images/coffee/cupping-table.webp') }}" alt="Green coffee samples lined up on the cupping table" loading="lazy">
+                <figcaption>Cup testing</figcaption>
             </figure>
         </div>
 
@@ -307,7 +307,7 @@
 
         <div class="cof-j-sort">
             <img loading="lazy" decoding="async"
-                src="{{ asset('images/coffee/hand-sorting.jpg') }}"
+                src="{{ asset('images/coffee/sorting-line.webp') }}"
                 alt="Hand-sorting green coffee at a processing station"
             >
         </div>

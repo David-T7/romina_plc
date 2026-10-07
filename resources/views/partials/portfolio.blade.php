@@ -97,8 +97,8 @@
                     <div class="portfolio-image">
 
                         <img loading="lazy" decoding="async"
-                            src="{{ asset('images/portfolio/coffee.jpg') }}"
-                            alt="Romina Coffee"
+                            src="{{ asset('images/coffee/romina-sack.webp') }}"
+                            alt="A Romina coffee sack: produce of Ethiopia, washed Arabica"
                         >
 
                         {{-- <div class="portfolio-image-caption">

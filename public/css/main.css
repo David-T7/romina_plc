@@ -15020,3 +15020,8 @@ button {
     .cof-mason figure { opacity: 1; transform: none; transition: none; }
     .cof-mason img    { transition: none; }
 }
+
+/* Gallery mosaic: when a 7-tile block is left with only two tiles,
+   give each half the row so the grid ends flush (e.g. 9 photos). */
+.bz-tile:nth-child(7n + 1):nth-last-child(2),
+.bz-tile:nth-child(7n + 2):last-child { grid-column: span 2; grid-row: span 1; }

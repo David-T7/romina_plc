@@ -182,14 +182,14 @@ $approach_items = [
     [
         'num'   => '05',
         'id'    => 'appr-5',
-        'image' => 'images/business/coffee.jpg',
+        'image' => 'images/coffee/warehouse-stacks.webp',
         'title' => 'Looking Ahead',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="none"/></svg>',
     ],
     [
         'num'   => '06',
         'id'    => 'appr-6',
-        'image' => 'images/coffee/green-beans.jpg',
+        'image' => 'images/coffee/sorting-line.webp',
         'title' => 'Farmer & Staff Training',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
     ],

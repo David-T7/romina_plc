@@ -85,9 +85,9 @@
             'cta'       => 'Discover Romina Coffee',
             'href'      => '#coffee',
             'slides'    => [
-                ['src' => 'images/coffee/drying-beds.jpg',  'shot' => 'Farmer tending drying beds',      'caption' => 'Drying beds',  'pos' => '50% 30%'],
-                ['src' => 'images/coffee/green-beans.jpg',  'shot' => 'Green coffee beans on a raised bed','caption' => 'Green coffee','pos' => '50% 60%'],
-                ['src' => 'images/coffee/hand-sorting.jpg', 'shot' => 'Hand-sorting coffee at a station', 'caption' => 'Hand-sorting', 'pos' => '50% 50%'],
+                ['src' => 'images/coffee/processing-floor.webp',   'shot' => 'Our coffee processing and storage floor', 'caption' => 'Processing floor', 'pos' => '50% 50%'],
+                ['src' => 'images/coffee/green-beans-burlap.webp', 'shot' => 'Green coffee beans in a burlap sack',     'caption' => 'Green coffee',     'pos' => '50% 50%'],
+                ['src' => 'images/coffee/sample-tray.webp',        'shot' => 'A green bean in a Romina sample tray',    'caption' => 'Sample grading',   'pos' => '50% 50%'],
             ],
         ],
 
