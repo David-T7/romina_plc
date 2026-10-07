@@ -15048,3 +15048,150 @@ button {
         width: calc(50% - 10px);
     }
 }
+
+
+
+/* =========================================================
+   OUR STORY — About › Our History (plain two-column layout)
+========================================================= */
+
+.hist {
+    background: #fff;
+    padding: clamp(80px, 9vw, 130px) 0;
+}
+
+.hist-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 7vw, 110px);
+    align-items: start;
+}
+
+.hist-title span {
+    display: block;
+    color: #8396b2;
+}
+
+.hist-subtitle {
+    margin: 0;
+    font-size: clamp(24px, 2.2vw, 32px);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -.01em;
+    color: #0E2240;
+}
+
+.hist-text,
+.hist-note {
+    margin: 28px 0 0;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #5b6b82;
+}
+
+.hist-text strong { color: #0E2240; font-weight: 600; }
+
+.hist-note {
+    padding-left: 18px;
+    border-left: 3px solid #e3262e;
+    font-size: 15px;
+}
+
+/* stats */
+.hist-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 40px 0 0;
+    border-top: 1px solid rgba(14,34,64,.14);
+}
+
+.hist-stats > div {
+    padding: 22px 16px 0 0;
+}
+
+.hist-stats > div + div {
+    padding-left: 20px;
+    border-left: 1px solid rgba(14,34,64,.14);
+}
+
+.hist-stats dt {
+    font-size: clamp(30px, 3vw, 42px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -.02em;
+    color: #0E2240;
+}
+
+.hist-stats dd {
+    margin: 10px 0 0;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #5b6b82;
+}
+
+/* sectors */
+.hist-sectors {
+    list-style: none;
+    margin: 30px 0 0;
+    padding: 0;
+    border-top: 1px solid rgba(14,34,64,.14);
+}
+
+.hist-sectors li { border-bottom: 1px solid rgba(14,34,64,.14); }
+
+.hist-sectors a {
+    display: grid;
+    grid-template-columns: 30px 28px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 0;
+    color: #0E2240;
+    text-decoration: none;
+}
+
+.hist-sector-num   { font-size: 12px; font-weight: 700; color: #e3262e; }
+.hist-sector-icon  { font-size: 16px; color: #0E2240; text-align: center; }
+.hist-sector-name  { font-size: 16px; font-weight: 500; }
+.hist-sector-arrow { font-size: 13px; color: #8396b2; }
+
+.hist-sectors a:hover .hist-sector-name,
+.hist-sectors a:hover .hist-sector-arrow { color: #e3262e; }
+
+/* buttons — solid red primary, navy outline secondary */
+.hist-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 40px;
+}
+
+.hist-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 26px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.hist-btn--solid         { background: #e3262e; color: #fff; border: 1px solid #e3262e; }
+.hist-btn--solid:hover   { background: #c21f26; border-color: #c21f26; color: #fff; }
+.hist-btn--outline       { background: transparent; color: #0E2240; border: 1px solid rgba(14,34,64,.35); }
+.hist-btn--outline:hover { border-color: #0E2240; color: #0E2240; }
+
+.hist-btn:focus-visible,
+.hist-sectors a:focus-visible { outline: 2px solid #e3262e; outline-offset: 3px; }
+
+@media (max-width: 991px) {
+    .hist-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .hist-stats > div + div { padding-left: 12px; }
+    .hist-sectors a { grid-template-columns: 26px 24px 1fr auto; gap: 10px; }
+}

@@ -8,7 +8,7 @@
     'crumb' => 'Careers',
     'title' => 'Grow with a family business<br><span>that keeps growing.</span>',
     'text'  => 'We\'re always looking for talented, passionate people to join our team across restaurants, coffee, imports and group functions.',
-    'image' => 'images/hero/hero-01.jpg',
+    'image' => 'images/stock/team-meeting.webp',
 ])
 
 

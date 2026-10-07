@@ -153,7 +153,7 @@ return [
             'title'    => 'Four schools built in remote coffee-growing communities',
             'category' => 'csr',
             'date'     => '2026-07-15',
-            'image'    => 'images/hero/hero-01.jpg',
+            'image'    => 'images/stock/classroom.webp',
             'excerpt'  => 'As part of our CSR commitment, four new schools are improving access to education in the regions where our coffee is grown.',
             'body'     => [
                 'Romina Group has completed the construction of four schools in remote coffee-growing communities, expanding access to education for children in regions that have historically been under-served.',
@@ -167,7 +167,7 @@ return [
             'title'    => 'New potable-water site brings clean water closer to home',
             'category' => 'csr',
             'date'     => '2026-04-02',
-            'image'    => 'images/hero/hero-03.jpg',
+            'image'    => 'images/stock/clean-water.webp',
             'excerpt'  => 'A new water site serves families in one of the communities that grow our coffee.',
             'body'     => [
                 'A new potable-water site is now serving families in one of Romina Coffee\'s growing communities, bringing clean water within reach for households that previously travelled far to collect it.',

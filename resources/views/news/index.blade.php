@@ -8,7 +8,7 @@
     'crumb' => 'News',
     'title' => 'Stories from<br><span>the Group.</span>',
     'text'  => 'Events, launches, harvest updates, awards, community work and more from across our restaurants, coffee, imports and showrooms.',
-    'image' => 'images/hero/hero-02.jpg',
+    'image' => 'images/stock/boardroom.webp',
 ])
 
 

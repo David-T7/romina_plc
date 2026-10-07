@@ -7,7 +7,7 @@
     'crumb' => 'Careers',
     'title' => '<span>' . e($position['title']) . '</span>',
     'text'  => $position['summary'],
-    'image' => 'images/hero/hero-02.jpg',
+    'image' => 'images/stock/team-at-work.webp',
 ])
 
 

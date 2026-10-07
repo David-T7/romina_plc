@@ -154,35 +154,35 @@ $approach_items = [
     [
         'num'   => '01',
         'id'    => 'appr-1',
-        'image' => 'images/coffee/drying-beds.jpg',
+        'image' => 'images/stock/coffee-farmer-phone.webp',
         'title' => 'Farmer Support & Responsible Sourcing',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V12"/><path d="M12 12C11 7 6 4 2 5c0 4 3 8 10 7"/><path d="M12 12c1-5 6-8 10-7 0 4-3 8-10 7"/></svg>',
     ],
     [
         'num'   => '02',
         'id'    => 'appr-2',
-        'image' => 'images/hero/hero-01.jpg',
+        'image' => 'images/stock/community-gathering.webp',
         'title' => 'Community Development',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
     ],
     [
         'num'   => '03',
         'id'    => 'appr-3',
-        'image' => 'images/hero/hero-03.jpg',
+        'image' => 'images/stock/green-valley.webp',
         'title' => 'Environmental Commitment',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
     ],
     [
         'num'   => '04',
         'id'    => 'appr-4',
-        'image' => 'images/coffee/hand-sorting.jpg',
+        'image' => 'images/stock/clean-water.webp',
         'title' => 'Water Treatment',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5S5 10 5 15a7 7 0 0 0 14 0c0-5-7-12.5-7-12.5z"/></svg>',
     ],
     [
         'num'   => '05',
         'id'    => 'appr-5',
-        'image' => 'images/coffee/warehouse-stacks.webp',
+        'image' => 'images/stock/youth-looking-ahead.webp',
         'title' => 'Looking Ahead',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="none"/></svg>',
     ],
@@ -305,12 +305,6 @@ $approach_items = [
                   our coffee – practical, long-term investments in education,
                   mobility, and everyday essentials.
                 </p>
-                <div class="photo-placeholder">
-                  <span class="photo-placeholder-icon">
-                    <i class="fa-regular fa-image"></i>
-                  </span>
-                  <span>Photos will be shared</span>
-                </div>
               @break
 
               @case(2)
@@ -356,12 +350,6 @@ $approach_items = [
                   <li>Expanding reforestation partnerships</li>
                   <li>Supporting biodiversity conservation</li>
                 </ul>
-                <div class="photo-placeholder">
-                  <span class="photo-placeholder-icon">
-                    <i class="fa-regular fa-image"></i>
-                  </span>
-                  <span>Photos will be shared</span>
-                </div>
               @break
 
               @case(5)

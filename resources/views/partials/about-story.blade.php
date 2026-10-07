@@ -1,6 +1,7 @@
 {{-- =====================================================
-     OUR STORY — two glass panels set like an open book,
-     with pointer-driven 3D tilt (see "OUR STORY — 3D TILT" script).
+     OUR STORY — About › Our History
+     Two plain columns in the site's brand style: welcome on
+     the left, who we are + sectors on the right.
 ===================================================== --}}
 
 @php
@@ -14,35 +15,25 @@
     ];
 @endphp
 
-<section class="story" id="our-story">
+<section class="hist" id="our-story">
 
-    <div class="story-bg" style="background-image: url('{{ asset('images/hero/hero-01.jpg') }}');" aria-hidden="true"></div>
-    <span class="story-orb story-orb--red" aria-hidden="true"></span>
-    <span class="story-orb story-orb--blue" aria-hidden="true"></span>
-    <span class="story-year" aria-hidden="true">2026</span>
-
-    <div class="container story-grid">
+    <div class="container hist-grid">
 
         {{-- ============ LEFT: WELCOME ============ --}}
-        <article class="story-card story-card--welcome story-reveal" data-tilt>
+        <div class="hist-col">
 
-            <div class="story-glass" aria-hidden="true"></div>
-            <div class="story-glare" aria-hidden="true"></div>
+            <p class="mark">
+                <span class="mark-rule"></span>
+                <i aria-hidden="true"></i>
+                Welcome to Romina Group
+            </p>
 
-            <div class="story-layer story-layer--1">
-                <span class="story-kicker">
-                    <i class="fa-solid fa-star" aria-hidden="true"></i>
-                    Welcome to Romina Group
-                </span>
-                <p class="story-amh" lang="am">እንኳን ደህና መጡ</p>
-            </div>
-
-            <h2 class="story-title story-layer story-layer--2">
-                Five Decades of<br>
+            <h2 class="t-h2 hist-title">
+                Five Decades of
                 <span>Building Together.</span>
             </h2>
 
-            <p class="story-text story-layer story-layer--1">
+            <p class="hist-text">
                 Established in 1973 and based in Addis Ababa, Ethiopia, Romina Group is a
                 formidable Ethiopian Holding company that has evolved from a humble beginning
                 into a robust and diversified enterprise. Our five decades of growth have been
@@ -50,50 +41,48 @@
                 commitment to excellence across all our endeavours.
             </p>
 
-            <div class="story-stats story-layer story-layer--3">
-                <div class="story-stat">
-                    <strong>1973</strong>
-                    <span>Established</span>
+            <dl class="hist-stats">
+                <div>
+                    <dt>1973</dt>
+                    <dd>Established</dd>
                 </div>
-                <div class="story-stat">
-                    <strong>50<sup>+</sup></strong>
-                    <span>Years of growth</span>
+                <div>
+                    <dt>50+</dt>
+                    <dd>Years of growth</dd>
                 </div>
-                <div class="story-stat">
-                    <strong>4</strong>
-                    <span>Key sectors</span>
+                <div>
+                    <dt>4</dt>
+                    <dd>Key sectors</dd>
                 </div>
-            </div>
+            </dl>
 
-            <div class="story-actions story-layer story-layer--2">
-                <a href="{{ route('about.leadership') }}" class="story-btn story-btn--solid">
+            <div class="hist-actions">
+                <a href="{{ route('about.leadership') }}" class="hist-btn hist-btn--solid">
                     Meet Our Leadership
                     <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
-                <a href="{{ $home }}#brands" class="story-btn story-btn--ghost">
+                <a href="{{ $home }}#brands" class="hist-btn hist-btn--outline">
                     Explore Our Brands
                 </a>
             </div>
 
-        </article>
+        </div>
 
 
         {{-- ============ RIGHT: WHO WE ARE ============ --}}
-        <article class="story-card story-card--who story-reveal" data-tilt>
+        <div class="hist-col">
 
-            <div class="story-glass" aria-hidden="true"></div>
-            <div class="story-glare" aria-hidden="true"></div>
-
-            <span class="story-kicker story-layer story-layer--1">
-                <i class="fa-solid fa-earth-africa" aria-hidden="true"></i>
+            <p class="mark">
+                <span class="mark-rule"></span>
+                <i aria-hidden="true"></i>
                 Who We Are
-            </span>
+            </p>
 
-            <h3 class="story-subtitle story-layer story-layer--2">
+            <h3 class="hist-subtitle">
                 From a cherished restaurant in Arat Kilo to a diversified group.
             </h3>
 
-            <p class="story-text story-layer story-layer--1">
+            <p class="hist-text">
                 Romina Group was founded in 1973 by <strong>Girma Taye</strong>, a prominent,
                 self-made business leader, starting with a small, cherished restaurant in
                 Arat Kilo, in the heart of Addis Ababa. After over 50 years of dedicated service
@@ -101,34 +90,32 @@
                 spanning several key sectors:
             </p>
 
-            <ul class="story-sectors story-layer story-layer--3">
+            <ul class="hist-sectors">
                 @foreach ($storySectors as $sector)
                     <li>
-                        <a href="{{ $sector['href'] }}" class="story-sector">
-                            <span class="story-sector-num">0{{ $loop->iteration }}</span>
-                            <span class="story-sector-icon" aria-hidden="true">
-                                <i class="fa-solid {{ $sector['icon'] }}"></i>
-                            </span>
-                            <span class="story-sector-name">{{ $sector['name'] }}</span>
-                            <i class="fa-solid fa-arrow-right story-sector-arrow" aria-hidden="true"></i>
+                        <a href="{{ $sector['href'] }}">
+                            <span class="hist-sector-num">0{{ $loop->iteration }}</span>
+                            <i class="fa-solid {{ $sector['icon'] }} hist-sector-icon" aria-hidden="true"></i>
+                            <span class="hist-sector-name">{{ $sector['name'] }}</span>
+                            <i class="fa-solid fa-arrow-right hist-sector-arrow" aria-hidden="true"></i>
                         </a>
                     </li>
                 @endforeach
             </ul>
 
-            <p class="story-note story-layer story-layer--1">
+            <p class="hist-note">
                 Our diversified assets ensure sustainable growth for our stakeholders and
                 deliver satisfactory, high-quality service to our clients.
             </p>
 
-            <div class="story-actions story-layer story-layer--2">
-                <a href="{{ $home }}#contact" class="story-btn story-btn--ghost">
+            <div class="hist-actions">
+                <a href="{{ $home }}#contact" class="hist-btn hist-btn--outline">
                     Get in Touch
                     <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
             </div>
 
-        </article>
+        </div>
 
     </div>
 
