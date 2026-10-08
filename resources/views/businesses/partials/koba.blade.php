@@ -81,7 +81,7 @@
                 </path>
             </svg>
 
-            <div class="kb-arch" data-kb-speed="0.05">
+            <div class="kb-arch">
                 <img src="{{ asset($brand['image']) }}" alt="A handcrafted KOBA celebration cake">
             </div>
 
@@ -121,7 +121,6 @@
         @for ($r = 0; $r < 4; $r++)
             @foreach ($items as $item)
                 <span class="kb-marquee-item">{{ $item['name'] }}</span>
-                <i class="fa-solid fa-star kb-marquee-sep"></i>
             @endforeach
         @endfor
     </div>

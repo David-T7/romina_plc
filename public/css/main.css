@@ -11971,10 +11971,25 @@ button {
 ===================================================== */
 
 .bz-theme--koba {
-    --accent:       #0f4d2d;   /* KOBA green — the accent */
-    --accent-dark:  #0b3a22;   /* deeper green — pressed / bars */
-    --accent-light: #145c37;   /* lighter green — hover text */
-    --accent-soft:  #E8F1EC;   /* pale green tint — hover backgrounds */
+    --accent:       #03402c;   /* KOBA green — the dominant colour */
+    --accent-dark:  #022c1d;   /* deeper green — pressed / bars */
+    --accent-light: #0a5a3c;   /* lighter green — hover text */
+    --accent-soft:  #eef4f1;   /* pale green tint — hover backgrounds */
+    --red:          #C9A66B;   /* antique gold — the accent across the KOBA page */
+}
+
+/* Primary (solid) button → gold on the green hero */
+.bz-theme--koba .story-btn--solid {
+    background: var(--red);
+    color: #03402c;
+    border: 1px solid var(--red);
+    font-family: inherit;
+    font-style: normal;
+}
+
+.bz-theme--koba .story-btn--solid:hover {
+    background: #b8914f;
+    color: #ffffff;
 }
 
 /* Eyebrow labels (Gallery, Locations, Explore) → green */
@@ -11996,29 +12011,62 @@ button {
     outline-color: var(--accent);
 }
 
-/* ---- LOCATIONS ---- */
+/* ---- LOCATIONS — coffee-style white cards: a green wash slides in from
+        the left on hover, the card lifts and the pin deepens to gold ---- */
+.bz-theme--koba .bz-locations {
+    background: var(--white);
+}
 
 .bz-theme--koba .bz-loc {
-    border-left: 3px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+
+    background: var(--white);
+    border: 1px solid #e6e9ee;
+    border-radius: 6px;
 
     transition:
-        border-color .35s ease,
-        border-width .35s ease,
-        background .35s ease,
         transform .4s cubic-bezier(.22, 1, .36, 1),
-        box-shadow .5s ease;
+        box-shadow .4s ease,
+        border-color .4s ease;
+}
+
+.bz-theme--koba .bz-loc::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    background: linear-gradient(90deg, rgba(3, 64, 44, .08), transparent 55%);
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+}
+
+.bz-theme--koba .bz-loc:hover::before {
+    opacity: 1;
+}
+
+.bz-theme--koba .bz-loc-pin,
+.bz-theme--koba .bz-loc > div {
+    position: relative;
+    z-index: 1;
 }
 
 .bz-theme--koba .bz-loc:hover {
-    border-left-width: 6px;
-    border-left-color: var(--accent);
-    background: var(--accent-soft);
-    transform: translateY(-2px);
-    box-shadow: 0 18px 38px rgba(15, 77, 45, .14);
+    transform: translateY(-5px);
+    border-color: #d7dbe2;
+    box-shadow: 0 22px 44px rgba(3, 64, 44, .14);
 }
 
 .bz-theme--koba .bz-loc-pin {
     color: var(--accent);
+    transition: color .4s ease;
+}
+
+.bz-theme--koba .bz-loc:hover .bz-loc-pin {
+    color: var(--red);               /* deepen the pin to gold */
 }
 
 .bz-theme--koba .bz-loc h3 {
@@ -12052,86 +12100,28 @@ button {
 }
 
 .bz-theme--koba .bz-tag--soon {
-    background: var(--red);
+    background: #e3262e;
 }
 
-/* ---- EXPLORE OUR OTHER BUSINESSES ---- */
-
-/* top + left accent bar, revealed on hover (same easing as the shared card) */
-.bz-theme--koba .bz-more-card {
-    position: relative;
-    overflow: hidden;
-}
-
-.bz-theme--koba .bz-more-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-
-    width: 3px;
-    height: 100%;
-
-    background: var(--accent);
-
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform .45s cubic-bezier(.22, 1, .36, 1);
-}
-
-.bz-theme--koba .bz-more-card::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-
-    width: 100%;
-    height: 3px;
-
-    background: var(--accent);
-
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .45s cubic-bezier(.22, 1, .36, 1);
-}
-
-/* keep the card light on hover — the colour comes from the bar + title */
+/* ---- EXPLORE OUR OTHER BUSINESSES — coffee-style: the card fills with
+        KOBA green on hover, text flips white and the gold arrow nudges ---- */
 .bz-theme--koba .bz-more-card:hover {
-    background: var(--white);
+    background: var(--accent);
     border-color: var(--accent);
-    color: var(--deep-blue);
+    color: var(--white);
     transform: translateY(-6px);
 }
 
-.bz-theme--koba .bz-more-card:hover::before {
-    transform: scaleY(1);
-}
-
-.bz-theme--koba .bz-more-card:hover::after {
-    transform: scaleX(1);
-}
-
 .bz-theme--koba .bz-more-group {
-    color: var(--accent);
-}
-
-.bz-theme--koba .bz-more-name {
-    transition: color .4s ease;
-}
-
-.bz-theme--koba .bz-more-card:hover .bz-more-name {
-    color: var(--accent);
-}
-
-/* kicker keeps its grey on the now-light hover card */
-.bz-theme--koba .bz-more-card:hover .bz-more-kicker {
-    color: var(--gray);
+    color: var(--red);               /* gold label */
 }
 
 .bz-theme--koba .bz-more-arrow {
-    color: var(--accent);
+    color: var(--red);               /* gold arrow, stays visible on green */
+}
+
+.bz-theme--koba .bz-more-card:hover .bz-more-kicker {
+    color: rgba(255, 255, 255, .65);
 }
 
 /* ---- Focus-visible across the themed lower sections ---- */
@@ -13879,8 +13869,9 @@ button {
 
 /* =====================================================
    KOBA — bespoke brand page (Kubo-inspired)
-   Keeps the site's red / Roboto guideline over a deep
-   KOBA green (#0f4d2d) with organic blobs; text flips white.
+   Dominant deep KOBA green (#03402C) with an antique-gold
+   (#C9A66B) accent and white cards; rectangular framed
+   photo and cards. Text flips white on the green.
    Scroll effects: see "KOBA — scroll effects" script.
 ===================================================== */
 
@@ -13888,13 +13879,13 @@ button {
 .kb-about,
 .kb-spot {
     --kb-cream: #FDF4E7;
-    --kb-tan: #E8BE7D;
-    --kb-tan-soft: #F6E3C3;
-    --kb-ink: #0E2240;
+    --kb-tan: #C9A66B;        /* antique gold */
+    --kb-tan-soft: #E7D3AE;
+    --kb-ink: #03402c;        /* deep green ink */
 }
 
 .kb-blob path {
-    fill: #1a6b41;
+    fill: #0a5a3c;
 }
 
 
@@ -13917,7 +13908,7 @@ button {
 
     padding: 150px 0 120px;
 
-    background: #0f4d2d;
+    background: #03402c;
     color: #ffffff;
 }
 
@@ -14029,7 +14020,27 @@ button {
 
 .kb-hero-stage {
     position: relative;
-    height: min(640px, 74vh);
+    height: auto;
+    padding: 0 26px 26px 0;
+}
+
+/* Coffee-style framed photo: drop the morphing blob + rotating badge so
+   the image reads as a clean rectangular frame with an offset gold outline. */
+.kb-blob--main,
+.kb-badge {
+    display: none;
+}
+
+.kb-hero-stage::before {
+    content: "";
+    position: absolute;
+    top: 26px;
+    left: 26px;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+
+    border: 2px solid var(--red);
 }
 
 .kb-blob--main {
@@ -14039,19 +14050,16 @@ button {
 }
 
 .kb-arch {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    z-index: 1;
 
-    width: 60%;
-    aspect-ratio: 3 / 4;
+    width: 100%;
+    aspect-ratio: 4 / 5;
     overflow: hidden;
 
-    border-radius: 999px 999px 28px 28px;
-    box-shadow:
-        0 0 0 10px rgba(26, 107, 65, .55),
-        0 40px 80px rgba(0, 0, 0, .35);
+    border-radius: 0;
+    background: #022c1d;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, .4);
 }
 
 .kb-arch img {
@@ -14111,7 +14119,7 @@ button {
 
     border-radius: 50%;
     background: var(--red);
-    color: var(--white);
+    color: #03402c;
 
     font-size: 26px;
     font-weight: 900;
@@ -14212,7 +14220,7 @@ button {
     padding: 26px 0;
     overflow: hidden;
 
-    background: #0b3a22;
+    background: #022c1d;
     color: #ffffff;
 
     transform: rotate(-2deg);
@@ -14241,11 +14249,6 @@ button {
     -webkit-text-stroke: 1px #ffffff;
 }
 
-.kb-marquee-sep {
-    color: var(--red);
-    font-size: 18px;
-}
-
 
 /* ---------- ABOUT STATEMENT ---------- */
 
@@ -14255,7 +14258,7 @@ button {
 
     padding: 170px 0 130px;
 
-    background: #0b3a22;
+    background: #022c1d;
 }
 
 .kb-about .container {
@@ -14326,7 +14329,7 @@ button {
 
     padding: 28px 24px;
 
-    border-radius: 18px;
+    border-radius: 6px;
     background: var(--white);
 
     transition:
@@ -14347,21 +14350,19 @@ button {
     display: grid;
     place-items: center;
 
-    border-radius: 58% 42% 55% 45% / 45% 55% 45% 55%;
+    border-radius: 6px;
     background: var(--kb-tan);
     color: var(--kb-ink);
 
     font-size: 20px;
 
     transition:
-        border-radius .8s ease,
         background .4s ease,
         color .4s ease;
 }
 
 .kb-pillar:hover .kb-pillar-icon {
-    border-radius: 42% 58% 45% 55% / 55% 45% 55% 45%;
-    background: var(--red);
+    background: #03402c;
     color: var(--white);
 }
 
@@ -14388,7 +14389,7 @@ button {
 
 .kb-spot {
     position: relative;
-    background: #145c37;
+    background: #034f34;
     padding: 110px 0 100px;
 }
 
@@ -14448,8 +14449,8 @@ button {
     place-items: center;
 
     border: 1.5px solid #ffffff;
-    border-radius: 50%;
-    background: rgba(11, 58, 34, .6);
+    border-radius: 8px;
+    background: rgba(2, 44, 29, .6);
     -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
     color: #ffffff;
@@ -14469,7 +14470,7 @@ button {
 
 .kb-spot-arrow:hover {
     background: #ffffff;
-    color: #0b3a22;
+    color: #03402c;
     transform: translateY(-50%) scale(1.05);
 }
 
@@ -14503,8 +14504,8 @@ button {
     height: 100%;
 
     overflow: hidden;
-    background: #0b3a22;
-    border-radius: 18px;
+    background: #022c1d;
+    border-radius: 6px;
 
     transform: translate(-50%, -50%);
     will-change: transform, opacity;
@@ -14529,7 +14530,7 @@ button {
 
     display: grid;
     place-items: center;
-    background: #0b3a22;
+    background: #022c1d;
 }
 
 .kb-spot-img {
@@ -14567,7 +14568,7 @@ button {
     inset: 0;
     z-index: 1;
 
-    background: rgba(11, 58, 34, .6);
+    background: rgba(2, 44, 29, .6);
     transition: background .6s ease;
     pointer-events: none;
 }
@@ -14583,7 +14584,7 @@ button {
     inset: 0;
     z-index: 2;
 
-    background: linear-gradient(to top, rgba(11, 58, 34, .92) 0%, rgba(11, 58, 34, 0) 45%);
+    background: linear-gradient(to top, rgba(2, 44, 29, .92) 0%, rgba(2, 44, 29, 0) 45%);
     pointer-events: none;
 }
 
@@ -14740,7 +14741,8 @@ button {
     }
 
     .kb-hero-stage {
-        height: 520px;
+        height: auto;
+        max-width: 460px;
     }
 
     /* tablet: active card ~70% width, neighbours peeking */
@@ -14753,11 +14755,12 @@ button {
 @media (max-width: 640px) {
 
     .kb-hero-stage {
-        height: 420px;
+        height: auto;
+        max-width: none;
     }
 
     .kb-arch {
-        width: 68%;
+        width: 100%;
     }
 
     .kb-badge {
