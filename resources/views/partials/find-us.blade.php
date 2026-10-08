@@ -1,6 +1,34 @@
 <!-- ==========================================
      FIND US ON THE MAP
+     Only Romina Group locations are pinned. The base map
+     (Esri Light Gray Canvas) has no business listings, so no other places show.
+     Coordinates come from OpenStreetMap; edit $sites to move or add a pin.
 =========================================== -->
+
+@php
+    $sites = [
+        ['brand' => 'romina', 'name' => 'Romina Restaurant | 4 Kilo',   'desc' => 'Restaurant, bar & cafe',              'lat' => 9.0361486, 'lng' => 38.7625479],
+        ['brand' => 'romina', 'name' => 'Romina Restaurant | Balderas', 'desc' => 'Restaurant & takeaway center',        'lat' => 9.0294129, 'lng' => 38.7850878],
+        ['brand' => 'koba',   'name' => 'KOBA | 4 Kilo',                'desc' => 'Pastry & bakery takeaway center',     'lat' => 9.0361979, 'lng' => 38.7625884],
+        ['brand' => 'koba',   'name' => 'KOBA | Sandford',              'desc' => 'Pastry, bakery, meals & drinks cafe', 'lat' => 9.0350704, 'lng' => 38.7721537],
+        ['brand' => 'koba',   'name' => 'KOBA | Atlas',                 'desc' => 'Pastry, bakery, meals & drinks cafe', 'lat' => 9.0009917, 'lng' => 38.7801206],
+        ['brand' => 'koba',   'name' => 'KOBA | Peacock',               'desc' => 'Elevated coffee roastery experience', 'lat' => 8.9990426, 'lng' => 38.7743347],
+        ['brand' => 'meskott', 'name' => 'Meskott Culinary | 4 Kilo',   'desc' => 'Sellassie Twin Towers, King George VI St', 'lat' => 9.0355875, 'lng' => 38.7627344],
+        ['brand' => 'bacio',   'name' => 'Bacio Cremeria',              'desc' => 'Zimbabwe Street',                      'lat' => 8.989968,  'lng' => 38.782691],
+        ['brand' => 'jaquar',  'name' => 'Jaquar World | Kazanchis',    'desc' => 'Joburg Building, Jomo Kenyatta St',    'lat' => 9.0100875, 'lng' => 38.7691719],
+    ];
+
+    // label, pin letter and pin colour per brand
+    $groups = [
+        'romina'  => ['label' => 'Romina Restaurants',       'letter' => 'R', 'color' => '#e3262e'],
+        'koba'    => ['label' => 'KOBA Patisserie & Bakery', 'letter' => 'K', 'color' => '#C9953F'],
+        'meskott' => ['label' => 'Meskott Culinary',         'letter' => 'M', 'color' => '#1f1f1f'],
+        'bacio'   => ['label' => 'Bacio Cremeria',           'letter' => 'B', 'color' => '#1E7FB8'],
+        'jaquar'  => ['label' => 'Jaquar World',             'letter' => 'J', 'color' => '#0E2240'],
+    ];
+@endphp
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
 <section class="find-us-section" id="find-us">
 
@@ -8,145 +36,44 @@
 
         <!-- HEADING -->
         <div class="find-us-heading">
-            <span class="find-us-label">OUR LOCATION</span>
+            <span class="find-us-label">OUR LOCATIONS</span>
             <h2>Find Us On The Map</h2>
         </div>
 
-        <!-- MAPS PANEL — mimics Google Maps layout -->
         <div class="find-us-panel">
 
-            <!-- LEFT SIDEBAR -->
-            <aside class="fup-sidebar">
-
-                <!-- Search bar (decorative) -->
-                <div class="fup-searchbar">
-                    <span class="fup-search-text">KOBA Patisserie &amp; Bakery | Atlas Br…</span>
-                    <div class="fup-search-icons">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <i class="fa-solid fa-xmark"></i>
+            <!-- BRANCH LIST -->
+            <aside class="fu-list" aria-label="Romina and KOBA branches">
+                @foreach ($groups as $key => $group)
+                    <div class="fu-group" style="--brand: {{ $group['color'] }}">
+                        <p class="fu-group-title">
+                            <span class="fu-dot" aria-hidden="true"></span>
+                            {{ $group['label'] }}
+                        </p>
+                        <ul>
+                            @foreach ($sites as $i => $site)
+                                @continue($site['brand'] !== $key)
+                                <li>
+                                    <button type="button" class="fu-site" data-site="{{ $i }}">
+                                        <span class="fu-site-name">{{ $site['name'] }}</span>
+                                        <span class="fu-site-desc">{{ $site['desc'] }}</span>
+                                    </button>
+                                    <a class="fu-site-dir"
+                                       href="https://www.google.com/maps/dir/?api=1&destination={{ $site['lat'] }},{{ $site['lng'] }}"
+                                       target="_blank" rel="noopener noreferrer"
+                                       aria-label="Directions to {{ $site['name'] }}">
+                                        <i class="fa-solid fa-diamond-turn-right" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
-                </div>
-
-                <!-- Photo -->
-                <div class="fup-photo">
-                    <img loading="lazy" decoding="async"
-                        src="{{ asset('images/business/baked.jpg') }}"
-                        alt="KOBA Patisserie &amp; Bakery – Atlas Branch"
-                    >
-                </div>
-
-                <!-- Info -->
-                <div class="fup-info">
-
-                    <h3 class="fup-name">
-                        KOBA Patisserie &amp; Bakery | Atlas Branch
-                    </h3>
-
-                    <p class="fup-local-name">ኮባ ኬክ ቤት | አትላስ</p>
-
-                    <div class="fup-rating">
-                        <span class="fup-score">4.5</span>
-                        <span class="fup-stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star-half-stroke"></i>
-                        </span>
-                        <span class="fup-reviews">(592)</span>
-                    </div>
-
-                    <p class="fup-type">
-                        Pastry shop
-                        <span class="fup-dot">·</span>
-                        <i class="fa-solid fa-wheelchair" title="Wheelchair accessible"></i>
-                    </p>
-
-                    <!-- Tabs -->
-                    <div class="fup-tabs">
-                        <button class="fup-tab active">Overview</button>
-                        <button class="fup-tab">Menu</button>
-                        <button class="fup-tab">Reviews</button>
-                        <button class="fup-tab">About</button>
-                    </div>
-
-                    <!-- Action icon buttons -->
-                    <div class="fup-actions">
-
-                        <a
-                            href="https://www.google.com/maps/dir/?api=1&destination=9.0011037,38.7800411"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="fup-action-btn"
-                            title="Directions"
-                        >
-                            <span class="fup-action-icon">
-                                <i class="fa-solid fa-diamond-turn-right"></i>
-                            </span>
-                            <span>Directions</span>
-                        </a>
-
-                        <button class="fup-action-btn" title="Save">
-                            <span class="fup-action-icon">
-                                <i class="fa-regular fa-bookmark"></i>
-                            </span>
-                            <span>Save</span>
-                        </button>
-
-                        <a
-                            href="https://www.google.com/maps/place/KOBA+Patisserie+%26+Bakery+%7C+Atlas+Branch/@9.0011037,38.7800411,17z/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="fup-action-btn"
-                            title="Nearby"
-                        >
-                            <span class="fup-action-icon">
-                                <i class="fa-solid fa-location-crosshairs"></i>
-                            </span>
-                            <span>Nearby</span>
-                        </a>
-
-                        <button class="fup-action-btn" title="Photos">
-                            <span class="fup-action-icon">
-                                <i class="fa-regular fa-image"></i>
-                            </span>
-                            <span>Photos</span>
-                        </button>
-
-                        <button class="fup-action-btn" title="Share">
-                            <span class="fup-action-icon">
-                                <i class="fa-solid fa-share-nodes"></i>
-                            </span>
-                            <span>Share</span>
-                        </button>
-
-                    </div>
-
-                    <!-- Open in Maps CTA -->
-                    <a
-                        href="https://www.google.com/maps/place/KOBA+Patisserie+%26+Bakery+%7C+Atlas+Branch/@9.0011037,38.7800411,17z/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="fup-open-maps"
-                    >
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        Open in Google Maps
-                    </a>
-
-                </div>
-
+                @endforeach
             </aside>
 
             <!-- MAP -->
-            <div class="fup-map-wrap">
-                <iframe
-                    class="fup-map"
-                    title="KOBA Patisserie &amp; Bakery – Atlas Branch location"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3941.096!2d38.7800411!3d9.0011037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85a8bec41deb%3A0x9c8d1dfcc7acb10f!2sKOBA%20Patisserie%20%26%20Bakery%20%7C%20Atlas%20Branch!5e0!3m2!1sen!2set!4v1695000000000!5m2!1sen!2set"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                ></iframe>
+            <div class="fu-map-wrap">
+                <div class="fu-map" id="fuMap" role="region" aria-label="Map of Romina and KOBA branches in Addis Ababa"></div>
             </div>
 
         </div>
@@ -155,23 +82,16 @@
 
 </section>
 
+
+
 <style>
 /* ============================================================
    FIND US — Section wrapper
 ============================================================ */
 .find-us-section {
     padding: var(--section-space) 0;
-    /* Interactive animated background using Romina Logo colors */
-    background: linear-gradient(-45deg, #0d1b2a, #11233F, #1b365d, #11233F);
-    background-size: 400% 400%;
-    animation: rominaBG 15s ease infinite;
+    background: #0E2240;
     position: relative;
-}
-
-@keyframes rominaBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
 }
 
 .find-us-container {
@@ -210,322 +130,192 @@
 }
 
 /* ============================================================
-   PANEL — two-column (sidebar + map)
+   PANEL — branch list + map
 ============================================================ */
 .find-us-panel {
-    display: flex;
-    overflow: hidden;
-    border-radius: 16px;
-    box-shadow:
-        0 24px 72px rgba(0, 0, 0, 0.6),
-        0 0 0 1px rgba(255,255,255,0.06);
+    display: grid;
+    grid-template-columns: 340px 1fr;
     height: 560px;
-    position: relative;
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.find-us-panel:hover {
-    transform: translateY(-10px) scale(1.01);
-    box-shadow:
-        0 40px 100px rgba(0, 0, 0, 0.8),
-        0 0 0 1px rgba(230, 28, 36, 0.4);
-}
-
-.find-us-panel::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: #E61C24; /* Romina Red accent */
-    z-index: 10;
-}
-
-/* ============================================================
-   LEFT SIDEBAR
-============================================================ */
-.fup-sidebar {
-    width: 340px;
-    flex-shrink: 0;
     background: #fff;
-    display: flex;
-    flex-direction: column;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, .35);
+}
+
+.fu-list {
     overflow-y: auto;
-    scrollbar-width: thin;
+    padding: 28px 24px;
+    border-right: 1px solid rgba(14, 34, 64, .1);
 }
 
-/* Scrollbar */
-.fup-sidebar::-webkit-scrollbar { width: 4px; }
-.fup-sidebar::-webkit-scrollbar-thumb { background: #d0d0d0; border-radius: 4px; }
+.fu-group + .fu-group { margin-top: 28px; }
 
-/* SEARCH BAR */
-.fup-searchbar {
+.fu-group-title {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    border-bottom: 1px solid #eee;
-    background: #fff;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-    gap: 8px;
+    gap: 10px;
+    margin: 0 0 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #0E2240;
 }
 
-.fup-search-text {
-    font-size: 13px;
-    font-weight: 500;
-    color: #1a1a1a;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.fu-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--brand, #e3262e);
+}
+
+.fu-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.fu-list li {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(14, 34, 64, .08);
+}
+
+.fu-site {
     flex: 1;
-}
-
-.fup-search-icons {
-    display: flex;
-    gap: 12px;
-    color: #555;
-    font-size: 14px;
-    flex-shrink: 0;
-}
-
-.fup-search-icons i { cursor: pointer; }
-.fup-search-icons i:hover { color: #000; }
-
-/* PHOTO */
-.fup-photo {
-    width: 100%;
-    height: 190px;
-    flex-shrink: 0;
-    overflow: hidden;
-}
-
-.fup-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-}
-
-.fup-photo:hover img { transform: scale(1.03); }
-
-/* INFO */
-.fup-info {
-    padding: 18px 16px 20px;
-    flex: 1;
-}
-
-.fup-name {
-    font-size: 17px;
-    font-weight: 700;
-    color: #1a1a1a;
-    line-height: 1.3;
-    margin: 0 0 4px;
-}
-
-.fup-local-name {
-    font-size: 13px;
-    color: #666;
-    margin: 0 0 8px;
-}
-
-/* RATING */
-.fup-rating {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 5px;
-}
-
-.fup-score {
-    font-size: 14px;
-    font-weight: 700;
-    color: #1a1a1a;
-}
-
-.fup-stars {
-    color: #f5a623;
-    font-size: 13px;
-    display: flex;
-    gap: 2px;
-}
-
-.fup-reviews {
-    font-size: 13px;
-    color: #1967d2;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.fup-type {
-    font-size: 13px;
-    color: #444;
-    margin: 0 0 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.fup-dot { color: #888; }
-
-/* TABS */
-.fup-tabs {
-    display: flex;
-    gap: 0;
-    border-bottom: 2px solid #e8e8e8;
-    margin-bottom: 16px;
-}
-
-.fup-tab {
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
-    padding: 8px 12px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #555;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.fup-tab:hover { color: #000; }
-
-.fup-tab.active {
-    color: #E61C24;
-    border-bottom-color: #E61C24;
-    font-weight: 700;
-}
-
-/* ACTION BUTTONS */
-.fup-actions {
-    display: flex;
-    gap: 4px;
-    flex-wrap: nowrap;
-    margin-bottom: 18px;
-    justify-content: space-between;
-}
-
-.fup-action-btn {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 5px;
+    gap: 3px;
+    padding: 14px 10px 14px 0;
     background: none;
-    border: none;
-    padding: 6px 4px;
+    border: 0;
+    text-align: left;
     cursor: pointer;
-    text-decoration: none;
-    flex: 1;
-    min-width: 0;
+    font-family: inherit;
 }
 
-.fup-action-btn span:last-child {
-    font-size: 10.5px;
-    color: #1967d2;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-}
+.fu-site-name { font-size: 15px; font-weight: 600; color: #0E2240; }
+.fu-site-desc { font-size: 13px; color: #6b7a90; }
 
-.fup-action-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #e8f0fe;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    color: #1967d2;
-    transition: background 0.2s, transform 0.2s;
-}
+.fu-site:hover .fu-site-name,
+.fu-site.is-active .fu-site-name { color: #e3262e; }
 
-.fup-action-btn:hover .fup-action-icon {
-    background: #c5d8fc;
-    transform: scale(1.08);
+.fu-site-dir {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(14, 34, 64, .14);
+    color: #0E2240;
+    font-size: 14px;
 }
+.fu-site-dir:hover { background: #0E2240; border-color: #0E2240; color: #fff; }
 
-/* First action btn (Directions) gets a different fill color based on Romina */
-.fup-action-btn:first-child .fup-action-icon {
-    background: #11233F;
+.fu-site:focus-visible,
+.fu-site-dir:focus-visible { outline: 2px solid #e3262e; outline-offset: 2px; }
+
+/* MAP */
+.fu-map-wrap { position: relative; min-height: 0; }
+.fu-map { position: absolute; inset: 0; background: #eef0f3; }
+
+/* pins — a teardrop in each brand's colour */
+.fu-pin {
+    background: none;
+    border: 0;
+}
+.fu-pin span {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    background: #e3262e;
+    border: 2px solid #fff;
+    box-shadow: 0 6px 14px rgba(14, 34, 64, .35);
     color: #fff;
-}
-
-.fup-action-btn:first-child:hover .fup-action-icon {
-    background: #0d1b2a;
-    box-shadow: 0 4px 12px rgba(17, 35, 63, 0.4);
-}
-
-/* Open in Maps CTA */
-.fup-open-maps {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
     font-size: 13px;
-    font-weight: 600;
-    color: #11233F;
-    text-decoration: none;
-    padding: 10px 0;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-    transition: all 0.3s ease;
-    border-radius: 6px;
-    background: #f8fafc;
+    font-weight: 700;
 }
+.fu-pin b { transform: rotate(45deg); font-weight: 700; }
 
-.fup-open-maps:hover {
-    background: #11233F;
-    color: #fff;
-}
-
-/* ============================================================
-   MAP
-============================================================ */
-.fup-map-wrap {
-    flex: 1;
-    position: relative;
-    overflow: hidden;
-}
-
-.fup-map {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: none;
-}
+.find-us-section .leaflet-popup-content { font-family: inherit; font-size: 13px; line-height: 1.5; color: #0E2240; }
+.find-us-section .leaflet-popup-content a { color: #e3262e; font-weight: 600; }
 
 /* ============================================================
    RESPONSIVE
 ============================================================ */
 @media (max-width: 900px) {
-    .find-us-section { padding: var(--section-space) 0; }
     .find-us-container { padding: 0 20px; }
 
     .find-us-panel {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         height: auto;
     }
 
-    .fup-sidebar {
-        width: 100%;
-        max-height: 420px;
+    .fu-list {
+        border-right: 0;
+        border-bottom: 1px solid rgba(14, 34, 64, .1);
     }
 
-    .fup-map-wrap {
-        height: 400px;
-    }
+    .fu-map-wrap { height: 400px; }
 }
 
 @media (max-width: 480px) {
-    .fup-map-wrap { height: 320px; }
-    .fup-tabs { overflow-x: auto; }
-    .fup-tab { padding: 8px 10px; font-size: 12px; }
+    .fu-map-wrap { height: 320px; }
 }
 </style>
+
+{{-- after the styles, so Leaflet sees the map's sizing when it initialises --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function () {
+    var el = document.getElementById('fuMap');
+    if (!el || typeof L === 'undefined') return;
+
+    var sites  = @json($sites);
+    var groups = @json($groups);
+
+    var map = L.map(el, { scrollWheelZoom: false, zoomControl: true });
+
+    /* Esri Light Gray Canvas: streets and area names only, no shops or restaurants */
+    var esri = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/';
+    L.tileLayer(esri + 'World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 16,
+        attribution: 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, &copy; OpenStreetMap contributors'
+    }).addTo(map);
+    L.tileLayer(esri + 'World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16 }).addTo(map);
+
+    var markers = sites.map(function (s) {
+        var icon = L.divIcon({
+            className: 'fu-pin',
+            html: '<span style="background:' + groups[s.brand].color + '"><b>' + groups[s.brand].letter + '</b></span>',
+            iconSize: [34, 34],
+            iconAnchor: [17, 34],
+            popupAnchor: [0, -32]
+        });
+        return L.marker([s.lat, s.lng], { icon: icon, title: s.name })
+            .addTo(map)
+            .bindPopup('<strong>' + s.name + '</strong><br>' + s.desc +
+                '<br><a href="https://www.google.com/maps/dir/?api=1&destination=' + s.lat + ',' + s.lng +
+                '" target="_blank" rel="noopener noreferrer">Get directions</a>');
+    });
+
+    var bounds = L.latLngBounds(sites.map(function (s) { return [s.lat, s.lng]; }));
+    map.fitBounds(bounds, { padding: [40, 40] });
+
+    var buttons = document.querySelectorAll('.fu-site');
+    buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var i = +btn.dataset.site;
+            buttons.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+            map.setView([sites[i].lat, sites[i].lng], 16);
+            markers[i].openPopup();
+        });
+    });
+
+    /* the map sits below the fold; redraw once it is laid out */
+    window.addEventListener('load', function () { map.invalidateSize(); map.fitBounds(bounds, { padding: [40, 40] }); });
+}());
+</script>

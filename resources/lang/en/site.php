@@ -74,6 +74,9 @@ return [
     'tl_2_title'             => 'Jaquar World',
     'tl_3_title'             => 'KOBA',
     'tl_4_title'             => 'Romina Group',
+    'tl_5_title'             => 'Bacio',
+    'tl_6_title'             => 'Meskott',
+    'tl_7_title'             => 'Coffee Roastery',
 
     // ── Timeline detail texts ─────────────────────────────────────────────
     'tl_0_text'              => 'Girma Taye opens a small, cherished restaurant in Arat Kilo, in the heart of Addis Ababa.',
@@ -82,6 +85,9 @@ return [
     'tl_3_text'              => 'KOBA Patisserie & Bakery is established, built on craftsmanship and artisan baking.',
     'tl_4_text'              => 'A diversified Ethiopian group spanning hospitality, coffee export, international trading, importing and distribution.',
     'tl_4_year'              => 'Today',
+    'tl_5_text'              => 'Bacio Cremeria joins the Group, adding handcrafted gelato and desserts to our hospitality brands.',
+    'tl_6_text'              => 'Meskott Culinary opens, bringing fine dining and international cuisine to Addis Ababa.',
+    'tl_7_text'              => 'Our coffee roastery opens at KOBA Peacock, an elevated specialty coffee experience.',
 
     // ── Values (Why choose Romina) ────────────────────────────────────────
     'val_0_name'             => 'Excellence',

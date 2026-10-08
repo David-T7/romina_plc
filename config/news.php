@@ -227,7 +227,7 @@ return [
             'title'    => 'Import division expands partnerships with global brands',
             'category' => 'group-news',
             'date'     => '2026-04-20',
-            'image'    => 'images/hero/hero-02.jpg',
+            'image'    => 'images/hero/imports-partners.webp',
             'excerpt'  => 'New agreements broaden the range of quality products the Group brings to the Ethiopian market.',
             'body'     => [
                 'Romina Group\'s import and distribution division has expanded its portfolio through new partnerships with established global brands.',

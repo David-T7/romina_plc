@@ -13,6 +13,17 @@
         ['icon' => 'fa-mug-hot',           'name' => 'Coffee Exporting',                    'href' => route('business', 'romina-coffee')],
         ['icon' => 'fa-truck-ramp-box',    'name' => 'Importing & Distribution',            'href' => route('business', 'romina-imports')],
     ];
+
+    // Milestones share their titles with the homepage timeline (resources/lang/*/site.php)
+    $storyMilestones = [
+        ['year' => '1973', 'key' => 'tl_0_title'],
+        ['year' => '2009', 'key' => 'tl_1_title'],
+        ['year' => '2017', 'key' => 'tl_2_title'],
+        ['year' => '2020', 'key' => 'tl_3_title'],
+        ['year' => '2021', 'key' => 'tl_5_title'],
+        ['year' => '2023', 'key' => 'tl_6_title'],
+        ['year' => '2026', 'key' => 'tl_7_title'],
+    ];
 @endphp
 
 <section class="hist" id="our-story">
@@ -40,6 +51,15 @@
                 marked by strategic expansion, successful partnerships, and an unwavering
                 commitment to excellence across all our endeavours.
             </p>
+
+            <ol class="hist-milestones" aria-label="Milestones">
+                @foreach ($storyMilestones as $m)
+                    <li>
+                        <span class="hist-ms-year">{{ $m['year'] }}</span>
+                        <span class="hist-ms-title">{{ __('site.' . $m['key']) }}</span>
+                    </li>
+                @endforeach
+            </ol>
 
             <dl class="hist-stats">
                 <div>

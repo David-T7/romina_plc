@@ -167,7 +167,7 @@
                         </span>
 
                         <h3>
-                            Jaguar Appliances
+                            Jaquar Appliances
                         </h3>
 
                         <p>
@@ -220,7 +220,7 @@
                         </span>
 
                         <h3>
-                            Cakes &amp; Pastry
+                            Cake, Pastry &amp; Confectionary
                         </h3>
 
                         <p>

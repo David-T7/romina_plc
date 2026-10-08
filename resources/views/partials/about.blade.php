@@ -37,13 +37,19 @@
                 ['year' => 2009,           'label' => '2009',  'i18n_title' => 'tl_1_title'],
                 ['year' => 2017,           'label' => '2017',  'i18n_title' => 'tl_2_title'],
                 ['year' => 2020,           'label' => '2020',  'i18n_title' => 'tl_3_title'],
+                ['year' => 2021,           'label' => '2021',  'i18n_title' => 'tl_5_title'],
+                ['year' => 2023,           'label' => '2023',  'i18n_title' => 'tl_6_title'],
+                ['year' => 2026,           'label' => '2026',  'i18n_title' => 'tl_7_title'],
                 ['year' => (int)date('Y'), 'label' => 'Today', 'i18n_title' => 'tl_4_title'],
             ];
 
-            // sqrt-weighted gaps so large spans compress and tight clusters expand
+            // sqrt-weighted gaps so large spans compress and tight clusters expand.
+            // "Today" can share a year with the last milestone, so it always gets
+            // a little extra room to keep the two labels apart.
             $tlGaps = [0];
             for ($i = 1, $n = count($tlMilestones); $i < $n; $i++) {
-                $tlGaps[] = sqrt($tlMilestones[$i]['year'] - $tlMilestones[$i-1]['year']);
+                $minGap   = ($i === $n - 1) ? 4 : 1;
+                $tlGaps[] = sqrt(max($minGap, $tlMilestones[$i]['year'] - $tlMilestones[$i-1]['year']));
             }
             $tlCum = [];  $tlSum = 0;
             foreach ($tlGaps as $g) { $tlSum += $g; $tlCum[] = $tlSum; }

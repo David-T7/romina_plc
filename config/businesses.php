@@ -123,7 +123,7 @@ return [
                 ['name' => '4 Kilo', 'desc' => 'Pastry & bakery takeaway center',     'tag' => null],
                 ['name' => 'Sandford',  'desc' => 'Pastry, bakery, meals & drinks cafe', 'tag' => null],
                 ['name' => 'Atlas',     'desc' => 'Pastry, bakery, meals & drinks cafe', 'tag' => null],
-                ['name' => 'Peacock',   'desc' => 'Elevated coffee roastery experience', 'tag' => 'Flagship'],
+                ['name' => 'Peacock',   'desc' => 'Elevated coffee roastery experience', 'tag' => null],
                 ['name' => 'ICS',       'desc' => 'Pastry, bakery, meals & drinks cafe', 'tag' => 'Coming soon'],
             ],
             'phone'      => '+251 900 989 898',
@@ -249,7 +249,7 @@ return [
             'kicker'     => 'Quality FMCG imported for local consumption',
             'intro'      => 'Essential products, sourced with care and distributed across the Ethiopian market.',
             'badge'      => ['value' => '5', 'label' => 'Product categories'],
-            'image'      => null,
+            'image'      => 'images/hero/imports-partners.webp',
             'image_shot' => 'Warehouse aisle, edible oils and rice',
             'title'      => 'From our kitchens to the market',
             'body'       => [

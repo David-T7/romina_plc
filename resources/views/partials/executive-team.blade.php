@@ -36,6 +36,12 @@
                     'photo'    => 'images/team/executive-04.jpg',
                     'role'     => 'Leads the organization’s financial management. Oversees budgeting, accounting, financial reporting, cash flow, financial controls, and ensures the organization uses its resources responsibly.',
                 ],
+                [
+                    'name'     => 'Nejat Hassen',
+                    'position' => 'Chief of Staff',
+                    'photo'    => 'images/team/executive-08.jpg',
+                    'role'     => 'Follows up on strategic initiatives, coordinates senior leaders, prepares important meetings and reports, and helps ensure decisions are implemented effectively.',
+                ],
 
             ],
         ],
@@ -61,16 +67,16 @@
                     'role'     => 'Identifies training needs, develops learning programs, and supports employees in building the skills needed for organizational growth.',
                 ],
                 [
-                    'name'     => 'Nejat Hassen',
-                    'position' => 'Chief of Staff',
-                    'photo'    => 'images/team/executive-08.jpg',
-                    'role'     => 'Follows up on strategic initiatives, coordinates senior leaders, prepares important meetings and reports, and helps ensure decisions are implemented effectively.',
-                ],
-                [
                     'name'     => 'Sameer Ahmed',
                     'position' => 'Food & Beverage Director',
                     'photo'    => 'images/team/executive-09.jpg',
                     'role'     => 'Leads food and beverage operations across the Group\'s restaurants and patisseries, overseeing menus, service standards, kitchen quality and the guest experience.',
+                ],
+                [
+                    'name'     => 'Fitsum Bekere',
+                    'position' => 'Coffee Field Operations Director',
+                    'photo'    => 'images/team/executive-10.jpg',
+                    'role'     => 'Leads Romina Coffee\'s field operations across our growing regions, working with farmers and wet-mill stations on harvesting, processing and quality at origin.',
                 ],
             ],
         ],

@@ -123,7 +123,7 @@
         </div>
 
         <div class="impact-number">
-          <span class="counter" data-target="8">0</span>
+          <span class="counter" data-target="7">0</span>
         </div>
 
         <p>Rainforest Alliance &amp; Organic Certifications</p>
@@ -168,7 +168,7 @@ $approach_items = [
     [
         'num'   => '03',
         'id'    => 'appr-3',
-        'image' => 'images/stock/green-valley.webp',
+        'image' => 'images/hero/hero-03.jpg',
         'title' => 'Environmental Commitment',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
     ],
@@ -182,7 +182,7 @@ $approach_items = [
     [
         'num'   => '05',
         'id'    => 'appr-5',
-        'image' => 'images/stock/youth-looking-ahead.webp',
+        'image' => 'images/coffee/processing-floor.webp',
         'title' => 'Looking Ahead',
         'icon'  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="none"/></svg>',
     ],

@@ -149,6 +149,9 @@ document.addEventListener('DOMContentLoaded', function () {
             { year: '2009',              text: L['tl_1_text'] || '' },
             { year: '2017',              text: L['tl_2_text'] || '' },
             { year: '2020',              text: L['tl_3_text'] || '' },
+            { year: '2021',              text: L['tl_5_text'] || '' },
+            { year: '2023',              text: L['tl_6_text'] || '' },
+            { year: '2026',              text: L['tl_7_text'] || '' },
             { year: L['tl_4_year'] || 'Today', text: L['tl_4_text'] || '' },
         ];
     }

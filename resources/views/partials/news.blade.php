@@ -21,7 +21,7 @@ $accomplishments = [
         'shot'  => 'Coffee farmers at a partner cooperative',
     ],
     [
-        'year'  => '8',
+        'year'  => '7',
         'cat'   => 'Certifications',
         'title' => 'Organic & Rainforest Alliance certified',
         'desc'  => 'Eight certifications including organic and Rainforest Alliance recognition for sustainable practices.',
