@@ -5,7 +5,7 @@
     --}}
 
     <?php
-    $brands_order = ['restaurants', 'koba', 'meskott', 'coffee', 'imports', 'jaquar'];
+    $brands_order = ['restaurants', 'koba', 'bacio', 'meskott', 'coffee', 'imports', 'jaquar'];
     $brands = [
 
         'restaurants' => [
@@ -50,6 +50,28 @@
                 ['src' => 'images/gallery/koba-patisserie/06-koba.webp', 'shot' => 'KOBA pastry counter, morning light',         'caption' => 'The pastry counter', 'pos' => '50% 50%'],
                 ['src' => 'images/gallery/koba-patisserie/01-koba.webp', 'shot' => 'Handcrafted celebration cake, close detail', 'caption' => 'Handcrafted cakes',  'pos' => '50% 50%'],
                 ['src' => 'images/gallery/koba-patisserie/03-koba.webp', 'shot' => 'Peacock roastery, espresso being pulled',    'caption' => 'Peacock roastery',   'pos' => '50% 50%'],
+            ],
+        ],
+
+        'bacio' => [
+            'name'      => 'Bacio Cremeria',
+            'tone'      => 'night',
+            'kicker'    => 'A blend of authentic flavor and modern creativity.',
+            'title'     => 'A blend of authentic flavor and modern creativity.',
+            'body'      => 'Handcrafted ice creams, gelatos, and elegant sundaes, made with fresh dairy ingredients sourced directly from Romina Dairy Farm. A premium ice cream and gelato concept in Addis Ababa, made for moments of connection.',
+            'list'      => ['label' => 'What we make', 'items' => ['Handcrafted Ice Creams', 'Gelatos', 'Elegant Sundaes', 'Fresh Dairy Ingredients']],
+            'locations' => [
+                ['Bole Japan',      'Ice cream, gelato & sundae cafe', false],
+                ['Bisrate Gabriel', 'Ice cream, gelato & sundae cafe', false],
+            ],
+            'phone'  => null,
+            'cta'    => 'Visit Bacio Cremeria',
+            'href'   => null,
+            'slides' => [
+                // TODO: client photos
+                ['src' => null, 'shot' => 'Bacio Cremeria gelato counter, scoops on display',  'caption' => 'The gelato counter', 'pos' => '50% 50%'],
+                ['src' => null, 'shot' => 'Elegant sundae, plated and garnished',              'caption' => 'Elegant sundaes',    'pos' => '50% 50%'],
+                ['src' => null, 'shot' => 'Handcrafted ice cream, close detail',                'caption' => 'Handcrafted',        'pos' => '50% 50%'],
             ],
         ],
 
@@ -166,7 +188,7 @@
                         aria-controls="brand-panel-{{ $k }}"
                         data-brand="{{ $k }}"
                         data-tone="{{ $k }}"
-                        data-dark="{{ in_array($k, ['restaurants', 'koba', 'meskott', 'coffee', 'imports'], true) ? '1' : '' }}"
+                        data-dark="{{ in_array($k, ['restaurants', 'koba', 'bacio', 'meskott', 'coffee', 'imports'], true) ? '1' : '' }}"
                         data-state="{{ $k === 'restaurants' ? 'active' : 'inactive' }}"
                     >{{ $brands[$k]['name'] }}</button>
                 @endforeach

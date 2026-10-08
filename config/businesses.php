@@ -175,6 +175,45 @@ return [
             'website'    => null,
         ],
 
+        'bacio-cremeria' => [
+            'name'       => 'Bacio Cremeria',
+            'menu'       => 'Bacio Cremeria',
+            'group'      => 'culinary',
+            'theme'      => 'bacio',   // Bacio's own design (.bc-*); colours from the Bacio logo
+            'kicker'     => 'Authentic flavor, modern creativity',
+            'intro'      => 'Handcrafted ice creams, gelatos and elegant sundaes — crafted with care and made for moments of connection. A fresh, indulgent experience in the heart of Addis Ababa.',
+            'badge'      => ['value' => 'New', 'label' => 'Handcrafted in Addis Ababa'],
+            'image'      => null,   // TODO: client photos
+            'image_shot' => 'Bacio Cremeria — gelato counter',
+            'title'      => 'A blend of authentic flavor and modern creativity.',
+            'body'       => [
+                'A contemporary home for handcrafted ice creams, gelatos and elegant sundaes — fresh ingredients and thoughtful craft, made for sharing.',
+                'Every creation balances authentic flavor with modern creativity: simple, quality ingredients turned into treats that feel both familiar and distinctive.',
+            ],
+            // Bacio-only content blocks, rendered by businesses/partials/bacio.blade.php
+            'dairy'      => 'Fresh dairy sourced directly from Romina Dairy Farm — a farm-to-creation connection that brings freshness and authenticity into every scoop, sundae and cone.',
+            'moment'     => 'Friends, a family outing, or simply treating yourself — Bacio is designed to make the moment memorable. Come for the flavor, stay for the experience.',
+            'closing'    => 'Make room for something delicious — handcrafted treats in a space made for connection.',
+            'highlights' => [
+                'label' => 'What we make',
+                'title' => 'Handcrafted ice creams, gelatos & elegant sundaes.',
+                'items' => [
+                    ['icon' => 'fa-ice-cream',  'name' => 'Handcrafted Ice Creams', 'desc' => 'Freshly crafted for moments of pure indulgence.'],
+                    ['icon' => 'fa-bowl-food',  'name' => 'Gelatos',                'desc' => 'Smooth, rich and full of authentic flavor.'],
+                    ['icon' => 'fa-wine-glass', 'name' => 'Elegant Sundaes',        'desc' => 'Beautifully presented, made to feel special.'],
+                    ['icon' => 'fa-cow',        'name' => 'Fresh Dairy',            'desc' => 'Sourced directly from Romina Dairy Farm.'],
+                ],
+            ],
+            'show_gallery'    => false,   // TODO: client photos — no gallery mosaic until photos arrive
+            'locations_label' => 'Visit Bacio',
+            'locations'  => [
+                ['name' => 'Bole Japan',      'desc' => 'Ice cream, gelato & sundae cafe', 'tag' => null],
+                ['name' => 'Bisrate Gabriel', 'desc' => 'Ice cream, gelato & sundae cafe', 'tag' => null],
+            ],
+            'phone'      => null,
+            'website'    => null,
+        ],
+
         'romina-coffee' => [
             'name'       => 'Romina Coffee',
             'menu'       => 'Romina Coffee',

@@ -24,6 +24,11 @@
 {{-- KOBA has its own hero / about / showcase (Kubo-inspired, with scroll effects) --}}
 @include('businesses.partials.koba')
 
+@elseif ($brandSlug === 'bacio-cremeria')
+
+{{-- Bacio Cremeria reuses the KOBA template (same .kb-* sections), re-tinted via .bz-theme--bacio --}}
+@include('businesses.partials.bacio')
+
 @else
 
 {{-- ============ HERO — split: story left, framed photo right ============ --}}
@@ -763,6 +768,52 @@
 
     go(0, false);
     startAuto();
+}());
+</script>
+@endif
+
+@if ($brandSlug === 'bacio-cremeria')
+<script>
+/* =====================================================
+   BACIO — scroll reveal + a gentle pointer tilt on the hero frame.
+   Reveal: elements marked .bc-reveal fade/rise in as they enter view
+   (staggered by their --i). The hero photo tilts slightly toward the
+   pointer on fine-pointer devices. Both honour reduced-motion.
+===================================================== */
+(function () {
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---- scroll reveal ---- */
+    var items = Array.prototype.slice.call(document.querySelectorAll('.bc-reveal'));
+    if (items.length && !reduced && 'IntersectionObserver' in window) {
+        items.forEach(function (el) { el.classList.add('is-armed'); });
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (!e.isIntersecting) return;
+                var i = parseInt(e.target.style.getPropertyValue('--i'), 10) || 0;
+                setTimeout(function () { e.target.classList.add('is-in'); }, i * 80);
+                io.unobserve(e.target);
+            });
+        }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+        items.forEach(function (el) { io.observe(el); });
+    }
+
+    /* ---- hero frame pointer tilt (fine pointers only) ---- */
+    var tilt = document.querySelector('[data-bc-tilt]');
+    var frame = tilt && tilt.querySelector('.bc-frame');
+    if (frame && !reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        frame.style.transition = 'transform .3s ease';
+        frame.style.willChange = 'transform';
+        tilt.addEventListener('pointermove', function (e) {
+            var r = tilt.getBoundingClientRect();
+            var px = (e.clientX - r.left) / r.width - 0.5;
+            var py = (e.clientY - r.top) / r.height - 0.5;
+            frame.style.transform = 'perspective(900px) rotateX(' + (-py * 4).toFixed(2) + 'deg) rotateY(' + (px * 5).toFixed(2) + 'deg)';
+        });
+        tilt.addEventListener('pointerleave', function () {
+            frame.style.transform = '';
+        });
+    }
 }());
 </script>
 @endif

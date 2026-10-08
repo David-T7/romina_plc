@@ -27,6 +27,7 @@
                     <p class="ftr-h" data-i18n="ftr_businesses_col">{{ __('site.ftr_businesses_col') }}</p>
                     <a href="{{ route('business', 'romina-restaurants') }}">Romina Restaurants</a>
                     <a href="{{ route('business', 'koba-patisserie') }}">KOBA</a>
+                    <a href="{{ route('business', 'bacio-cremeria') }}">Bacio Cremeria</a>
                     <a href="{{ route('business', 'meskott-culinary') }}">Meskott</a>
                     <a href="{{ route('business', 'romina-coffee') }}">Romina Coffee</a>
                     <a href="{{ route('business', 'romina-imports') }}">Romina Imports</a>
