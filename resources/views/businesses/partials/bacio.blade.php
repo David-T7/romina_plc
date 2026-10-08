@@ -2,7 +2,7 @@
      BACIO CREMERIA — its own page design (.bc-*), distinct from KOBA.
      Image-forward and light on text: a rectangular framed hero, a short
      About, a dairy band, a "What we make" card grid, a rectangular image
-     grid and a centred close. Scroll-reveal + hover animation are wired by
+     gallery and a centred close. Scroll-reveal + hover animation are wired by
      the Bacio script in show.blade.php (.bc-reveal / data hooks).
      Styles: .bz-theme--bacio block in main.css.
 ===================================================== --}}
@@ -10,17 +10,6 @@
 @php
     $items     = $brand['highlights']['items'];
     $locations = $brand['locations'] ?? [];
-
-    // Rectangular image grid. 'img' shows a photo (object-position via 'pos');
-    // a tile without one keeps its brand-colour artwork.
-    $tiles = [
-        ['icon' => 'fa-bowl-food',  'label' => 'Gelato flavors',         'tone' => 'rasp',  'img' => 'images/bacio/gelato-counter.webp',   'pos' => '50% 55%'],
-        ['icon' => 'fa-ice-cream',  'label' => 'Handcrafted ice creams', 'tone' => 'teal',  'img' => 'images/bacio/gelato-plate.webp',     'pos' => '50% 45%'],
-        ['icon' => 'fa-wine-glass', 'label' => 'Waffles & ice cream',    'tone' => 'gold',  'img' => 'images/bacio/waffle-ice-cream.webp', 'pos' => '50% 45%'],
-        ['icon' => 'fa-mug-hot',    'label' => 'Affogato',               'tone' => 'blue',  'img' => 'images/bacio/affogato.webp',         'pos' => '50% 62%'],
-        ['icon' => 'fa-glass-water','label' => 'Iced coffee',            'tone' => 'peach', 'img' => 'images/bacio/iced-latte.webp',       'pos' => '50% 50%'],
-        // ['icon' => 'fa-heart',      'label' => 'The Bacio moment',       'tone' => 'cream'],
-    ];
 
     // Split a heading into animated word spans (see .bc-words).
     $words = function ($text) { return preg_split('/\s+/', trim($text)); };
@@ -140,36 +129,7 @@
 </section>
 
 
-{{-- ============ IMAGE GRID — rectangular tiles ============ --}}
-<section class="bc-gallery">
-    <div class="container">
-
-        <div class="bc-make-head">
-            <span class="bc-label bc-reveal">A closer look</span>
-            <h2 class="bc-section-h2 bc-reveal bc-words">@foreach ($words('Moments, flavors & craft.') as $wi => $w)<span class="bc-w" style="--wi: {{ $wi }}">{{ $w }}</span> @endforeach</h2>
-        </div>
-
-        <div class="bc-gallery-grid">
-            @foreach ($tiles as $tile)
-                <figure class="bc-tile bc-tile--{{ $tile['tone'] }} bc-reveal"
-                        style="--i: {{ $loop->index }}">
-                    @if (!empty($tile['img']))
-                        <img class="bc-tile-img" src="{{ asset($tile['img']) }}" alt="{{ $tile['label'] }} at Bacio Cremeria"
-                             loading="lazy" decoding="async" style="object-position: {{ $tile['pos'] ?? '50% 50%' }}">
-                    @else
-                        <span class="bc-tile-art" aria-hidden="true">
-                            <i class="fa-solid {{ $tile['icon'] }}"></i>
-                        </span>
-                    @endif
-                    <figcaption class="bc-tile-cap">
-                        <span>{{ $tile['label'] }}</span>
-                    </figcaption>
-                </figure>
-            @endforeach
-        </div>
-
-    </div>
-</section>
+@include('businesses.partials.gallery')
 
 
 {{-- ============ THE BACIO MOMENT — teal, centred close ============ --}}

@@ -14341,9 +14341,6 @@ button {
 /* ---- left column ---- */
 .rib-copy { max-width: 560px; }
 
-/* Hide images/text inside circles — keep circles as empty clean shapes */
-.rib-badge-face img,
-.rib-badge-face .rib-badge-name { display: none; }
 
 .rib-heading {
     font-weight: 300;
@@ -16074,3 +16071,63 @@ button {
 }
 
 .ac-card:hover .ac-card-img img { transform: scale(1.04); }
+
+/* Bacio's five photos fill a complete rectangle at every screen size. */
+.bz-theme--bacio .bz-mosaic > .bz-tile:nth-child(n) {
+    grid-column: auto;
+    grid-row: auto;
+}
+.bz-theme--bacio .bz-mosaic > .bz-tile:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+@media (max-width: 1000px) {
+    .bz-theme--bacio .bz-mosaic > .bz-tile:first-child {
+        grid-row: span 1;
+    }
+}
+@media (max-width: 640px) {
+    .bz-theme--bacio .bz-mosaic > .bz-tile:first-child {
+        grid-column: auto;
+        grid-row: auto;
+    }
+}
+/* Unbranded product categories inside the Imports circles. */
+.rib-category-art {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    padding: 16px;
+    color: #fff;
+    text-align: center;
+}
+.rib-category-art i {
+    font-size: clamp(30px, 3.4vw, 48px);
+    line-height: 1;
+}
+.rib-category-label {
+    font-size: clamp(11px, 1.1vw, 14px);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* Space the Imports categories apart and raise the right-aligned cluster. */
+@media (min-width: 641px) {
+    .rib-cluster {
+        align-self: center;
+        min-height: calc(var(--sz) * 2.1);
+        margin-bottom: 0;
+    }
+}
+@media (min-width: 641px) and (max-width: 960px) {
+    .rib-cluster {
+        width: calc(var(--sz) * 3.44);
+    }
+}
+@media (min-width: 1200px) {
+    .rib-cluster {
+        bottom: 25%;
+        width: calc(var(--sz) * 3.44);
+        height: calc(var(--sz) * 2.1);
+    }
+}

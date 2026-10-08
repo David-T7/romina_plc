@@ -204,7 +204,13 @@ return [
                     ['icon' => 'fa-cow',        'name' => 'Fresh Dairy',            'desc' => 'Sourced directly from Romina Dairy Farm.'],
                 ],
             ],
-            'show_gallery'    => false,   // TODO: client photos — no gallery mosaic until photos arrive
+            'gallery' => [
+                ['src' => 'images/bacio/gelato-counter.webp', 'shot' => 'Gelato flavors at Bacio Cremeria', 'caption' => 'Gelato flavors'],
+                ['src' => 'images/bacio/gelato-plate.webp', 'shot' => 'Handcrafted ice creams at Bacio Cremeria', 'caption' => 'Handcrafted ice creams'],
+                ['src' => 'images/bacio/waffle-ice-cream.webp', 'shot' => 'Waffles & ice cream at Bacio Cremeria', 'caption' => 'Waffles & ice cream'],
+                ['src' => 'images/bacio/affogato.webp', 'shot' => 'Affogato at Bacio Cremeria', 'caption' => 'Affogato'],
+                ['src' => 'images/bacio/iced-latte.webp', 'shot' => 'Iced coffee at Bacio Cremeria', 'caption' => 'Iced coffee'],
+            ],
             'locations_label' => 'Visit Bacio',
             'locations'  => [
                 ['name' => 'Bole Japan',      'desc' => 'Ice cream, gelato & sundae cafe', 'tag' => null],

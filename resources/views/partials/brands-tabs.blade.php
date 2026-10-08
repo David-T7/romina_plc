@@ -21,7 +21,7 @@
             ],
             'phone'  => null,
             'cta'    => 'Visit Romina Restaurants',
-            'href'   => null,
+            'href'   => route('business', 'romina-restaurants'),
             'slides' => [
                 ['src' => 'images/gallery/romina-restaurants/08-romina-restaurant.webp', 'shot' => 'Balderas dining room, evening service',    'caption' => 'Balderas',                'pos' => '50% 50%'],
                 ['src' => 'images/gallery/romina-restaurants/05-romina-restaurant.webp', 'shot' => 'Signature Agelgel, plated on the pass',    'caption' => 'Signature Agelgel',       'pos' => '50% 50%'],
@@ -66,7 +66,7 @@
             ],
             'phone'  => null,
             'cta'    => 'Visit Bacio Cremeria',
-            'href'   => null,
+            'href'   => route('business', 'bacio-cremeria'),
             'slides' => [
                 ['src' => 'images/bacio/gelato-counter.webp',   'shot' => 'Bacio Cremeria gelato counter, flavors on display', 'caption' => 'The gelato counter',  'pos' => '50% 55%'],
                 ['src' => 'images/bacio/gelato-plate.webp',     'shot' => 'Gelato scoops, plated with chocolate',              'caption' => 'Handcrafted gelato',   'pos' => '50% 45%'],
@@ -86,7 +86,7 @@
             ],
             'phone'  => '+251 90 387 9999',
             'cta'    => 'Visit Meskott',
-            'href'   => null,
+            'href'   => route('business', 'meskott-culinary'),
             'slides' => [
                 ['src' => 'images/gallery/meskott-culinary/meskott_6.webp', 'shot' => 'Meskott bar at night, backlit shelves', 'caption' => 'The bar',            'pos' => '50% 50%'],
                 ['src' => 'images/gallery/meskott-culinary/meskott_1.webp', 'shot' => 'VIP table area, set for dinner',         'caption' => 'VIP table area',    'pos' => '50% 50%'],
@@ -104,7 +104,7 @@
             'locations' => null,
             'phone'     => null,
             'cta'       => 'Discover Romina Coffee',
-            'href'      => '#coffee',
+            'href'      => route('business', 'romina-coffee'),
             'slides'    => [
                 ['src' => 'images/coffee/processing-floor.webp',   'shot' => 'Our coffee processing and storage floor', 'caption' => 'Processing floor', 'pos' => '50% 50%'],
                 ['src' => 'images/coffee/green-beans-burlap.webp', 'shot' => 'Green coffee beans in a burlap sack',     'caption' => 'Green coffee',     'pos' => '50% 50%'],
@@ -121,11 +121,10 @@
             'list'      => ['label' => 'Categories', 'items' => ['Pastas', 'Pastry ingredients', 'Dairy products', 'Edible oils', 'Rice']],
             'locations' => null,
             'phone'     => '0116 669 100',
-            'cta'       => 'Contact Romina Imports',
-            'href'      => '#contact',
+            'cta'       => 'Visit Romina Imports',
+            'href'      => route('business', 'romina-imports'),
             'slides'    => [
-                ['src' => null, 'shot' => 'Imported pasta range, studio still life',  'caption' => 'Pastas',       'pos' => '50% 50%'],
-                ['src' => null, 'shot' => 'Warehouse aisle, edible oils and rice',    'caption' => 'Distribution', 'pos' => '50% 50%'],
+                ['src' => config('businesses.brands.romina-imports.image'), 'shot' => 'Romina Imports partners', 'caption' => 'Our partners', 'pos' => '50% 50%'],
             ],
         ],
 
@@ -142,7 +141,7 @@
             ],
             'phone'  => '+251 944 143 073',
             'cta'    => 'Visit Jaquar World',
-            'href'   => null,
+            'href'   => route('business', 'jaquar-world'),
             'slides' => [
                 ['src' => 'images/portfolio/jaquar-basin.jpg', 'shot' => 'Basin and wall-mounted faucet', 'caption' => 'Bathroom solutions', 'pos' => '50% 45%'],
                 ['src' => 'images/gallery/jaquar-world/01-jaquar.webp', 'shot' => 'Jaquar bathroom fixtures', 'caption' => 'Jaquar showroom', 'pos' => '50% 50%'],
