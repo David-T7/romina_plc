@@ -215,7 +215,7 @@
             </li>
 
             <li>
-                <p class="cof-stat-n"><span class="cof-count" data-to="3500">0</span></p>
+                <p class="cof-stat-n"><span class="cof-count" data-to="3500">0</span>+</p>
                 <div>
                     <p class="cof-stat-l">Tons of annual capacity</p>
                     <p class="cof-stat-t">Annual production capacity, in tons.</p>

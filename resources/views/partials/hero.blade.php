@@ -4,13 +4,14 @@
 
     @php
         // One representative image per brand, appended to the hero slider.
+        // 'right' => true sits the photo in the right of the hero on desktop, clear of the heading.
         $brandSlides = [
             ['img' => 'images/gallery/romina-restaurants/06-romina-restaurant.webp', 'cat' => 'Restaurants & Culinary', 'title' => 'Romina Restaurants', 'sub' => 'Home of Great Service.',        'text' => 'An Iconic Eatery in the heart of Addis Ababa', 'slug' => 'romina-restaurants'],
             ['img' => 'images/gallery/koba-patisserie/06-koba.webp',                 'cat' => 'Restaurants & Culinary', 'title' => 'KOBA Patisserie',    'sub' => 'Crafted with Passion.',            'text' => 'Pastries, Cakes, Breakfasts and Coffee, across Addis Ababa.', 'slug' => 'koba-patisserie'],
             ['img' => 'images/gallery/meskott-culinary/meskott_1.webp',              'cat' => 'Restaurants & Culinary', 'title' => 'Meskott Culinary',   'sub' => 'Diverse Experiences, Unified.',         'text' => 'Fine dining, and an unparalleled selection of International Cuisine', 'slug' => 'meskott-culinary'],
             ['img' => 'images/coffee/warehouse-stacks.webp',                         'cat' => 'Romina Coffee',          'title' => 'Romina Coffee',      'sub' => 'Legacy of Ethiopian Coffee.',   'text' => 'Sourced from six regions and exported across four continents since 2009.','slug' => 'romina-coffee'],
-            ['img' => 'images/hero/hero-02.jpg',                                     'cat' => 'Other Businesses',       'title' => 'Romina Imports',     'sub' => 'From our Partners to You.',  'text' => 'Quality FMCG imported and distributed across the Ethiopian market.','slug' => 'romina-imports'],
-            ['img' => 'images/gallery/jaquar-world/01-jaquar.webp',                  'cat' => 'Jaquar World',       'title' => 'Jaquar World',       'sub' => 'Complete Bathroom Solutions.',      'text' => 'Faucets, Showers, Sanitary-ware and more, from exquisite luxury to Jaquar Premium.','slug' => 'jaquar-world'],
+            ['img' => 'images/hero/imports-partners.webp',                            'cat' => 'Other Businesses',       'title' => 'Romina Imports',     'sub' => 'From our Partners to You.',  'text' => 'Quality FMCG imported and distributed across the Ethiopian market.','slug' => 'romina-imports', 'right' => true],
+            ['img' => 'images/gallery/jaquar-world/01-jaquar.webp',                  'cat' => 'Jaquar World',       'title' => 'Jaquar World',       'sub' => 'Complete Bathroom Solutions.',      'text' => 'Faucets, Showers, Sanitary-ware and more, from exquisite luxury to Jaquar Premium.','slug' => 'jaquar-world', 'right' => true],
         ];
         $heroTotal = 1 + count($brandSlides);
     @endphp
@@ -57,7 +58,7 @@
             @foreach ($brandSlides as $s)
                 <div class="hero-slide">
 
-                    <div class="hero-background"
+                    <div class="hero-background{{ !empty($s['right']) ? ' hero-background--right' : '' }}"
                          style="background-image:
                          url('{{ asset($s['img']) }}');">
                     </div>
