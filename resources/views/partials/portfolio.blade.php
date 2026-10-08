@@ -247,6 +247,44 @@
 
                 </article>
 
+
+                <!-- CARD 05 -->
+                <article class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img loading="lazy" decoding="async"
+                            src="{{ asset('images/bacio/gelato-counter.webp') }}"
+                            alt="Bacio Cremeria gelato counter">
+                    </div>
+                    <div class="portfolio-card-content">
+                        <span class="portfolio-number">05</span>
+                        <h3>Bacio Cremeria</h3>
+                        <p>Handcrafted ice creams, gelatos and elegant sundaes, made with fresh dairy from Romina Dairy Farm.</p>
+                        <a href="{{ route('business', 'bacio-cremeria') }}" class="portfolio-link">
+                            Explore Bacio Cremeria
+                            <span><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+
+                <!-- CARD 06 -->
+                <article class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img loading="lazy" decoding="async"
+                            src="{{ asset('images/gallery/meskott-culinary/meskott_1.webp') }}"
+                            alt="Meskott Culinary Experience dining space">
+                    </div>
+                    <div class="portfolio-card-content">
+                        <span class="portfolio-number">06</span>
+                        <h3>Meskott Culinary Experience</h3>
+                        <p>International cuisine, curated drinks and a welcoming setting for memorable dining in Addis Ababa.</p>
+                        <a href="{{ route('business', 'meskott-culinary') }}" class="portfolio-link">
+                            Explore Meskott
+                            <span><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
             </div>
 
         </div>
@@ -258,7 +296,7 @@
     <div class="portfolio-counter">
         <span class="portfolio-current">01</span>
         <span>/</span>
-        <span>04</span>
+        <span>06</span>
     </div>
 
     <div class="portfolio-progress">

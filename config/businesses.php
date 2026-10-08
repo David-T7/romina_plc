@@ -63,7 +63,7 @@ return [
                 ['src' => 'images/business/restaurant.webp', 'shot' => 'A signature plate from the kitchen', 'caption' => 'From our kitchen'],
                 ['src' => null, 'shot' => 'Balderas dining room, evening service',     'caption' => 'Balderas'],
                 ['src' => null, 'shot' => 'Signature Agelgel, plated on the pass',     'caption' => 'Signature Agelgel'],
-                ['src' => null, 'shot' => 'Arat Kilo restaurant, bar and cafe',        'caption' => 'Arat Kilo'],
+                ['src' => null, 'shot' => '4 Kilo restaurant, bar and cafe',        'caption' => '4 Kilo'],
                 ['src' => null, 'shot' => 'Chef finishing a European dish',            'caption' => 'European dishes'],
                 ['src' => null, 'shot' => 'Traditional Ethiopian platter, shared',     'caption' => 'Ethiopian classics'],
                 ['src' => null, 'shot' => 'Takeaway counter at Balderas',              'caption' => 'Takeaway center'],

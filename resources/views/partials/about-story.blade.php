@@ -99,13 +99,13 @@
             </p>
 
             <h3 class="hist-subtitle">
-                From a cherished restaurant in Arat Kilo to a diversified group.
+                From a cherished restaurant in 4 Kilo to a diversified group.
             </h3>
 
             <p class="hist-text">
                 Romina Group was founded in 1973 by <strong>Girma Taye</strong>, a prominent,
                 self-made business leader, starting with a small, cherished restaurant in
-                Arat Kilo, in the heart of Addis Ababa. After over 50 years of dedicated service
+                4 Kilo, in the heart of Addis Ababa. After over 50 years of dedicated service
                 and continuous evolution, we now operate a dynamic and diverse portfolio
                 spanning several key sectors:
             </p>

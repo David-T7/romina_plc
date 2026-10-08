@@ -951,6 +951,23 @@
             if (on) { active = active.filter(function (c) { return c !== cat; }); }
             else if (active.indexOf(cat) === -1) { active.push(cat); }
             apply();
+
+            if (window.matchMedia('(max-width: 640px)').matches) {
+                var badge = badges.find(function (b) {
+                    return b.getAttribute('data-cat') === cat;
+                });
+                if (badge) {
+                    badge.focus({ preventScroll: true });
+                    var badgeRect = badge.getBoundingClientRect();
+                    var clusterRect = cluster.getBoundingClientRect();
+                    var targetLeft = cluster.scrollLeft + badgeRect.left - clusterRect.left
+                        - (cluster.clientWidth - badgeRect.width) / 2;
+                    cluster.scrollTo({
+                        left: targetLeft,
+                        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+                    });
+                }
+            }
         });
     });
 

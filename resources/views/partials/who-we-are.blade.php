@@ -16,7 +16,7 @@
                 <p class="fifty-since">Since 1973</p>
 
                 <p class="fifty-body">
-                    From a single restaurant in Arat Kilo to a holding company
+                    From a single restaurant in 4 Kilo to a holding company
                     across hospitality, coffee, trading and distribution.
                     Five decades of growth marked by strategic expansion
                     and successful partnerships.

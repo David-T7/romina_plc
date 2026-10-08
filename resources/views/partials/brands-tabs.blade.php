@@ -5,7 +5,7 @@
     --}}
 
     <?php
-    $brands_order = ['restaurants', 'koba', 'bacio', 'meskott', 'coffee', 'imports', 'jaquar'];
+    $brands_order = ['restaurants', 'coffee', 'jaquar', 'koba', 'bacio', 'meskott', 'imports'];
     $brands = [
 
         'restaurants' => [
@@ -16,7 +16,7 @@
             'body'      => "We don't just serve food; we invite you into an experience that mirrors the inclusion and warmth of home. Home-styled dishes from across the world, prepared as the most comforting versions of what you love.",
             'list'      => ['label' => 'Culinary promise', 'items' => ['European dishes', 'Asian dishes', 'Local Ethiopian dishes', 'Signature Agelgel']],
             'locations' => [
-                ['Arat Kilo (4 Kilo)', 'Romina Restaurant, Bar & Cafe',          true],
+                ['4 Kilo', 'Romina Restaurant, Bar & Cafe',          true],
                 ['Balderas',           'Romina Restaurant / Takeaway Center',     false],
             ],
             'phone'  => null,
@@ -37,7 +37,7 @@
             'body'      => 'Artisan pastries, handcrafted cakes, signature breakfasts, specialty coffee and savory dishes, baked fresh by skilled pastry artisans across Addis Ababa.',
             'list'      => null,
             'locations' => [
-                ['Arat Kilo', 'Pastry & bakery takeaway center',        false],
+                ['4 Kilo', 'Pastry & bakery takeaway center',        false],
                 ['Sandford',  'Pastry, bakery, meals & drinks cafe',    false],
                 ['Atlas',     'Pastry, bakery, meals & drinks cafe',    false],
                 ['Peacock',   'Elevated coffee roastery experience',    false],
@@ -82,7 +82,7 @@
             'body'      => 'International cuisine led by talented chefs, paired with a curated selection of wines, spirits and classy cocktails. The new upscale meeting place in the city.',
             'list'      => null,
             'locations' => [
-                ['Arat Kilo', 'King George VI Street, opposite Menelik II School, ground floor, Sellassie Twin Towers', false],
+                ['4 Kilo', 'King George VI Street, opposite Menelik II School, ground floor, Sellassie Twin Towers', false],
             ],
             'phone'  => '+251 90 387 9999',
             'cta'    => 'Visit Meskott',

@@ -16131,3 +16131,10 @@ button {
         height: calc(var(--sz) * 2.1);
     }
 }
+
+@media (max-width: 640px) {
+    .rib-cluster {
+        width: 100%;
+        min-width: 0;
+    }
+}

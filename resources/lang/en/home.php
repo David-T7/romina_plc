@@ -27,7 +27,7 @@ return [
     'fifty_aria'    => '50 plus years',
     'fifty_heading' => 'Years of excellence',
     'fifty_since'   => 'Since 1973',
-    'fifty_body'    => 'From a single restaurant in Arat Kilo to a holding company across hospitality, coffee, trading and distribution. Five decades of growth marked by strategic expansion and successful partnerships.',
+    'fifty_body'    => 'From a single restaurant in 4 Kilo to a holding company across hospitality, coffee, trading and distribution. Five decades of growth marked by strategic expansion and successful partnerships.',
 
     // ── PORTFOLIO ─────────────────────────────────────────────────────────
     'port_mark'      => 'Business portfolio',
@@ -230,8 +230,8 @@ return [
     'ac_next'      => 'Next accomplishment',
     'ac_track_lbl' => 'Our accomplishments',
     'ac_0_cat'     => 'Founded',
-    'ac_0_title'   => 'Founded in Arat Kilo',
-    'ac_0_desc'    => 'Girma Taye opens a small restaurant in Arat Kilo, Addis Ababa — the seed of Romina Group.',
+    'ac_0_title'   => 'Founded in 4 Kilo',
+    'ac_0_desc'    => 'Girma Taye opens a small restaurant in 4 Kilo, Addis Ababa — the seed of Romina Group.',
     'ac_1_cat'     => 'Community',
     'ac_1_title'   => 'Farmers supported',
     'ac_1_desc'    => "Romina Coffee directly supports 3,714 smallholder farmers across Ethiopia's coffee regions.",

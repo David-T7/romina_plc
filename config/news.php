@@ -184,9 +184,9 @@ return [
             'category' => 'restaurant-promotions',
             'date'     => '2026-09-05',
             'image'    => 'images/business/restaurant.webp',
-            'excerpt'  => 'Our signature Agelgel is available as a weekday lunch special at Arat Kilo and Balderas.',
+            'excerpt'  => 'Our signature Agelgel is available as a weekday lunch special at 4 Kilo and Balderas.',
             'body'     => [
-                'Romina Restaurants is celebrating one of its most-loved dishes with a weekday Agelgel lunch special, available at both our Arat Kilo and Balderas locations.',
+                'Romina Restaurants is celebrating one of its most-loved dishes with a weekday Agelgel lunch special, available at both our 4 Kilo and Balderas locations.',
                 'Prepared the way our guests have always loved it, the Agelgel brings home-style comfort to the middle of the working day.',
                 'Visit us for lunch, or ask our Balderas takeaway centre to prepare it to go.',
             ],
@@ -201,7 +201,7 @@ return [
             'excerpt'  => 'Slow Saturdays and Sundays with brunch plates, fresh juices and coffee in the garden.',
             'body'     => [
                 'Meskott Culinary Experience now hosts weekend brunch in its street food garden, with brunch plates, fresh juices and specialty coffee.',
-                'It is the perfect way to spend a slow Saturday or Sunday morning in Arat Kilo — whether catching up with friends or bringing the family.',
+                'It is the perfect way to spend a slow Saturday or Sunday morning in 4 Kilo — whether catching up with friends or bringing the family.',
                 'Tables can be reserved by calling Meskott directly.',
             ],
         ],
@@ -214,9 +214,9 @@ return [
             'category' => 'group-news',
             'date'     => '2026-06-02',
             'image'    => 'images/about/romina-history.jpg',
-            'excerpt'  => 'From a small restaurant in Arat Kilo to a group of businesses, we mark fifty years of welcoming guests.',
+            'excerpt'  => 'From a small restaurant in 4 Kilo to a group of businesses, we mark fifty years of welcoming guests.',
             'body'     => [
-                'What began in 1973 as a small restaurant in Arat Kilo, Addis Ababa, has grown into a group of businesses spanning hospitality, coffee export, imports and distribution.',
+                'What began in 1973 as a small restaurant in 4 Kilo, Addis Ababa, has grown into a group of businesses spanning hospitality, coffee export, imports and distribution.',
                 'Across five decades, the constant has been our commitment to quality, craft, and the guests and communities we serve.',
                 'As we look ahead, we remain a family business — one that keeps growing while staying true to the values it was founded on.',
             ],

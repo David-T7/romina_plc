@@ -10,9 +10,9 @@ $accomplishments = [
     [
         'year'  => '1973',
         'cat'   => 'Founded',
-        'title' => 'Founded in Arat Kilo',
-        'desc'  => 'Girma Taye opens a small restaurant in Arat Kilo, Addis Ababa — the seed of Romina Group.',
-        'shot'  => 'The Arat Kilo monument, Addis Ababa, where Romina began',
+        'title' => 'Founded in 4 Kilo',
+        'desc'  => 'Girma Taye opens a small restaurant in 4 Kilo, Addis Ababa — the seed of Romina Group.',
+        'shot'  => 'The 4 Kilo monument, Addis Ababa, where Romina began',
         'img'   => 'images/stock/arat-kilo-monument.webp',
         'pos'   => '50% 30%',
     ],

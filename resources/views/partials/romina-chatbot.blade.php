@@ -124,13 +124,13 @@
         {
             id: 'about',
             keywords: ['romina','about','group','company','history','established','founded','1973','holding','ethiopia','ethiopian','who','overview','general'],
-            shortAnswer: 'Romina Group is an Ethiopian holding company established in 1973 and headquartered in Addis Ababa. The Group operates across hospitality and restaurants, coffee exporting, international trading, and importing and distribution. Romina began with a restaurant in Arat Kilo and has grown into a diversified enterprise spanning multiple sectors.',
+            shortAnswer: 'Romina Group is an Ethiopian holding company established in 1973 and headquartered in Addis Ababa. The Group operates across hospitality and restaurants, coffee exporting, international trading, and importing and distribution. Romina began with a restaurant in 4 Kilo and has grown into a diversified enterprise spanning multiple sectors.',
             followUp: 'Would you like to learn about one of our business sectors?',
             route: null, routeLabel: null
         },
         {
             id: 'restaurants',
-            keywords: ['restaurant','restaurants','dining','food','culinary','hospitality','catering','takeaway','european','asian','dishes','arat kilo','eat','menu','cuisine'],
+            keywords: ['restaurant','restaurants','dining','food','culinary','hospitality','catering','takeaway','european','asian','dishes','arat kilo','4 kilo','eat','menu','cuisine'],
             shortAnswer: 'Romina Restaurants focuses on great hospitality, attentive service, and home-style dishes. The culinary offering includes European, Asian, and Ethiopian cuisine, along with catering and takeaway services.',
             followUp: 'Would you like to know about KOBA Patisserie or Meskott?',
             route: '#brands', routeLabel: 'Explore Restaurants'
@@ -138,14 +138,14 @@
         {
             id: 'koba',
             keywords: ['koba','patisserie','bakery','pastry','pastries','cake','cakes','bakery','breakfast','sandford','atlas','peacock','ics','artisan','bread'],
-            shortAnswer: 'KOBA Patisserie & Bakery was established in 2020. KOBA specialises in pastries, cakes, artisan bakery products, breakfast, specialty coffee, and savoury dishes. Locations include Arat Kilo, Sandford, Atlas, and Peacock — with ICS coming soon.',
+            shortAnswer: 'KOBA Patisserie & Bakery was established in 2020. KOBA specialises in pastries, cakes, artisan bakery products, breakfast, specialty coffee, and savoury dishes. Locations include 4 Kilo, Sandford, Atlas, and Peacock — with ICS coming soon.',
             followUp: 'Would you like to know about Meskott or Romina Coffee?',
             route: '#brands', routeLabel: 'Explore KOBA'
         },
         {
             id: 'meskott',
             keywords: ['meskott','culinary','experience','upscale','bar','cocktail','cocktails','wine','wines','fine dining','vip','street food','sellassie','twin towers','king george'],
-            shortAnswer: 'Meskott Culinary Experience is an upscale dining and bar concept in Addis Ababa, offering international cuisine, wines, spirits, cocktails, fine dining, a VIP table area, a street food garden, and a bar experience. Located at Arat Kilo, King George VI Street, ground floor of Sellassie Twin Towers. Phone: +251 90 387 9999.',
+            shortAnswer: 'Meskott Culinary Experience is an upscale dining and bar concept in Addis Ababa, offering international cuisine, wines, spirits, cocktails, fine dining, a VIP table area, a street food garden, and a bar experience. Located at 4 Kilo, King George VI Street, ground floor of Sellassie Twin Towers. Phone: +251 90 387 9999.',
             followUp: null,
             route: '#brands', routeLabel: 'Explore Meskott'
         },
