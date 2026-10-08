@@ -68,10 +68,9 @@
             'cta'    => 'Visit Bacio Cremeria',
             'href'   => null,
             'slides' => [
-                // TODO: client photos
-                ['src' => null, 'shot' => 'Bacio Cremeria gelato counter, scoops on display',  'caption' => 'The gelato counter', 'pos' => '50% 50%'],
-                ['src' => null, 'shot' => 'Elegant sundae, plated and garnished',              'caption' => 'Elegant sundaes',    'pos' => '50% 50%'],
-                ['src' => null, 'shot' => 'Handcrafted ice cream, close detail',                'caption' => 'Handcrafted',        'pos' => '50% 50%'],
+                ['src' => 'images/bacio/gelato-counter.webp',   'shot' => 'Bacio Cremeria gelato counter, flavors on display', 'caption' => 'The gelato counter',  'pos' => '50% 55%'],
+                ['src' => 'images/bacio/gelato-plate.webp',     'shot' => 'Gelato scoops, plated with chocolate',              'caption' => 'Handcrafted gelato',   'pos' => '50% 45%'],
+                ['src' => 'images/bacio/waffle-ice-cream.webp', 'shot' => 'Waffle topped with ice cream and chocolate',        'caption' => 'Waffles & ice cream',  'pos' => '50% 45%'],
             ],
         ],
 

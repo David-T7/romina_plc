@@ -183,7 +183,7 @@ return [
             'kicker'     => 'Authentic flavor, modern creativity',
             'intro'      => 'Handcrafted ice creams, gelatos and elegant sundaes — crafted with care and made for moments of connection. A fresh, indulgent experience in the heart of Addis Ababa.',
             'badge'      => ['value' => 'New', 'label' => 'Handcrafted in Addis Ababa'],
-            'image'      => null,   // TODO: client photos
+            'image'      => 'images/bacio/gelato-counter.webp',
             'image_shot' => 'Bacio Cremeria — gelato counter',
             'title'      => 'A blend of authentic flavor and modern creativity.',
             'body'       => [

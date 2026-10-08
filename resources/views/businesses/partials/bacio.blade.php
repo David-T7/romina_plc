@@ -11,14 +11,15 @@
     $items     = $brand['highlights']['items'];
     $locations = $brand['locations'] ?? [];
 
-    // Rectangular image grid — styled placeholders until client photos arrive. // TODO: client photos
+    // Rectangular image grid. 'img' shows a photo (object-position via 'pos');
+    // a tile without one keeps its brand-colour artwork.
     $tiles = [
-        ['icon' => 'fa-ice-cream',    'label' => 'Handcrafted ice creams', 'tone' => 'teal'],
-        ['icon' => 'fa-bowl-food',    'label' => 'Gelato flavors',         'tone' => 'rasp'],
-        ['icon' => 'fa-wine-glass',   'label' => 'Elegant sundaes',        'tone' => 'gold'],
-        ['icon' => 'fa-cow',          'label' => 'Fresh dairy',            'tone' => 'blue'],
-        ['icon' => 'fa-people-group', 'label' => 'Made for sharing',       'tone' => 'peach'],
-        ['icon' => 'fa-heart',        'label' => 'The Bacio moment',       'tone' => 'cream'],
+        ['icon' => 'fa-bowl-food',  'label' => 'Gelato flavors',         'tone' => 'rasp',  'img' => 'images/bacio/gelato-counter.webp',   'pos' => '50% 55%'],
+        ['icon' => 'fa-ice-cream',  'label' => 'Handcrafted ice creams', 'tone' => 'teal',  'img' => 'images/bacio/gelato-plate.webp',     'pos' => '50% 45%'],
+        ['icon' => 'fa-wine-glass', 'label' => 'Waffles & ice cream',    'tone' => 'gold',  'img' => 'images/bacio/waffle-ice-cream.webp', 'pos' => '50% 45%'],
+        ['icon' => 'fa-mug-hot',    'label' => 'Affogato',               'tone' => 'blue',  'img' => 'images/bacio/affogato.webp',         'pos' => '50% 62%'],
+        ['icon' => 'fa-glass-water','label' => 'Iced coffee',            'tone' => 'peach', 'img' => 'images/bacio/iced-latte.webp',       'pos' => '50% 50%'],
+        // ['icon' => 'fa-heart',      'label' => 'The Bacio moment',       'tone' => 'cream'],
     ];
 
     // Split a heading into animated word spans (see .bc-words).
@@ -139,7 +140,7 @@
 </section>
 
 
-{{-- ============ IMAGE GRID — rectangular tiles (placeholders) ============ --}}
+{{-- ============ IMAGE GRID — rectangular tiles ============ --}}
 <section class="bc-gallery">
     <div class="container">
 
@@ -152,12 +153,16 @@
             @foreach ($tiles as $tile)
                 <figure class="bc-tile bc-tile--{{ $tile['tone'] }} bc-reveal"
                         style="--i: {{ $loop->index }}">
-                    <span class="bc-tile-art" aria-hidden="true">
-                        <i class="fa-solid {{ $tile['icon'] }}"></i>
-                    </span>
+                    @if (!empty($tile['img']))
+                        <img class="bc-tile-img" src="{{ asset($tile['img']) }}" alt="{{ $tile['label'] }} at Bacio Cremeria"
+                             loading="lazy" decoding="async" style="object-position: {{ $tile['pos'] ?? '50% 50%' }}">
+                    @else
+                        <span class="bc-tile-art" aria-hidden="true">
+                            <i class="fa-solid {{ $tile['icon'] }}"></i>
+                        </span>
+                    @endif
                     <figcaption class="bc-tile-cap">
                         <span>{{ $tile['label'] }}</span>
-                        <em>Photo coming soon</em>{{-- TODO: client photos --}}
                     </figcaption>
                 </figure>
             @endforeach
