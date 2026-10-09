@@ -12,7 +12,7 @@
         ['brand' => 'koba',   'name' => 'KOBA | 4 Kilo',                'desc' => 'Pastry & bakery takeaway center',     'lat' => 9.0361979, 'lng' => 38.7625884],
         ['brand' => 'koba',   'name' => 'KOBA | Sandford',              'desc' => 'Pastry, bakery, meals & drinks cafe', 'lat' => 9.0350704, 'lng' => 38.7721537],
         ['brand' => 'koba',   'name' => 'KOBA | Atlas',                 'desc' => 'Pastry, bakery, meals & drinks cafe', 'lat' => 9.0009917, 'lng' => 38.7801206],
-        ['brand' => 'koba',   'name' => 'KOBA | Peacock',               'desc' => 'Elevated coffee roastery experience', 'lat' => 8.9990426, 'lng' => 38.7743347],
+        ['brand' => 'koba',   'name' => 'KOBA | Peacock',               'desc' => 'Elevated coffee experience', 'lat' => 8.9990426, 'lng' => 38.7743347],
         ['brand' => 'meskott', 'name' => 'Meskott Culinary | 4 Kilo',   'desc' => 'Sellassie Twin Towers, King George VI St', 'lat' => 9.0355875, 'lng' => 38.7627344],
         ['brand' => 'bacio',   'name' => 'Bacio Cremeria',              'desc' => 'Zimbabwe Street',                      'lat' => 8.989968,  'lng' => 38.782691],
         ['brand' => 'jaquar',  'name' => 'Jaquar World | Kazanchis',    'desc' => 'Joburg Building, Jomo Kenyatta St',    'lat' => 9.0100875, 'lng' => 38.7691719],
@@ -216,7 +216,7 @@
 .fu-site-dir:focus-visible { outline: 2px solid #e3262e; outline-offset: 2px; }
 
 /* MAP */
-.fu-map-wrap { position: relative; min-height: 0; }
+.fu-map-wrap { position: relative; min-height: 0; z-index: 0; isolation: isolate; } /* contains Leaflet's z-index so the header stays on top */
 .fu-map { position: absolute; inset: 0; background: #eef0f3; }
 
 /* pins — a teardrop in each brand's colour */

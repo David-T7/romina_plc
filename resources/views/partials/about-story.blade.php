@@ -8,10 +8,12 @@
     $home = url('/');
 
     $storySectors = [
-        ['icon' => 'fa-utensils',          'name' => 'Restaurant Management & Hospitality', 'href' => route('business', 'romina-restaurants')],
-        ['icon' => 'fa-globe',             'name' => 'International Culinary Services',     'href' => route('business', 'meskott-culinary')],
-        ['icon' => 'fa-mug-hot',           'name' => 'Coffee Exporting',                    'href' => route('business', 'romina-coffee')],
-        ['icon' => 'fa-truck-ramp-box',    'name' => 'Importing & Distribution',            'href' => route('business', 'romina-imports')],
+        ['icon' => 'fa-utensils',          'name' => 'Restaurant Management & Hospitality',  'href' => route('business', 'romina-restaurants')],
+        ['icon' => 'fa-cake-candles',      'name' => 'Cakes, Pastries & Confectionaries',    'href' => route('business', 'koba-patisserie')],
+        ['icon' => 'fa-globe',             'name' => 'International Culinary Services',      'href' => route('business', 'meskott-culinary')],
+        ['icon' => 'fa-mug-hot',           'name' => 'Coffee Exporting',                     'href' => route('business', 'romina-coffee')],
+        ['icon' => 'fa-fire-burner',       'name' => 'Coffee Roastery',                      'href' => route('business', 'koba-patisserie')],
+        ['icon' => 'fa-truck-ramp-box',    'name' => 'FMCG Importing & Distribution',        'href' => route('business', 'romina-imports')],
     ];
 
     // Milestones share their titles with the homepage timeline (resources/lang/*/site.php)
@@ -40,7 +42,7 @@
             </p>
 
             <h2 class="t-h2 hist-title">
-                Five Decades of
+                Over Five Decades of
                 <span>Building Together.</span>
             </h2>
 
@@ -67,11 +69,11 @@
                     <dd>Established</dd>
                 </div>
                 <div>
-                    <dt>50+</dt>
+                    <dt>50<sup class="num-plus">+</sup></dt>
                     <dd>Years of growth</dd>
                 </div>
                 <div>
-                    <dt>4</dt>
+                    <dt>{{ count($storySectors) }}</dt>
                     <dd>Key sectors</dd>
                 </div>
             </dl>

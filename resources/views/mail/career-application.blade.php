@@ -25,7 +25,7 @@
 
     <div class="hd">
         <h1>New Career Application</h1>
-        <p>Romina Group — Careers Portal</p>
+        <p>Romina Group Careers Portal</p>
     </div>
 
     <div class="body">

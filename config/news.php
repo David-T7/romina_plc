@@ -37,7 +37,7 @@ return [
             'excerpt'  => 'Guests, partners and buyers joined our coffee team to taste this season\'s lots from across Ethiopia\'s growing regions.',
             'body'     => [
                 'Romina Coffee welcomed partners, buyers and friends of the Group for an evening of cupping, bringing together lots from several of Ethiopia\'s best-known growing regions.',
-                'Our quality team guided guests through each coffee — from bright, floral washed lots to deeper, fruit-forward naturals — sharing the story of the farmers and stations behind every cup.',
+                'Our quality team guided guests through each coffee, from bright, floral washed lots to deeper, fruit-forward naturals, sharing the story of the farmers and stations behind every cup.',
                 'Events like this are a chance to celebrate the people who make Ethiopian coffee exceptional, and to share that pride with the partners who carry it around the world.',
             ],
         ],
@@ -67,7 +67,7 @@ return [
             'excerpt'  => 'A new flagship location brings KOBA\'s craft patisserie and specialty coffee to the heart of the city.',
             'body'     => [
                 'KOBA Patisserie & Bakery has opened the doors of its newest flagship in Addis Ababa, bringing together craft pastry, fresh bakery, and specialty coffee service under one roof.',
-                'The new space was designed as a destination — a place for guests to slow down, enjoy a carefully made cup, and experience the quality that has become synonymous with the KOBA name.',
+                'The new space was designed as a destination: a place for guests to slow down, enjoy a carefully made cup, and experience the quality that has become synonymous with the KOBA name.',
                 'The opening marks another step in the Group\'s continued growth across hospitality and coffee.',
             ],
         ],
@@ -78,7 +78,7 @@ return [
             'category' => 'launches',
             'date'     => '2026-02-18',
             'image'    => 'images/portfolio/jaguar.jpg',
-            'excerpt'  => 'Our showrooms now feature Artize — luxury faucets, showers and architectural lighting for premium spaces.',
+            'excerpt'  => 'Our showrooms now feature Artize, with luxury faucets, showers and architectural lighting for premium spaces.',
             'body'     => [
                 'Jaquar World Addis Ababa has introduced the Artize collection to its showrooms, bringing luxury faucets, shower systems and architectural lighting to customers across the city.',
                 'Artize sits alongside the Jaquar Premium range, giving architects, developers and homeowners a complete choice for every kind of project.',
@@ -112,7 +112,7 @@ return [
             'body'     => [
                 'Quality begins long before the cup. At Romina Coffee, hand-sorting is a core part of how we ensure every bean that carries our name meets the standard our customers expect.',
                 'Skilled teams review the beans by hand, removing defects and preserving the consistency that defines specialty-grade Ethiopian coffee.',
-                'It is meticulous, deliberate work — and it is one of the many reasons our coffee stands apart.',
+                'It is meticulous, deliberate work, and it is one of the many reasons our coffee stands apart.',
             ],
         ],
 
@@ -172,7 +172,7 @@ return [
             'body'     => [
                 'A new potable-water site is now serving families in one of Romina Coffee\'s growing communities, bringing clean water within reach for households that previously travelled far to collect it.',
                 'The project was delivered together with community leaders, and forms part of the Group\'s wider investment in schools, bridges and roads across coffee regions.',
-                'Clean water changes daily life — for health, for school attendance, and for the time families get back.',
+                'Clean water changes daily life: for health, for school attendance, and for the time families get back.',
             ],
         ],
 
@@ -201,7 +201,7 @@ return [
             'excerpt'  => 'Slow Saturdays and Sundays with brunch plates, fresh juices and coffee in the garden.',
             'body'     => [
                 'Meskott Culinary Experience now hosts weekend brunch in its street food garden, with brunch plates, fresh juices and specialty coffee.',
-                'It is the perfect way to spend a slow Saturday or Sunday morning in 4 Kilo — whether catching up with friends or bringing the family.',
+                'It is the perfect way to spend a slow Saturday or Sunday morning in 4 Kilo, whether catching up with friends or bringing the family.',
                 'Tables can be reserved by calling Meskott directly.',
             ],
         ],
@@ -218,7 +218,7 @@ return [
             'body'     => [
                 'What began in 1973 as a small restaurant in 4 Kilo, Addis Ababa, has grown into a group of businesses spanning hospitality, coffee export, imports and distribution.',
                 'Across five decades, the constant has been our commitment to quality, craft, and the guests and communities we serve.',
-                'As we look ahead, we remain a family business — one that keeps growing while staying true to the values it was founded on.',
+                'As we look ahead, we remain a family business, one that keeps growing while staying true to the values it was founded on.',
             ],
         ],
 
@@ -232,7 +232,7 @@ return [
             'body'     => [
                 'Romina Group\'s import and distribution division has expanded its portfolio through new partnerships with established global brands.',
                 'The agreements broaden the range of quality products available to the Ethiopian market and strengthen the Group\'s position across its distribution network.',
-                'The expansion reflects a disciplined approach to growth — pursuing partnerships that align with the Group\'s standards and long-term vision.',
+                'The expansion reflects a disciplined approach to growth, pursuing partnerships that align with the Group\'s standards and long-term vision.',
             ],
         ],
 

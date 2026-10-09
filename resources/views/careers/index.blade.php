@@ -52,7 +52,7 @@
                 <div class="car-why-num">04</div>
                 <h3>Meaningful work</h3>
                 {{-- TODO: Describe the impact employees have on the company's mission/community --}}
-                <p>Our work matters — from the farmers we partner with to the guests we welcome. You'll be part of a business with purpose and a five-decade legacy.</p>
+                <p>Our work matters, from the farmers we partner with to the guests we welcome. You'll be part of a business with purpose and a five-decade legacy.</p>
             </div>
 
         </div>

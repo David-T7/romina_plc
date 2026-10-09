@@ -74,8 +74,8 @@ return [
     'rev_dot_2'     => 'ግምገማ 2',
     'rev_dot_3'     => 'ግምገማ 3',
     'rev_dot_4'     => 'ግምገማ 4',
-    'rev_img_1_alt' => 'Romina ምግብ ቤት የምግብ ተሞክሮ — የእንግዳ ግምገማ',
-    'rev_img_2_alt' => 'Romina የተጠበሰ የበሬ አጥንት እና የኢትዮጵያ ቡና — የእንግዳ ግምገማ',
+    'rev_img_1_alt' => 'Romina ምግብ ቤት የምግብ ተሞክሮ፣ የእንግዳ ግምገማ',
+    'rev_img_2_alt' => 'Romina የተጠበሰ የበሬ አጥንት እና የኢትዮጵያ ቡና፣ የእንግዳ ግምገማ',
     'rev_img_3_alt' => 'Romina የእንግዳ ደረጃ ምዘናዎች እና ግምገማዎች',
     'rev_img_4_alt' => 'Romina ምግብ ቤት ድባብ እና ምግብ',
 
@@ -231,7 +231,7 @@ return [
     'ac_track_lbl'  => 'ስኬቶቻችን',
     'ac_0_cat'      => 'መስራቻ',
     'ac_0_title'    => 'በአራት ኪሎ ተቋቁሞ',
-    'ac_0_desc'     => 'ጊርማ ጣዬ ከአዲስ አበባ አራት ኪሎ አቅራቢያ ትንሽ ምግብ ቤት ከፈቱ — የ Romina ቡድን ዘር።',
+    'ac_0_desc'     => 'ጊርማ ጣዬ ከአዲስ አበባ አራት ኪሎ አቅራቢያ ትንሽ ምግብ ቤት ከፈቱ፤ የ Romina ቡድን ዘር።',
     'ac_1_cat'      => 'ማህበረሰብ',
     'ac_1_title'    => 'የተደገፉ ገበሬዎች',
     'ac_1_desc'     => 'Romina Coffee በቀጥታ 3,714 ትናንሽ ይዞታ ያላቸው ገበሬዎችን በኢትዮጵያ ቡና ክልሎች ይደግፋል።',
@@ -287,6 +287,6 @@ return [
     'find_photos'       => 'ፎቶዎች',
     'find_share'        => 'አጋራ',
     'find_open_maps'    => 'ካርታ ውስጥ ክፈት',
-    'find_iframe_title' => 'KOBA Patisserie &amp; Bakery – Atlas Branch አካባቢ',
+    'find_iframe_title' => 'KOBA Patisserie &amp; Bakery፣ Atlas Branch አካባቢ',
 
 ];

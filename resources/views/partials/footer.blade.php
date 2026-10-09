@@ -44,3 +44,16 @@
 
         </div>
     </footer>
+
+<script>
+/* Footer line: draw in once the footer scrolls into view */
+(function () {
+    var d = document.querySelector('.ftr-divider');
+    if (!d) return;
+    if (!('IntersectionObserver' in window)) { d.classList.add('is-drawn'); return; }
+    var io = new IntersectionObserver(function (e) {
+        if (e[0].isIntersecting) { d.classList.add('is-drawn'); io.disconnect(); }
+    }, { threshold: 0.4 });
+    io.observe(d);
+}());
+</script>

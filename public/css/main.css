@@ -965,8 +965,6 @@ button {
     z-index: 100;
 
     color: var(--white);
-
-    border-bottom: 1px solid rgba(255,255,255,0.18);
 }
 
 
@@ -1020,7 +1018,6 @@ button {
     position: fixed;
     background: #fff;
     box-shadow: 0 2px 20px rgba(0,0,0,.12);
-    border-bottom-color: rgba(0,0,0,.08);
 }
 
 .site-header.is-scrolled .logo-white { display: none; }
@@ -3858,7 +3855,6 @@ button {
 
 }
 
-}
 
 /* =========================================================
    VALUES — "Why choose Romina" (React exact port)
@@ -7030,7 +7026,6 @@ button {
       animation: none;
     }
   }
-}
 
 
 /* =========================================================
@@ -7604,7 +7599,7 @@ button {
 .brands.tone-koba        { background: #0f4d2d; }   /* KOBA green (matches KOBA page --accent) */
 .brands.tone-bacio       { background: #003851; }   /* Bacio deep teal (matches Bacio page --accent) */
 .brands.tone-meskott     { background: #07111F; }   /* night */
-.brands.tone-coffee      { background: #241712; }   /* espresso */
+.brands.tone-coffee      { background: #0E2240; }   /* brand navy, as the homepage coffee section */
 .brands.tone-imports     { background: #14396e; }   /* dark blue (distinct from Meskott night) */
 .brands.tone-jaguar      { background: #eaf1fa; }   /* light chrome-blue */
 
@@ -11108,8 +11103,8 @@ button {
 ===================================================== */
 
 .bz-theme--coffee {
-    --deep-blue:   #0E0E0E;   /* near-black — dark surfaces */
-    --deep-blue-2: #141414;   /* alternating dark surface / frames */
+    --deep-blue:   #0E2240;   /* brand navy — dark surfaces (matches the homepage coffee section) */
+    --deep-blue-2: #0B1B33;   /* deeper navy — alternating dark surface / frames */
     --red:         #e3262e;   /* site red — the accent (matches homepage) */
 
     --romina-red:  #e3262e;   /* the brand red — logo-line accents */
@@ -16137,4 +16132,322 @@ button {
         width: 100%;
         min-width: 0;
     }
+}
+
+
+/* =====================================================
+   HERO COUNTER — both numbers the same size, fixed-width digits
+   so "01 / 07" never shifts as the slides change
+===================================================== */
+.slide-counter {
+    display: inline-flex;
+    align-items: baseline;
+    font-size: 18px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+
+.slide-counter .current-slide,
+.slide-counter .total-slides {
+    display: inline-block;
+    min-width: 2ch;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.slide-counter .total-slides { color: rgba(255,255,255,.55); }
+.slide-counter .counter-divider { font-weight: 400; }
+
+
+/* =====================================================
+   STAT NUMBERS — a trailing "+" sits raised and smaller,
+   like the homepage "50+" (.num-plus)
+===================================================== */
+.num-plus {
+    position: relative;
+    top: -.72em;
+    margin-left: .04em;
+    font-size: .48em;
+    line-height: 0;
+    vertical-align: baseline;
+    color: var(--red);
+}
+
+.ac-badge .num-plus { color: inherit; top: -.5em; font-size: .62em; }
+
+
+/* =====================================================
+   SECTION LABELS (.mark: line + dot + text) — larger, easier to read
+===================================================== */
+.mark {
+    gap: 14px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.mark .mark-rule {
+    width: 52px;
+    min-width: 52px;
+    height: 3px;
+}
+
+.mark i {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    min-height: 12px;
+}
+
+@media (max-width: 600px) {
+    .mark { gap: 12px; font-size: 15px; }
+    .mark .mark-rule { width: 40px; min-width: 40px; }
+    .mark i { width: 10px; height: 10px; min-width: 10px; min-height: 10px; }
+}
+
+
+/* Why choose Romina — standard section spacing above and below
+   (the section rule was being dropped by a stray "}"; now fixed) */
+.values-section      { background: #fff; padding-block: var(--section-space); }
+.values-section .mark { margin-top: 0; }
+
+
+/* =====================================================
+   HERO — keep the "Explore" link clear of the slide counter
+===================================================== */
+.hero-content { padding-bottom: 150px; }
+@media (max-width: 768px) { .hero-content { padding-bottom: 120px; } }
+
+/* =====================================================
+   CONTACT — shorter message box, readable placeholders
+===================================================== */
+.ctc-form textarea.field { min-height: 96px; height: 96px; resize: vertical; }
+.ctc-form .field::placeholder { color: rgba(14,34,64,.42); }
+
+/* =====================================================
+   FOOTER — the line next to the logo draws in when the footer
+   comes into view (JS adds .is-drawn), then the dot pulses
+===================================================== */
+.ftr-divider b {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1.1s cubic-bezier(.77, 0, .18, 1);
+}
+.ftr-divider b:last-child { transition-delay: .55s; }
+
+.ftr-divider i {
+    transform: scale(0);
+    transition: transform .5s cubic-bezier(.34, 1.56, .64, 1) .9s;
+}
+
+.ftr-divider.is-drawn b,
+.ftr-divider.is-drawn i { transform: none; }
+
+.ftr-divider.is-drawn i { animation: ftrDot 2.8s ease-in-out 1.6s infinite; }
+
+@keyframes ftrDot {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(232, 19, 44, .55); }
+    50%      { box-shadow: 0 0 0 9px rgba(232, 19, 44, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ftr-divider b, .ftr-divider i { transform: none; transition: none; }
+    .ftr-divider.is-drawn i { animation: none; }
+}
+
+
+/* About pages — solid tab bar under the hero so "Our History / Our Leadership"
+   read the same on every photo */
+.page-hero-tabs {
+    background: rgba(7, 27, 58, .94);
+    -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+}
+.page-hero-tabs a { color: rgba(255,255,255,.82); font-size: 15px; }
+
+
+/* =====================================================
+   ABOUT PAGES (hero with tabs) — the hero never grows taller than
+   the window, so "Our History / Our Leadership" stay on screen
+   and clickable on laptops as well as large monitors
+===================================================== */
+.page-hero:not(.page-hero--plain) {
+    height: min(78vh, 100svh);
+    min-height: min(560px, 100svh);
+}
+
+@media (max-height: 760px) and (min-width: 769px) {
+    .page-hero:not(.page-hero--plain) { height: 100svh; min-height: 480px; }
+    .page-hero:not(.page-hero--plain) .page-hero-content { padding-top: 90px; padding-bottom: 20px; }
+    .page-hero:not(.page-hero--plain) .page-hero-crumbs { margin-bottom: 14px; }
+    .page-hero:not(.page-hero--plain) .page-hero-content h1 { font-size: clamp(34px, 7.2vh, 64px); }
+    .page-hero:not(.page-hero--plain) .page-hero-content p { margin-top: 16px; }
+    .page-hero:not(.page-hero--plain) .page-hero-tabs a { padding: 20px 0; }
+}
+
+/* Team cards — no "+" badge */
+.executive-hint { display: none; }
+
+
+/* =====================================================
+   BRAND HERO — logo in place of the title ('hero_logo')
+===================================================== */
+.bz-hero-copy h1.bz-hero-logo { margin: 6px 0 4px; line-height: 0; letter-spacing: 0; }
+.bz-hero-logo img {
+    display: block;
+    width: min(100%, 520px);
+    height: auto;
+    filter: brightness(0) invert(1);          /* black logo → white on the navy hero */
+}
+@media (max-width: 768px) { .bz-hero-logo img { width: min(100%, 340px); } }
+
+
+/* =====================================================
+   HIGHLIGHTS — photo variant (cards carry 'image')
+   The section shows the active card's photo; hovering,
+   focusing or tapping another card cross-fades to its photo.
+===================================================== */
+.bz-highlights.bz-highlights--photo {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background: #07111F;
+    padding: calc(var(--section-space) * 1.3) 0;
+}
+
+.bz-xp-bg { position: absolute; inset: 0; z-index: -1; }
+.bz-xp-bg::after {                             /* keeps text readable on any photo */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(7, 17, 31, .82) 0%, rgba(7, 17, 31, .55) 45%, rgba(7, 17, 31, .9) 100%);
+}
+.bz-xp-bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.06);
+    transition: opacity .8s ease, transform 1.6s cubic-bezier(.22, 1, .36, 1);
+}
+.bz-xp-bg-img.is-on { opacity: 1; transform: scale(1); }
+
+.bz-highlights--photo .bz-label,
+.bz-highlights--photo .bz-section-head h2 { color: #fff; }
+.bz-highlights--photo .bz-label::before   { background: #fff; }
+
+.bz-highlights.bz-highlights--photo .bz-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: clamp(40px, 6vw, 80px);
+}
+
+.bz-highlights.bz-highlights--photo .bz-card {
+    min-height: 220px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .22);
+    border-radius: 12px;
+    box-shadow: none;
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+}
+.bz-highlights.bz-highlights--photo .bz-card:hover,
+.bz-highlights.bz-highlights--photo .bz-card:focus-visible,
+.bz-highlights.bz-highlights--photo .bz-card.is-on {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, .16);
+    border-color: rgba(255, 255, 255, .55);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, .35);
+    outline: none;
+}
+.bz-highlights.bz-highlights--photo .bz-card.is-on::before { width: 100%; }
+
+.bz-highlights.bz-highlights--photo .bz-card-icon { background: rgba(255, 255, 255, .14); color: #fff; }
+.bz-highlights.bz-highlights--photo .bz-card.is-on .bz-card-icon { background: #a81c20; }
+.bz-highlights.bz-highlights--photo .bz-card-num  { color: rgba(255, 255, 255, .55); }
+.bz-highlights.bz-highlights--photo .bz-card-name { color: #fff; }
+
+@media (max-width: 991px) {
+    .bz-highlights.bz-highlights--photo .bz-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+    .bz-highlights.bz-highlights--photo .bz-cards { grid-template-columns: 1fr; }
+    .bz-highlights.bz-highlights--photo .bz-card  { min-height: 150px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .bz-xp-bg-img { transition: none; transform: none; }
+}
+
+
+/* =====================================================
+   LOCATIONS — photo slider beside the location card
+   ('location_slides'); autoplay every 6 s in JS
+===================================================== */
+.bz-loc-split {
+    display: grid;
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: center;
+}
+.bz-loc-split .bz-loc-grid { grid-template-columns: 1fr; }
+
+.bz-locslider { min-width: 0; }
+
+.bz-locslider-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    border-radius: 10px;
+    aspect-ratio: 16 / 10;
+    background: #e6e9ee;
+}
+.bz-locslider-track::-webkit-scrollbar { display: none; }
+.bz-locslider-track:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+.bz-locslider-slide {
+    position: relative;
+    flex: 0 0 100%;
+    margin: 0;
+    scroll-snap-align: start;
+}
+.bz-locslider-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bz-locslider-slide figcaption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 36px 20px 16px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    background: linear-gradient(transparent, rgba(7, 17, 31, .7));
+}
+
+.bz-locslider-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 16px;
+}
+.bz-locslider-arrows { display: flex; }
+
+.bz-locslider-dots { display: flex; gap: 8px; }
+.bz-locslider-dots button {
+    width: 26px;
+    height: 4px;
+    padding: 0;
+    border: 0;
+    border-radius: 2px;
+    background: rgba(14, 34, 64, .2);
+    cursor: pointer;
+    transition: background .3s, width .3s;
+}
+.bz-locslider-dots button.is-on { width: 44px; background: var(--red); }
+
+@media (max-width: 900px) {
+    .bz-loc-split { grid-template-columns: 1fr; }
 }

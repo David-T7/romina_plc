@@ -74,8 +74,8 @@ return [
     'rev_dot_2'     => 'Review 2',
     'rev_dot_3'     => 'Review 3',
     'rev_dot_4'     => 'Review 4',
-    'rev_img_1_alt' => 'Romina Restaurant dining experience — guest review',
-    'rev_img_2_alt' => 'Romina grilled beef ribs and Ethiopian coffee — guest review',
+    'rev_img_1_alt' => 'Romina Restaurant dining experience, guest review',
+    'rev_img_2_alt' => 'Romina grilled beef ribs and Ethiopian coffee, guest review',
     'rev_img_3_alt' => 'Romina guest ratings and reviews',
     'rev_img_4_alt' => 'Romina Restaurant atmosphere and food',
 
@@ -186,7 +186,7 @@ return [
     'cof_stat_1_label' => 'Wet mill stations',
     'cof_stat_1_text'  => 'Located across all major coffee-growing regions, at advantageous altitudes.',
     'cof_stat_2_label' => 'Coffee-growing regions',
-    'cof_stat_2_text'  => 'Sidamo, Limmu, Yirgachefe, Guji, Nekempte, Anfilo and Nansabo.',
+    'cof_stat_2_text'  => 'Sidamo, Limmu, Yirgacheffe, Guji, Neqemte, Anfilo and Nansebo.',
     'cof_stat_3_label' => 'Tons of annual capacity',
     'cof_stat_3_text'  => 'Annual production capacity, in tons.',
     'cof_stat_4_label' => 'Farmers',
@@ -231,7 +231,7 @@ return [
     'ac_track_lbl' => 'Our accomplishments',
     'ac_0_cat'     => 'Founded',
     'ac_0_title'   => 'Founded in 4 Kilo',
-    'ac_0_desc'    => 'Girma Taye opens a small restaurant in 4 Kilo, Addis Ababa — the seed of Romina Group.',
+    'ac_0_desc'    => 'Girma Taye opens a small restaurant in 4 Kilo, Addis Ababa, the seed of Romina Group.',
     'ac_1_cat'     => 'Community',
     'ac_1_title'   => 'Farmers supported',
     'ac_1_desc'    => "Romina Coffee directly supports 3,714 smallholder farmers across Ethiopia's coffee regions.",
@@ -287,6 +287,6 @@ return [
     'find_photos'       => 'Photos',
     'find_share'        => 'Share',
     'find_open_maps'    => 'Open in Google Maps',
-    'find_iframe_title' => 'KOBA Patisserie &amp; Bakery – Atlas Branch location',
+    'find_iframe_title' => 'KOBA Patisserie &amp; Bakery, Atlas Branch location',
 
 ];

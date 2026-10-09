@@ -199,7 +199,7 @@
         <ol class="cof-stats" id="cofStats">
 
             <li>
-                <p class="cof-stat-n"><span class="cof-count" data-to="24">0</span>+</p>
+                <p class="cof-stat-n"><span class="cof-count" data-to="24">0</span><sup class="num-plus">+</sup></p>
                 <div>
                     <p class="cof-stat-l">Wet mill stations</p>
                     <p class="cof-stat-t">Located across all major coffee-growing regions, at advantageous altitudes.</p>
@@ -210,12 +210,12 @@
                 <p class="cof-stat-n"><span class="cof-count" data-to="6">0</span></p>
                 <div>
                     <p class="cof-stat-l">Coffee-growing regions</p>
-                    <p class="cof-stat-t">Sidamo, Limmu, Yirgachefe, Guji, Nekempte and Nansabo.</p>
+                    <p class="cof-stat-t">Sidamo, Limmu, Yirgacheffe, Guji, Neqemte and Nansabo.</p>
                 </div>
             </li>
 
             <li>
-                <p class="cof-stat-n"><span class="cof-count" data-to="3500">0</span>+</p>
+                <p class="cof-stat-n"><span class="cof-count" data-to="3500">0</span><sup class="num-plus">+</sup></p>
                 <div>
                     <p class="cof-stat-l">Tons of annual capacity</p>
                     <p class="cof-stat-t">Annual production capacity, in tons.</p>
@@ -223,7 +223,7 @@
             </li>
 
             <li>
-                <p class="cof-stat-n"><span class="cof-count" data-to="30000">0</span>+</p>
+                <p class="cof-stat-n"><span class="cof-count" data-to="30000">0</span><sup class="num-plus">+</sup></p>
                 <div>
                     <p class="cof-stat-l">Farmers Collaborated With</p>
                     <p class="cof-stat-t">Supplying beans of varied tastes and profiles.</p>
@@ -231,7 +231,7 @@
             </li>
 
             <li>
-                <p class="cof-stat-n"><span class="cof-count" data-to="6000+">0</span>+</p>
+                <p class="cof-stat-n"><span class="cof-count" data-to="6000+">0</span><sup class="num-plus">+</sup></p>
                 <div>
                     <p class="cof-stat-l">Specialty Farmer Partners</p>
                     <p class="cof-stat-t">Smallholders producing specialty coffee in the Oromia region.</p>

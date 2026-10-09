@@ -194,10 +194,10 @@
          data-i18n-attr="aria-label:lang_switcher_label">
         <a href="{{ route('lang.switch', 'en') }}" lang="en" hreflang="en"
            data-locale="en"
-           class="mobile-lang-opt{{ app()->getLocale() === 'en' ? ' mobile-lang-opt--on' : '' }}">EN — English</a>
+           class="mobile-lang-opt{{ app()->getLocale() === 'en' ? ' mobile-lang-opt--on' : '' }}">EN · English</a>
         <a href="{{ route('lang.switch', 'am') }}" lang="am" hreflang="am"
            data-locale="am"
-           class="mobile-lang-opt{{ app()->getLocale() === 'am' ? ' mobile-lang-opt--on' : '' }}">አማ — አማርኛ</a>
+           class="mobile-lang-opt{{ app()->getLocale() === 'am' ? ' mobile-lang-opt--on' : '' }}">አማ · አማርኛ</a>
     </nav>
     @endif
 

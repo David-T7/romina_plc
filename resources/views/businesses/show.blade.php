@@ -17,6 +17,8 @@
 
 @section('page-css')
 @if ($brandSlug === 'bacio-cremeria')
+{{-- Josefin Sans stands in for the guideline face (Champagne & Limousines) until it is self-hosted --}}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap">
 <link rel="stylesheet" href="{{ asset('css/bacio.css') }}">
 @endif
 @endsection
@@ -56,7 +58,13 @@
 
             <div class="hero-category">{{ strtoupper($groups[$brand['group']]) }}</div>
 
-            <h1>{{ $brand['name'] }}</h1>
+            @if (!empty($brand['hero_logo']))
+                <h1 class="bz-hero-logo">
+                    <img src="{{ asset($brand['hero_logo']) }}" alt="{{ $brand['name'] }}">
+                </h1>
+            @else
+                <h1>{{ $brand['name'] }}</h1>
+            @endif
 
             <p class="bz-hero-kicker">{{ $brand['kicker'] }}</p>
 
@@ -137,8 +145,24 @@
 
 
 {{-- ============ HIGHLIGHTS ============ --}}
-@if (($brand['show_highlights'] ?? true) && !empty($brand['highlights']['items']))
-<section class="bz-highlights bz-highlights--{{ $brandSlug }}">
+@php
+    $hlItems = $brand['highlights']['items'] ?? [];
+    $hlPhoto = !empty($hlItems) && !empty($hlItems[0]['image']);   // photo variant when cards carry images
+@endphp
+@if (($brand['show_highlights'] ?? true) && !empty($hlItems))
+<section class="bz-highlights bz-highlights--{{ $brandSlug }}{{ $hlPhoto ? ' bz-highlights--photo' : '' }}"
+         @if ($hlPhoto) data-bz-xp @endif>
+
+    @if ($hlPhoto)
+        {{-- background photos: the hovered / focused card's image fades in --}}
+        <div class="bz-xp-bg" aria-hidden="true">
+            @foreach ($hlItems as $item)
+                <img class="bz-xp-bg-img{{ $loop->first ? ' is-on' : '' }}" src="{{ asset($item['image']) }}" alt=""
+                     data-xp-bg="{{ $loop->index }}" @unless ($loop->first) loading="lazy" @endunless>
+            @endforeach
+        </div>
+    @endif
+
     <div class="container">
 
         <div class="bz-section-head">
@@ -148,7 +172,8 @@
 
         <ul class="bz-cards">
             @foreach ($brand['highlights']['items'] as $item)
-                <li class="bz-card">
+                <li class="bz-card{{ $hlPhoto && $loop->first ? ' is-on' : '' }}"
+                    @if ($hlPhoto) data-xp="{{ $loop->index }}" tabindex="0" @endif>
                     <span class="bz-card-num">{{ sprintf('%02d', $loop->iteration) }}</span>
                     <span class="bz-card-icon" aria-hidden="true"><i class="fa-solid {{ $item['icon'] }}"></i></span>
                     <span class="bz-card-name">{{ $item['name'] }}</span>
@@ -176,7 +201,7 @@
         <div class="bz-stats-grid">
             @foreach ($brand['stats'] as $stat)
                 <div class="bz-stat">
-                    <strong>{{ $stat['value'] }}</strong>
+                    <strong>{{ rtrim($stat['value'], '+') }}@if (str_ends_with($stat['value'], '+'))<sup class="num-plus">+</sup>@endif</strong>
                     <span>{{ $stat['label'] }}</span>
                 </div>
             @endforeach
@@ -206,8 +231,10 @@
 
 {{-- ============ LOCATIONS ============ --}}
 @if (!empty($brand['locations']))
-<section class="bz-locations" id="bz-locations">
-    <div class="container">
+<section class="bz-locations{{ !empty($brand['location_slides']) ? ' bz-locations--slides' : '' }}" id="bz-locations">
+    <div class="container{{ !empty($brand['location_slides']) ? ' bz-loc-split' : '' }}">
+
+    <div class="bz-loc-main">
 
         <div class="bz-section-head">
             <span class="bz-label">{{ $brand['locations_label'] }}</span>
@@ -237,6 +264,37 @@
                 </li>
             @endforeach
         </ul>
+
+    </div>{{-- /.bz-loc-main --}}
+
+    @if (!empty($brand['location_slides']))
+        {{-- Swipe / arrows / dots; advances on its own every 6 s (paused on hover) --}}
+        <div class="bz-locslider" data-bz-locslider aria-roledescription="carousel" aria-label="{{ $brand['menu'] }} photos">
+            <div class="bz-locslider-track" tabindex="0">
+                @foreach ($brand['location_slides'] as $slide)
+                    <figure class="bz-locslider-slide" aria-roledescription="slide" aria-label="{{ $loop->iteration }} of {{ count($brand['location_slides']) }}">
+                        <img src="{{ asset($slide['src']) }}" alt="{{ $slide['caption'] }}" loading="lazy" decoding="async">
+                        <figcaption>{{ $slide['caption'] }}</figcaption>
+                    </figure>
+                @endforeach
+            </div>
+            <div class="bz-locslider-bar">
+                <div class="bz-locslider-dots" role="group" aria-label="Choose photo">
+                    @foreach ($brand['location_slides'] as $slide)
+                        <button type="button" class="{{ $loop->first ? 'is-on' : '' }}" aria-label="Photo {{ $loop->iteration }}"></button>
+                    @endforeach
+                </div>
+                <div class="ac-arrows bz-locslider-arrows">
+                    <button type="button" class="bz-locslider-prev" aria-label="Previous photo">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <button type="button" class="bz-locslider-next" aria-label="Next photo">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endif
 
     </div>
 </section>
@@ -291,7 +349,7 @@
             {{-- TODO: replace with client-supplied intro copy. --}}
             <p class="rib-intro">
                 From pasta and rice to dairy and edible oils, Romina Imports brings a
-                growing family of trusted everyday brands to the Ethiopian market —
+                growing family of trusted everyday brands to the Ethiopian market,
                 each sourced with the same care we hold in our own kitchens.
             </p>
 
@@ -329,11 +387,11 @@
                     <a class="rib-badge" role="listitem" data-cat="{{ $b['category'] }}"
                        style="{{ $vars }}"
                        href="{{ $b['link'] }}" target="_blank" rel="noopener"
-                       aria-label="{{ !empty($b['logo']) ? $b['name'] . ' — ' . $b['category'] : $b['category'] }}">
+                       aria-label="{{ !empty($b['logo']) ? $b['name'] . ', ' . $b['category'] : $b['category'] }}">
                 @else
                     <button type="button" class="rib-badge" role="listitem" data-cat="{{ $b['category'] }}"
                             style="{{ $vars }}"
-                            aria-label="{{ !empty($b['logo']) ? $b['name'] . ' — ' . $b['category'] : $b['category'] }}">
+                            aria-label="{{ !empty($b['logo']) ? $b['name'] . ', ' . $b['category'] : $b['category'] }}">
                 @endif
                     <span class="rib-badge-face">
                         @if (!empty($b['logo']))
@@ -823,27 +881,29 @@
             })
             .filter(Boolean);
 
+        /* a trailing '+' renders as the raised .num-plus superscript */
         var fmt = function (p, v) {
             var n = p.grouped ? Math.floor(v).toLocaleString('en-US') : String(Math.floor(v));
-            return p.prefix + n + p.suffix;
+            var suffix = p.suffix === '+' ? '<sup class="num-plus">+</sup>' : p.suffix;
+            return p.prefix + n + suffix;
         };
 
         var runCount = function () {
             parsed.forEach(function (p) {
-                if (reduce) { p.el.textContent = fmt(p, p.target); return; }
+                if (reduce) { p.el.innerHTML = fmt(p, p.target); return; }
                 var dur = p.target > 1000 ? 1900 : 1300;
                 var t0  = performance.now();
                 (function tick(now) {
                     var prog  = Math.min((now - t0) / dur, 1);
                     var eased = 1 - Math.pow(1 - prog, 3);
-                    p.el.textContent = fmt(p, eased * p.target);
+                    p.el.innerHTML = fmt(p, eased * p.target);
                     if (prog < 1) requestAnimationFrame(tick);
-                    else p.el.textContent = fmt(p, p.target);
+                    else p.el.innerHTML = fmt(p, p.target);
                 })(performance.now());
             });
         };
 
-        if (!reduce) parsed.forEach(function (p) { p.el.textContent = fmt(p, 0); });
+        if (!reduce) parsed.forEach(function (p) { p.el.innerHTML = fmt(p, 0); });
 
         if ('IntersectionObserver' in window && !reduce) {
             var io1 = new IntersectionObserver(function (entries) {
@@ -1012,4 +1072,67 @@
 })();
 </script>
 @endif
+
+<script>
+/* =====================================================
+   BRAND PAGE — photo highlights (hover swaps the section
+   background) + location photo slider (6 s autoplay)
+===================================================== */
+(function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---- highlights: background follows the hovered / focused card ---- */
+    document.querySelectorAll('[data-bz-xp]').forEach(function (sec) {
+        var bgs   = sec.querySelectorAll('[data-xp-bg]');
+        var cards = sec.querySelectorAll('[data-xp]');
+        function show(i) {
+            bgs.forEach(function (b) { b.classList.toggle('is-on', b.dataset.xpBg === String(i)); });
+            cards.forEach(function (c) { c.classList.toggle('is-on', c.dataset.xp === String(i)); });
+        }
+        cards.forEach(function (c) {
+            c.addEventListener('mouseenter', function () { show(c.dataset.xp); });
+            c.addEventListener('focus',      function () { show(c.dataset.xp); });
+            c.addEventListener('click',      function () { show(c.dataset.xp); });   /* touch */
+        });
+    });
+
+    /* ---- location slider ---- */
+    document.querySelectorAll('[data-bz-locslider]').forEach(function (box) {
+        var track  = box.querySelector('.bz-locslider-track');
+        var slides = box.querySelectorAll('.bz-locslider-slide');
+        var dots   = box.querySelectorAll('.bz-locslider-dots button');
+        var n = slides.length, i = 0, timer = null;
+        if (!n) return;
+
+        function go(k, smooth) {
+            i = (k + n) % n;
+            track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: smooth === false || reduce ? 'auto' : 'smooth' });
+            dots.forEach(function (d, j) { d.classList.toggle('is-on', j === i); });
+        }
+        function start() { stop(); if (!reduce) timer = setInterval(function () { go(i + 1); }, 6000); }
+        function stop()  { if (timer) clearInterval(timer); timer = null; }
+
+        box.querySelector('.bz-locslider-prev').addEventListener('click', function () { go(i - 1); start(); });
+        box.querySelector('.bz-locslider-next').addEventListener('click', function () { go(i + 1); start(); });
+        dots.forEach(function (d, j) { d.addEventListener('click', function () { go(j); start(); }); });
+
+        /* keep the dots in step when the visitor swipes / scrolls the track */
+        var t;
+        track.addEventListener('scroll', function () {
+            clearTimeout(t);
+            t = setTimeout(function () {
+                var k = Math.round(track.scrollLeft / track.clientWidth);
+                if (k !== i) { i = k; dots.forEach(function (d, j) { d.classList.toggle('is-on', j === i); }); }
+            }, 120);
+        }, { passive: true });
+
+        box.addEventListener('mouseenter', stop);
+        box.addEventListener('mouseleave', start);
+        box.addEventListener('focusin', stop);
+        box.addEventListener('focusout', start);
+        start();
+    });
+}());
+</script>
+
 @endsection

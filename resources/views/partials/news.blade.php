@@ -11,7 +11,7 @@ $accomplishments = [
         'year'  => '1973',
         'cat'   => 'Founded',
         'title' => 'Founded in 4 Kilo',
-        'desc'  => 'Girma Taye opens a small restaurant in 4 Kilo, Addis Ababa — the seed of Romina Group.',
+        'desc'  => 'Girma Taye opens a small restaurant in 4 Kilo, Addis Ababa, the seed of Romina Group.',
         'shot'  => 'The 4 Kilo monument, Addis Ababa, where Romina began',
         'img'   => 'images/stock/arat-kilo-monument.webp',
         'pos'   => '50% 30%',
@@ -98,7 +98,7 @@ $accomplishments = [
                         </div>
                     @endif
                     <div class="ac-card-body">
-                        <span class="ac-badge">{{ $item['year'] }}</span>
+                        <span class="ac-badge">{{ rtrim($item['year'], '+') }}@if (str_ends_with($item['year'], '+'))<sup class="num-plus">+</sup>@endif</span>
                         <span class="ac-cat">{{ $item['cat'] }}</span>
                         <h3 class="ac-title">{{ $item['title'] }}</h3>
                         <p class="ac-desc">{{ $item['desc'] }}</p>

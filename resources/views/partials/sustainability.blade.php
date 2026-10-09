@@ -10,7 +10,7 @@
       <h2>Sustainability Practices</h2>
 
       <p>
-        At Romina Coffee, sustainability isn't a side project – it's woven into
+        At Romina Coffee, sustainability isn't a side project. It's woven into
         how we source, process, and export every batch of Ethiopian coffee.
         Our approach ties environmental responsibility to farmer livelihoods
         and community wellbeing, so the people and ecosystems behind every cup
@@ -110,7 +110,7 @@
         <p>Potable-Water Sites</p>
 
         <span class="impact-detail">
-          Our Water Sites at Nansabo &amp; Guji
+          Our Water Sites at Nansebo &amp; Guji
         </span>
       </div>
 
@@ -262,7 +262,7 @@ $approach_items = [
 
               @case(0)
                 <p>
-                  We invest directly in the farmers who grow our coffee – providing
+                  We invest directly in the farmers who grow our coffee, providing
                   disease-resistant coffee seedlings and shade-tree seedlings free
                   of charge to encourage sustainable growing systems, and supporting
                   them throughout the agricultural year with access to the planting
@@ -270,13 +270,13 @@ $approach_items = [
                 </p>
                 <p>
                   Beyond the farm, we purchase coffee at fair, premium prices and
-                  share dividends based on farmers' original coffee supply – giving
+                  share dividends based on farmers' original coffee supply, giving
                   our partners a stake in the value their coffee creates, not just a
                   one-time sale.
                 </p>
                 <p>
                   This support runs across our sourcing network in
-                  <strong>Sidama, Limmu, Yirgacheffe, Guji, Djimma, and Nekempte</strong>,
+                  <strong>Sidama, Limmu, Yirgacheffe, Guji, Djimma, and Neqemte</strong>,
                   with facilities and operations based in
                   <strong>Sidama, West Arsi, Wollega, and Guji.</strong>
                 </p>
@@ -302,7 +302,7 @@ $approach_items = [
                 </ul>
                 <p>
                   These projects are built within the same communities that grow
-                  our coffee – practical, long-term investments in education,
+                  our coffee: practical, long-term investments in education,
                   mobility, and everyday essentials.
                 </p>
               @break
@@ -314,7 +314,7 @@ $approach_items = [
                   shade-tree planting and disease-resistant varieties on the farm,
                   alongside a growing push toward reduced carbon emissions, less
                   operational waste, and renewable energy through our eco-friendly machines
-                  at our processing facilities – together with expanding partnerships in
+                  at our processing facilities, together with expanding partnerships in
                   reforestation and biodiversity conservation.
                 <br>
 
@@ -330,7 +330,7 @@ $approach_items = [
                 <p>
                   Washed coffee processing uses a lot of water, so we treat the
                   water used during washing before it's released back into the
-                  environment – an ongoing operational commitment, not a one-off
+                  environment. It is an ongoing operational commitment, not a one-off
                   project, applied at our wet-mill and processing facilities across
                   <strong>Sidama, West Arsi, Wollega, and Guji.</strong>
                 </p>
@@ -360,7 +360,7 @@ $approach_items = [
                   in sustainable farming, farm
                   management, plant health and disease prevention, proper use of
                   improved varieties, shade-tree management, harvesting and quality
-                  practices, environmental responsibility, and processing quality –
+                  practices, environmental responsibility, and processing quality,
                   delivered continuously, in step with the agricultural calendar.
                 </p>
 

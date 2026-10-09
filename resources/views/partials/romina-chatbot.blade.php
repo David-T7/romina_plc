@@ -132,7 +132,7 @@
         {
             id: 'koba',
             keywords: ['koba','patisserie','bakery','pastry','pastries','cake','cakes','bakery','breakfast','sandford','atlas','peacock','ics','artisan','bread'],
-            shortAnswer: 'KOBA Patisserie & Bakery was established in 2020. KOBA specialises in pastries, cakes, artisan bakery products, breakfast, specialty coffee, and savoury dishes. Locations include 4 Kilo, Sandford, Atlas, and Peacock — with ICS coming soon.',
+            shortAnswer: 'KOBA Patisserie & Bakery was established in 2020. KOBA specialises in pastries, cakes, artisan bakery products, breakfast, specialty coffee, and savoury dishes. Locations include 4 Kilo, Sandford, Atlas, and Peacock, with ICS coming soon.',
             followUp: 'Would you like to know about Meskott or Romina Coffee?',
             route: '#brands', routeLabel: 'Explore KOBA'
         },
@@ -167,7 +167,7 @@
         {
             id: 'sustainability',
             keywords: ['sustainability','sustainable','csr','community','environment','farmer','farmers','school','bridge','water','responsible','sourcing','seedling','certification','training','environmental'],
-            shortAnswer: "Romina Coffee's sustainability programme focuses on farmer support, responsible sourcing, community development, and environmental responsibility. Community projects include schools, bridges, roads, and potable-water infrastructure — along with farmer training, coffee seedlings, shade trees, and certification programmes.",
+            shortAnswer: "Romina Coffee's sustainability programme focuses on farmer support, responsible sourcing, community development, and environmental responsibility. Community projects include schools, bridges, roads, and potable-water infrastructure, along with farmer training, coffee seedlings, shade trees, and certification programmes.",
             followUp: null,
             route: '#sustainability', routeLabel: 'View Sustainability'
         },

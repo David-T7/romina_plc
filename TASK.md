@@ -80,11 +80,11 @@
 
   **Stats (animated counters):**
   - 24 — Wet mill stations
-  - 7+ — Coffee-growing regions *(Sidamo, Limmu, Yirgachefe, Guji, Nekempte, Anfilo, Nansabo)*
+  - 7+ — Coffee-growing regions *(Sidamo, Limmu, Yirgacheffe, Guji, Nekempte, Anfilo, Nansebo)*
   - 3,000–3,500 — Tons of annual capacity
   - 30,000+ — Farmers
   - 6,000+ — Specialty farmer partners
-  - 7 — Certified stations *(Rainforest Alliance, Fair Trade, UTZ)*
+  - 7+ — Certified stations *(Rainforest Alliance, Fair Trade, UTZ)*
 
   **Export journey bar:**
   Farm → Harvest → Wet mill → Processing → Cup testing → Export → Global market
@@ -148,7 +148,7 @@
     - Arat Kilo — Pastry & bakery takeaway center
     - Sandford — Pastry, bakery, meals & drinks cafe
     - Atlas — Pastry, bakery, meals & drinks cafe
-    - Peacock — Elevated coffee roastery experience *(flagship)*
+    - Peacock — Elevated coffee experience *(flagship)*
     - ICS — Pastry, bakery, meals & drinks cafe *(coming soon)*
 
 - [ ] **Task 15 — Build Meskott brand panel**

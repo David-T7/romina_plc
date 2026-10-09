@@ -89,7 +89,7 @@ return [
             'title'      => 'Crafted with passion. Made fresh.',
             'body'       => [
                 'Pastries, Cakes, Signature Breakfasts, Coffee and Savory Dishes, baked fresh across Addis Ababa.',
-                "Established in 2020, KOBA is built on craftsmanship and artisan baking, and has grown into a family of cafes and takeaway counters, including an elevated coffee roastery experience at Peacock.",
+                "Established in 2020, KOBA is built on craftsmanship and artisan baking, and has grown into a family of cafes and takeaway counters, including an elevated coffee experience",
             ],
             'facts'      => [
                 ['value' => '2020', 'label' => 'Established'],
@@ -123,7 +123,7 @@ return [
                 ['name' => '4 Kilo', 'desc' => 'Pastry & bakery takeaway center',     'tag' => null],
                 ['name' => 'Sandford',  'desc' => 'Pastry, bakery, meals & drinks cafe', 'tag' => null],
                 ['name' => 'Atlas',     'desc' => 'Pastry, bakery, meals & drinks cafe', 'tag' => null],
-                ['name' => 'Peacock',   'desc' => 'Elevated coffee roastery experience', 'tag' => null],
+                ['name' => 'Peacock',   'desc' => 'Elevated coffee experience', 'tag' => null],
                 ['name' => 'ICS',       'desc' => 'Pastry, bakery, meals & drinks cafe', 'tag' => 'Coming soon'],
             ],
             'phone'      => '+251 900 989 898',
@@ -139,6 +139,7 @@ return [
             'badge'      => ['value' => '4 Kilo', 'label' => 'Selassie Twin Towers'],
             'image'      => 'images/gallery/meskott-culinary/meskott_1.webp',
             'image_shot' => 'Meskott bar at night, backlit shelves',
+            'hero_logo'  => 'images/brands/logos/meskott.png',   // shown large in place of the hero title
             'title'      => 'Your Evening, Elevated.',
             'body'       => [
                 'International cuisine led by talented chefs, paired with a curated selection of wines, spirits and classy cocktails.',
@@ -153,9 +154,11 @@ return [
                 'label' => 'The experience',
                 'title' => 'Enjoying your Nights at Meskott.',
                 'items' => [
-                    ['icon' => 'fa-utensils',              'name' => 'Fine dining'],
-                    ['icon' => 'fa-globe',                  'name' => 'International Cuisine'],
-                    ['icon' => 'fa-martini-glass-citrus',  'name' => 'Immersive bar'],
+                    // 'image' = the section background shown while this card is hovered
+                    ['icon' => 'fa-utensils',             'name' => 'Fine dining',           'image' => 'images/gallery/meskott-culinary/meskott_2.webp'],
+                    ['icon' => 'fa-globe',                'name' => 'International Cuisine', 'image' => 'images/gallery/meskott-culinary/meskott_1.webp'],
+                    ['icon' => 'fa-martini-glass-citrus', 'name' => 'Immersive bar',         'image' => 'images/gallery/meskott-culinary/meskott_7.webp'],
+                    ['icon' => 'fa-music',                'name' => 'Jazz Nights',           'image' => 'images/gallery/meskott-culinary/meskott_3.webp'],
                 ],
             ],
             'gallery'    => [
@@ -168,6 +171,15 @@ return [
                 ['src' => 'images/gallery/meskott-culinary/meskott_7.webp', 'shot' => 'Curated wine wall',                    'caption' => 'Wines & spirits'],
             ],
             'locations_label' => 'Find us',
+            // Photo slider beside the "Worth the trip." card (advances every 6 s)
+            'location_slides' => [
+                ['src' => 'images/gallery/meskott-culinary/meskott_6.webp', 'caption' => 'Meskott at Sellassie Twin Towers'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_5.webp', 'caption' => 'The street food garden'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_1.webp', 'caption' => 'Dining by the open kitchen'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_7.webp', 'caption' => 'The bar'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_3.webp', 'caption' => 'The lounge'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_4.webp', 'caption' => 'Garden seating'],
+            ],
             'locations'  => [
                 ['name' => '4 Kilo', 'desc' => 'King George VI Street, opposite Menelik II School, ground floor, Sellassie Twin Towers', 'tag' => null],
             ],
@@ -181,19 +193,19 @@ return [
             'group'      => 'culinary',
             'theme'      => 'bacio',   // Bacio's own design (.bc-*); colours from the Bacio logo
             'kicker'     => 'Authentic flavor, modern creativity',
-            'intro'      => 'Handcrafted ice creams, gelatos and elegant sundaes — crafted with care and made for moments of connection. A fresh, indulgent experience in the heart of Addis Ababa.',
+            'intro'      => 'Handcrafted ice creams, gelatos and elegant sundaes, crafted with care and made for moments of connection. A fresh, indulgent experience in the heart of Addis Ababa.',
             'badge'      => ['value' => 'New', 'label' => 'Handcrafted in Addis Ababa'],
             'image'      => 'images/bacio/gelato-counter.webp',
-            'image_shot' => 'Bacio Cremeria — gelato counter',
+            'image_shot' => 'Bacio Cremeria gelato counter',
             'title'      => 'A blend of authentic flavor and modern creativity.',
             'body'       => [
-                'A contemporary home for handcrafted ice creams, gelatos and elegant sundaes — fresh ingredients and thoughtful craft, made for sharing.',
+                'A contemporary home for handcrafted ice creams, gelatos and elegant sundaes, made with fresh ingredients and thoughtful craft for sharing.',
                 'Every creation balances authentic flavor with modern creativity: simple, quality ingredients turned into treats that feel both familiar and distinctive.',
             ],
             // Bacio-only content blocks, rendered by businesses/partials/bacio.blade.php
-            'dairy'      => 'Fresh dairy sourced directly from Romina Dairy Farm — a farm-to-creation connection that brings freshness and authenticity into every scoop, sundae and cone.',
-            'moment'     => 'Friends, a family outing, or simply treating yourself — Bacio is designed to make the moment memorable. Come for the flavor, stay for the experience.',
-            'closing'    => 'Make room for something delicious — handcrafted treats in a space made for connection.',
+            'dairy'      => 'Fresh dairy sourced directly from Romina Dairy Farm. A farm-to-creation connection that brings freshness and authenticity into every scoop, sundae and cone.',
+            'moment'     => 'Whether it is friends, a family outing, or simply treating yourself, Bacio is designed to make the moment memorable. Come for the flavor, stay for the experience.',
+            'closing'    => 'Make room for something delicious: handcrafted treats in a space made for connection.',
             'highlights' => [
                 'label' => 'What we make',
                 'title' => 'Handcrafted ice creams, gelatos & elegant sundaes.',
@@ -274,10 +286,10 @@ return [
             'locations'  => [
                 ['name' => 'Sidamo',     'desc' => 'Coffee-growing region', 'tag' => null],
                 ['name' => 'Limmu',      'desc' => 'Coffee-growing region', 'tag' => null],
-                ['name' => 'Yirgachefe', 'desc' => 'Coffee-growing region', 'tag' => null],
+                ['name' => 'Yirgacheffe', 'desc' => 'Coffee-growing region', 'tag' => null],
                 ['name' => 'Guji',       'desc' => 'Coffee-growing region', 'tag' => null],
-                ['name' => 'Nekempte',   'desc' => 'Coffee-growing region', 'tag' => null],
-                ['name' => 'Nansabo',    'desc' => 'Coffee-growing region', 'tag' => null],
+                ['name' => 'Neqemte',   'desc' => 'Coffee-growing region', 'tag' => null],
+                ['name' => 'Nansebo',    'desc' => 'Coffee-growing region', 'tag' => null],
             ],
             'directions' => false,
             'phone'      => null,
@@ -349,7 +361,7 @@ return [
 
         'jaquar-world' => [
             'name'       => 'Jaquar World Addis Ababa',
-            'menu'       => 'Jaquar World – Addis Ababa',
+            'menu'       => 'Jaquar World Addis Ababa',
             'group'      => 'other',
             'theme'      => 'jaguar',   // white-dominant, small blue (see .bz-theme--jaguar)
             'kicker'     => 'Launched 2017 with Jaquar Group',

@@ -117,7 +117,7 @@
                         No {{ strtolower($categories[$active]['full'] ?? $categories[$active]['label']) }} to share right now.
                         <a href="{{ route('news') }}">See all news</a>
                     @else
-                        No news to share right now — check back soon.
+                        No news to share right now. Check back soon.
                     @endif
                 </p>
             </div>

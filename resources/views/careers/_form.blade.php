@@ -6,7 +6,7 @@
 
 @if (session('success'))
     <p class="f-status car-success" role="status">
-        Your application was submitted — thank you! We'll be in touch if your profile is a strong match.
+        Your application was submitted. Thank you! We'll be in touch if your profile is a strong match.
     </p>
 @endif
 

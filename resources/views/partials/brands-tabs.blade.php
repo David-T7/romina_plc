@@ -40,7 +40,7 @@
                 ['4 Kilo', 'Pastry & bakery takeaway center',        false],
                 ['Sandford',  'Pastry, bakery, meals & drinks cafe',    false],
                 ['Atlas',     'Pastry, bakery, meals & drinks cafe',    false],
-                ['Peacock',   'Elevated coffee roastery experience',    false],
+                ['Peacock',   'Elevated coffee experience',    false],
                 ['ICS',       'Pastry, bakery, meals & drinks cafe',    true],
             ],
             'phone'  => '+251 900 989 898',
@@ -225,7 +225,7 @@
                                                     >
                                                 @else
                                                     <div class="ph" role="img" aria-label="Image placeholder: {{ $slide['shot'] }}">
-                                                        <span class="ph-tag"><i></i>IMAGE PLACEHOLDER — OFFICIAL PHOTOGRAPH REQUIRED</span>
+                                                        <span class="ph-tag"><i></i>IMAGE PLACEHOLDER: OFFICIAL PHOTOGRAPH REQUIRED</span>
                                                         <span class="ph-shot">{{ $slide['shot'] }}</span>
                                                     </div>
                                                 @endif

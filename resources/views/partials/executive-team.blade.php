@@ -1,6 +1,6 @@
 <!-- =====================================================
      EXECUTIVE TEAM
-     Pass ['extendedTeam' => true] to also show the second grid.
+     Pass ['extendedTeam' => true] to also show the other grids (three rows of four).
 ===================================================== -->
 
 @php
@@ -24,23 +24,17 @@
                                     Oversees key departments, coordinates senior managers, and represents the CEO when required.',
                 ],
                 [
+                    'name'     => 'Nejat Hassen',
+                    'position' => 'Chief of Staff',
+                    'photo'    => 'images/team/executive-08.jpg',
+                    'role'     => 'Follows up on strategic initiatives, coordinates senior leaders, prepares important meetings and reports, and helps ensure decisions are implemented effectively.',
+                ],
+                [
                     'name'     => 'Blen Mekonnen',
                     'position' => 'HR Director',
                     'photo'    => 'images/team/executive-03.jpg',
                     'role'     => 'Leads the organization’s human resources activities.
                                     Manages recruitment, employee development, performance, workplace policies, employee relations, and staff welfare.',
-                ],
-                [
-                    'name'     => 'Elias Dagne',
-                    'position' => 'Finance Director',
-                    'photo'    => 'images/team/executive-04.jpg',
-                    'role'     => 'Leads the organization’s financial management. Oversees budgeting, accounting, financial reporting, cash flow, financial controls, and ensures the organization uses its resources responsibly.',
-                ],
-                [
-                    'name'     => 'Nejat Hassen',
-                    'position' => 'Chief of Staff',
-                    'photo'    => 'images/team/executive-08.jpg',
-                    'role'     => 'Follows up on strategic initiatives, coordinates senior leaders, prepares important meetings and reports, and helps ensure decisions are implemented effectively.',
                 ],
 
             ],
@@ -72,8 +66,22 @@
                     'photo'    => 'images/team/executive-09.jpg',
                     'role'     => 'Leads food and beverage operations across the Group\'s restaurants and patisseries, overseeing menus, service standards, kitchen quality and the guest experience.',
                 ],
+            ],
+        ],
+        [
+            // Third row of four. Each member carries their own 'label'; two open seats.
+            'label'   => 'LEADERSHIP',
+            'members' => [
+                [
+                    'name'     => 'Elias Dagne',
+                    'label'    => 'EXECUTIVE LEADERSHIP',
+                    'position' => 'Finance Director',
+                    'photo'    => 'images/team/executive-04.jpg',
+                    'role'     => 'Leads the organization’s financial management. Oversees budgeting, accounting, financial reporting, cash flow, financial controls, and ensures the organization uses its resources responsibly.',
+                ],
                 [
                     'name'     => 'Fitsum Bekere',
+                    'label'    => 'BUSINESS LEADERSHIP',
                     'position' => 'Coffee Field Operations Director',
                     'photo'    => 'images/team/executive-10.jpg',
                     'role'     => 'Leads Romina Coffee\'s field operations across our growing regions, working with farmers and wet-mill stations on harvesting, processing and quality at origin.',
@@ -142,10 +150,6 @@
                                 </div>
                             @endif
 
-                            <span class="executive-hint" aria-hidden="true">
-                                <i class="fa-solid fa-plus"></i>
-                            </span>
-
                             <!-- Role description, revealed on hover / focus -->
                             <div class="executive-overlay">
                                 <span class="executive-overlay-label">The role</span>
@@ -157,7 +161,7 @@
                         <div class="executive-info">
 
                             <span>
-                                {{ $grid['label'] }}
+                                {{ $member['label'] ?? $grid['label'] }}
                             </span>
 
                             <h3>

@@ -62,28 +62,28 @@
             <div class="f-row">
                 <div class="f">
                     <label for="ctc_name">Name</label>
-                    <input class="field" type="text"  id="ctc_name"    name="name"    autocomplete="name">
+                    <input class="field" type="text"  id="ctc_name"    name="name"    autocomplete="name"  placeholder="Your full name">
                 </div>
                 <div class="f">
                     <label for="ctc_email">Email</label>
-                    <input class="field" type="email" id="ctc_email"   name="email"   autocomplete="email">
+                    <input class="field" type="email" id="ctc_email"   name="email"   autocomplete="email" placeholder="you@example.com">
                 </div>
             </div>
 
             <div class="f-row">
                 <div class="f">
                     <label for="ctc_phone">Phone</label>
-                    <input class="field" type="tel"   id="ctc_phone"   name="phone"   autocomplete="tel">
+                    <input class="field" type="tel"   id="ctc_phone"   name="phone"   autocomplete="tel"   placeholder="+251 9XX XXX XXX">
                 </div>
                 <div class="f">
                     <label for="ctc_subject">Subject</label>
-                    <input class="field" type="text"  id="ctc_subject" name="subject">
+                    <input class="field" type="text"  id="ctc_subject" name="subject" placeholder="What is it about?">
                 </div>
             </div>
 
             <div class="f">
                 <label for="ctc_message">Message</label>
-                <textarea class="field" id="ctc_message" name="message" rows="5"></textarea>
+                <textarea class="field" id="ctc_message" name="message" rows="3" placeholder="Write your message here"></textarea>
             </div>
 
             <div class="f-actions">
