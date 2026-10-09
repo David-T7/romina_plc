@@ -16181,9 +16181,7 @@ button {
    SECTION LABELS (.mark: line + dot + text) — larger, easier to read
 ===================================================== */
 .mark {
-    gap: 14px;
-    font-size: 17px;
-    font-weight: 600;
+    gap: 14px;   /* text keeps its original 14px / 500 (see the base .mark rule) */
 }
 
 .mark .mark-rule {
@@ -16200,7 +16198,7 @@ button {
 }
 
 @media (max-width: 600px) {
-    .mark { gap: 12px; font-size: 15px; }
+    .mark { gap: 12px; }
     .mark .mark-rule { width: 40px; min-width: 40px; }
     .mark i { width: 10px; height: 10px; min-width: 10px; min-height: 10px; }
 }
