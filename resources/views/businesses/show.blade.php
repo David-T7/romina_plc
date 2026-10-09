@@ -15,9 +15,15 @@
     $bzTheme   = $brand['theme'] ?? null;   // e.g. 'coffee' — re-tints the whole page
 @endphp
 
+@section('page-css')
+@if ($brandSlug === 'bacio-cremeria')
+<link rel="stylesheet" href="{{ asset('css/bacio.css') }}">
+@endif
+@endsection
+
 @section('page-content')
 
-<div class="bz-page{{ $bzTheme ? ' bz-theme--' . $bzTheme : '' }}">
+<div class="bz-page{{ $bzTheme ? ' bz-theme--' . $bzTheme : '' }}{{ $brandSlug === 'bacio-cremeria' ? ' bacio-page' : '' }}">
 
 @if ($brandSlug === 'koba-patisserie')
 
@@ -383,6 +389,24 @@
 
 @section('page-js')
 <script>
+/* Bacio scoops arrive in a wave when What we make comes into view. */
+(function () {
+    var grid = document.querySelector('.bacio-product-grid');
+    if (!grid || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    grid.querySelectorAll('.bacio-product-card').forEach(function (card, index) {
+        card.style.setProperty('--wave-index', index);
+    });
+    if (!('IntersectionObserver' in window)) return;
+    var observer = new IntersectionObserver(function (entries) {
+        if (!entries.some(function (entry) { return entry.isIntersecting; })) return;
+        grid.classList.add('is-waving');
+        observer.disconnect();
+    }, { threshold: 0.12 });
+    observer.observe(grid);
+}());
+</script>
+
+<script>
 /* =====================================================
    BRAND GALLERY — lightbox
    Click a photo tile to open; arrows / swipe to browse,
@@ -416,8 +440,8 @@
         textEl.textContent  = t.dataset.caption;
     }
 
-    function open(i) {
-        opener = tiles[i];
+    function open(i, trigger) {
+        opener = trigger || tiles[i];
         box.hidden = false;
         box.classList.toggle('is-single', tiles.length < 2);
         requestAnimationFrame(function () { box.classList.add('is-open'); });
@@ -437,6 +461,13 @@
         t.addEventListener('click', function () { open(i); });
     });
 
+    document.querySelectorAll('.bacio-image-btn').forEach(function (button) {
+        var photo = button.querySelector('img');
+        button.setAttribute('aria-label', 'Enlarge photo: ' + photo.alt);
+        var index = tiles.findIndex(function (tile) { return tile.dataset.full === photo.src; });
+        if (index < 0) return;
+        button.addEventListener('click', function () { open(index, button); });
+    });
     btnPrev.addEventListener('click', function () { show(current - 1); });
     btnNext.addEventListener('click', function () { show(current + 1); });
     btnClose.addEventListener('click', close);

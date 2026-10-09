@@ -10,7 +10,7 @@
     $currentBiz = $pageCode === 'Business' ? ($brandSlug ?? null) : null;
 
     // Pages with a light/white hero need the dark nav treatment at the top.
-    $lightThemes = ['jaguar'];
+    $lightThemes = ['jaguar', 'bacio'];
     $headerLight = in_array($brand['theme'] ?? null, $lightThemes, true);
 @endphp
 

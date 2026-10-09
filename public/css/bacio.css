@@ -1,0 +1,146 @@
+.bacio-page { --bacio-cream:#fff7ee; --bacio-pink:#f7dde3; --bacio-cocoa:#4b2f2a; --bacio-accent:#914067; --bacio-caramel:#e7c4a6; color:var(--bacio-cocoa); background:var(--bacio-cream); overflow:clip; border-top:100px solid var(--bacio-cream); }
+.bacio-page .container { max-width:1200px; padding-inline:28px; }
+.bacio-page h1,.bacio-page h2,.bacio-page h3,.bacio-page p { color:inherit; }
+.bacio-page h1,.bacio-page h2 { font-family:Georgia,'Times New Roman',serif; font-weight:400; letter-spacing:-.045em; }
+.bacio-page h2 { font-size:clamp(32px,4vw,52px); line-height:1.1; }
+.bacio-page p { line-height:1.75; }
+.bacio-page a:focus-visible,.bacio-page button:focus-visible { outline:3px solid #003851; outline-offset:5px; }
+.bacio-page [id] { scroll-margin-top:110px; }
+.bacio-page .bacio-eyebrow { margin:0 0 18px; color:var(--bacio-accent); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.13em; }
+.bacio-page .bacio-hero { padding:38px 0 70px; background:linear-gradient(110deg,#fff7ee 45%,#f7dde3 100%); }
+.bacio-page .bacio-hero-grid { display:grid; grid-template-columns:1.05fr 1fr; gap:65px; align-items:center; }
+.bacio-page .bacio-crumbs { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:35px; font-size:12px; }
+.bacio-page .bacio-crumbs a { color:var(--bacio-cocoa); display:inline-flex; align-items:center; min-height:44px; }
+.bacio-page .bacio-crumbs > span { align-self:center; }
+.bacio-page h1 { font-size:clamp(52px,6.1vw,86px); line-height:1.02; margin:0 0 25px; }
+.bacio-page h1 em { color:var(--bacio-accent); font-weight:400; }
+.bacio-page .bacio-lead { font-size:16px; max-width:440px; margin-bottom:30px; }
+.bacio-page .bacio-actions { display:flex; align-items:center; flex-wrap:wrap; gap:24px; }
+.bacio-page .bacio-button { display:inline-flex; align-items:center; justify-content:center; gap:20px; min-height:52px; padding:14px 25px; border-radius:0; background:var(--bacio-cocoa); color:#fff7ee; text-decoration:none; font-size:14px; font-weight:600; transition:transform .2s,background .2s; }
+.bacio-page .bacio-button:hover { background:#663d35; transform:translateY(-2px); }
+.bacio-page .bacio-text-link { color:var(--bacio-cocoa); display:inline-flex; align-items:center; gap:14px; min-height:44px; font-size:14px; text-underline-offset:5px; }
+.bacio-page .bacio-hero-art { position:relative; padding:35px 18px 30px; }
+.bacio-page .bacio-hero-photo { position:relative; margin:0; padding:10px; background:#fffaf5; border-radius:0;  box-shadow:0 25px 50px #4b2f2a18; animation:bacio-product-float 7s ease-in-out infinite; }
+.bacio-page .bacio-hero-photo img { display:block; width:100%; height:440px; object-fit:cover; object-position:50% 61%; border-radius:0; }
+.bacio-page .bacio-hero-photo figcaption { padding:16px 8px 9px; font-size:12px; text-align:center; letter-spacing:.04em; }
+.bacio-page .bacio-round-note { position:absolute; bottom:5px; left:-18px; display:grid; place-content:center; width:110px; height:110px; border-radius:0; background:var(--bacio-caramel); font-family:Georgia,serif; font-style:italic; text-align:center; transform:rotate(-12deg); font-size:17px; line-height:1.2; }
+.bacio-page .bacio-spark { position:absolute; pointer-events:none; color:var(--bacio-accent); font-size:80px; line-height:1; }
+.bacio-page .bacio-spark--hero { top:0; right:-5px; z-index:1; transform:rotate(12deg); }
+.bacio-page .bacio-flavors { padding:85px 0; }
+.bacio-page .bacio-section-heading { display:flex; align-items:end; justify-content:space-between; gap:35px; margin-bottom:36px; }
+.bacio-page .bacio-section-heading h2 { margin-bottom:0; }
+.bacio-page .bacio-section-heading > p { margin-bottom:0; font-size:14px; }
+.bacio-page .bacio-product-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:18px; padding:0; margin:0; list-style:none; }
+.bacio-page .bacio-product-card { min-width:0; }
+.bacio-page .bacio-product-card img { display:block; width:100%; height:auto; aspect-ratio:3/4; object-fit:cover; object-position:50% 62%; border-radius:0; transition:transform .3s; }
+.bacio-page .bacio-product-card:nth-child(even) { padding-top:25px; }
+
+.bacio-page .bacio-product-card h3 { margin:18px 0 0; font-size:16px; font-weight:500; line-height:1.4; text-align:center; }
+.bacio-page .bacio-story { padding:90px 0; background:#f3e6da; }
+.bacio-page .bacio-story-grid { display:grid; grid-template-columns:1fr 1fr; gap:75px; align-items:center; }
+.bacio-page .bacio-craft-sequence { display:grid; grid-template-columns:1fr 1fr; gap:16px; position:relative; }
+.bacio-page .bacio-craft-sequence figure { margin:0; padding:8px; background:#fff7ee; border-radius:0;  }
+.bacio-page .bacio-craft-sequence figure:nth-child(2) { margin-top:75px;  }
+.bacio-page .bacio-craft-sequence img { width:100%; height:auto; aspect-ratio:3/4; object-fit:cover; object-position:50% 62%; border-radius:0; }
+.bacio-page .bacio-craft-sequence figcaption { font-size:12px; text-align:center; padding:14px 3px 6px; }
+.bacio-page .bacio-spark--story { bottom:-25px; left:5px; font-size:64px; }
+.bacio-page .bacio-story-copy > p { font-size:15px; }
+.bacio-page .bacio-story-copy h2 { margin-bottom:25px; }
+.bacio-page .bacio-dairy-note { display:flex; gap:20px; border-top:1px solid #4b2f2a30; padding-top:25px; margin-top:28px; }
+.bacio-page .bacio-dairy-note > i { font-size:28px; color:var(--bacio-accent); margin-top:4px; }
+.bacio-page .bacio-dairy-note h3 { font-size:15px; font-weight:600; }
+.bacio-page .bacio-dairy-note p { font-size:14px; margin-bottom:0; }
+.bacio-page .bz-gallery { background:var(--bacio-cream); padding:85px 0; }
+.bacio-page .bz-label { color:var(--bacio-accent); }
+.bacio-page .bz-gallery-hint { color:var(--bacio-cocoa); }
+.bacio-page .bz-tile { border-radius:0; }
+.bacio-page .bz-lightbox { background:rgba(35,22,19,.96); }
+.bacio-page .bz-lightbox button:focus-visible { outline-color:#fff7ee; }
+.bacio-page .bz-lb-caption,.bacio-page .bz-tile-overlay > span { color:#fff; }
+.bacio-page .bacio-moment { position:relative; padding:80px 0; text-align:center; background:var(--bacio-pink); }
+.bacio-page .bacio-moment h2 { font-size:clamp(42px,5vw,65px); margin-bottom:24px; }
+.bacio-page .bacio-moment p:not(.bacio-eyebrow) { max-width:620px; margin-inline:auto; font-size:15px; }
+.bacio-page .bacio-moment .bacio-button { margin-top:12px; }
+.bacio-page .bz-locations { background:var(--bacio-cream); padding:80px 0; }
+.bacio-page .bz-loc { border-radius:0; border-color:#4b2f2a20; box-shadow:none; background:#fffdf9; }
+.bacio-page .bz-loc h3,.bacio-page .bz-loc p,.bacio-page .bz-loc-link { color:var(--bacio-cocoa); }
+.bacio-page .bz-loc-link { min-height:44px; display:inline-flex; align-items:center; }
+.bacio-page .bz-loc-pin { color:var(--bacio-accent); }
+.bacio-page .bz-more { background:#f3e6da; padding:70px 0; }
+.bacio-page .bz-more-card { background:var(--bacio-cream); border-radius:0; border-color:#4b2f2a20; }
+.bacio-page .bz-more-name,.bacio-page .bz-more-kicker { color:var(--bacio-cocoa); }
+.bacio-page .bz-more-group,.bacio-page .bz-more-arrow { color:var(--bacio-accent); }
+.bacio-page .bz-more-card:hover,.bacio-page .bz-more-card:focus-visible { background:var(--bacio-cocoa); border-color:var(--bacio-cocoa); color:var(--bacio-cream); transform:translateY(-6px); }
+.bacio-page .bz-more-card:hover .bz-more-name,.bacio-page .bz-more-card:focus-visible .bz-more-name { color:var(--bacio-cream); }
+.bacio-page .bz-more-card:hover .bz-more-kicker,.bacio-page .bz-more-card:focus-visible .bz-more-kicker { color:rgba(255,247,238,.75); }
+.bacio-page .bz-more-card:hover .bz-more-group,.bacio-page .bz-more-card:hover .bz-more-arrow,.bacio-page .bz-more-card:focus-visible .bz-more-group,.bacio-page .bz-more-card:focus-visible .bz-more-arrow { color:var(--bacio-pink); }
+.bacio-page .bz-more-card:focus-visible .bz-more-arrow { transform:translateX(8px); }
+@keyframes bacio-product-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+@media (max-width:1000px) {
+    .bacio-page .bacio-hero-grid,.bacio-page .bacio-story-grid { gap:35px; }
+    .bacio-page .bacio-hero-photo img { height:360px; }
+    .bacio-page .bacio-product-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:25px; }
+    .bacio-page .bacio-product-card:nth-child(even) { padding-top:0; }
+}
+@media (max-width:640px) {
+    .bacio-page .container { padding-inline:22px; }
+    .bacio-page .bacio-hero { padding:25px 0 45px; }
+    .bacio-page .bacio-hero-grid,.bacio-page .bacio-story-grid { grid-template-columns:1fr; gap:30px; }
+    .bacio-page .bacio-crumbs { margin-bottom:25px; }
+    .bacio-page h1 { font-size:clamp(48px,12vw,72px); }
+    .bacio-page .bacio-lead { font-size:15px; }
+    .bacio-page .bacio-hero-art { max-width:400px; width:100%; margin-inline:auto; padding-inline:22px; }
+    .bacio-page .bacio-hero-photo img { height:350px; }
+    .bacio-page .bacio-round-note { width:95px; height:95px; left:0; font-size:15px; }
+    .bacio-page .bacio-spark--hero { right:0; font-size:65px; }
+    .bacio-page .bacio-section-heading { display:block; }
+    .bacio-page .bacio-section-heading > p { margin-top:18px; }
+    .bacio-page .bacio-product-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:25px 16px; }
+    .bacio-page .bacio-product-card:last-child { grid-column:1/-1; width:calc(50% - 8px); justify-self:center; }
+    .bacio-page .bacio-product-card h3 { font-size:14px; }
+    .bacio-page .bacio-flavors,.bacio-page .bacio-story,.bacio-page .bz-gallery,.bacio-page .bz-locations { padding:55px 0; }
+    .bacio-page .bacio-craft-sequence { margin-bottom:25px; }
+    .bacio-page .bacio-moment { padding:60px 0; }
+    .bacio-page .bz-gallery-head { align-items:start; }
+}
+@media (prefers-reduced-motion:reduce) {
+    .bacio-page .bacio-hero-photo { animation:none; }
+    .bacio-page .bacio-button,.bacio-page .bacio-product-card img { transition:none; }
+    .bacio-page .bacio-button:hover,.bacio-page .bacio-product-card:hover img { transform:none; }
+}
+
+.bacio-page .bacio-image-btn { position:relative; display:block; width:100%; padding:0; border:0; border-radius:0; background:transparent; color:var(--bacio-cream); cursor:zoom-in; overflow:hidden; }
+.bacio-page .bacio-product-card .bacio-image-btn { border-radius:0; }
+.bacio-page .bacio-craft-sequence .bacio-image-btn { border-radius:0; }
+.bacio-page .bacio-hero-photo .bacio-image-btn { border-radius:0; }
+.bacio-page .bacio-image-btn img { transition:transform .3s ease; }
+
+.bacio-page .bacio-image-zoom { position:absolute; right:14px; bottom:14px; display:grid; place-items:center; width:40px; height:40px; border-radius:0; background:var(--bacio-cocoa); box-shadow:0 2px 10px #4b2f2a30; pointer-events:none; }
+.bacio-page .bacio-spark,.bacio-page .bacio-round-note { pointer-events:none; }
+@media (prefers-reduced-motion:reduce) {
+    .bacio-page .bacio-image-btn img { transition:none; }
+    .bacio-page .bacio-image-btn:hover img,.bacio-page .bacio-image-btn:focus-visible img { transform:none; }
+}
+/* Strawberry glaze drips into the frame, keeping the photo still. */
+.bacio-page .bacio-image-btn::after { content:''; position:absolute; inset:0 0 auto; height:76px; background:linear-gradient(var(--bacio-pink),var(--bacio-pink)) top/100% 30px no-repeat,radial-gradient(ellipse at 50% 0,var(--bacio-pink) 68%,transparent 71%) 0 29px/48px 46px repeat-x; transform:translateY(-100%); transition:transform .55s cubic-bezier(.22,1,.36,1); pointer-events:none; }
+.bacio-page .bacio-image-btn:hover::after,.bacio-page .bacio-image-btn:focus-visible::after { transform:translateY(0); }
+.bacio-page .bacio-image-zoom { z-index:1; transition:background .25s,color .25s,rotate .35s; }
+.bacio-page .bacio-image-btn:hover .bacio-image-zoom,.bacio-page .bacio-image-btn:focus-visible .bacio-image-zoom { background:var(--bacio-pink); color:var(--bacio-accent); rotate:-12deg; }
+.bacio-page .bacio-product-grid.is-waving .bacio-product-card { animation:bacio-scoop-wave .85s cubic-bezier(.22,1,.36,1) both; animation-delay:calc(var(--wave-index,0) * 140ms); }
+@keyframes bacio-scoop-wave {
+    0% { opacity:0; transform:translateY(42px) rotate(-4deg); }
+    60% { opacity:1; transform:translateY(-12px) rotate(2deg); }
+    82% { transform:translateY(4px) rotate(-1deg); }
+    100% { opacity:1; transform:translateY(0) rotate(0); }
+}
+@media (prefers-reduced-motion:reduce) {
+    .bacio-page .bacio-image-btn::after { transition:none; }
+    .bacio-page .bacio-image-zoom { transition:none; rotate:0; }
+    .bacio-page .bacio-product-grid.is-waving .bacio-product-card { animation:none; }
+}
+/* Keep every Bacio photo and card square, including the shared gallery viewer. */
+.bacio-page .bacio-product-card,.bacio-page .bz-tile-btn,.bacio-page .bz-lb-img { border-radius:0; }
+@media (prefers-reduced-motion:reduce) {
+    .bacio-page .bz-more-card,.bacio-page .bz-more-arrow { transition:none; }
+    .bacio-page .bz-more-card:hover,.bacio-page .bz-more-card:focus-visible,.bacio-page .bz-more-card:hover .bz-more-arrow,.bacio-page .bz-more-card:focus-visible .bz-more-arrow { transform:none; }
+}
