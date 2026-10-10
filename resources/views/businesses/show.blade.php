@@ -230,8 +230,8 @@
     <div class="container">
 
         <div class="bz-section-head bz-section-head--light">
-            <span class="bz-label">By the numbers</span>
-            <h2>The scale behind every cup.</h2>
+            <span class="bz-label">By the Numbers</span>
+            <h2>The Scale Behind Every Cup.</h2>
         </div>
 
         <div class="bz-stats-grid">
@@ -377,10 +377,10 @@
             <p class="mark tone-white">
                 <span class="mark-rule"></span>
                 <i aria-hidden="true"></i>
-                Our brands
+                Our Brands
             </p>
 
-            <h2 id="rib-brands-title" class="rib-heading">The names we bring<br>to Ethiopia.</h2>
+            <h2 id="rib-brands-title" class="rib-heading">The Names We Bring<br>to Ethiopia.</h2>
 
             {{-- TODO: replace with client-supplied intro copy. --}}
             <p class="rib-intro">
@@ -459,7 +459,7 @@
 
         <div class="bz-section-head">
             <span class="bz-label">Romina Group</span>
-            <h2>Explore our other businesses.</h2>
+            <h2>Explore Our Other Businesses.</h2>
         </div>
 
         <div class="bz-more-grid">

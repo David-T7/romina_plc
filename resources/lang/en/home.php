@@ -25,12 +25,12 @@ return [
 
     // ── WHO WE ARE (fifty section) ────────────────────────────────────────
     'fifty_aria'    => '50 plus years',
-    'fifty_heading' => 'Years of excellence',
+    'fifty_heading' => 'Years of Excellence',
     'fifty_since'   => 'Since 1973',
     'fifty_body'    => 'From a single restaurant in 4 Kilo to a holding company across hospitality, coffee, trading and distribution. Five decades of growth marked by strategic expansion and successful partnerships.',
 
     // ── PORTFOLIO ─────────────────────────────────────────────────────────
-    'port_mark'      => 'Business portfolio',
+    'port_mark'      => 'Business Portfolio',
     'port_h2'        => 'Four sectors, built from one restaurant.',
     'port_1_alt'     => 'Romina Restaurant interior, evening service',
     'port_1_caption' => 'Romina Restaurant interior, evening service',
@@ -62,7 +62,7 @@ return [
     'port_4_link'    => 'Explore our properties',
 
     // ── GUEST REVIEWS (UI only — review text stays in English) ───────────
-    'rev_mark'      => 'Guest reviews',
+    'rev_mark'      => 'Guest Reviews',
     'rev_h2'        => 'What our<br>guests say.',
     'rev_count'     => '141 guest reviews',
     'rev_stars_lbl' => '4.3 out of 5 stars',
@@ -80,8 +80,8 @@ return [
     'rev_img_4_alt' => 'Romina Restaurant atmosphere and food',
 
     // ── BRANDS TABS — shared labels ───────────────────────────────────────
-    'brands_mark'          => 'Featured brands',
-    'brands_tablist_label' => 'Business brands',
+    'brands_mark'          => 'Featured Brands',
+    'brands_tablist_label' => 'Business Brands',
     'brands_gal_prev'      => 'Previous image',
     'brands_gal_next'      => 'Next image',
     'brands_locations_lbl' => 'Locations',
@@ -91,7 +91,7 @@ return [
 
     // Romina Restaurants
     'brand_rest_kicker'      => 'An iconic eatery in the heart of Addis Ababa',
-    'brand_rest_title'       => 'The home of great service',
+    'brand_rest_title'       => 'The Home of Great Service',
     'brand_rest_body'        => "We don't just serve food; we invite you into an experience that mirrors the inclusion and warmth of home. Home-styled dishes from across the world, prepared as the most comforting versions of what you love.",
     'brand_rest_list_lbl'    => 'Culinary promise',
     'brand_rest_list_0'      => 'European dishes',
@@ -107,7 +107,7 @@ return [
 
     // KOBA
     'brand_koba_kicker'      => 'Patisserie & bakery, established 2020',
-    'brand_koba_title'       => 'Crafted with passion. Made fresh.',
+    'brand_koba_title'       => 'Crafted With Passion. Made Fresh.',
     'brand_koba_body'        => 'Artisan pastries, handcrafted cakes, signature breakfasts, specialty coffee and savory dishes, baked fresh by skilled pastry artisans across Addis Ababa.',
     'brand_koba_loc_0_desc'  => 'Pastry & bakery takeaway center',
     'brand_koba_loc_1_desc'  => 'Pastry, bakery, meals & drinks cafe',
@@ -131,7 +131,7 @@ return [
 
     // Romina Coffee
     'brand_coffee_kicker'      => 'Launched 2009',
-    'brand_coffee_title'       => 'Upholding the legacy of Ethiopian coffee',
+    'brand_coffee_title'       => 'Upholding the Legacy of Ethiopian Coffee',
     'brand_coffee_body'        => "Ethiopian coffee is inseparable from daily life here. We export it as more than a commodity: one of life's little luxuries, spread across continents.",
     'brand_coffee_list_lbl'    => 'Markets',
     'brand_coffee_list_0'      => 'Europe',
@@ -145,7 +145,7 @@ return [
 
     // Romina Imports
     'brand_imports_kicker'      => 'Quality FMCG imported for local consumption',
-    'brand_imports_title'       => 'From our kitchens to the market',
+    'brand_imports_title'       => 'From Our Kitchens to the Market',
     'brand_imports_body'        => "What began as sourcing for Romina's own hospitality operations grew into a dedicated importer supplying the Ethiopian market.",
     'brand_imports_list_lbl'    => 'Categories',
     'brand_imports_list_0'      => 'Pastas',
@@ -159,7 +159,7 @@ return [
 
     // Jaquar World
     'brand_jaquar_kicker'      => 'Launched 2017 with Jaquar Group',
-    'brand_jaquar_title'       => 'The complete bathroom solutions destination',
+    'brand_jaquar_title'       => 'The Complete Bathroom Solutions Destination',
     'brand_jaquar_body'        => 'Faucets, shower systems, sanitaryware, smart toilets, jacuzzi baths and architectural lighting, from Artize luxury to Jaquar Premium.',
     'brand_jaquar_list_lbl'    => 'Brands',
     'brand_jaquar_list_0'      => 'Artize (luxury)',
@@ -171,7 +171,7 @@ return [
     'brand_jaquar_slide_1_cap' => 'Artize',
 
     // ── COFFEE SECTION ────────────────────────────────────────────────────
-    'cof_mark'         => 'Romina Coffee, since 2009',
+    'cof_mark'         => 'Romina Coffee, Since 2009',
     'cof_display'      => 'Upholding the legacy of Ethiopian coffee',
     'cof_lead'         => "Ethiopian coffee is more than an export commodity. It is one of life's little luxuries, a catalyst for meaningful social interaction, and a source of inspiration worldwide.",
     'cof_vid_controls' => 'Video controls',
@@ -223,7 +223,7 @@ return [
     'biz_card_3'     => 'Patisseries',
 
     // ── ACCOMPLISHMENTS ───────────────────────────────────────────────────
-    'ac_mark'      => 'Our accomplishments',
+    'ac_mark'      => 'Our Accomplishments',
     'ac_h2'        => "Milestones we're<br>proud of.",
     'ac_arrows_lbl' => 'Scroll accomplishments',
     'ac_prev'      => 'Previous accomplishment',
@@ -254,7 +254,7 @@ return [
     'careers_h2'           => 'Grow with a family business that keeps growing.',
     'careers_lead'         => 'Our people are the core of our success. Passionate, skilled individuals across restaurants, coffee, imports and group functions.',
     'careers_no_positions' => 'No open positions right now.',
-    'careers_general_link' => 'Send us a general application.',
+    'careers_general_link' => 'Send Us a General Application.',
     'careers_view_all'     => 'View all openings',
 
     // ── CONTACT ───────────────────────────────────────────────────────────
@@ -287,6 +287,6 @@ return [
     'find_photos'       => 'Photos',
     'find_share'        => 'Share',
     'find_open_maps'    => 'Open in Google Maps',
-    'find_iframe_title' => 'KOBA Patisserie &amp; Bakery, Atlas Branch location',
+    'find_iframe_title' => 'KOBA Patisserie &amp; Bakery, Atlas Branch Location',
 
 ];

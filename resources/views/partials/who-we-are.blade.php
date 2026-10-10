@@ -11,7 +11,7 @@
             <!-- Copy -->
             <div class="fifty-copy">
 
-                <h2 class="fifty-heading">Years of excellence</h2>
+                <h2 class="fifty-heading">Years of Excellence</h2>
 
                 <p class="fifty-since">Since 1973</p>
 

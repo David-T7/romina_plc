@@ -101,7 +101,7 @@
             </p>
 
             <h3 class="hist-subtitle">
-                From a cherished restaurant in 4 Kilo to a diversified group.
+                From a Cherished Restaurant in 4 Kilo to a Diversified Group.
             </h3>
 
             <p class="hist-text">

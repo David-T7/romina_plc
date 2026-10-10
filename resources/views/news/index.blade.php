@@ -91,7 +91,7 @@
     <div class="container">
 
         @if (count($articles))
-            <h2 class="t-h2 news-list-heading">More stories.</h2>
+            <h2 class="t-h2 news-list-heading">More Stories.</h2>
 
             <div class="news-grid">
                 @foreach ($articles as $article)

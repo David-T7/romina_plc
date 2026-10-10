@@ -49,10 +49,10 @@
             <p class="mark tone-white">
                 <span class="mark-rule"></span>
                 <i aria-hidden="true"></i>
-                Romina Coffee, since 2009
+                Romina Coffee, Since 2009
             </p>
 
-            <h2 class="cof-display">Upholding the legacy of Ethiopian coffee</h2>
+            <h2 class="cof-display">Upholding the Legacy of Ethiopian Coffee</h2>
 
             <p class="cof-lead">
                 Ethiopian coffee is more than an export commodity. It is one of life's little
@@ -292,7 +292,7 @@
     {{-- 4. JOURNEY: farm to global market --}}
     <div class="cof-wrap cof-journey" id="cofJourney">
 
-        <h3 class="cof-journey-h3">From farm to global market</h3>
+        <h3 class="cof-journey-h3">From Farm to Global Market</h3>
 
         <ol class="cof-j-list">
             <span class="cof-j-line"><i></i></span>
@@ -319,7 +319,7 @@
     <div class="cof-wrap cof-cols">
 
         <div>
-            <h4>Quality assurance</h4>
+            <h4>Quality Assurance</h4>
             <p>Careful handpicking and rigorous cupping tests before any lot is approved for export.</p>
         </div>
 
@@ -329,7 +329,7 @@
         </div>
 
         <div>
-            <h4>Farmers first</h4>
+            <h4>Farmers First</h4>
             <p>Training and knowledge transfer, disease-resistant seedlings and shade trees, and fairer
                compensation through higher pricing and a post-sale share.</p>
         </div>

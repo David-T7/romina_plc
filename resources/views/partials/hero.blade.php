@@ -35,8 +35,8 @@
                     </div>
 
                     <h1>
-                        Building businesses<br>
-                        <span>that shape tomorrow.</span>
+                        Building Businesses<br>
+                        <span>That Shape Tomorrow.</span>
                     </h1>
 
                     <p>

@@ -20,7 +20,7 @@
                 <i class="careers-mark-dot"></i>
                 Careers
             </p>
-            <h2 class="t-h2 light">Grow with a family business that keeps growing.</h2>
+            <h2 class="t-h2 light">Grow With a Family Business That Keeps Growing.</h2>
         </div>
 
         <div class="careers-copy">

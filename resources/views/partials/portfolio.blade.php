@@ -1,3 +1,26 @@
+@php
+    // Our Diversified Portfolio: one card per sector (same order as Our History).
+    $portfolioSectors = [
+        ['title' => 'Restaurant Management & Hospitality', 'slug' => 'romina-restaurants',
+         'img' => 'images/portfolio/restaurant.webp',                        'alt' => 'Romina Restaurants dining room',
+         'text' => 'Home-styled dishes, warm service and distinct culinary brands across Addis Ababa.', 'link' => 'Explore Romina Restaurants'],
+        ['title' => 'Cakes, Pastries & Confectionaries', 'slug' => 'koba-patisserie',
+         'img' => 'images/portfolio/baked.jpg',                              'alt' => 'KOBA cakes and pastries',
+         'text' => 'Artisan pastries, handcrafted cakes, signature breakfasts and specialty coffee, baked fresh across Addis Ababa.', 'link' => 'Explore KOBA'],
+        ['title' => 'International Culinary Services', 'slug' => 'meskott-culinary',
+         'img' => 'images/gallery/meskott-culinary/12-glazed-salmon.webp',   'alt' => 'Glazed salmon at Meskott',
+         'text' => 'International cuisine, curated drinks and a welcoming setting for memorable dining in Addis Ababa.', 'link' => 'Explore Meskott'],
+        ['title' => 'Coffee Exporting', 'slug' => 'romina-coffee',
+         'img' => 'images/coffee-origin/03-drying-beds-team.webp',           'alt' => 'Coffee farmers working the drying beds',
+         'text' => 'Upholding the legacy of Ethiopian coffee, from farm to cup, across four continents.', 'link' => 'Explore Romina Coffee'],
+        ['title' => 'Coffee Roastery', 'slug' => 'coffee-roastery',
+         'img' => 'images/koba/koba-coffee.webp',                            'alt' => 'Iced coffee on a wooden table',
+         'text' => 'Coming soon.', 'link' => 'Learn More'],
+        ['title' => 'FMCG Importing & Distribution', 'slug' => 'romina-imports',
+         'img' => 'images/hero/imports-partners.webp',                       'alt' => 'Romina Imports partners',
+         'text' => 'Quality FMCG imported for local consumption.', 'link' => 'Explore Romina Imports'],
+    ];
+@endphp
 <!-- ==========================================
      BUSINESS PORTFOLIO
 =========================================== -->
@@ -35,255 +58,23 @@
         <div class="portfolio-slider-wrapper" tabindex="0" aria-label="Our businesses">
 
             <div class="portfolio-track">
-
-
-                <!-- CARD 01 -->
-                <article class="portfolio-card">
-
-                    <div class="portfolio-image">
-
-                        <img loading="lazy" decoding="async"
-                            src="{{ asset('images/portfolio/restaurant.webp') }}"
-                            alt="Romina Restaurant interior, evening service"
-                        >
-
-                        {{-- <div class="portfolio-image-caption">
-                            Romina Restaurant, evening service
-                        </div> --}}
-
-                    </div>
-
-
-                    <div class="portfolio-card-content">
-
-                        <span class="portfolio-number">
-                            01
-                        </span>
-
-                        <h3>
-                            Restaurant Management
-                            &amp; Hospitality
-                        </h3>
-
-                        <p>
-                            Home-styled Dishes, Warm Service and
-                            Distinct Culinary Brands across
-                            Addis Ababa.
-                        </p>
-
-
-                        {{-- <div class="portfolio-pills">
-
-                            <span>Romina Restaurants</span>
-                            <span>KOBA</span>
-                            <span>Meskott</span>
-
-                        </div> --}}
-
-
-                        <a href="businesses/romina-restaurants" class="portfolio-link">
-                            Explore our Restaurant
-                            <span><i class="fa-solid fa-arrow-right"></i></span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- CARD 02 -->
-                <article class="portfolio-card">
-
-                    <div class="portfolio-image">
-
-                        <img loading="lazy" decoding="async"
-                            src="{{ asset('images/coffee/romina-sack.webp') }}"
-                            alt="A Romina coffee sack: produce of Ethiopia, washed Arabica"
-                        >
-
-                        {{-- <div class="portfolio-image-caption">
-                            Romina Coffee, crafted for everyday moments
-                        </div> --}}
-
-                    </div>
-
-
-                    <div class="portfolio-card-content">
-
-                        <span class="portfolio-number">
-                            02
-                        </span>
-
-                        <h3>
-                            Coffee Experiences
-                        </h3>
-
-                        <p>
-                            Thoughtfully Sourced Coffee, Distinctive
-                            spaces and a growing culture built around
-                            every cup.
-                        </p>
-
-
-                        {{-- <div class="portfolio-pills">
-
-                            <span>Romina Coffee</span>
-                            <span>Retail</span>
-
-                        </div> --}}
-
-
-                        <a href="/businesses/romina-coffee" class="portfolio-link">
-                            Explore Romina Coffee
-                            <span><i class="fa-solid fa-arrow-right"></i></span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- CARD 03 -->
-                <article class="portfolio-card">
-
-                    <div class="portfolio-image">
-
-                        <img loading="lazy" decoding="async"
-                            src="{{ asset('images/portfolio/jaguar.jpg') }}"
-                            alt="Business investment and ventures"
-                        >
-
-                        {{-- <div class="portfolio-image-caption">
-                            Building the next generation of businesses
-                        </div> --}}
-
-                    </div>
-
-
-                    <div class="portfolio-card-content">
-
-                        <span class="portfolio-number">
-                            03
-                        </span>
-
-                        <h3>
-                            Jaquar Appliances
-                        </h3>
-
-                        <p>
-                            Spaces Designed for People and Business
-                        </p>
-
-
-                        {{-- <div class="portfolio-pills">
-
-                            <span>Investments</span>
-                            <span>New Ventures</span>
-                            <span>Partnerships</span>
-
-                        </div> --}}
-
-
-                        <a href="/businesses/jaquar-world" class="portfolio-link">
-                            Explore our Appliances
-                            <span><i class="fa-solid fa-arrow-right"></i></span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- CARD 04 -->
-                <article class="portfolio-card">
-
-                    <div class="portfolio-image">
-
-                        <img loading="lazy" decoding="async"
-                            src="{{ asset('images/portfolio/baked.jpg') }}"
-                            alt="Business property and real estate"
-                        >
-
-                        {{-- <div class="portfolio-image-caption">
-                            Identifying opportunities, supporting
-                            entrepreneurs and building businesses
-                            with long-term potential.
-                        </div> --}}
-
-                    </div>
-
-
-                    <div class="portfolio-card-content">
-
-                        <span class="portfolio-number">
-                            04
-                        </span>
-
-                        <h3>
-                            Cake, Pastry &amp; Confectionary
-                        </h3>
-
-                        <p>
-                            Creating purposeful spaces that bring
-                            together people, businesses and communities.
-                        </p>
-
-
-                        {{-- <div class="portfolio-pills">
-
-                            <span>Patisseries</span>
-                            <span>Passion</span>
-                            <span>Cake</span>
-
-                        </div> --}}
-
-
-                        <a href="/businesses/koba-patisserie" class="portfolio-link">
-                            Explore our Pastries
-                            <span><i class="fa-solid fa-arrow-right"></i></span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- CARD 05 -->
-                <article class="portfolio-card">
-                    <div class="portfolio-image">
-                        <img loading="lazy" decoding="async"
-                            src="{{ asset('images/bacio/gelato-counter.webp') }}"
-                            alt="Bacio Cremeria gelato counter">
-                    </div>
-                    <div class="portfolio-card-content">
-                        <span class="portfolio-number">05</span>
-                        <h3>Bacio Cremeria</h3>
-                        <p>Handcrafted ice creams, gelatos and elegant sundaes, made with fresh dairy from Romina Dairy Farm.</p>
-                        <a href="{{ route('business', 'bacio-cremeria') }}" class="portfolio-link">
-                            Explore Bacio Cremeria
-                            <span><i class="fa-solid fa-arrow-right"></i></span>
-                        </a>
-                    </div>
-                </article>
-
-
-                <!-- CARD 06 -->
-                <article class="portfolio-card">
-                    <div class="portfolio-image">
-                        <img loading="lazy" decoding="async"
-                            src="{{ asset('images/gallery/meskott-culinary/meskott_1.webp') }}"
-                            alt="Meskott Culinary Experience dining space">
-                    </div>
-                    <div class="portfolio-card-content">
-                        <span class="portfolio-number">06</span>
-                        <h3>Meskott Culinary Experience</h3>
-                        <p>International cuisine, curated drinks and a welcoming setting for memorable dining in Addis Ababa.</p>
-                        <a href="{{ route('business', 'meskott-culinary') }}" class="portfolio-link">
-                            Explore Meskott
-                            <span><i class="fa-solid fa-arrow-right"></i></span>
-                        </a>
-                    </div>
-                </article>
+                {{-- Six sectors (data in $portfolioSectors at the top of this file) --}}
+                @foreach ($portfolioSectors as $sector)
+                    <article class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img loading="lazy" decoding="async" src="{{ asset($sector['img']) }}" alt="{{ $sector['alt'] }}">
+                        </div>
+                        <div class="portfolio-card-content">
+                            <span class="portfolio-number">{{ sprintf('%02d', $loop->iteration) }}</span>
+                            <h3>{{ $sector['title'] }}</h3>
+                            <p>{{ $sector['text'] }}</p>
+                            <a href="{{ route('business', $sector['slug']) }}" class="portfolio-link">
+                                {{ $sector['link'] }}
+                                <span><i class="fa-solid fa-arrow-right"></i></span>
+                            </a>
+                        </div>
+                    </article>
+                @endforeach
 
             </div>
 
@@ -296,7 +87,7 @@
     <div class="portfolio-counter">
         <span class="portfolio-current">01</span>
         <span>/</span>
-        <span>06</span>
+        <span>{{ sprintf('%02d', count($portfolioSectors)) }}</span>
     </div>
 
     <div class="portfolio-progress">

@@ -21,8 +21,8 @@
             <div class="culture-heading">
 
                 <h2>
-                    A family of people,
-                    <span>driven by purpose.</span>
+                    A Family of People,
+                    <span>Driven by Purpose.</span>
                 </h2>
 
                 <div class="culture-intro-number">
@@ -108,7 +108,7 @@
                 <h3>
                     Experience
                     <br>
-                    meets vision.
+                    Meets Vision.
                 </h3>
 
 
@@ -148,8 +148,8 @@
             <div class="values-copy">
 
                 <h2>
-                    Principles that
-                    <span>guide us.</span>
+                    Principles That
+                    <span>Guide Us.</span>
                 </h2>
 
                 <p>

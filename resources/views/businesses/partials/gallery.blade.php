@@ -12,7 +12,7 @@
         <div class="bz-gallery-head">
             <div class="bz-section-head">
                 <span class="bz-label">Gallery</span>
-                <h2>A closer look.</h2>
+                <h2>A Closer Look.</h2>
             </div>
             @if ($photoCount)
                 <p class="bz-gallery-hint">
