@@ -15,7 +15,7 @@
                     Contact
                 </p>
 
-                <h2 class="ctc-display">Let's talk</h2>
+                <h2 class="ctc-display">Let's Talk</h2>
 
                 <div class="c-block">
                     <p class="c-label">Head office</p>

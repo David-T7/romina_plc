@@ -110,8 +110,8 @@
             <div class="executive-team-heading">
 
                 <h2>
-                    Experienced people,
-                    <span>shared direction.</span>
+                    Experienced People,
+                    <span>Shared Direction.</span>
                 </h2>
 
                 <p>

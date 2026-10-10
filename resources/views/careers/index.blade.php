@@ -6,7 +6,7 @@
 @include('partials.page-hero', [
     'label' => 'CAREERS',
     'crumb' => 'Careers',
-    'title' => 'Grow with a family business<br><span>that keeps growing.</span>',
+    'title' => 'Grow With a Family Business<br><span>That Keeps Growing.</span>',
     'text'  => 'We\'re always looking for talented, passionate people to join our team across restaurants, coffee, imports and group functions.',
     'image' => 'images/coffee-origin/03-drying-beds-team.webp',
 ])
@@ -23,34 +23,34 @@
             <i></i>
             Why Romina
         </p>
-        <h2 class="t-h2">Why join us.</h2>
+        <h2 class="t-h2">Why Join Us.</h2>
 
         <div class="car-why-grid">
 
             <div class="car-why-item">
                 <div class="car-why-num">01</div>
-                <h3>A culture of growth</h3>
+                <h3>A Culture of Growth</h3>
                 {{-- TODO: Short description of your growth culture, learning environment, or promotion pathways --}}
                 <p>We invest in our people. From day one, you'll have access to mentorship, on-the-job learning, and real opportunities to grow within the Group.</p>
             </div>
 
             <div class="car-why-item">
                 <div class="car-why-num">02</div>
-                <h3>Diverse opportunities</h3>
+                <h3>Diverse Opportunities</h3>
                 {{-- TODO: Describe the range of roles across the Group's different businesses --}}
                 <p>With businesses spanning hospitality, coffee export, imports and distribution, Romina Group offers a rare breadth of career paths under one roof.</p>
             </div>
 
             <div class="car-why-item">
                 <div class="car-why-num">03</div>
-                <h3>Competitive compensation</h3>
+                <h3>Competitive Compensation</h3>
                 {{-- TODO: Replace with actual benefits/compensation details from the client --}}
                 <p>We offer competitive salaries and benefits aligned with industry standards, recognising the contribution of every member of our team.</p>
             </div>
 
             <div class="car-why-item">
                 <div class="car-why-num">04</div>
-                <h3>Meaningful work</h3>
+                <h3>Meaningful Work</h3>
                 {{-- TODO: Describe the impact employees have on the company's mission/community --}}
                 <p>Our work matters, from the farmers we partner with to the guests we welcome. You'll be part of a business with purpose and a five-decade legacy.</p>
             </div>
@@ -72,7 +72,7 @@
             <i></i>
             Open Positions
         </p>
-        <h2 class="t-h2">Current openings.</h2>
+        <h2 class="t-h2">Current Openings.</h2>
 
         @if (count($positions))
 
@@ -143,7 +143,7 @@
                     <i></i>
                     Apply Now
                 </p>
-                <h2 class="t-h2">Send your<br>application.</h2>
+                <h2 class="t-h2">Send Your<br>Application.</h2>
                 <p class="car-apply-sub">
                     Don't see the right role? Submit a general application and we'll reach out when a match opens up.
                 </p>

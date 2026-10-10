@@ -37,7 +37,7 @@
         <!-- HEADING -->
         <div class="find-us-heading">
             <span class="find-us-label">OUR LOCATIONS</span>
-            <h2>Find Us On The Map</h2>
+            <h2>Find Us on the Map</h2>
         </div>
 
         <div class="find-us-panel">

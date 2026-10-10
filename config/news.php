@@ -17,11 +17,11 @@ return [
     'categories' => [
         'events'                => ['label' => 'Events',                  'icon' => 'fa-calendar-days'],
         'launches'              => ['label' => 'Launches',                'icon' => 'fa-rocket',              'full' => 'New product & branch launches'],
-        'coffee-harvest'        => ['label' => 'Coffee harvest',          'icon' => 'fa-seedling',            'full' => 'Coffee harvest updates'],
+        'coffee-harvest'        => ['label' => 'Coffee Harvest',          'icon' => 'fa-seedling',            'full' => 'Coffee harvest updates'],
         'awards'                => ['label' => 'Awards',                  'icon' => 'fa-trophy'],
         'csr'                   => ['label' => 'CSR',                     'icon' => 'fa-hand-holding-heart',  'full' => 'CSR activities'],
-        'restaurant-promotions' => ['label' => 'Restaurant promotions',   'icon' => 'fa-utensils'],
-        'group-news'            => ['label' => 'Group news',              'icon' => 'fa-newspaper',           'full' => 'Other Group news'],
+        'restaurant-promotions' => ['label' => 'Restaurant Promotions',   'icon' => 'fa-utensils'],
+        'group-news'            => ['label' => 'Group News',              'icon' => 'fa-newspaper',           'full' => 'Other Group news'],
     ],
 
     'articles' => [
@@ -30,7 +30,7 @@ return [
 
         [
             'slug'     => 'coffee-cupping-evening',
-            'title'    => 'An evening of Ethiopian coffee: our annual cupping night',
+            'title'    => 'An Evening of Ethiopian Coffee: Our Annual Cupping Night',
             'category' => 'events',
             'date'     => '2026-09-20',
             'image'    => 'images/coffee/cupping-table.webp',
@@ -44,7 +44,7 @@ return [
 
         [
             'slug'     => 'hospitality-expo-addis',
-            'title'    => 'Romina Group joins the Addis Ababa hospitality showcase',
+            'title'    => 'Romina Group Joins the Addis Ababa Hospitality Showcase',
             'category' => 'events',
             'date'     => '2026-05-14',
             'image'    => 'images/hero/hero-02.jpg',
@@ -60,7 +60,7 @@ return [
 
         [
             'slug'     => 'koba-flagship-opening',
-            'title'    => 'KOBA Patisserie opens new flagship in Addis Ababa',
+            'title'    => 'KOBA Patisserie Opens New Flagship in Addis Ababa',
             'category' => 'launches',
             'date'     => '2026-08-28',
             'image'    => 'images/portfolio/baked.jpg',
@@ -74,7 +74,7 @@ return [
 
         [
             'slug'     => 'jaquar-world-artize-collection',
-            'title'    => 'Jaquar World introduces the Artize luxury collection',
+            'title'    => 'Jaquar World Introduces the Artize Luxury Collection',
             'category' => 'launches',
             'date'     => '2026-02-18',
             'image'    => 'images/portfolio/jaguar.jpg',
@@ -90,7 +90,7 @@ return [
 
         [
             'slug'     => 'harvest-season-begins',
-            'title'    => 'This season\'s harvest begins across our growing regions',
+            'title'    => 'This Season\'s Harvest Begins Across Our Growing Regions',
             'category' => 'coffee-harvest',
             'date'     => '2026-08-10',
             'image'    => 'images/coffee/drying-beds.jpg',
@@ -104,7 +104,7 @@ return [
 
         [
             'slug'     => 'hand-sorting-quality-program',
-            'title'    => 'Inside our hand-sorting quality programme',
+            'title'    => 'Inside Our Hand-Sorting Quality Programme',
             'category' => 'coffee-harvest',
             'date'     => '2026-03-08',
             'image'    => 'images/coffee/sorting-line.webp',
@@ -120,7 +120,7 @@ return [
 
         [
             'slug'     => 'romina-coffee-rainforest-alliance',
-            'title'    => 'Romina Coffee earns Rainforest Alliance recognition',
+            'title'    => 'Romina Coffee Earns Rainforest Alliance Recognition',
             'category' => 'awards',
             'date'     => '2026-09-12',
             'image'    => 'images/coffee/green-beans-burlap.webp',
@@ -134,7 +134,7 @@ return [
 
         [
             'slug'     => 'koba-favourite-bakery',
-            'title'    => 'KOBA voted among the city\'s favourite bakeries',
+            'title'    => 'KOBA Voted Among the City\'s Favourite Bakeries',
             'category' => 'awards',
             'date'     => '2026-01-22',
             'image'    => 'images/business/baked.jpg',
@@ -150,7 +150,7 @@ return [
 
         [
             'slug'     => 'schools-in-coffee-communities',
-            'title'    => 'Four schools built in remote coffee-growing communities',
+            'title'    => 'Four Schools Built in Remote Coffee-Growing Communities',
             'category' => 'csr',
             'date'     => '2026-07-15',
             'image'    => 'images/stock/classroom.webp',
@@ -164,7 +164,7 @@ return [
 
         [
             'slug'     => 'clean-water-site-opens',
-            'title'    => 'New potable-water site brings clean water closer to home',
+            'title'    => 'New Potable-Water Site Brings Clean Water Closer to Home',
             'category' => 'csr',
             'date'     => '2026-04-02',
             'image'    => 'images/stock/clean-water.webp',
@@ -180,7 +180,7 @@ return [
 
         [
             'slug'     => 'agelgel-lunch-special',
-            'title'    => 'Signature Agelgel lunch, now at Romina Restaurants',
+            'title'    => 'Signature Agelgel Lunch, Now at Romina Restaurants',
             'category' => 'restaurant-promotions',
             'date'     => '2026-09-05',
             'image'    => 'images/business/restaurant.webp',
@@ -194,7 +194,7 @@ return [
 
         [
             'slug'     => 'meskott-weekend-brunch',
-            'title'    => 'Weekend brunch arrives in the Meskott street food garden',
+            'title'    => 'Weekend Brunch Arrives in the Meskott Street Food Garden',
             'category' => 'restaurant-promotions',
             'date'     => '2026-06-20',
             'image'    => 'images/portfolio/restaurant.webp',
@@ -210,7 +210,7 @@ return [
 
         [
             'slug'     => 'romina-restaurants-milestone',
-            'title'    => 'Romina celebrates five decades of hospitality',
+            'title'    => 'Romina Celebrates Five Decades of Hospitality',
             'category' => 'group-news',
             'date'     => '2026-06-02',
             'image'    => 'images/about/romina-history.jpg',
@@ -224,7 +224,7 @@ return [
 
         [
             'slug'     => 'import-division-partnerships',
-            'title'    => 'Import division expands partnerships with global brands',
+            'title'    => 'Import Division Expands Partnerships With Global Brands',
             'category' => 'group-news',
             'date'     => '2026-04-20',
             'image'    => 'images/hero/imports-partners.webp',

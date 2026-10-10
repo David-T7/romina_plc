@@ -65,8 +65,8 @@
             <p class="bacio-kicker">{{ $brand['kicker'] }}</p>
 
             <h1 id="bacioTitle" class="bacio-display">
-                A little scoop.
-                <span>A lot of joy.</span>
+                A Little Scoop.
+                <span>A Lot of Joy.</span>
             </h1>
 
             <p class="bacio-lead">{{ $brand['intro'] }}</p>
@@ -194,8 +194,8 @@
     <span class="bacio-sprinkles bacio-sprinkles--dairy" aria-hidden="true"></span>
 
     <div class="bacio-wrap bacio-dairy-inner">
-        <p class="bacio-label bacio-label--light">Farm to scoop</p>
-        <h2 id="bacioDairy" class="bacio-h2">Fresh from Romina Dairy Farm.</h2>
+        <p class="bacio-label bacio-label--light">Farm to Scoop</p>
+        <h2 id="bacioDairy" class="bacio-h2">Fresh From Romina Dairy Farm.</h2>
         <p class="bacio-dairy-text" data-bacio-reveal>{{ $brand['dairy'] }}</p>
     </div>
 </section>
@@ -214,10 +214,10 @@
     <span class="bacio-dots bacio-dots--moment" aria-hidden="true"></span>
 
     <div class="bacio-wrap bacio-moment-inner">
-        <p class="bacio-label">The Bacio moment</p>
+        <p class="bacio-label">The Bacio Moment</p>
         <h2 id="bacioMoment" class="bacio-display bacio-display--center" data-bacio-reveal>
-            Good company.
-            <span>Great ice cream.</span>
+            Good Company.
+            <span>Great Ice Cream.</span>
         </h2>
         <p data-bacio-reveal style="--d: 1">{{ $brand['moment'] }}</p>
         <p data-bacio-reveal style="--d: 2">{{ $brand['closing'] }}</p>

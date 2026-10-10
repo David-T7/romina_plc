@@ -44,10 +44,10 @@
                     @endif
                 </div>
 
-                <h2>About the role</h2>
+                <h2>About the Role</h2>
                 <p>{{ $position['description'] }}</p>
 
-                <h2>What we're looking for</h2>
+                <h2>What We're Looking For</h2>
                 <ul class="car-req-list">
                     @foreach ($position['requirements'] as $req)
                         <li>{{ $req }}</li>
@@ -67,7 +67,7 @@
 
             {{-- Sidebar --}}
             <aside class="car-detail-sidebar">
-                <h3>Role summary</h3>
+                <h3>Role Summary</h3>
                 <div class="car-sidebar-fact">
                     <span>Business</span>
                     <span>{{ $position['business'] }}</span>
@@ -111,7 +111,7 @@
                     <i></i>
                     Apply Now
                 </p>
-                <h2 class="t-h2">Apply for<br>this role.</h2>
+                <h2 class="t-h2">Apply for<br>This Role.</h2>
                 <p class="car-apply-sub">
                     Fill in the form and attach your CV. We'll be in touch if your profile is a strong match.
                 </p>

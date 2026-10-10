@@ -10,18 +10,18 @@ return [
     'nav_news'               => 'News',
     'nav_contact'            => 'Contact',
     'nav_lets_talk'          => "Let's Talk",
-    'nav_open_menu'          => 'Open menu',
-    'nav_close_menu'         => 'Close menu',
-    'nav_mobile_label'       => 'Mobile navigation',
-    'nav_about_pages_label'  => 'About pages',
-    'nav_biz_pages_label'    => 'Business pages',
+    'nav_open_menu'          => 'Open Menu',
+    'nav_close_menu'         => 'Close Menu',
+    'nav_mobile_label'       => 'Mobile Navigation',
+    'nav_about_pages_label'  => 'About Pages',
+    'nav_biz_pages_label'    => 'Business Pages',
     'nav_our_history'        => 'Our History',
     'nav_our_leadership'     => 'Our Leadership',
     'nav_explore'            => 'Explore',
 
     // ── About mega-menu ───────────────────────────────────────────────────
     'mega_about_label'       => 'ABOUT ROMINA',
-    'mega_about_heading'     => 'Five decades<br>of building together.',
+    'mega_about_heading'     => 'Five Decades<br>of Building Together.',
     'mega_about_text'        => 'From a single restaurant in 4 Kilo to a diversified Ethiopian group, since 1973.',
     'mega_about_history_col' => 'Our History',
     'mega_about_story_link'  => 'Our Story',
@@ -30,16 +30,16 @@ return [
 
     // ── Businesses mega-menu ──────────────────────────────────────────────
     'mega_biz_label'         => 'OUR BUSINESSES',
-    'mega_biz_heading'       => 'Building businesses<br>that matter.',
+    'mega_biz_heading'       => 'Building Businesses<br>That Matter.',
     'mega_biz_text'          => 'A diverse portfolio of businesses creating long-term value across multiple industries.',
 
     // ── Language switcher ─────────────────────────────────────────────────
-    'lang_switcher_label'    => 'Change language',
+    'lang_switcher_label'    => 'Change Language',
 
     // ── Footer ───────────────────────────────────────────────────────────
     'ftr_group_col'          => 'Romina Group',
     'ftr_businesses_col'     => 'Businesses',
-    'ftr_head_office_col'    => 'Head office',
+    'ftr_head_office_col'    => 'Head Office',
     'ftr_address'            => 'Bole Atlas, Cape Verde Street<br>Noah Diplomat Building, 13th floor<br>Addis Ababa, Ethiopia',
     'ftr_copyright'          => '© :year Romina Group. All rights reserved.',
 
@@ -59,17 +59,17 @@ return [
     'form_preview_msg'       => "Form preview: this form isn't connected to an inbox yet. Email info@rominaplc.com in the meantime.",
 
     // ── Values section ────────────────────────────────────────────────────
-    'why_choose_romina'      => 'Why choose Romina',
+    'why_choose_romina'      => 'Why Choose Romina',
 
     // ── About section ─────────────────────────────────────────────────────
-    'about_mark'             => 'Who we are',
+    'about_mark'             => 'Who We Are',
     'about_heading'          => "Find out all about Romina's<br>corporate business.",
     'about_amh'              => 'እንኳን ደህና መጡ',
     'about_sub'              => 'Welcome to Romina Group',
     'about_body'             => 'Founded in 1973 by Girma Taye as a small restaurant in 4 Kilo, Romina has grown over five decades into a diversified Ethiopian enterprise, through strategic expansion, successful partnerships and an unwavering commitment to excellence.',
 
     // ── Timeline node titles ──────────────────────────────────────────────
-    'tl_0_title'             => 'Where it began',
+    'tl_0_title'             => 'Where It Began',
     'tl_1_title'             => 'Romina Coffee',
     'tl_2_title'             => 'Jaquar World',
     'tl_3_title'             => 'KOBA',

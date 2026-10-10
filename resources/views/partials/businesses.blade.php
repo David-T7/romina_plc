@@ -10,8 +10,8 @@
                 <span class="section-label">OUR BUSINESSES</span>
 
                 <h2>
-                    Businesses built<br>
-                    <span>for tomorrow.</span>
+                    Businesses Built<br>
+                    <span>for Tomorrow.</span>
                 </h2>
             </div>
 
