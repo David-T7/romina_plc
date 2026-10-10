@@ -266,6 +266,8 @@
 
 @if ($brandSlug === 'koba-patisserie')
 @include('businesses.partials.koba-gallery')
+@elseif ($brandSlug === 'meskott-culinary')
+@include('businesses.partials.meskott-gallery')
 @elseif ($brandSlug !== 'bacio-cremeria' && $brandSlug !== 'romina-restaurants')
 @include('businesses.partials.gallery')
 @endif

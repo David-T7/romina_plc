@@ -16841,3 +16841,102 @@ button {
 
 /* Coffee journey: the steps run full width (the photo beside them was removed) */
 .cof-journey { grid-template-columns: 1fr; }
+
+/* =====================================================
+   MESKOTT — gallery as an editorial mosaic (same pattern as the
+   KOBA and Romina Restaurants galleries). Eight photos placed on a
+   12-column grid: wide tiles for rooms, tall tiles for the plates.
+===================================================== */
+.ms-gallery { padding: var(--section-space) 0; background: #fff; }
+.ms-gallery-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 32px;
+    margin-bottom: clamp(32px, 4vw, 52px);
+}
+.ms-gallery-head .bz-section-head { margin-bottom: 0; }
+.ms-gallery-head > p {
+    margin: 0;
+    text-align: right;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(14, 34, 64, .62);
+}
+
+.ms-mosaic {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-rows: clamp(110px, 10.5vw, 160px);
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.ms-mosaic li { min-width: 0; min-height: 0; }
+.ms-mosaic li:nth-child(1) { grid-column: 1 / 9;  grid-row: 1 / 4; }
+.ms-mosaic li:nth-child(2) { grid-column: 9 / 13; grid-row: 1 / 5; }
+.ms-mosaic li:nth-child(3) { grid-column: 1 / 5;  grid-row: 4 / 6; }
+.ms-mosaic li:nth-child(4) { grid-column: 5 / 9;  grid-row: 4 / 8; }
+.ms-mosaic li:nth-child(5) { grid-column: 9 / 13; grid-row: 5 / 8; }
+.ms-mosaic li:nth-child(6) { grid-column: 1 / 5;  grid-row: 6 / 8; }
+.ms-mosaic li:nth-child(7) { grid-column: 1 / 9;  grid-row: 8 / 11; }
+.ms-mosaic li:nth-child(8) { grid-column: 9 / 13; grid-row: 8 / 11; }
+.ms-mosaic li:nth-child(n+9) { grid-column: span 4; grid-row: span 2; }
+
+.ms-photo {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    background: #0E2240;
+    cursor: zoom-in;
+}
+.ms-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .9s cubic-bezier(.16, 1, .3, 1);
+}
+.ms-photo-caption {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    background: rgba(14, 34, 64, .82);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: left;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: background .3s;
+}
+.ms-photo-caption i { font-size: 12px; opacity: .8; }
+.ms-photo:hover img,
+.ms-photo:focus-visible img { transform: scale(1.04); }
+.ms-photo:hover .ms-photo-caption { background: rgba(14, 34, 64, .95); }
+.ms-photo:focus-visible { outline: 3px solid #e3262e; outline-offset: 3px; }
+
+@media (max-width: 700px) {
+    .ms-gallery-head { flex-direction: column; align-items: start; gap: 16px; }
+    .ms-gallery-head > p { text-align: left; }
+    .ms-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; gap: 12px; }
+    .ms-mosaic li:nth-child(n) { grid-column: auto; grid-row: auto; aspect-ratio: 3 / 4; }
+    .ms-mosaic li:nth-child(1),
+    .ms-mosaic li:nth-child(6) { grid-column: span 2; aspect-ratio: 4 / 3; }
+    .ms-photo-caption { left: 8px; right: 8px; bottom: 8px; padding: 8px 10px; font-size: 11.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ms-photo img { transition: none; }
+    .ms-photo:hover img, .ms-photo:focus-visible img { transform: none; }
+}
