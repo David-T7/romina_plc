@@ -56,7 +56,7 @@ return [
                 'items' => [
                     ['icon' => 'fa-utensils',   'name' => 'European dishes'],
                     ['icon' => 'fa-bowl-rice',  'name' => 'Asian dishes'],
-                    ['icon' => 'fa-pepper-hot', 'name' => 'Local Ethiopian dishes'],
+                    ['icon' => 'fa-pepper-hot', 'name' => 'Ethiopian dishes'],
                 ],
             ],
             'gallery'    => [

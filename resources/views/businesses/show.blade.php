@@ -16,6 +16,11 @@
 @endphp
 
 @section('page-css')
+@if ($brandSlug === 'romina-restaurants')
+<link rel="stylesheet" href="{{ asset('css/romina-restaurants.css') }}">
+<link rel="preload" as="image" href="{{ asset('images/gallery/romina-restaurants/10-romina-restaurant.webp') }}">
+<link rel="preload" as="image" href="{{ asset('images/gallery/romina-restaurants/08-romina-restaurant.webp') }}">
+@endif
 @if ($brandSlug === 'bacio-cremeria')
 {{-- Josefin Sans stands in for the guideline face (Champagne & Limousines) until it is self-hosted --}}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap">
@@ -25,7 +30,7 @@
 
 @section('page-content')
 
-<div class="bz-page{{ $bzTheme ? ' bz-theme--' . $bzTheme : '' }}{{ $brandSlug === 'bacio-cremeria' ? ' bacio-page' : '' }}">
+<div class="bz-page{{ $bzTheme ? ' bz-theme--' . $bzTheme : '' }}{{ $brandSlug === 'bacio-cremeria' ? ' bacio-page' : '' }}{{ $brandSlug === 'romina-restaurants' ? ' rr-page' : '' }}">
 
 @if (!empty($brand['coming_soon']))
 
@@ -113,7 +118,13 @@
         <div class="bz-hero-media">
             <div class="bz-hero-frame">
                 @if ($brand['image'])
-                    <img src="{{ asset($brand['image']) }}" alt="{{ $brand['name'] }}">
+                    @if ($brandSlug === 'romina-restaurants')
+                        <a class="rr-photo" href="{{ asset('images/romina-restaurants/11-clay-pot-special.webp') }}" data-rr-photo data-caption="The clay-pot special" aria-label="Enlarge photo: The clay-pot special">
+                            <img src="{{ asset('images/romina-restaurants/11-clay-pot-special.webp') }}" width="1600" height="1850" alt="Romina clay-pot dish garnished with fresh herbs">
+                        </a>
+                    @else
+                        <img src="{{ asset($brand['image']) }}" alt="{{ $brand['name'] }}">
+                    @endif
                 @else
                     <div class="bz-ph bz-ph--hero">
                         <span class="bz-ph-initial" aria-hidden="true">{{ $initial }}</span>
@@ -135,6 +146,9 @@
 
 
 {{-- ============ OVERVIEW ============ --}}
+@if ($brandSlug === 'romina-restaurants')
+@include('businesses.partials.romina-restaurants')
+@else
 <section class="bz-overview bz-overview--{{ $brandSlug }}" id="bz-overview">
     <div class="container bz-overview-grid">
 
@@ -208,6 +222,8 @@
 @endif
 
 
+@endif
+
 {{-- ============ STATS + JOURNEY (Romina Coffee) ============ --}}
 @if (!empty($brand['stats']))
 <section class="bz-stats">
@@ -244,13 +260,13 @@
 @endif
 
 
-@if ($brandSlug !== 'bacio-cremeria')
+@if ($brandSlug !== 'bacio-cremeria' && $brandSlug !== 'romina-restaurants')
 @include('businesses.partials.gallery')
 @endif
 
 
 {{-- ============ LOCATIONS ============ --}}
-@if (!empty($brand['locations']))
+@if (!empty($brand['locations']) && $brandSlug !== 'romina-restaurants')
 <section class="bz-locations{{ !empty($brand['location_slides']) ? ' bz-locations--slides' : '' }}" id="bz-locations">
     <div class="container{{ !empty($brand['location_slides']) ? ' bz-loc-split' : '' }}">
 
@@ -466,6 +482,9 @@
 @endsection
 
 @section('page-js')
+@if ($brandSlug === 'romina-restaurants')
+<script src="{{ asset('js/romina-restaurants.js') }}" defer></script>
+@endif
 <script>
 /* Bacio scoops arrive in a wave when What we make comes into view. */
 (function () {
