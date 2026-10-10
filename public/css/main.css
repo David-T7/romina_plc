@@ -14986,44 +14986,6 @@ button {
 
 /* ---------- MARQUEE ---------- */
 
-.kb-marquee {
-    position: relative;
-    z-index: 2;
-
-    margin: -22px -3vw;
-    padding: 26px 0;
-    overflow: hidden;
-
-    background: #022c1d;
-    color: #ffffff;
-
-    transform: rotate(-2deg);
-    box-shadow: 0 20px 40px rgba(14, 34, 64, .2);
-}
-
-.kb-marquee-track {
-    display: flex;
-    align-items: center;
-    gap: 36px;
-
-    width: max-content;
-    will-change: transform;
-}
-
-.kb-marquee-item {
-    font-size: clamp(28px, 3.4vw, 48px);
-    font-weight: 700;
-    letter-spacing: -1px;
-    white-space: nowrap;
-}
-
-/* every other word as an outline */
-.kb-marquee-item:nth-of-type(even) {
-    color: transparent;
-    -webkit-text-stroke: 1px #ffffff;
-}
-
-
 /* ---------- ABOUT STATEMENT ---------- */
 
 .kb-about {

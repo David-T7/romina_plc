@@ -48,8 +48,7 @@
             <span class="kb-eyebrow">{{ $brand['kicker'] }}</span>
 
             <h1 class="kb-title">
-                <span class="kb-title-main">KOBA</span>
-                <span class="kb-title-sub">Patisserie &amp; Bakery</span>
+                <span class="kb-title-main" style="height: .82em;"><img src="{{ asset('images/koba/koba-wordmark-light.svg') }}" alt="KOBA" style="display: block; width: 100%; height: 100%; object-fit: contain; object-position: left center;"></span>
             </h1>
 
             <p class="kb-lead">{{ $brand['intro'] }}</p>
@@ -81,9 +80,9 @@
                 </path>
             </svg>
 
-            <div class="kb-arch">
+            <button type="button" class="kb-arch kl-hero-photo" data-full="{{ asset($brand['image']) }}" data-caption="A celebration at KOBA" aria-label="Enlarge photo: A handcrafted KOBA celebration cake">
                 <img src="{{ asset($brand['image']) }}" alt="A handcrafted KOBA celebration cake">
-            </div>
+            </button>
 
             {{-- rotating badge --}}
             <div class="kb-badge" data-kb-speed="-0.14" aria-hidden="true">
@@ -107,67 +106,12 @@
 
     </div>
 
-    <a href="#kb-about" class="kb-scroll-cue">
-        <span>Scroll</span>
-        <i aria-hidden="true"></i>
-    </a>
+
 
 </section>
 
 
-{{-- ============ MARQUEE — speed & direction follow the scroll ============ --}}
-<div class="kb-marquee" aria-hidden="true">
-    <div class="kb-marquee-track">
-        @for ($r = 0; $r < 4; $r++)
-            @foreach ($items as $item)
-                <span class="kb-marquee-item">{{ $item['name'] }}</span>
-            @endforeach
-        @endfor
-    </div>
-</div>
-
-
-{{-- ============ STATEMENT — words light up as you scroll ============ --}}
-<section class="kb-about" id="kb-about">
-
-    <svg class="kb-blob kb-blob--about" data-kb-speed="-0.1" viewBox="0 0 200 200" aria-hidden="true">
-        <path transform="translate(100 100)" d="{{ $blobB }}"/>
-    </svg>
-
-    <div class="container">
-
-        <span class="bz-label">About {{ $brand['menu'] }}</span>
-
-        <p class="kb-reveal">
-            @foreach (preg_split('/\s+/', $brand['body'][0]) as $word)
-                <span class="kb-word">{{ $word }}</span>
-            @endforeach
-        </p>
-
-        <div class="kb-about-grid">
-            <p class="kb-about-more">{{ $brand['body'][1] ?? '' }}</p>
-
-            <ul class="kb-pillars">
-                <li class="kb-pillar">
-                    <span class="kb-pillar-icon" aria-hidden="true"><i class="fa-solid fa-hands"></i></span>
-                    <strong>100% handmade</strong>
-                    <span>Baked fresh by our pastry</span>
-                </li>
-                <li class="kb-pillar">
-                    <span class="kb-pillar-icon" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
-                    <strong>{{ count($locations) }} locations</strong>
-                    <span>{{ $openCount }} open across Addis Ababa, {{ count($locations) - $openCount }} coming soon</span>
-                </li>
-                <li class="kb-pillar">
-                    <span class="kb-pillar-icon" aria-hidden="true"><i class="fa-solid fa-mug-hot"></i></span>
-                    <strong>Coffee</strong>
-                    <span>An elevated coffee experience</span>
-                </li>
-            </ul>
-        </div>
-
-    </div>
-</section>
+@include('businesses.partials.koba-about')
 
 
 {{-- ============ SHOWCASE — spotlight carousel ============ --}}

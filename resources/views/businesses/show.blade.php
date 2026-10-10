@@ -21,6 +21,10 @@
 <link rel="preload" as="image" href="{{ asset('images/gallery/romina-restaurants/10-romina-restaurant.webp') }}">
 <link rel="preload" as="image" href="{{ asset('images/gallery/romina-restaurants/08-romina-restaurant.webp') }}">
 @endif
+@if ($brandSlug === 'koba-patisserie')
+<link rel="stylesheet" href="{{ asset('css/koba-about.css') }}">
+<link rel="stylesheet" href="{{ asset('css/koba-explorer.css') }}">
+@endif
 @if ($brandSlug === 'bacio-cremeria')
 {{-- Josefin Sans stands in for the guideline face (Champagne & Limousines) until it is self-hosted --}}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap">
@@ -260,13 +264,17 @@
 @endif
 
 
-@if ($brandSlug !== 'bacio-cremeria' && $brandSlug !== 'romina-restaurants')
+@if ($brandSlug === 'koba-patisserie')
+@include('businesses.partials.koba-gallery')
+@elseif ($brandSlug !== 'bacio-cremeria' && $brandSlug !== 'romina-restaurants')
 @include('businesses.partials.gallery')
 @endif
 
 
 {{-- ============ LOCATIONS ============ --}}
-@if (!empty($brand['locations']) && $brandSlug !== 'romina-restaurants')
+@if ($brandSlug === 'koba-patisserie')
+@include('businesses.partials.koba-locations')
+@elseif (!empty($brand['locations']) && $brandSlug !== 'romina-restaurants')
 <section class="bz-locations{{ !empty($brand['location_slides']) ? ' bz-locations--slides' : '' }}" id="bz-locations">
     <div class="container{{ !empty($brand['location_slides']) ? ' bz-loc-split' : '' }}">
 
@@ -510,7 +518,7 @@
    Esc or backdrop click to close. Focus returns to the tile.
 ===================================================== */
 (function () {
-    var tiles = Array.prototype.slice.call(document.querySelectorAll('.bz-tile-btn'));
+    var tiles = Array.prototype.slice.call(document.querySelectorAll('.bz-tile-btn, .ks-photo, .kl-photo, .kl-hero-photo'));
     var box   = document.getElementById('bzLightbox');
     if (!tiles.length || !box) return;
 
@@ -601,12 +609,12 @@
 </script>
 
 @if ($brandSlug === 'koba-patisserie')
+<script src="{{ asset('js/koba-about.js') }}" defer></script>
+<script src="{{ asset('js/koba-explorer.js') }}" defer></script>
 <script>
 /* =====================================================
    KOBA — scroll effects (one rAF-throttled scroll loop)
    · parallax on [data-kb-speed]
-   · marquee that speeds up / reverses with the scroll
-   · statement words light up as it is read
    Off for reduced motion; parallax off below 900px.
 ===================================================== */
 (function () {
@@ -614,18 +622,13 @@
     var wide    = window.matchMedia('(min-width: 901px)');
 
     if (reduced) {
-        /* stop the SVG blob morph and show the statement fully lit */
+        /* stop the SVG blob morph */
         document.querySelectorAll('.kb-hero svg').forEach(function (s) { if (s.pauseAnimations) s.pauseAnimations(); });
-        document.querySelectorAll('.kb-word').forEach(function (w) { w.classList.add('on'); });
         return;
     }
 
     var parallax  = Array.prototype.slice.call(document.querySelectorAll('[data-kb-speed]'));
-    var words     = Array.prototype.slice.call(document.querySelectorAll('.kb-word'));
-    var reveal    = document.querySelector('.kb-reveal');
-    var track     = document.querySelector('.kb-marquee-track');
-
-    var lastY = window.scrollY, velocity = 0, ticking = false;
+    var ticking = false;
 
     function update() {
         ticking = false;
@@ -639,38 +642,10 @@
             el.style.translate = '0 ' + offset.toFixed(1) + 'px';
         });
 
-        /* statement: light words up progressively */
-        if (reveal) {
-            var r2 = reveal.getBoundingClientRect();
-            var p  = (vh * 0.85 - r2.top) / (r2.height + vh * 0.35);
-            var lit = Math.round(Math.max(0, Math.min(1, p)) * words.length);
-            words.forEach(function (w, i) { w.classList.toggle('on', i < lit); });
-        }
     }
 
     function onScroll() {
-        var y = window.scrollY;
-        velocity = y - lastY;
-        lastY = y;
         if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }
-
-    /* ---- Marquee: continuous drift; scroll velocity adds speed and sets direction ---- */
-    if (track) {
-        var mx = 0, dir = 1, half = 0;
-        function measure() { half = track.scrollWidth / 2; }
-        measure();
-        (function loop() {
-            if (Math.abs(velocity) > 0.5) dir = velocity > 0 ? 1 : -1;
-            var speed = 0.6 + Math.min(Math.abs(velocity) * 0.15, 8);
-            velocity *= 0.9;                               /* ease back to the base drift */
-            mx -= speed * dir;
-            if (mx <= -half) mx += half;
-            if (mx > 0)      mx -= half;
-            track.style.transform = 'translate3d(' + mx.toFixed(1) + 'px,0,0)';
-            requestAnimationFrame(loop);
-        })();
-        window.addEventListener('resize', measure);
     }
 
     update();
