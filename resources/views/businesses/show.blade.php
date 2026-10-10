@@ -27,7 +27,25 @@
 
 <div class="bz-page{{ $bzTheme ? ' bz-theme--' . $bzTheme : '' }}{{ $brandSlug === 'bacio-cremeria' ? ' bacio-page' : '' }}">
 
-@if ($brandSlug === 'koba-patisserie')
+@if (!empty($brand['coming_soon']))
+
+{{-- ============ COMING SOON — brand page placeholder ============ --}}
+<section class="bz-soon">
+    <div class="container">
+        <nav class="page-hero-crumbs" aria-label="Breadcrumb">
+            <a href="{{ $home }}">Home</a>
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            <a href="{{ $home }}#businesses">Businesses</a>
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            <span aria-current="page">{{ $brand['menu'] }}</span>
+        </nav>
+        <p class="hero-category">{{ strtoupper($groups[$brand['group']]) }}</p>
+        <h1>{{ $brand['name'] }}</h1>
+        <p class="bz-soon-tag"><span class="bz-soon-dot" aria-hidden="true"></span>Coming Soon</p>
+    </div>
+</section>
+
+@elseif ($brandSlug === 'koba-patisserie')
 
 {{-- KOBA has its own hero / about / showcase (Kubo-inspired, with scroll effects) --}}
 @include('businesses.partials.koba')
@@ -149,7 +167,9 @@
     $hlItems = $brand['highlights']['items'] ?? [];
     $hlPhoto = !empty($hlItems) && !empty($hlItems[0]['image']);   // photo variant when cards carry images
 @endphp
-@if (($brand['show_highlights'] ?? true) && !empty($hlItems))
+@if (!empty($brand['export_journey']))
+@include('businesses.partials.coffee-journey')
+@elseif (($brand['show_highlights'] ?? true) && !empty($hlItems))
 <section class="bz-highlights bz-highlights--{{ $brandSlug }}{{ $hlPhoto ? ' bz-highlights--photo' : '' }}"
          @if ($hlPhoto) data-bz-xp @endif>
 
@@ -1134,5 +1154,255 @@
     });
 }());
 </script>
+
+@if (!empty($brand['export_journey']))
+<script>
+/* =====================================================
+   COFFEE JOURNEY — "Where our coffee goes" (Romina Coffee)
+   One pure function, render(f), draws the whole scene from a
+   single number f = scroll progress through the section × 5
+   (0–1 origin intro, then one unit per destination). Cards,
+   countries and keys never animate directly: they scroll the
+   page to a journey, so scroll stays the one source of truth
+   and forward / reverse / interrupted moves always agree.
+   Reduced motion: no pinning; all routes drawn, cards select.
+===================================================== */
+(function () {
+    var root = document.querySelector('[data-cj]');
+    if (!root || root.dataset.cjInit) return;
+    root.dataset.cjInit = '1';
+
+    var svg    = root.querySelector('.cj-svg');
+    var stage  = root.querySelector('.cj-stage');
+    var btns   = [].slice.call(root.querySelectorAll('[data-cj-go]'));
+    var keys   = btns.map(function (b) { return b.dataset.route; });
+    var names  = btns.map(function (b) { return b.querySelector('.cj-dest-name').textContent.trim(); });
+    var routes = keys.map(function (k) { return svg.querySelector('.cj-route[data-route="' + k + '"]'); });
+    var dests  = keys.map(function (k) { return svg.querySelector('.cj-dest[data-dest="' + k + '"]'); });
+    var plane  = svg.querySelector('.cj-plane');
+    var originG = svg.querySelector('.cj-origin');
+    var glow   = svg.querySelector('.cj-glow');
+    var eth    = svg.querySelector('.cj-eth');
+    var live   = root.querySelector('[data-cj-live]');
+    var tip    = root.querySelector('[data-cj-tip]');
+    var labels = {};
+    root.querySelectorAll('[data-cj-label]').forEach(function (l) { labels[l.dataset.cjLabel] = l; });
+
+    var N = keys.length, STAGES = N + 1;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---------- geometry ---------- */
+    var lens = routes.map(function (r) { return r.getTotalLength(); });
+    var origin = svg.dataset.origin.split(' ').map(Number);
+    var destXY = dests.map(function (g) {
+        var m = /translate\(([-\d.]+) ([-\d.]+)\)/.exec(g.getAttribute('transform'));
+        return [+m[1], +m[2]];
+    });
+
+    function box(x0, y0, x1, y1) { return { x: x0, y: y0, w: x1 - x0, h: y1 - y0 }; }
+    function union(a, b) {
+        var x0 = Math.min(a.x, b.x), y0 = Math.min(a.y, b.y);
+        return box(x0, y0, Math.max(a.x + a.w, b.x + b.w), Math.max(a.y + a.h, b.y + b.h));
+    }
+    function bb(el) { var r = el.getBBox(); return box(r.x, r.y, r.x + r.width, r.y + r.height); }
+    function pad(b, k) { return box(b.x - b.w * k, b.y - b.h * k, b.x + b.w * (1 + k), b.y + b.h * (1 + k)); }
+
+    var ethBox = bb(eth);
+    var raw = {
+        intro: pad(ethBox, 2.2),
+        routes: routes.map(function (r) { return pad(union(bb(r), box(origin[0], origin[1], origin[0], origin[1])), .18); }),
+        all: pad(routes.reduce(function (acc, r) { return union(acc, bb(r)); }, ethBox), .08)
+    };
+
+    /* fit a box to the stage's aspect ratio (camera director) */
+    var W = 1, H = 1, frames = {};
+    var MIN_W = 300;                       /* never zoom in further than ~1/4 of the world width */
+    function fit(b) {
+        var a = W / H, w = Math.max(b.w, MIN_W), h = b.h;
+        if (w / h > a) h = w / a; else w = h * a;
+        return { cx: b.x + b.w / 2, cy: b.y + b.h / 2, w: w };
+    }
+    function measure() {
+        var r = stage.getBoundingClientRect();
+        W = Math.max(r.width, 1); H = Math.max(r.height, 1);
+        var keep = MIN_W; MIN_W = 120; frames.intro = fit(raw.intro); MIN_W = keep;
+        frames.routes = raw.routes.map(fit);
+        frames.all = fit(raw.all);
+    }
+
+    /* ---------- helpers ---------- */
+    function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+    function seg(t, a, b) { return clamp((t - a) / (b - a), 0, 1); }
+    function ease(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    function mix(a, b, t) {   /* centre glides, zoom interpolates on a log scale */
+        return { cx: a.cx + (b.cx - a.cx) * t, cy: a.cy + (b.cy - a.cy) * t, w: Math.exp(Math.log(a.w) + (Math.log(b.w) - Math.log(a.w)) * t) };
+    }
+
+    /* ---------- scene from progress ---------- */
+    var lastActive = null, lastArrived = -1;
+
+    function render(f) {
+        var j = Math.floor(f), t = f - j;
+        if (j >= STAGES) { j = N; t = 1; }
+
+        /* camera */
+        var cam, active = -1, r = 0;
+        if (j === 0) {
+            cam = mix(frames.intro, frames.routes[0], ease(seg(t, .45, 1)));
+        } else {
+            active = j - 1;
+            r = ease(seg(t, .05, .72));
+            var next = active + 1 < N ? frames.routes[active + 1] : frames.all;
+            cam = mix(frames.routes[active], next, ease(seg(t, .82, 1)));
+        }
+        var ch = cam.w * H / W;
+        svg.setAttribute('viewBox', (cam.cx - cam.w / 2).toFixed(2) + ' ' + (cam.cy - ch / 2).toFixed(2) + ' ' + cam.w.toFixed(2) + ' ' + ch.toFixed(2));
+        var k = cam.w / W;                                  /* svg units per screen px */
+
+        /* routes */
+        routes.forEach(function (path, i) {
+            var done = i < active, on = i === active;
+            path.classList.toggle('is-done', done);
+            path.classList.toggle('is-active', on);
+            path.style.strokeDashoffset = done ? 0 : on ? lens[i] * (1 - r) : lens[i];
+            dests[i].classList.toggle('is-on', done || (on && r >= 1));
+            dests[i].setAttribute('transform', 'translate(' + destXY[i][0] + ' ' + destXY[i][1] + ') scale(' + (k * 1.6).toFixed(3) + ')');
+        });
+        originG.setAttribute('transform', 'translate(' + origin[0] + ' ' + origin[1] + ') scale(' + (k * 1.8).toFixed(3) + ')');
+        glow.setAttribute('r', (110 * k).toFixed(2));
+
+        /* aircraft: arc-length position, heading from the path tangent */
+        var flying = active >= 0 && r > 0 && r < 1;
+        plane.classList.toggle('is-flying', flying);
+        if (flying) {
+            var L = lens[active] * r;
+            var p = routes[active].getPointAtLength(L);
+            var q = routes[active].getPointAtLength(Math.min(L + 1, lens[active]));
+            var ang = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI;
+            plane.setAttribute('transform', 'translate(' + p.x.toFixed(2) + ' ' + p.y.toFixed(2) + ') rotate(' + ang.toFixed(1) + ') scale(' + (k * 1.25).toFixed(3) + ')');
+        }
+
+        /* arrival ripple, once per arrival */
+        var arrived = active >= 0 && r >= 1 ? active : -1;
+        if (arrived !== lastArrived) {
+            dests.forEach(function (d, i) { d.classList.toggle('is-arrived', i === arrived); });
+            lastArrived = arrived;
+        }
+
+        /* HTML labels */
+        function place(el, x, y, show) {
+            if (!el) return;
+            el.style.left = ((x - (cam.cx - cam.w / 2)) / k).toFixed(1) + 'px';
+            el.style.top = ((y - (cam.cy - ch / 2)) / k).toFixed(1) + 'px';
+            el.classList.toggle('is-on', show);
+        }
+        place(labels.origin, origin[0], origin[1], true);
+        keys.forEach(function (key, i) { place(labels[key], destXY[i][0], destXY[i][1], i === active ? r >= .98 : i < active); });
+
+        /* cards + map region + announcement */
+        btns.forEach(function (b, i) {
+            b.setAttribute('aria-pressed', i === active ? 'true' : 'false');
+            b.style.setProperty('--cj-p', i < active ? 1 : i === active ? r : 0);
+        });
+        if (active !== lastActive) {
+            lastActive = active;
+            root.dataset.active = active >= 0 ? keys[active] : '';
+            if (live) live.textContent = active >= 0 ? 'Journey ' + (active + 1) + ' of ' + N + ': Ethiopia to ' + names[active] : '';
+            root.dispatchEvent(new CustomEvent('romina:journey-change', { bubbles: true, detail: { index: active, key: active >= 0 ? keys[active] : null } }));
+        }
+    }
+
+    /* ---------- reduced motion: calm, static presentation ---------- */
+    if (reduce) {
+        measure();
+        var c = frames.all, h = c.w * H / W;
+        svg.setAttribute('viewBox', (c.cx - c.w / 2) + ' ' + (c.cy - h / 2) + ' ' + c.w + ' ' + h);
+        function select(i) {
+            root.dataset.active = keys[i];
+            btns.forEach(function (b, n) { b.setAttribute('aria-pressed', n === i ? 'true' : 'false'); });
+            if (live) live.textContent = 'Ethiopia to ' + names[i];
+        }
+        btns.forEach(function (b, i) { b.addEventListener('click', function () { select(i); }); });
+        bindCountries(select);
+        return;
+    }
+
+    /* ---------- live mode ---------- */
+    root.classList.add('cj--live');
+    routes.forEach(function (r, i) { r.style.strokeDasharray = lens[i] + ' ' + lens[i]; });
+
+    function progress() {
+        var rect = root.getBoundingClientRect();
+        var total = root.offsetHeight - window.innerHeight;
+        return total > 0 ? clamp(-rect.top / total, 0, 1) * STAGES : 0;
+    }
+
+    /* intents: card, country, key and #hash all resolve here — scroll to the journey */
+    function goTo(i, instant) {
+        i = clamp(i, 0, N - 1);
+        var total = root.offsetHeight - window.innerHeight;
+        var y = root.getBoundingClientRect().top + window.pageYOffset + ((i + 1 + .8) / STAGES) * total;
+        window.scrollTo({ top: Math.round(y), behavior: instant ? 'auto' : 'smooth' });
+    }
+
+    btns.forEach(function (b, i) {
+        b.addEventListener('click', function () { goTo(i); });
+        b.addEventListener('keydown', function (e) {
+            var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+            if (e.key === 'Home') d = -N; if (e.key === 'End') d = N;
+            if (!d) return;
+            e.preventDefault();
+            var n = clamp(i + d, 0, N - 1);
+            btns[n].focus();
+            goTo(n);
+        });
+    });
+    bindCountries(goTo);
+
+    /* one rAF per scroll burst; skip all work while the section is off screen */
+    var ticking = false;
+    function frame() {
+        ticking = false;
+        var rect = root.getBoundingClientRect();
+        if (rect.bottom < -200 || rect.top > window.innerHeight + 200) return;
+        render(progress());
+    }
+    function request() {                 /* rAF, with a timer fallback so a skipped frame can never stall updates */
+        if (ticking) return;
+        ticking = true;
+        var done = false;
+        function run() { if (!done) { done = true; frame(); } }
+        requestAnimationFrame(run);
+        setTimeout(run, 120);
+    }
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', function () { measure(); request(); });
+    window.addEventListener('load', function () { measure(); request(); });
+
+    measure();
+    render(progress());
+
+    var hashIndex = keys.indexOf(location.hash.slice(1));
+    if (hashIndex >= 0) goTo(hashIndex, true);
+
+    /* ---------- countries: hover names, tap selects the region ---------- */
+    function bindCountries(onPick) {
+        svg.querySelectorAll('.cj-c--dest').forEach(function (path) {
+            var i = keys.indexOf(path.dataset.region);
+            if (i < 0) return;
+            path.addEventListener('click', function () { onPick(i); });
+            path.addEventListener('pointermove', function (e) {
+                var s = stage.getBoundingClientRect();
+                tip.textContent = path.dataset.name + ' · ' + names[i];
+                tip.style.left = (e.clientX - s.left) + 'px';
+                tip.style.top = (e.clientY - s.top) + 'px';
+                tip.classList.add('is-on');
+            });
+            path.addEventListener('pointerleave', function () { tip.classList.remove('is-on'); });
+        });
+    }
+}());
+</script>
+@endif
 
 @endsection

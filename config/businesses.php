@@ -39,7 +39,7 @@ return [
             'kicker'     => 'An iconic eatery in the heart of Addis Ababa',
             'intro'      => 'Home-styled dishes from across the world, served with the warmth of home.',
             'badge'      => ['value' => '1973', 'label' => 'Where it all began'],
-            'image'      => 'images/business/restaurant.webp',
+            'image'      => 'images/gallery/romina-restaurants/11-clay-pot-special.webp',
             'title'      => 'The home of great service',
             'body'       => [
                 "We don't just serve food; we invite you into an experience that mirrors the inclusion and warmth of home. Home-styled dishes from across the world, prepared as the most comforting versions of what you love.",
@@ -60,7 +60,6 @@ return [
                 ],
             ],
             'gallery'    => [
-                ['src' => 'images/business/restaurant.webp', 'shot' => 'A signature plate from the kitchen', 'caption' => 'From our kitchen'],
                 ['src' => null, 'shot' => 'Balderas dining room, evening service',     'caption' => 'Balderas'],
                 ['src' => null, 'shot' => 'Signature Agelgel, plated on the pass',     'caption' => 'Signature Agelgel'],
                 ['src' => null, 'shot' => '4 Kilo restaurant, bar and cafe',        'caption' => '4 Kilo'],
@@ -155,8 +154,8 @@ return [
                 'title' => 'Enjoying your Nights at Meskott.',
                 'items' => [
                     // 'image' = the section background shown while this card is hovered
-                    ['icon' => 'fa-utensils',             'name' => 'Fine dining',           'image' => 'images/gallery/meskott-culinary/meskott_2.webp'],
-                    ['icon' => 'fa-globe',                'name' => 'International Cuisine', 'image' => 'images/gallery/meskott-culinary/meskott_1.webp'],
+                    ['icon' => 'fa-utensils',             'name' => 'Fine dining',           'image' => 'images/gallery/meskott-culinary/11-garden-table-set.webp'],
+                    ['icon' => 'fa-globe',                'name' => 'International Cuisine', 'image' => 'images/gallery/meskott-culinary/12-glazed-salmon.webp'],
                     ['icon' => 'fa-martini-glass-citrus', 'name' => 'Immersive bar',         'image' => 'images/gallery/meskott-culinary/meskott_7.webp'],
                     ['icon' => 'fa-music',                'name' => 'Jazz Nights',           'image' => 'images/gallery/meskott-culinary/meskott_3.webp'],
                 ],
@@ -173,12 +172,12 @@ return [
             'locations_label' => 'Find us',
             // Photo slider beside the "Worth the trip." card (advances every 6 s)
             'location_slides' => [
-                ['src' => 'images/gallery/meskott-culinary/meskott_6.webp', 'caption' => 'Meskott at Sellassie Twin Towers'],
-                ['src' => 'images/gallery/meskott-culinary/meskott_5.webp', 'caption' => 'The street food garden'],
-                ['src' => 'images/gallery/meskott-culinary/meskott_1.webp', 'caption' => 'Dining by the open kitchen'],
-                ['src' => 'images/gallery/meskott-culinary/meskott_7.webp', 'caption' => 'The bar'],
-                ['src' => 'images/gallery/meskott-culinary/meskott_3.webp', 'caption' => 'The lounge'],
-                ['src' => 'images/gallery/meskott-culinary/meskott_4.webp', 'caption' => 'Garden seating'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_6.webp',              'caption' => 'Meskott at Sellassie Twin Towers'],
+                ['src' => 'images/gallery/meskott-culinary/10-garden-long-table.webp',   'caption' => 'The garden terrace'],
+                ['src' => 'images/gallery/meskott-culinary/08-curtained-dining.webp',    'caption' => 'The dining room'],
+                ['src' => 'images/gallery/meskott-culinary/15-sauce-pour.webp',          'caption' => 'Finished at the table'],
+                ['src' => 'images/gallery/meskott-culinary/18-chef-plating.webp',        'caption' => 'From our chefs'],
+                ['src' => 'images/gallery/meskott-culinary/17-smoking-skewers.webp',     'caption' => 'Off the grill'],
             ],
             'locations'  => [
                 ['name' => '4 Kilo', 'desc' => 'King George VI Street, opposite Menelik II School, ground floor, Sellassie Twin Towers', 'tag' => null],
@@ -234,7 +233,7 @@ return [
 
         'romina-coffee' => [
             'name'       => 'Romina Coffee',
-            'menu'       => 'Romina Coffee',
+            'menu'       => 'Coffee Export',
             'group'      => 'coffee',
             'theme'      => 'coffee',   // black & white re-tint with the site red (see .bz-theme--coffee)
             'kicker'     => 'Ethiopian Arabica, exported since 2009',
@@ -251,6 +250,7 @@ return [
                 ['value' => '4',    'label' => 'Continents served'],
                 ['value' => '6',   'label' => 'Growing regions'],
             ],
+            'export_journey' => true,   // "Where our coffee goes" renders as the interactive map (partials/coffee-journey)
             'highlights' => [
                 'label' => 'Where our coffee goes',
                 'title' => 'From Ethiopian highlands to cups around the world.',
@@ -294,6 +294,25 @@ return [
             'directions' => false,
             'phone'      => null,
             'website'    => null,
+        ],
+
+        'coffee-roastery' => [
+            'name'         => 'Coffee Roastery',
+            'menu'         => 'Coffee Roastery',
+            'group'        => 'coffee',
+            'coming_soon'  => true,   // renders the "Coming Soon" page (businesses/show.blade.php)
+            'kicker'       => 'Coming soon',
+            'intro'        => '',
+            'image'        => null,
+            'title'        => '',
+            'body'         => [],
+            'facts'        => [],
+            'show_highlights' => false,
+            'show_gallery' => false,
+            'gallery'      => [],
+            'locations'    => [],
+            'phone'        => null,
+            'website'      => null,
         ],
 
         'romina-imports' => [
