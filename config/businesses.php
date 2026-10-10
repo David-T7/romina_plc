@@ -123,7 +123,7 @@ return [
                 ['name' => 'Sandford',  'desc' => 'Pastry, bakery, meals & drinks cafe', 'tag' => null],
                 ['name' => 'Atlas',     'desc' => 'Pastry, bakery, meals & drinks cafe', 'tag' => null],
                 ['name' => 'Peacock',   'desc' => 'Elevated coffee experience', 'tag' => null],
-                ['name' => 'ICS',       'desc' => 'Pastry, bakery, meals & drinks cafe', 'tag' => 'Coming soon'],
+                ['name' => 'Bisrate Gabriel - ICS',       'desc' => 'Pastry, bakery, meals & drinks cafe', 'tag' => 'Coming soon'],
             ],
             'phone'      => '+251 900 989 898',
             'website'    => 'https://kobapatisserie.com/',

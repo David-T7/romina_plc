@@ -307,12 +307,6 @@
             <li><span class="cof-j-dot"></span><span class="cof-j-n">07</span><span class="cof-j-name">Global market</span></li>
         </ol>
 
-        <div class="cof-j-sort">
-            <img loading="lazy" decoding="async"
-                src="{{ asset('images/coffee/sorting-line.webp') }}"
-                alt="Hand-sorting green coffee at a processing station"
-            >
-        </div>
 
     </div>
 
@@ -321,16 +315,25 @@
     <div class="cof-wrap cof-cols">
 
         <div>
+            <figure class="cof-col-img">
+                <img loading="lazy" decoding="async" src="{{ asset('images/coffee-origin/04-processing-floor.webp') }}" alt="Green coffee in open sacks on the processing floor, with the quality team inspecting">
+            </figure>
             <h4>Quality Assurance</h4>
             <p>Careful handpicking and rigorous cupping tests before any lot is approved for export.</p>
         </div>
 
         <div>
+            <figure class="cof-col-img">
+                <img loading="lazy" decoding="async" src="{{ asset('images/coffee/sorting-line.webp') }}" alt="Hand-sorting green coffee at a washing station">
+            </figure>
             <h4>Traceability</h4>
             <p>Farm-to-cup tracking, from the station where a lot is washed through to delivery.</p>
         </div>
 
         <div>
+            <figure class="cof-col-img">
+                <img loading="lazy" decoding="async" src="{{ asset('images/stock/coffee-farmer.webp') }}" alt="A coffee farmer checking the branches of his coffee tree" style="object-position: 72% 40%">
+            </figure>
             <h4>Farmers First</h4>
             <p>Training and knowledge transfer, disease-resistant seedlings and shade trees, and fairer
                compensation through higher pricing and a post-sale share.</p>
