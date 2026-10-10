@@ -461,6 +461,12 @@
 @endif
 
 
+{{-- ============ EXTERNAL PARTNERS (Romina Imports) ============ --}}
+@if ($brandSlug === 'romina-imports')
+    @include('partials.partners', ['partnersLabel' => 'External Partners'])
+@endif
+
+
 {{-- ============ MORE BUSINESSES ============ --}}
 <section class="bz-more">
     <div class="container">

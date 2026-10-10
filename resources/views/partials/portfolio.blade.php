@@ -14,10 +14,10 @@
          'img' => 'images/coffee-origin/03-drying-beds-team.webp',           'alt' => 'Coffee farmers working the drying beds',
          'text' => 'Upholding the legacy of Ethiopian coffee, from farm to cup, across four continents.', 'link' => 'Explore Romina Coffee'],
         ['title' => 'Coffee Roastery', 'slug' => 'coffee-roastery',
-         'img' => 'images/koba/koba-coffee.webp',                            'alt' => 'Iced coffee on a wooden table',
+         'img' => 'images/stock/coffee-roaster.webp',                        'alt' => 'Freshly roasted coffee beans turning in a roaster cooling tray',
          'text' => 'Coming soon.', 'link' => 'Learn More'],
         ['title' => 'FMCG Importing & Distribution', 'slug' => 'romina-imports',
-         'img' => 'images/hero/imports-partners.webp',                       'alt' => 'Romina Imports partners',
+         'img' => 'images/stock/fmcg-aisle.webp',                            'alt' => 'Supermarket aisles stocked with packaged goods',
          'text' => 'Quality FMCG imported for local consumption.', 'link' => 'Explore Romina Imports'],
     ];
 @endphp

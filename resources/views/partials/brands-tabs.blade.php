@@ -1,6 +1,6 @@
     {{--
          Locations: [name, description, comingSoon, phone]. A location phone shows
-         beside the branch; the brand 'phone' shows only when no branch has one.
+         beside the branch; the brand 'phone' shows unless every branch has its own.
          BRANDS / BUSINESSES — tabbed detail section
          Ported from React romina.jsx  (Brands + BrandPanel + Gallery components)
          Data array lives in the PHP block below — edit here to update content.
@@ -16,10 +16,10 @@
             'kicker'    => 'An iconic eatery in the heart of Addis Ababa',
             'title'     => 'The Home of Great Service',
             'body'      => "We don't just serve food; we invite you into an experience that mirrors the inclusion and warmth of home. Home-styled dishes from across the world, prepared as the most comforting versions of what you love.",
-            'list'      => ['label' => 'Culinary Promise', 'items' => ['European dishes', 'Asian dishes', 'Local Ethiopian dishes', 'Signature Agelgel']],
+            'list'      => ['label' => 'Culinary Promise', 'items' => ['European dishes', 'Asian dishes', 'Ethiopian dishes', 'Signature Agelgel']],
             'locations' => [
-                ['4 Kilo', 'Romina Restaurant, Bar & Cafe',          true],
-                ['Balderas',           'Romina Restaurant / Takeaway Center',     false],
+                ['4 Kilo', 'Romina Restaurant, Bar & Cafe',          false, '+251 11 111 0005'],
+                ['Balderas',           'Romina Restaurant / Takeaway Center',     false, '+251 964 414 141'],
             ],
             'phone'  => null,
             'cta'    => 'Visit Romina Restaurants',
@@ -28,6 +28,8 @@
                 ['src' => 'images/gallery/romina-restaurants/08-romina-restaurant.webp', 'shot' => 'Romina dining room, brick wall and pendant lights', 'caption' => 'The Dining Room',                'pos' => '50% 50%'],
                 ['src' => 'images/gallery/romina-restaurants/05-romina-restaurant.webp', 'shot' => 'Breaded cutlet with saffron rice, lime and side salad', 'caption' => 'Breaded Cutlet & Saffron Rice', 'pos' => '50% 50%'],
                 ['src' => 'images/gallery/romina-restaurants/12-mixed-grill.webp',      'shot' => 'Mixed grill with rice, mushroom sauce and crispy greens', 'caption' => 'Mixed Grill', 'pos' => '50% 55%'],
+                ['src' => 'images/gallery/romina-restaurants/09-romina-restaurant.webp', 'shot' => 'Backlit bar shelves stocked with wines and spirits', 'caption' => 'The Bar', 'pos' => '50% 50%'],
+                ['src' => 'images/gallery/romina-restaurants/03-romina-restaurant.webp', 'shot' => 'Vegetable pizza with a side of avocado dip', 'caption' => 'Vegetable Pizza', 'pos' => '50% 50%'],
             ],
         ],
 
@@ -39,19 +41,21 @@
             'body'      => 'Artisan pastries, handcrafted cakes, signature breakfasts, specialty coffee and savory dishes, baked fresh by skilled pastry artisans across Addis Ababa.',
             'list'      => null,
             'locations' => [
-                ['4 Kilo', 'Pastry & bakery takeaway center',        false],
-                ['Sandford',  'Pastry, bakery, meals & drinks cafe',    false],
-                ['Atlas',     'Pastry, bakery, meals & drinks cafe',    false],
+                ['4 Kilo', 'Pastry & bakery takeaway center',        false, '+251 900 898 989'],
+                ['Sandford',  'Pastry, bakery, meals & drinks cafe',    false, '+251 941 000 022'],
+                ['Atlas',     'Pastry, bakery, meals & drinks cafe',    false, '+251 900 989 898'],
                 ['Peacock',   'Elevated coffee experience',    false],
-                ['ICS',       'Pastry, bakery, meals & drinks cafe',    true],
+                ['Bisrate Gabriel - ICS',       'Pastry, bakery, meals & drinks cafe',    true],
             ],
-            'phone'  => '+251 900 989 898',
+            'phone'  => null,   // +251 900 989 898 is the Atlas line, shown on that branch
             'cta'    => 'Visit KOBA',
             'href'   => "https://kobapatisserie.com/",
             'slides' => [
                 ['src' => 'images/gallery/koba-patisserie/06-koba.webp', 'shot' => 'Glazed chocolate dome pastry on a marble board', 'caption' => 'Signature Dome Pastry', 'pos' => '50% 50%'],
                 ['src' => 'images/gallery/koba-patisserie/01-koba.webp', 'shot' => 'Layered macchiato in a glass cup and saucer',    'caption' => 'Macchiato',           'pos' => '50% 50%'],
                 ['src' => 'images/gallery/koba-patisserie/03-koba.webp', 'shot' => 'Milk poured over iced coffee at the table',     'caption' => 'Iced Coffee',         'pos' => '50% 50%'],
+                ['src' => 'images/gallery/koba-patisserie/04-koba.webp', 'shot' => 'Milk tea poured from a white teapot into a glass', 'caption' => 'Tea Service',         'pos' => '50% 50%'],
+                ['src' => 'images/gallery/koba-patisserie/02-koba.webp', 'shot' => 'Sparkling mint and lime cooler in a tall glass',  'caption' => 'Mint & Lime Cooler',  'pos' => '50% 40%'],
             ],
         ],
 
@@ -66,13 +70,15 @@
                 ['Bole Japan',      'Ice cream, gelato & sundae cafe', false],
                 ['Bisrate Gabriel', 'Ice cream, gelato & sundae cafe', false],
             ],
-            'phone'  => null,
+            'phone'  => '+251 94 100 0033',
             'cta'    => 'Visit Bacio Cremeria',
             'href'   => route('business', 'bacio-cremeria'),
             'slides' => [
                 ['src' => 'images/bacio/gelato-counter.webp',   'shot' => 'Bacio Cremeria gelato counter, flavors on display', 'caption' => 'The Gelato Counter',  'pos' => '50% 55%'],
                 ['src' => 'images/bacio/gelato-plate.webp',     'shot' => 'Gelato scoops, plated with chocolate',              'caption' => 'Handcrafted Gelato',   'pos' => '50% 45%'],
                 ['src' => 'images/bacio/waffle-ice-cream.webp', 'shot' => 'Waffle topped with ice cream and chocolate',        'caption' => 'Waffles & Ice Cream',  'pos' => '50% 45%'],
+                ['src' => 'images/bacio/affogato.webp',         'shot' => 'Affogato in a glass cup with coffee beans',          'caption' => 'Affogato',             'pos' => '50% 45%'],
+                ['src' => 'images/bacio/iced-latte.webp',       'shot' => 'Iced latte to go, held in hand',                     'caption' => 'Iced Latte',           'pos' => '50% 50%'],
             ],
         ],
 
@@ -93,6 +99,8 @@
                 ['src' => 'images/gallery/meskott-culinary/meskott_6.webp', 'shot' => 'Meskott entrance and green wall at Sellassie Twin Towers', 'caption' => 'The Entrance',       'pos' => '50% 50%'],
                 ['src' => 'images/gallery/meskott-culinary/meskott_3.webp', 'shot' => 'Lounge seating beneath framed Ethiopian art',  'caption' => 'The Lounge',        'pos' => '50% 50%'],
                 ['src' => 'images/gallery/meskott-culinary/meskott_5.webp', 'shot' => 'Garden terrace tables under the Meskott sign',  'caption' => 'The Garden Terrace', 'pos' => '50% 50%'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_7.webp', 'shot' => 'Stone-clad bar counter and stools before the Meskott green wall', 'caption' => 'The Bar',            'pos' => '50% 50%'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_4.webp', 'shot' => 'Courtyard tables with red and green cushions among plants',       'caption' => 'Courtyard Seating',  'pos' => '50% 50%'],
             ],
         ],
 
@@ -111,6 +119,7 @@
                 ['src' => 'images/coffee/processing-floor.webp',   'shot' => 'Coffee processing hall with sacks ready for export', 'caption' => 'Processing Hall', 'pos' => '50% 50%'],
                 ['src' => 'images/coffee/green-beans-burlap.webp', 'shot' => 'Green coffee beans in a burlap sack',     'caption' => 'Green Coffee',     'pos' => '50% 50%'],
                 ['src' => 'images/coffee/sample-tray.webp',        'shot' => 'A single green bean in a Romina sample tray',     'caption' => 'Sample Grading',   'pos' => '50% 50%'],
+                ['src' => 'images/coffee-origin/02-coffee-cherries.webp', 'shot' => 'Two hands holding freshly picked red coffee cherries', 'caption' => 'Ripe Coffee Cherries', 'pos' => '50% 50%'],
             ],
         ],
 
@@ -118,7 +127,7 @@
             'name'      => 'Romina Imports',
             'tone'      => 'paper',
             'kicker'    => 'Quality FMCG imported for local consumption',
-            'title'     => 'From Our Kitchens to the Market',
+            'title'     => 'Connecting you directly to premium global products',
             'body'      => "What began as sourcing for Romina's own hospitality operations grew into a dedicated importer supplying the Ethiopian market.",
             'list'      => ['label' => 'Categories', 'items' => ['Pastas', 'Pastry ingredients', 'Dairy products', 'Edible oils', 'Rice']],
             'locations' => null,
@@ -127,6 +136,7 @@
             'href'      => route('business', 'romina-imports'),
             'slides'    => [
                 ['src' => config('businesses.brands.romina-imports.image'), 'shot' => 'Two partners reviewing a presentation on a tablet', 'caption' => 'With Our Partners', 'pos' => '50% 50%'],
+                ['src' => 'images/stock/dried-pasta.webp', 'shot' => 'Bins of long dried pasta in several varieties', 'caption' => 'Dried Pasta', 'pos' => '50% 50%'],
             ],
         ],
 
@@ -136,10 +146,10 @@
             'kicker'    => 'Launched 2017 with Jaquar Group',
             'title'     => 'The Complete Bathroom Solutions Destination',
             'body'      => 'Faucets, shower systems, sanitaryware, smart toilets, jacuzzi baths and architectural lighting, from Artize luxury to Jaquar Premium.',
-            'list'      => ['label' => 'Brands', 'items' => ['Artize (luxury)', 'Jaquar Premium']],
+            'list'      => ['label' => 'Brands', 'items' => ['Jaquar Premium']],
             'locations' => [
                 ['Kazanchis',     'Zewditu Street, Joberg Building, 1st floor',                    false],
-                ['Meskel Flower', 'Off Ethio-China Street, Martreza Building, ground floor',        false],
+                ['Meskel Flower', 'Off Ethio-China Street, Martreza Building, ground floor',        false, '+251 114 701 650'],
             ],
             'phone'  => '+251 944 143 073',
             'cta'    => 'Visit Jaquar World',
@@ -149,6 +159,8 @@
                 ['src' => 'images/gallery/jaquar-world/01-jaquar.webp', 'shot' => 'Outdoor wall and bollard lights on display', 'caption' => 'Outdoor Lighting', 'pos' => '50% 50%'],
                 ['src' => 'images/gallery/jaquar-world/02-jaquar.webp', 'shot' => 'Glass pendant light with a woven brass shade', 'caption' => 'Pendant Lighting', 'pos' => '50% 50%'],
                 ['src' => 'images/gallery/jaquar-world/03-jaquar.webp', 'shot' => 'Twin wall lights with frosted glass shades', 'caption' => 'Wall Lights',  'pos' => '50% 50%'],
+                ['src' => 'images/gallery/jaquar-world/jaguar_1.webp', 'shot' => 'Freestanding bathtub and floor-mounted filler in the showroom', 'caption' => 'Freestanding Bathtub', 'pos' => '50% 60%'],
+                ['src' => 'images/gallery/jaquar-world/jaguar_6.webp', 'shot' => 'Showroom wall of wall lights and chandeliers', 'caption' => 'The Lighting Gallery', 'pos' => '50% 50%'],
             ],
         ],
 
@@ -307,7 +319,7 @@
                                     @if (!$b['href']) onclick="return false;" @endif
                                 >{{ $b['cta'] }}</a>
 
-                                @if ($b['phone'] && !collect($b['locations'] ?? [])->contains(fn ($l) => !empty($l[3])))
+                                @if ($b['phone'] && !($b['locations'] && collect($b['locations'])->every(fn ($l) => !empty($l[3]))))
                                     <a class="bp-phone" href="tel:{{ preg_replace('/\s/', '', $b['phone']) }}">
                                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                                         {{ $b['phone'] }}

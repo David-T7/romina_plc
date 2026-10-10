@@ -202,7 +202,7 @@
     @endif
 
     <div class="container mobile-nav-foot">
-        <a href="mailto:info@rominaplc.com">info@rominaplc.com</a>
+        <a href="mailto:contact@rominaplc.com">contact@rominaplc.com</a>
     </div>
 
 </div>

@@ -730,6 +730,48 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { threshold: 0.2 }).observe(quote);
     }
 
+    /* hand-drawn coffee sketch: strokes draw in with scroll progress */
+    var sketch = document.getElementById('cofSketch');
+    if (sketch && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var skHost  = sketch.parentElement;
+        var skDraw  = [].slice.call(sketch.querySelectorAll('.sk, .sk-mask')).map(function (el) {
+            return { el: el, at: parseFloat(el.dataset.at), to: parseFloat(el.dataset.to) };
+        });
+        var skPop   = [].slice.call(sketch.querySelectorAll('.sk-bean, .sk-type, .sk-dot')).map(function (el) {
+            return { el: el, at: parseFloat(el.dataset.at) };
+        });
+        var skLast  = -1, skQueued = false;
+        sketch.classList.add('sk-live');
+
+        function skFrame() {
+            skQueued = false;
+            var r = skHost.getBoundingClientRect(), vh = window.innerHeight;
+            // 0 when the copy's top enters the lower edge, 1 when its bottom reaches 75% of the viewport
+            var p = (vh - r.top) / (r.height + vh * .25);
+            p = Math.max(0, Math.min(1, p));
+            if (Math.abs(p - skLast) < .002) return;
+            skLast = p;
+            skDraw.forEach(function (s) {
+                var k = Math.max(0, Math.min(1, (p - s.at) / ((s.to - s.at) || .01)));
+                s.el.style.strokeDashoffset = 1 - k;
+            });
+            skPop.forEach(function (s) {
+                var on = p >= s.at;
+                if (s.el.tagName === 'circle') s.el.style.opacity = on ? 1 : 0;
+                else s.el.classList.toggle('on', on);
+            });
+        }
+        function skQueue() {
+            if (skQueued) return;
+            skQueued = true;
+            requestAnimationFrame(skFrame);
+            setTimeout(function () { if (skQueued) skFrame(); }, 120);
+        }
+        window.addEventListener('scroll', skQueue, { passive: true });
+        window.addEventListener('resize', skQueue);
+        skFrame();
+    }
+
     /* stats count-up */
     var statsEl = document.getElementById('cofStats');
     if (statsEl) {
