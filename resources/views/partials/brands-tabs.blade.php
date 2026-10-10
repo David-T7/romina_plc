@@ -25,7 +25,7 @@
             'slides' => [
                 ['src' => 'images/gallery/romina-restaurants/08-romina-restaurant.webp', 'shot' => 'Balderas dining room, evening service',    'caption' => 'Balderas',                'pos' => '50% 50%'],
                 ['src' => 'images/gallery/romina-restaurants/05-romina-restaurant.webp', 'shot' => 'Signature Agelgel, plated on the pass',    'caption' => 'Signature Agelgel',       'pos' => '50% 50%'],
-                ['src' => 'images/gallery/romina-restaurants/07-romina-restaurant.webp', 'shot' => 'Catering quarter, centralized preparation','caption' => 'Centralized preparation', 'pos' => '50% 50%'],
+                ['src' => 'images/gallery/romina-restaurants/12-mixed-grill.webp',      'shot' => 'Mixed grill on seasoned rice',            'caption' => 'From our kitchen',        'pos' => '50% 55%'],
             ],
         ],
 
@@ -89,7 +89,7 @@
             'href'   => route('business', 'meskott-culinary'),
             'slides' => [
                 ['src' => 'images/gallery/meskott-culinary/meskott_6.webp', 'shot' => 'Meskott bar at night, backlit shelves', 'caption' => 'The bar',            'pos' => '50% 50%'],
-                ['src' => 'images/gallery/meskott-culinary/meskott_1.webp', 'shot' => 'VIP table area, set for dinner',         'caption' => 'VIP table area',    'pos' => '50% 50%'],
+                ['src' => 'images/gallery/meskott-culinary/meskott_3.webp', 'shot' => 'The lounge, set for the evening',        'caption' => 'The lounge',        'pos' => '50% 50%'],
                 ['src' => 'images/gallery/meskott-culinary/meskott_5.webp', 'shot' => 'Street food garden, brunch service',     'caption' => 'Street food garden', 'pos' => '50% 50%'],
             ],
         ],

@@ -74,12 +74,23 @@ class PagesController extends Controller
         $photos = [];
         $dir = public_path('images/gallery/' . $slug);
 
+        $usedOnPage = array_filter(array_merge(
+            [$brand['image'] ?? null],
+            array_column($brand['highlights']['items'] ?? [], 'image'),
+            array_column($brand['location_slides'] ?? [], 'src')
+        ));
+
         if (is_dir($dir)) {
             $files = glob($dir . '/*');
             natcasesort($files);
 
             foreach ($files as $file) {
                 if (!preg_match('/\.(jpe?g|png|webp)$/i', $file)) {
+                    continue;
+                }
+
+                // photos already shown elsewhere on the page (hero, cards, slider) are skipped
+                if (in_array('images/gallery/' . $slug . '/' . basename($file), $usedOnPage, true)) {
                     continue;
                 }
 
@@ -97,6 +108,8 @@ class PagesController extends Controller
         $placeholders = [];
         foreach ($brand['gallery'] ?? [] as $item) {
             if (!empty($item['src'])) {
+                if (in_array($item['src'], $usedOnPage, true)) continue;   // already shown on the page
+                if (in_array($item['src'], array_column($photos, 'src'), true)) continue;   // already loaded from the folder
                 $photos[] = $item;
             } else {
                 $placeholders[] = $item;
