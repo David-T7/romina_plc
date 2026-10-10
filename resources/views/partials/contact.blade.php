@@ -15,7 +15,7 @@
                     Contact
                 </p>
 
-                <h2 class="ctc-display">Let's talk</h2>
+                <h2 class="ctc-display">Contact us</h2>
 
                 <div class="c-block">
                     <p class="c-label">Head office</p>
@@ -61,29 +61,34 @@
 
             <div class="f-row">
                 <div class="f">
-                    <input class="field" type="text"  id="ctc_name"    name="name"    autocomplete="name"  placeholder=" ">
+                    <input class="field" type="text" id="ctc_name" name="name" autocomplete="name" placeholder=" " required value="{{ old('name') }}" aria-describedby="ctc_name_error" aria-invalid="{{ $errors->has('name') ? 'true' : 'false' }}">
                     <label for="ctc_name">Name</label>
+                    <p class="ctc-error" id="ctc_name_error" aria-live="polite" @unless($errors->has('name')) hidden @endunless>@error('name'){{ $message }}@enderror</p>
                 </div>
                 <div class="f">
-                    <input class="field" type="email" id="ctc_email"   name="email"   autocomplete="email" placeholder=" ">
+                    <input class="field" type="email" id="ctc_email" name="email" autocomplete="email" placeholder=" " required value="{{ old('email') }}" aria-describedby="ctc_email_error" aria-invalid="{{ $errors->has('email') ? 'true' : 'false' }}">
                     <label for="ctc_email">Email</label>
+                    <p class="ctc-error" id="ctc_email_error" aria-live="polite" @unless($errors->has('email')) hidden @endunless>@error('email'){{ $message }}@enderror</p>
                 </div>
             </div>
 
             <div class="f-row">
                 <div class="f">
-                    <input class="field" type="tel"   id="ctc_phone"   name="phone"   autocomplete="tel"   placeholder=" ">
+                    <input class="field" type="tel" id="ctc_phone" name="phone" autocomplete="tel" inputmode="numeric" pattern="[0-9]*" placeholder=" " value="{{ old('phone') }}" aria-describedby="ctc_phone_error" aria-invalid="{{ $errors->has('phone') ? 'true' : 'false' }}">
                     <label for="ctc_phone">Phone</label>
+                    <p class="ctc-error" id="ctc_phone_error" aria-live="polite" @unless($errors->has('phone')) hidden @endunless>@error('phone'){{ $message }}@enderror</p>
                 </div>
                 <div class="f">
-                    <input class="field" type="text"  id="ctc_subject" name="subject" placeholder=" ">
+                    <input class="field" type="text" id="ctc_subject" name="subject" placeholder=" " value="{{ old('subject') }}" aria-describedby="ctc_subject_error" aria-invalid="{{ $errors->has('subject') ? 'true' : 'false' }}">
                     <label for="ctc_subject">Subject</label>
+                    <p class="ctc-error" id="ctc_subject_error" aria-live="polite" @unless($errors->has('subject')) hidden @endunless>@error('subject'){{ $message }}@enderror</p>
                 </div>
             </div>
 
-            <div class="f">
-                <textarea class="field" id="ctc_message" name="message" rows="3" placeholder=" "></textarea>
+            <div class="f ctc-message">
+                <textarea class="field" id="ctc_message" name="message" rows="1" placeholder=" " required aria-describedby="ctc_message_error" aria-invalid="{{ $errors->has('message') ? 'true' : 'false' }}">{{ old('message') }}</textarea>
                 <label for="ctc_message">Message</label>
+                <p class="ctc-error" id="ctc_message_error" aria-live="polite" @unless($errors->has('message')) hidden @endunless>@error('message'){{ $message }}@enderror</p>
             </div>
 
             <div class="f-actions">

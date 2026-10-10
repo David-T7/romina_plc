@@ -9,7 +9,7 @@ return [
     'nav_careers'            => 'Careers',
     'nav_news'               => 'News',
     'nav_contact'            => 'Contact',
-    'nav_lets_talk'          => "Let's Talk",
+    'nav_lets_talk'          => 'Contact us',
     'nav_open_menu'          => 'Open menu',
     'nav_close_menu'         => 'Close menu',
     'nav_mobile_label'       => 'Mobile navigation',

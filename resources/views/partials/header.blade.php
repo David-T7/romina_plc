@@ -175,7 +175,7 @@
         <a href="{{ route('sustainability') }}" style="--d: 100ms"{!! $pageCode === 'Sustainability' ? ' aria-current="page"' : '' !!}><span data-i18n="nav_sustainability">{{ __('site.nav_sustainability') }}</span></a>
         <a href="{{ route('careers.index') }}" style="--d: 150ms"{!! $pageCode === 'Careers' ? ' aria-current="page"' : '' !!}><span data-i18n="nav_careers">{{ __('site.nav_careers') }}</span></a>
         <a href="{{ route('news') }}" style="--d: 200ms"{!! $pageCode === 'News' ? ' aria-current="page"' : '' !!}><span data-i18n="nav_news">{{ __('site.nav_news') }}</span></a>
-        <a href="{{ $home }}#contact"        style="--d: 250ms"><span data-i18n="nav_contact">{{ __('site.nav_contact') }}</span></a>
+        <a href="{{ $home }}#contact"        style="--d: 250ms"><span data-i18n="nav_lets_talk">{{ __('site.nav_lets_talk') }}</span></a>
     </nav>
 
     <div class="container mobile-nav-brands">
