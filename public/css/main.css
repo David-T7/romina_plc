@@ -7985,7 +7985,7 @@ button {
 .ctc-in {
     width: 100%;
     max-width: 640px;
-    padding: clamp(88px,10vw,140px) clamp(20px,4.4vw,64px);
+    padding: calc(clamp(88px,10vw,140px) - 16px) clamp(20px,4.4vw,64px) calc(clamp(88px,10vw,140px) + 16px);
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -8075,7 +8075,7 @@ button {
 
 .ctc-form {
     background: #fff;
-    padding: clamp(88px,10vw,140px) clamp(20px,4.4vw,64px);
+    padding: calc(clamp(88px,10vw,140px) - 16px) clamp(20px,4.4vw,64px) calc(clamp(88px,10vw,140px) + 16px);
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -16448,4 +16448,16 @@ button {
 
 @media (max-width: 900px) {
     .bz-loc-split { grid-template-columns: 1fr; }
+}
+
+/* Contact labels sit inside empty fields and float on focus or with a value. */
+.ctc-form .f { position:relative; gap:0; }
+.ctc-form .field { padding:25px 0 10px; line-height:1.5; }
+.ctc-form .f > label { position:absolute; left:0; top:25px; font-size:17px; line-height:1.5; font-weight:400; color:#565656; cursor:text; transform-origin:left top; transition:top .2s ease,font-size .2s ease,color .2s ease; }
+.ctc-form .field:focus + label,
+.ctc-form .field:not(:placeholder-shown) + label,
+.ctc-form .field:autofill + label { top:2px; font-size:12px; font-weight:500; color:#0E2240; }
+.ctc-form .field:-webkit-autofill + label { top:2px; font-size:12px; font-weight:500; color:#0E2240; }
+@media (prefers-reduced-motion:reduce) {
+    .ctc-form .f > label { transition:none; }
 }
