@@ -257,6 +257,8 @@
     <div class="cof-wrap cof-quote" id="cofQuote">
 
         <div class="cof-quote-copy">
+            {{-- hand-drawn coffee branch -> falling beans -> export sack, drawn on scroll --}}
+            @include('partials.coffee-sketch')
             <p class="cof-quote-text">"Spreading the Magic Across Continents."</p>
             <p class="cof-markets-label">Exporting to</p>
             <ul class="cof-markets">
@@ -292,7 +294,7 @@
     {{-- 4. JOURNEY: farm to global market --}}
     <div class="cof-wrap cof-journey" id="cofJourney">
 
-        <h3 class="cof-journey-h3">From Farm to Global Market</h3>
+        {{-- <h3 class="cof-journey-h3">From Farm to Global Market</h3> --}}
 
         <ol class="cof-j-list">
             <span class="cof-j-line"><i></i></span>

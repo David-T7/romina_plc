@@ -93,7 +93,7 @@ return [
             'facts'      => [
                 ['value' => '2020', 'label' => 'Established'],
                 ['value' => '5',    'label' => 'Locations, One Coming Soon'],
-                ['value' => '100%', 'label' => 'Baked Fresh by Our Artisans'],
+                ['value' => '100%', 'label' => 'Baked Fresh'],
             ],
             'highlights' => [
                 'label' => 'What We Make',
@@ -327,7 +327,7 @@ return [
             'badge'      => ['value' => '5', 'label' => 'Product Categories'],
             'image'      => 'images/hero/imports-partners.webp',
             'image_shot' => 'Warehouse aisle, edible oils and rice',
-            'title'      => 'From Our Kitchens to the Market',
+            'title'      => 'Connecting you directly to premium global products',
             'body'       => [
                 "What began as sourcing for Romina's own hospitality operations grew into a dedicated importer supplying the Ethiopian market.",
                 'Today, Romina Imports brings in quality fast-moving consumer goods and distributes essential products to the local market, built on the same standards we hold in our own kitchens.',

@@ -2,6 +2,7 @@
          PARTNERS — auto-scroll logo strip
          To add a real logo: place the file in public/images/partners/
          and set 'image' => asset('images/partners/filename.png') below.
+         Pass ['partnersLabel' => '...'] to retitle it (Romina Imports uses "External Partners").
     =========================================== --}}
 
     <?php
@@ -16,9 +17,9 @@
         ['name' => 'Michael Girma CO',   'file' => 'images/brands/logos/michael-girma.png', 'alt' => 'Michael Girma CO'],
     ];
 
-    $logoArea = 6000;   // px² each logo occupies
-    $maxW     = 168;
-    $maxH     = 64;
+    $logoArea = 13500;  // px² each logo occupies
+    $maxW     = 236;
+    $maxH     = 100;
 
     foreach ($partners as &$partner) {
         $partner['image'] = asset($partner['file']);
@@ -28,15 +29,17 @@
         $partner['size'] = ['w' => (int) round($height * $ratio), 'h' => (int) round($height)];
     }
     unset($partner);
+
+    $partnersLabel = $partnersLabel ?? 'Our Brands';
     ?>
 
-    <section class="partners-strip" aria-label="Our brands">
+    <section class="partners-strip" aria-label="{{ $partnersLabel }}">
 
         <div class="container">
             <p class="mark">
                 <span class="mark-rule"></span>
                 <i></i>
-                Our Brands
+                {{ $partnersLabel }}
             </p>
         </div>
 
