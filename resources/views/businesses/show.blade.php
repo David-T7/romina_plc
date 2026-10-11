@@ -25,6 +25,10 @@
 <link rel="stylesheet" href="{{ asset('css/koba-about.css') }}">
 <link rel="stylesheet" href="{{ asset('css/koba-explorer.css') }}">
 @endif
+@if ($brandSlug === 'jaquar-world')
+<link rel="stylesheet" href="{{ asset('css/jaquar.css') }}">
+<link rel="preload" as="image" href="{{ asset('images/jaquar/bath-slipper.webp') }}">
+@endif
 @if ($brandSlug === 'bacio-cremeria')
 {{-- Josefin Sans stands in for the guideline face (Champagne & Limousines) until it is self-hosted --}}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap">
@@ -63,6 +67,11 @@
 
 {{-- Bacio has its own page sections and uses the shared business gallery. --}}
 @include('businesses.partials.bacio')
+
+@elseif ($brandSlug === 'jaquar-world')
+
+{{-- Jaquar has its own retail-style sections and filterable gallery. --}}
+@include('businesses.partials.jaquar')
 
 @else
 
@@ -268,7 +277,7 @@
 @include('businesses.partials.koba-gallery')
 @elseif ($brandSlug === 'meskott-culinary')
 @include('businesses.partials.meskott-gallery')
-@elseif ($brandSlug !== 'bacio-cremeria' && $brandSlug !== 'romina-restaurants')
+@elseif (!in_array($brandSlug, ['bacio-cremeria', 'romina-restaurants', 'jaquar-world'], true))
 @include('businesses.partials.gallery')
 @endif
 
@@ -538,28 +547,30 @@
     var btnClose = box.querySelector('.bz-lb-close');
     var current = 0;
     var opener  = null;
+    var active  = tiles;                            /* the photos currently visible (filters can hide some) */
 
     function pad(n) { return (n < 10 ? '0' : '') + n; }
 
     function show(i) {
-        current = (i + tiles.length) % tiles.length;
-        var t = tiles[current];
+        current = (i + active.length) % active.length;
+        var t = active[current];
         box.classList.remove('is-swapping');
         void box.offsetWidth;                       /* restart the swap animation */
         box.classList.add('is-swapping');
         img.src = t.dataset.full;
         img.alt = t.querySelector('img').alt;
-        countEl.textContent = pad(current + 1) + ' / ' + pad(tiles.length);
+        countEl.textContent = pad(current + 1) + ' / ' + pad(active.length);
         textEl.textContent  = t.dataset.caption;
     }
 
     function open(i, trigger) {
         opener = trigger || tiles[i];
+        active = tiles.filter(function (t) { return t === tiles[i] || t.offsetParent !== null; });
         box.hidden = false;
-        box.classList.toggle('is-single', tiles.length < 2);
+        box.classList.toggle('is-single', active.length < 2);
         requestAnimationFrame(function () { box.classList.add('is-open'); });
         document.body.style.overflow = 'hidden';
-        show(i);
+        show(active.indexOf(tiles[i]));
         btnClose.focus();
     }
 

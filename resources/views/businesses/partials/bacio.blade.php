@@ -201,7 +201,30 @@
 </section>
 
 
-{{-- ============ GALLERY — shared mosaic + lightbox, styled for Bacio ============ --}}
+{{-- ============ GALLERY — shared mosaic + lightbox, styled for Bacio ============
+     Shows the photos in public/images/gallery/bacio-cremeria/ only; the config photos
+     already appear in the hero and the menu above, so they are not repeated here. --}}
+@php
+    $bacioGalleryText = [
+        '01-gelato-display.webp'      => ['Gelato Display',        'Gelato flavours in the display case, each with a handwritten label'],
+        '02-ice-cream-bars.webp'      => ['Ice Cream Bars',        'A heart-shaped white chocolate bar and a milk chocolate bar, held side by side'],
+        '03-waffles-chocolate.webp'   => ['Waffles & Chocolate',   'Waffles dusted with sugar, topped with strawberries and a chocolate drizzle'],
+        '04-waffle-gelato-scoops.webp' => ['Waffle & Gelato',      'A waffle topped with pistachio and vanilla scoops under chocolate sauce'],
+        '05-milkshake-wafer.webp'     => ['Milkshake',             'A chocolate milkshake with whipped cream, a wafer crisp and broken cones'],
+        '06-sundae-at-counter.webp'   => ['Sundae at the Counter', 'A three-scoop sundae with sprinkles, handed over the counter'],
+        '07-sundae-five-scoops.webp'  => ['Five-Scoop Sundae',     'A five-scoop sundae finished with sprinkles and sugar pearls'],
+        '08-affogato-pour.webp'       => ['Affogato',              'Espresso pouring over ice cream in a glass'],
+        '09-spaghetti-gelato.webp'    => ['Spaghetti Ice Cream',   'Ice cream pressed into spaghetti strands, drizzled with chocolate'],
+    ];
+    $gallery = collect($gallery)
+        ->filter(fn ($g) => !empty($g['src']) && str_starts_with($g['src'], 'images/gallery/bacio-cremeria/'))
+        ->map(function ($g) use ($bacioGalleryText) {
+            [$cap, $shot] = $bacioGalleryText[basename($g['src'])] ?? [$g['caption'], $g['shot']];
+            return array_merge($g, ['caption' => $cap, 'shot' => $shot]);
+        })
+        ->values()
+        ->all();
+@endphp
 <div class="bacio-gallery">
     @include('businesses.partials.gallery')
 </div>
