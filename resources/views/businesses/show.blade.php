@@ -16,6 +16,9 @@
 @endphp
 
 @section('page-css')
+@if ($brandSlug === 'romina-coffee')
+<link rel="stylesheet" href="{{ asset('css/romina-coffee.css') }}">
+@endif
 @if ($brandSlug === 'romina-restaurants')
 <link rel="stylesheet" href="{{ asset('css/romina-restaurants.css') }}">
 <link rel="preload" as="image" href="{{ asset('images/gallery/romina-restaurants/10-romina-restaurant.webp') }}">
@@ -38,7 +41,7 @@
 
 @section('page-content')
 
-<div class="bz-page{{ $bzTheme ? ' bz-theme--' . $bzTheme : '' }}{{ $brandSlug === 'bacio-cremeria' ? ' bacio-page' : '' }}{{ $brandSlug === 'romina-restaurants' ? ' rr-page' : '' }}">
+<div class="bz-page{{ $bzTheme ? ' bz-theme--' . $bzTheme : '' }}{{ $brandSlug === 'bacio-cremeria' ? ' bacio-page' : '' }}{{ $brandSlug === 'romina-restaurants' ? ' rr-page' : '' }}{{ $brandSlug === 'romina-coffee' ? ' coffee-page' : '' }}">
 
 @if (!empty($brand['coming_soon']))
 
@@ -135,6 +138,10 @@
                         <a class="rr-photo" href="{{ asset('images/romina-restaurants/11-clay-pot-special.webp') }}" data-rr-photo data-caption="The clay-pot special" aria-label="Enlarge photo: The clay-pot special">
                             <img src="{{ asset('images/romina-restaurants/11-clay-pot-special.webp') }}" width="1600" height="1850" alt="Romina clay-pot dish garnished with fresh herbs">
                         </a>
+                    @elseif ($brandSlug === 'romina-coffee')
+                        <button type="button" class="bz-tile-btn ce-hero-photo" data-full="{{ asset($brand['image']) }}" data-caption="The Warehouse" aria-label="Enlarge photo: coffee sacks in the Romina warehouse">
+                            <img src="{{ asset($brand['image']) }}" width="2000" height="1333" alt="Coffee sacks stacked on pallets in the Romina warehouse">
+                        </button>
                     @else
                         <img src="{{ asset($brand['image']) }}" alt="{{ $brand['name'] }}">
                     @endif
@@ -161,6 +168,8 @@
 {{-- ============ OVERVIEW ============ --}}
 @if ($brandSlug === 'romina-restaurants')
 @include('businesses.partials.romina-restaurants')
+@elseif ($brandSlug === 'romina-coffee')
+@include('businesses.partials.coffee-about')
 @else
 <section class="bz-overview bz-overview--{{ $brandSlug }}" id="bz-overview">
     <div class="container bz-overview-grid">
@@ -234,6 +243,10 @@
 
 @endif
 
+@if ($brandSlug === 'romina-coffee' && !empty($brand['export_journey']))
+@include('businesses.partials.coffee-journey')
+@endif
+
 
 @endif
 
@@ -277,6 +290,8 @@
 @include('businesses.partials.koba-gallery')
 @elseif ($brandSlug === 'meskott-culinary')
 @include('businesses.partials.meskott-gallery')
+@elseif ($brandSlug === 'romina-coffee')
+@include('businesses.partials.coffee-gallery')
 @elseif (!in_array($brandSlug, ['bacio-cremeria', 'romina-restaurants', 'jaquar-world'], true))
 @include('businesses.partials.gallery')
 @endif
@@ -285,6 +300,8 @@
 {{-- ============ LOCATIONS ============ --}}
 @if ($brandSlug === 'koba-patisserie')
 @include('businesses.partials.koba-locations')
+@elseif ($brandSlug === 'romina-coffee')
+@include('businesses.partials.coffee-regions')
 @elseif (!empty($brand['locations']) && $brandSlug !== 'romina-restaurants')
 <section class="bz-locations{{ !empty($brand['location_slides']) ? ' bz-locations--slides' : '' }}" id="bz-locations">
     <div class="container{{ !empty($brand['location_slides']) ? ' bz-loc-split' : '' }}">

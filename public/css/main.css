@@ -15139,6 +15139,10 @@ button {
     margin-bottom: 44px;
 }
 
+.bz-theme--koba .kb-spot-head .bz-label {
+    color: #fff;
+}
+
 .kb-spot-head h2 {
     max-width: 640px;
     margin: 18px 0 0;
