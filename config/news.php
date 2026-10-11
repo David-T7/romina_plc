@@ -24,7 +24,7 @@ return [
         'group-news'            => ['label' => 'Group News',              'icon' => 'fa-newspaper',           'full' => 'Other Group news'],
     ],
 
-    'articles' => [
+    'articles' => array_merge(require __DIR__ . '/news-initiatives.php', [
 
         /* ---------------- EVENTS ---------------- */
 
@@ -39,20 +39,6 @@ return [
                 'Romina Coffee welcomed partners, buyers and friends of the Group for an evening of cupping, bringing together lots from several of Ethiopia\'s best-known growing regions.',
                 'Our quality team guided guests through each coffee, from bright, floral washed lots to deeper, fruit-forward naturals, sharing the story of the farmers and stations behind every cup.',
                 'Events like this are a chance to celebrate the people who make Ethiopian coffee exceptional, and to share that pride with the partners who carry it around the world.',
-            ],
-        ],
-
-        [
-            'slug'     => 'hospitality-expo-addis',
-            'title'    => 'Romina Group Joins the Addis Ababa Hospitality Showcase',
-            'category' => 'events',
-            'date'     => '2026-05-14',
-            'image'    => 'images/hero/hero-02.jpg',
-            'excerpt'  => 'Our hospitality, coffee and imports teams met industry peers and partners at the city\'s hospitality showcase.',
-            'body'     => [
-                'Teams from across Romina Group took part in the Addis Ababa hospitality showcase, meeting industry peers, suppliers and partners from across the region.',
-                'Visitors to our stand sampled KOBA pastries and Romina Coffee, and learned about the Group\'s work across restaurants, imports and distribution.',
-                'We look forward to building on the conversations started at the showcase in the months ahead.',
             ],
         ],
 
@@ -236,5 +222,5 @@ return [
             ],
         ],
 
-    ],
+    ]),
 ];

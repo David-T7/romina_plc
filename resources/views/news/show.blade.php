@@ -1,5 +1,11 @@
 @extends('layouts/mainlayout')
 
+@section('page-css')
+@if (!empty($article['gallery']))
+    <link rel="stylesheet" href="{{ asset('css/news-media.css') }}">
+@endif
+@endsection
+
 @section('page-content')
 
 
@@ -9,7 +15,7 @@
 <section class="page-hero page-hero--plain news-article-hero">
 
     <div class="hero-background page-hero-bg"
-         style="background-image: url('{{ asset($article['image']) }}');">
+         style="background-image: url('{{ asset($article['hero_image'] ?? $article['image']) }}');">
     </div>
 
     <div class="hero-overlay"></div>
@@ -28,7 +34,9 @@
 
         <h1>{{ $article['title'] }}</h1>
 
-        <p class="news-article-date">{{ \Carbon\Carbon::parse($article['date'])->format('d M Y') }}</p>
+        @if (!empty($article['date']))
+            <p class="news-article-date">{{ \Carbon\Carbon::parse($article['date'])->format('d M Y') }}</p>
+        @endif
 
     </div>
 
@@ -46,6 +54,10 @@
                 <p>{{ $paragraph }}</p>
             @endforeach
         </div>
+
+        @if (!empty($article['gallery']))
+            @include('news.partials.media-gallery')
+        @endif
 
         <a href="{{ route('news') }}" class="news-back">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -78,7 +90,9 @@
                     <div class="news-card-body">
                         <div class="news-meta">
                             <span class="news-cat">{{ $categories[$item['category']]['label'] ?? $item['category'] }}</span>
-                            <span class="news-date">{{ \Carbon\Carbon::parse($item['date'])->format('d M Y') }}</span>
+                            @if (!empty($item['date']))
+                                <span class="news-date">{{ \Carbon\Carbon::parse($item['date'])->format('d M Y') }}</span>
+                            @endif
                         </div>
                         <h3>{{ $item['title'] }}</h3>
                         <p>{{ $item['excerpt'] }}</p>
@@ -92,4 +106,10 @@
 @endif
 
 
+@endsection
+
+@section('page-js')
+@if (!empty($article['gallery']))
+    <script src="{{ asset('js/news-media.js') }}" defer></script>
+@endif
 @endsection

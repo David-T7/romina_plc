@@ -142,6 +142,12 @@ class PagesController extends Controller
         $articles = config('news.articles', []);
 
         usort($articles, function ($a, $b) {
+            // Client-supplied, undated highlights retain their editorial order.
+            // Do not turn a Drive upload timestamp into an event date.
+            if (empty($a['date']) || empty($b['date'])) {
+                return empty($a['date']) === empty($b['date']) ? 0 : (empty($a['date']) ? -1 : 1);
+            }
+
             return strcmp($b['date'], $a['date']);
         });
 

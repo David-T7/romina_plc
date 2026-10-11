@@ -8,7 +8,7 @@
     'crumb' => 'News',
     'title' => 'Stories from<br><span>the Group.</span>',
     'text'  => 'Events, launches, harvest updates, awards, community work and more from across our restaurants, coffee, imports and showrooms.',
-    'image' => 'images/stock/boardroom.webp',
+    'image' => 'images/news/training-1.webp',
 ])
 
 
@@ -54,7 +54,7 @@
         <p class="mark">
             <span class="mark-rule"></span>
             <i></i>
-            {{ $active ? 'Latest in ' . ($categories[$active]['full'] ?? $categories[$active]['label']) : 'Latest' }}
+            {{ $active ? ($categories[$active]['full'] ?? $categories[$active]['label']) : 'Featured story' }}
         </p>
 
         <a href="{{ route('news.show', $featured['slug']) }}" class="news-featured">
@@ -64,7 +64,9 @@
             <div class="news-featured-body">
                 <div class="news-meta">
                     <span class="news-cat">{{ $categories[$featured['category']]['label'] ?? $featured['category'] }}</span>
-                    <span class="news-date">{{ \Carbon\Carbon::parse($featured['date'])->format('d M Y') }}</span>
+                    @if (!empty($featured['date']))
+                        <span class="news-date">{{ \Carbon\Carbon::parse($featured['date'])->format('d M Y') }}</span>
+                    @endif
                 </div>
                 <h2>{{ $featured['title'] }}</h2>
                 <p>{{ $featured['excerpt'] }}</p>
@@ -102,7 +104,9 @@
                         <div class="news-card-body">
                             <div class="news-meta">
                                 <span class="news-cat">{{ $categories[$article['category']]['label'] ?? $article['category'] }}</span>
-                                <span class="news-date">{{ \Carbon\Carbon::parse($article['date'])->format('d M Y') }}</span>
+                                @if (!empty($article['date']))
+                                    <span class="news-date">{{ \Carbon\Carbon::parse($article['date'])->format('d M Y') }}</span>
+                                @endif
                             </div>
                             <h3>{{ $article['title'] }}</h3>
                             <p>{{ $article['excerpt'] }}</p>
