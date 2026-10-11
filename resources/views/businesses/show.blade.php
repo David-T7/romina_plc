@@ -16,6 +16,9 @@
 @endphp
 
 @section('page-css')
+@if ($brandSlug === 'romina-imports')
+<link rel="stylesheet" href="{{ asset('css/romina-imports.css') }}">
+@endif
 @if ($brandSlug === 'romina-coffee')
 <link rel="stylesheet" href="{{ asset('css/romina-coffee.css') }}">
 @endif
@@ -41,7 +44,7 @@
 
 @section('page-content')
 
-<div class="bz-page{{ $bzTheme ? ' bz-theme--' . $bzTheme : '' }}{{ $brandSlug === 'bacio-cremeria' ? ' bacio-page' : '' }}{{ $brandSlug === 'romina-restaurants' ? ' rr-page' : '' }}{{ $brandSlug === 'romina-coffee' ? ' coffee-page' : '' }}">
+<div class="bz-page{{ $bzTheme ? ' bz-theme--' . $bzTheme : '' }}{{ $brandSlug === 'bacio-cremeria' ? ' bacio-page' : '' }}{{ $brandSlug === 'romina-restaurants' ? ' rr-page' : '' }}{{ $brandSlug === 'romina-coffee' ? ' coffee-page' : '' }}{{ $brandSlug === 'romina-imports' ? ' romina-imports-page' : '' }}">
 
 @if (!empty($brand['coming_soon']))
 
@@ -170,6 +173,8 @@
 @include('businesses.partials.romina-restaurants')
 @elseif ($brandSlug === 'romina-coffee')
 @include('businesses.partials.coffee-about')
+@elseif ($brandSlug === 'romina-imports')
+@include('businesses.partials.imports-about')
 @else
 <section class="bz-overview bz-overview--{{ $brandSlug }}" id="bz-overview">
     <div class="container bz-overview-grid">
@@ -490,7 +495,7 @@
 
 
 {{-- ============ EXTERNAL PARTNERS (Romina Imports) ============ --}}
-@if ($brandSlug === 'romina-imports')
+@if ($brandSlug === 'romina-imports' && ($brand['show_external_partners'] ?? true))
     @include('partials.partners', ['partnersLabel' => 'External Partners'])
 @endif
 

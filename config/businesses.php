@@ -322,6 +322,7 @@ return [
             'theme'          => 'imports',   // fresh market-green re-tint (see .bz-theme--imports)
             'show_highlights' => false,      // hidden: the brand cluster carries this page
             'show_gallery'    => false,
+            'show_external_partners' => false, // temporarily hidden on the Imports page only
             'kicker'     => 'Quality FMCG imported for local consumption',
             'intro'      => 'Essential products, sourced with care and distributed across the Ethiopian market.',
             'badge'      => ['value' => '5', 'label' => 'Product Categories'],

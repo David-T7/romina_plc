@@ -1,0 +1,42 @@
+/* Imports-only palette, matching the homepage's Featured Brands Imports panel. */
+.romina-imports-page {
+    --deep-blue: #14396E;
+    --deep-blue-2: #0f2c55;
+    --red: #E8132C;
+    --imp-steel: #d8e3f2;
+    --imp-mist: #eef3fa;
+}
+.romina-imports-page .bz-hero,
+.romina-imports-page .rib-bg { background: var(--deep-blue); }
+.romina-imports-page .story-btn { background: var(--red); border-color: var(--red); color: #fff; }
+.romina-imports-page .story-btn:hover { background: #c51027; border-color: #c51027; color: #fff; }
+.romina-imports-page .imp-about { padding: clamp(48px, 6vw, 88px) 0; background: #f4f7fc; }
+.romina-imports-page .imp-about-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(32px, 7vw, 100px); align-items: start; }
+.romina-imports-page .imp-about-eyebrow { display: flex; align-items: center; gap: 12px; margin: 0 0 20px; color: var(--deep-blue); font-size: 12px; font-weight: 700; line-height: 1.5; letter-spacing: .1em; text-transform: uppercase; }
+.romina-imports-page .imp-about-eyebrow::before { content: ''; width: 28px; height: 3px; flex: none; background: var(--red); }
+.romina-imports-page .imp-about h2 { margin: 0; color: var(--deep-blue); font-size: clamp(38px, 4.5vw, 64px); font-weight: 700; line-height: 1.06; letter-spacing: -.04em; }
+.romina-imports-page .imp-about h2 span { display: block; margin-top: 8px; color: var(--red); font-weight: 400; }
+.romina-imports-page .imp-about-summary { margin: 24px 0 0; color: #4b5d74; font-size: 14px; line-height: 1.7; }
+.romina-imports-page .imp-about-copy { padding: 6px 0 0 30px; border-left: 1px solid #ccd7e7; }
+.romina-imports-page .imp-about-lead { margin: 0; color: #273d59; font-size: 22px; line-height: 1.6; }
+.romina-imports-page .imp-about-body { margin: 18px 0 0; color: #4b5d74; font-size: 16px; line-height: 1.75; }
+.romina-imports-page .imp-about-journey { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; margin: 44px 0 0; padding: 24px 0 0; border-top: 1px solid #ccd7e7; list-style: none; }
+.romina-imports-page .imp-about-journey li { display: flex; align-items: start; gap: 14px; min-width: 0; }
+.romina-imports-page .imp-about-step { flex: none; color: var(--red); font-size: 12px; font-weight: 700; line-height: 1.6; }
+.romina-imports-page .imp-about-journey strong { display: block; color: var(--deep-blue); font-size: 16px; font-weight: 700; line-height: 1.4; }
+.romina-imports-page .imp-about-journey div > span { display: block; margin-top: 7px; color: #4b5d74; font-size: 13px; line-height: 1.5; }
+.romina-imports-page .imp-about-arrow { flex: none; margin-left: auto; color: var(--deep-blue); font-size: 22px; line-height: 1; }
+@media (max-width: 950px) {
+    .romina-imports-page .imp-about-grid { gap: 32px; }
+    .romina-imports-page .imp-about-lead { font-size: 18px; }
+    .romina-imports-page .imp-about-journey { gap: 22px; }
+}
+@media (max-width: 760px) {
+    .romina-imports-page .imp-about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .romina-imports-page .imp-about-copy { padding: 22px 0 0; border-left: 0; border-top: 1px solid #ccd7e7; }
+    .romina-imports-page .imp-about-journey { grid-template-columns: 1fr; gap: 22px; margin-top: 30px; }
+    .romina-imports-page .imp-about-arrow { display: none; }
+}
+@media (max-width: 400px) {
+    .romina-imports-page .imp-about-eyebrow { font-size: 11px; letter-spacing: .07em; }
+}
