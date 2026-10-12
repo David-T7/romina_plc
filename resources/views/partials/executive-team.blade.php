@@ -81,7 +81,7 @@
                 ],
                 [
                     'name'     => 'Fitsum Bekere',
-                    'label'    => 'BUSINESS LEADERSHIP',
+                    'label'    => 'EXECUTIVE LEADERSHIP',
                     'position' => 'Coffee Field Operations Director',
                     'photo'    => 'images/team/executive-10.jpg',
                     'role'     => 'Leads Romina Coffee\'s field operations across our growing regions, working with farmers and wet-mill stations on harvesting, processing and quality at origin.',
