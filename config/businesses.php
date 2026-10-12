@@ -385,10 +385,12 @@ return [
             'group'      => 'other',
             'theme'      => 'jaguar',   // white-dominant, small blue (see .bz-theme--jaguar)
             'kicker'     => 'Launched 2017 with Jaquar Group',
-            'intro'      => 'The complete bathroom solutions destination in Addis Ababa.',
+            'intro'      => 'The complete bathroom and lighting solutions destination in Addis Ababa.',
             'badge'      => ['value' => '2017', 'label' => 'Launched With Jaquar Group'],
-            'image'      => 'images/gallery/jaquar-world/jaguar_1.webp',
-            'title'      => 'The Complete Bathroom Solutions Destination',
+            'image'      => 'images/jaquar/vanity-round-mirror.webp',
+            'hero_logo'  => 'images/brands/logos/jaquar.png',   // shown in place of the hero title
+            'show_highlights' => false,                         // the Jaquar sections carry the categories
+            'title'      => 'The Complete Bathroom & Lighting Solutions Destination',
             'body'       => [
                 'Faucets, shower systems, sanitaryware, smart toilets, jacuzzi baths and architectural lighting, from Artize luxury to Jaquar Premium.',
                 'Jaquar World Addis Ababa opened in 2017 through a partnership between Jaquar Group and Romina Group, bringing a complete range of bathroom solutions to two showrooms in the city.',

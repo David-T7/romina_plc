@@ -350,3 +350,12 @@
     .jq-cat, .jq-cat-icon, .jq-feature-tile img, .jq-photo img { transition: none; }
     .jq-cat:hover, .jq-feature-tile:hover img, .jq-photo:hover img { transform: none; }
 }
+
+/* ---------- Shared business hero, on this page ----------
+   keeps the blue logo in its own colour (the shared rule turns logos white
+   for dark heroes), sizes it like a title, and makes the breadcrumb readable */
+.bz-theme--jaguar .bz-hero-logo img { filter: none; width: min(100%, 210px); }
+.bz-theme--jaguar .page-hero-crumbs a { color: var(--jq-muted); }
+.bz-theme--jaguar .page-hero-crumbs a:hover { color: var(--jq-teal); }
+.bz-theme--jaguar .page-hero-crumbs i { color: var(--jq-teal); }
+@media (max-width: 768px) { .bz-theme--jaguar .bz-hero-logo img { width: min(100%, 150px); } }

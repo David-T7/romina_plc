@@ -33,7 +33,7 @@
 @endif
 @if ($brandSlug === 'jaquar-world')
 <link rel="stylesheet" href="{{ asset('css/jaquar.css') }}">
-<link rel="preload" as="image" href="{{ asset('images/jaquar/bath-slipper.webp') }}">
+<link rel="preload" as="image" href="{{ asset('images/jaquar/vanity-round-mirror.webp') }}">
 @endif
 @if ($brandSlug === 'bacio-cremeria')
 {{-- Josefin Sans stands in for the guideline face (Champagne & Limousines) until it is self-hosted --}}
@@ -73,11 +73,6 @@
 
 {{-- Bacio has its own page sections and uses the shared business gallery. --}}
 @include('businesses.partials.bacio')
-
-@elseif ($brandSlug === 'jaquar-world')
-
-{{-- Jaquar has its own retail-style sections and filterable gallery. --}}
-@include('businesses.partials.jaquar')
 
 @else
 
@@ -169,7 +164,10 @@
 
 
 {{-- ============ OVERVIEW ============ --}}
-@if ($brandSlug === 'romina-restaurants')
+@if ($brandSlug === 'jaquar-world')
+{{-- Jaquar: shared hero above, then its own retail-style sections and filterable gallery --}}
+@include('businesses.partials.jaquar')
+@elseif ($brandSlug === 'romina-restaurants')
 @include('businesses.partials.romina-restaurants')
 @elseif ($brandSlug === 'romina-coffee')
 @include('businesses.partials.coffee-about')

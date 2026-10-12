@@ -61,7 +61,6 @@
         ['light-crystal-flush',    'lighting',   'Crystal Ceiling Light',    'A crystal flush-mount ceiling light'],
         ['basin-wall-mixer',       'faucets',    'Wall-Mounted Mixer',       'A round vessel basin under a wall-mounted mixer'],
         ['basin-marble-wall',      'sanitary',   'Wall-Hung Basin',          'A wall-hung basin on blue marble'],
-        ['vanity-round-mirror',    'sanitary',   'Vanity & Round Mirror',    'A vessel basin on a floating shelf below a lit round mirror'],
         ['light-bollard',          'lighting',   'Garden Bollard',           'A garden bollard light beside white pebbles'],
         ['bath-slipper-angle',     'bathtubs',   'Slipper Bathtub',          'A slipper bathtub on a timber plinth with a sheepskin rug'],
     ];
@@ -75,33 +74,6 @@
         ['light-copper-ring-wide', 'lighting', 'Lighting', 'Chandeliers, pendants, wall and garden lights.'],
     ];
 @endphp
-
-{{-- ============ HERO — full-width lifestyle banner ============ --}}
-<section class="jq-hero" aria-labelledby="jqTitle">
-    <img class="jq-hero-img" src="{{ asset($jqImg('bath-slipper')) }}"
-         alt="A white slipper bathtub on a timber plinth in the Jaquar World showroom" fetchpriority="high">
-    <div class="jq-wrap jq-hero-inner">
-        <div class="jq-hero-card">
-            <nav class="jq-crumbs" aria-label="Breadcrumb">
-                <a href="{{ $home }}">Home</a>
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                <a href="{{ $home }}#businesses">Businesses</a>
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                <span aria-current="page">{{ $brand['menu'] }}</span>
-            </nav>
-            <img class="jq-hero-logo" src="{{ asset('images/brands/logos/jaquar.png') }}" alt="Jaquar">
-            <p class="jq-kicker">{{ $brand['kicker'] }}</p>
-            <h1 id="jqTitle">{{ $brand['title'] }}</h1>
-            <p class="jq-hero-text">{{ $brand['intro'] }}</p>
-            <div class="jq-hero-actions">
-                <a href="#bz-locations" class="jq-btn">Visit a Showroom</a>
-                @if ($jqTel)
-                    <a href="tel:{{ $jqTel }}" class="jq-btn jq-btn--ghost"><i class="fa-solid fa-phone" aria-hidden="true"></i>{{ $brand['phone'] }}</a>
-                @endif
-            </div>
-        </div>
-    </div>
-</section>
 
 {{-- ============ BRAND BAND — tagline + facts (Jaquar banner teal) ============ --}}
 <section class="jq-band" aria-label="Jaquar World at a glance">
@@ -177,7 +149,7 @@
 <section class="jq-about" id="bz-overview" aria-labelledby="jqAboutTitle">
     <div class="jq-wrap jq-about-grid">
         <figure class="jq-about-img">
-            <img src="{{ asset($jqImg('brand-wall')) }}" alt="The Jaquar brand wall in the showroom: complete bathroom solutions" loading="lazy" decoding="async">
+            <img src="{{ asset($jqImg('brand-wall')) }}" alt="The Jaquar brand wall in the showroom: complete bathroom and lighting solutions" loading="lazy" decoding="async">
         </figure>
         <div class="jq-about-copy">
             <p class="jq-eyebrow">About {{ $brand['name'] }}</p>
