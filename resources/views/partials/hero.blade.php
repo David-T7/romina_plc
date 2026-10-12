@@ -16,7 +16,7 @@
         $heroTotal = 1 + count($brandSlides);
     @endphp
 
-    <section class="hero">
+    <section class="hero homepage-hero">
 
         <!-- Slides -->
         <div class="hero-slides">
@@ -24,9 +24,10 @@
             {{-- Slide 01 — Romina Group (no image for now) --}}
             <div class="hero-slide active">
 
-                <div class="hero-background" style="background: var(--deep-blue);"></div>
-
-                <div class="hero-overlay"></div>
+                <div class="hero-visuals" aria-hidden="true">
+                    <div class="hero-background" style="background: var(--deep-blue);"></div>
+                    <div class="hero-overlay"></div>
+                </div>
 
                 <div class="container hero-content">
 
@@ -58,12 +59,13 @@
             @foreach ($brandSlides as $s)
                 <div class="hero-slide">
 
-                    <div class="hero-background{{ !empty($s['right']) ? ' hero-background--right' : '' }}"
-                         style="background-image:
-                         url('{{ asset($s['img']) }}');">
+                    <div class="hero-visuals" aria-hidden="true">
+                        <div class="hero-background{{ !empty($s['right']) ? ' hero-background--right' : '' }}"
+                             style="background-image:
+                             url('{{ asset($s['img']) }}');">
+                        </div>
+                        <div class="hero-overlay"></div>
                     </div>
-
-                    <div class="hero-overlay"></div>
 
                     <div class="container hero-content">
 

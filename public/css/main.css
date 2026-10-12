@@ -16179,8 +16179,89 @@ button {
 /* =====================================================
    HERO — keep the "Explore" link clear of the slide counter
 ===================================================== */
-.hero-content { padding-bottom: 150px; }
-@media (max-width: 768px) { .hero-content { padding-bottom: 120px; } }
+.homepage-hero {
+    display: grid;
+    grid-template-rows: minmax(min-content, 1fr) auto;
+    gap: clamp(1.5rem, 3vh, 3rem);
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    /* The header overlays the hero; keep its space inside the viewport. */
+    padding-top: clamp(124px, 19vh, 220px);
+    padding-bottom: calc(clamp(2rem, 5vh, 3.4375rem) + env(safe-area-inset-bottom, 0px));
+    overflow: visible;
+}
+
+/* Stack fading slides in one grid cell; even hidden slides reserve their
+   content height so longer headings cannot collide with the controls. */
+.homepage-hero .hero-slides {
+    position: static;
+    display: grid;
+}
+
+.homepage-hero .hero-slide {
+    position: static;
+    grid-area: 1 / 1;
+    display: flex;
+}
+
+.homepage-hero .hero-content {
+    height: auto;
+    padding-block: 0;
+}
+
+/* Clip only decorative image zoom, never the text or controls. */
+.homepage-hero .hero-visuals {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.homepage-hero .hero-content h1 {
+    font-size: clamp(2.75rem, min(6vw, 10vh), 5.875rem);
+    line-height: 1;
+}
+
+.homepage-hero .hero-controls {
+    position: relative;
+    inset: auto;
+    transform: none;
+    /* Reserve the lower-right corner for the fixed chat launcher. */
+    padding-right: 4.75rem;
+}
+
+@media (max-width: 768px) {
+    .homepage-hero {
+        padding-top: clamp(120px, 16vh, 170px);
+    }
+}
+
+@media (max-height: 800px) {
+    .homepage-hero { padding-top: 120px; }
+    .homepage-hero .hero-category { margin-bottom: 18px; }
+    .homepage-hero .hero-content h1 {
+        font-size: clamp(2.5rem, min(5.3vw, 9vh), 4.5rem);
+        line-height: 1;
+    }
+    .homepage-hero .hero-content p { margin-top: 24px; }
+    .homepage-hero .hero-link { margin-top: 26px; }
+}
+
+@media (max-width: 600px) {
+    .homepage-hero { padding-top: 104px; }
+    .homepage-hero .hero-content h1 {
+        font-size: clamp(2.25rem, min(12vw, 8vh), 2.75rem);
+    }
+    /* Keep arrows above the progress line, but reserve their own row. */
+    .homepage-hero .slide-arrows {
+        position: static;
+        grid-area: 1 / 2;
+    }
+
+    .homepage-hero .slide-counter { grid-area: 2 / 1; }
+    .homepage-hero .slide-progress { grid-area: 2 / 2; }
+}
 
 /* =====================================================
    CONTACT — shorter message box, readable placeholders
