@@ -7,7 +7,7 @@
 
 @include('partials.page-hero', [
     'label' => 'OUR LEADERSHIP',
-    'title' => 'Guided by vision,<br><span>led with integrity.</span>',
+    'title' => 'Guided by Vision,<br><span>Led with Integrity.</span>',
     'text'  => 'Five decades of steady leadership have shaped Romina Group, from a single family restaurant to a diversified enterprise built on excellence, quality and trust.',
     'image' => 'images/news/tafo-2.webp',
 ])

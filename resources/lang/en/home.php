@@ -144,7 +144,7 @@ return [
     'brand_coffee_slide_2_cap' => 'Hand-sorting',
 
     // Romina Imports
-    'brand_imports_kicker'      => 'Quality FMCG imported for local consumption',
+    'brand_imports_kicker'      => 'Quality FMCG imported for Local Consumption',
     'brand_imports_title'       => 'From Our Kitchens to the Market',
     'brand_imports_body'        => "What began as sourcing for Romina's own hospitality operations grew into a dedicated importer supplying the Ethiopian market.",
     'brand_imports_list_lbl'    => 'Categories',

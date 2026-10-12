@@ -3,22 +3,22 @@
     $portfolioSectors = [
         ['title' => 'Restaurant Management & Hospitality', 'slug' => 'romina-restaurants',
          'img' => 'images/portfolio/restaurant.webp',                        'alt' => 'Romina Restaurants dining room',
-         'text' => 'Home-styled dishes, warm service and distinct culinary brands across Addis Ababa.', 'link' => 'Explore Romina Restaurants'],
+         'text' => 'Home-styled Dishes, Warm Service and Distinct Culinary brands across Addis Ababa.', 'link' => 'Explore Romina Restaurants'],
         ['title' => 'Cakes, Pastries & Confectionaries', 'slug' => 'koba-patisserie',
          'img' => 'images/portfolio/baked.jpg',                              'alt' => 'KOBA cakes and pastries',
-         'text' => 'Artisan pastries, handcrafted cakes, signature breakfasts and specialty coffee, baked fresh across Addis Ababa.', 'link' => 'Explore KOBA'],
+         'text' => 'Pastries, Handcrafted Cakes, Signature Breakfasts and Specialty Coffee, baked fresh across Addis Ababa.', 'link' => 'Explore KOBA'],
         ['title' => 'International Culinary Services', 'slug' => 'meskott-culinary',
          'img' => 'images/gallery/meskott-culinary/12-glazed-salmon.webp',   'alt' => 'Glazed salmon at Meskott',
-         'text' => 'International cuisine, curated drinks and a welcoming setting for memorable dining in Addis Ababa.', 'link' => 'Explore Meskott'],
+         'text' => 'International Cuisine, Curated Drinks and a Welcoming Setting for Memorable Dining in Addis Ababa.', 'link' => 'Explore Meskott'],
         ['title' => 'Coffee Exporting', 'slug' => 'romina-coffee',
          'img' => 'images/coffee-origin/03-drying-beds-team.webp',           'alt' => 'Coffee farmers working the drying beds',
-         'text' => 'Upholding the legacy of Ethiopian coffee, from farm to cup, across four continents.', 'link' => 'Explore Romina Coffee'],
+         'text' => 'Upholding the Legacy of Ethiopian Coffee, from farm to cup, across four continents.', 'link' => 'Explore Romina Coffee'],
         ['title' => 'Coffee Roastery', 'slug' => 'coffee-roastery',
          'img' => 'images/stock/coffee-roaster.webp',                        'alt' => 'Freshly roasted coffee beans turning in a roaster cooling tray',
          'text' => 'Coming soon.', 'link' => 'Learn More'],
         ['title' => 'FMCG Importing & Distribution', 'slug' => 'romina-imports',
          'img' => 'images/stock/fmcg-aisle.webp',                            'alt' => 'Supermarket aisles stocked with packaged goods',
-         'text' => 'Quality FMCG imported for local consumption.', 'link' => 'Explore Romina Imports'],
+         'text' => 'Quality FMCG imported for Local Consumption.', 'link' => 'Explore Romina Imports'],
     ];
 @endphp
 <!-- ==========================================
