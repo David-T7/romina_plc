@@ -384,7 +384,7 @@ return [
             'menu'       => 'Jaquar World Addis Ababa',
             'group'      => 'other',
             'theme'      => 'jaguar',   // white-dominant, small blue (see .bz-theme--jaguar)
-            'kicker'     => 'Launched 2017 with Jaquar Group',
+            'kicker'     => 'The Only Premier Partner with Jaquar Group',
             'intro'      => 'The complete bathroom and lighting solutions destination in Addis Ababa.',
             'badge'      => ['value' => '2017', 'label' => 'Launched With Jaquar Group'],
             'image'      => 'images/jaquar/vanity-round-mirror.webp',

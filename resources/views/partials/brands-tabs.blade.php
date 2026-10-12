@@ -143,7 +143,7 @@
         'jaquar' => [
             'name'      => 'Jaquar World',
             'tone'      => 'light',
-            'kicker'    => 'Launched 2017 with Jaquar Group',
+            'kicker'    => 'The Only Premier Partner with Jaquar Group',
             'title'     => 'The Complete Bathroom & Lighting Solutions Destination',
             'body'      => 'Faucets, shower systems, sanitaryware, smart toilets, jacuzzi baths and architectural lighting, from Artize luxury to Jaquar Premium.',
             'list'      => ['label' => 'Brands', 'items' => ['Jaquar Premium']],

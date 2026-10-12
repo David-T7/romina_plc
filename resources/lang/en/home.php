@@ -158,7 +158,7 @@ return [
     'brand_imports_slide_1_cap' => 'Distribution',
 
     // Jaquar World
-    'brand_jaquar_kicker'      => 'Launched 2017 with Jaquar Group',
+    'brand_jaquar_kicker'      => 'The Only Premier Partner with Jaquar Group',
     'brand_jaquar_title'       => 'The Complete Bathroom and Lighting Solutions Destination',
     'brand_jaquar_body'        => 'Faucets, shower systems, sanitaryware, smart toilets, jacuzzi baths and architectural lighting, from Artize luxury to Jaquar Premium.',
     'brand_jaquar_list_lbl'    => 'Brands',
