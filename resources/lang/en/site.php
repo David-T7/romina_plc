@@ -41,7 +41,7 @@ return [
     'ftr_businesses_col'     => 'Businesses',
     'ftr_head_office_col'    => 'Head Office',
     'ftr_address'            => 'Bole Atlas, Cape Verde Street<br>Noah Diplomat Building, 13th floor<br>Addis Ababa, Ethiopia',
-    'ftr_copyright'          => '© :year Romina Group. All rights reserved.',
+    'ftr_copyright'          => '© :year Romina Group. All rights reserved. Designed and Developed by Drongo Technology PLC',
 
     // ── Video player ─────────────────────────────────────────────────────
     'vid_play'               => 'Play video',
