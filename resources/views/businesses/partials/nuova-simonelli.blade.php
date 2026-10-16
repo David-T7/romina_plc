@@ -9,9 +9,9 @@
         ['fa-shield-halved', 'Durability',  'Built to withstand the high-volume demands of a busy professional environment.'],
     ];
     $nsServices = [
-        ['fa-gears',        'Genuine Spare Parts',   'We only use authentic Nuova Simonelli components.'],
+        ['fa-gears',        'Genuine Spare Parts',   'We only use Authentic Nuova Simonelli components.'],
         ['fa-user-gear',    'Certified Technicians', 'Our team is trained directly on Italian engineering standards.'],
-        ['fa-award',        'Warranty Coverage',     'Full manufacturer-backed peace of mind.'],
+        ['fa-award',        'Warranty Coverage',     'Full Manufacturer-Backed peace of mind.'],
     ];
     $nsLineup = [
         [
@@ -20,7 +20,7 @@
             'img'   => ['aurelia-wave-red', 'aurelia-wave-black'],
             'alt'   => 'Nuova Simonelli Aurelia Wave espresso machine',
             'feats' => [
-                ['Smart Water Technology', 'Detects water quality and protects the machine.'],
+                ['Smart Water Technology', 'Detects Water Quality and Protects the Machine.'],
                 ['Ergonomics', 'Designed to reduce barista fatigue and improve workflow.'],
                 ['Pulse-Jet Technology', 'Optimizes extraction for diverse flavor profiles.'],
             ],
