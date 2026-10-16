@@ -376,6 +376,10 @@
 @endif
 
 
+@if ($brandSlug === 'romina-imports')
+@include('businesses.partials.nuova-simonelli')
+@endif
+
 {{-- ============ OUR BRANDS (Romina Imports only) ============ --}}
 @if ($brandSlug === 'romina-imports' && !empty($brand['import_brands']))
 @php
