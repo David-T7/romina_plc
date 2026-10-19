@@ -54,8 +54,9 @@
                     @endforeach
                 </ul>
 
-                <a href="#apply" class="car-apply-link">
-                    Apply for this role
+                <a href="{{ $position['apply_url'] }}" class="car-apply-link"
+                   target="_blank" rel="noopener noreferrer">
+                    Apply on EthioJobs
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <line x1="5" y1="12" x2="19" y2="12"/>
@@ -91,39 +92,17 @@
                         <span>Rolling</span>
                     </div>
                 @endif
+
+                <a href="{{ $position['apply_url'] }}" class="car-sidebar-apply"
+                   target="_blank" rel="noopener noreferrer">
+                    Apply on EthioJobs
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
             </aside>
-
-        </div>
-    </div>
-</section>
-
-
-{{-- =====================================================
-     APPLY FORM
-===================================================== --}}
-<section class="car-apply-section" id="apply">
-    <div class="container">
-        <div class="car-apply-cols">
-
-            <div class="car-apply-info">
-                <p class="mark">
-                    <span class="mark-rule"></span>
-                    <i></i>
-                    Apply Now
-                </p>
-                <h2 class="t-h2">Apply for<br>This Role.</h2>
-                <p class="car-apply-sub">
-                    Fill in the form and attach your CV. We'll be in touch if your profile is a strong match.
-                </p>
-                <div class="car-apply-hints">
-                    <p>CV: PDF, DOC or DOCX &mdash; max 5 MB</p>
-                    <p>Questions? <a href="mailto:{{ config('careers.notify_email') }}">{{ config('careers.notify_email') }}</a></p>
-                </div>
-            </div>
-
-            <div>
-                @include('careers._form', ['position' => $position, 'positions' => []])
-            </div>
 
         </div>
     </div>

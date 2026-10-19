@@ -13526,6 +13526,24 @@ button {
 .car-sidebar-fact span:first-child { color: #667085; }
 .car-sidebar-fact span:last-child  { font-weight: 600; color: #0E2240; text-align: right; }
 
+.car-sidebar-apply {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 24px;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background: #E8132C;
+    text-decoration: none;
+    transition: gap .25s, background .25s;
+}
+
+.car-sidebar-apply:hover { gap: 12px; background: #c20f24; }
+
 /* ----- Home page: openings list ----- */
 
 .careers-openings {
